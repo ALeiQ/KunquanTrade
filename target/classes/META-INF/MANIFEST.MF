@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Class-Path: jackson-module-parameter-names-2.8.1.jar spring-tx-4.3.2.R
+ ELEASE.jar spring-context-4.3.2.RELEASE.jar spring-aop-4.3.2.RELEASE.
+ jar spring-boot-starter-aop-1.3.0.M5.jar spring-expression-4.3.2.RELE
+ ASE.jar jackson-datatype-jdk8-2.8.1.jar thymeleaf-3.0.2.RELEASE.jar c
+ lassmate-1.3.1.jar spring-boot-starter-logging-1.4.0.RELEASE.jar spri
+ ng-boot-starter-web-2.0.0.RELEASE.jar spring-boot-starter-tomcat-1.4.
+ 0.RELEASE.jar mybatis-spring-boot-starter-1.3.0.jar jcl-over-slf4j-1.
+ 7.21.jar tomcat-juli-8.5.4.jar tomcat-jdbc-8.5.4.jar slf4j-api-1.7.21
+ .jar spring-boot-1.4.0.RELEASE.jar aspectjweaver-1.8.9.jar aspectjrt-
+ 1.8.9.jar unbescape-1.1.4.RELEASE.jar spring-boot-starter-1.4.0.RELEA
+ SE.jar attoparser-2.0.1.RELEASE.jar spring-web-4.3.2.RELEASE.jar snak
+ eyaml-1.17.jar spring-boot-starter-thymeleaf-1.4.0.RELEASE.jar tomcat
+ -embed-websocket-8.5.4.jar spring-core-4.3.2.RELEASE.jar spring-beans
+ -4.3.2.RELEASE.jar spring-boot-starter-json-2.0.0.RELEASE.jar jackson
+ -annotations-2.8.1.jar log4j-over-slf4j-1.7.21.jar jul-to-slf4j-1.7.2
+ 1.jar spring-context-support-4.3.2.RELEASE.jar groovy-2.4.7.jar jacks
+ on-datatype-jsr310-2.8.1.jar spring-jdbc-4.3.2.RELEASE.jar spring-boo
+ t-starter-jdbc-1.4.0.RELEASE.jar logback-core-1.1.7.jar springloaded-
+ 1.2.6.RELEASE.jar mybatis-spring-boot-autoconfigure-1.3.0.jar spring-
+ boot-devtools-1.3.0.RELEASE.jar mybatis-3.4.4.jar jackson-core-2.8.1.
+ jar logback-classic-1.1.7.jar spring-boot-autoconfigure-1.4.0.RELEASE
+ .jar validation-api-2.0.1.Final.jar lombok-1.16.8.jar thymeleaf-layou
+ t-dialect-2.0.5.jar mysql-connector-java-5.1.31.jar spring-webmvc-4.3
+ .2.RELEASE.jar thymeleaf-expression-processor-1.1.2.jar jackson-datab
+ ind-2.8.1.jar hibernate-validator-6.0.7.Final.jar jboss-logging-3.3.0
+ .Final.jar mybatis-spring-1.3.1.jar tomcat-embed-core-8.5.4.jar thyme
+ leaf-spring4-3.0.2.RELEASE.jar tomcat-embed-el-8.5.4.jar
+Main-Class: com.sdut.trade.Application
+
