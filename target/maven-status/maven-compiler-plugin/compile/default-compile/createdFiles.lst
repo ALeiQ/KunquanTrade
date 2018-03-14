@@ -1,4 +1,5 @@
 com\sdut\trade\interceptor\LoginFilter.class
 com\sdut\trade\Application.class
+com\sdut\trade\controller\MajorTermsController.class
 com\sdut\trade\controller\LoginController.class
 com\sdut\trade\conf\TradeDataSourceConfig.class

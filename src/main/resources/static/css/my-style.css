@@ -1,0 +1,22 @@
+/*
+ * Copyright (C) 2018 Baidu, Inc. All Rights Reserved.
+ */
+
+.index-large-button
+{
+    height: 300px;
+}
+
+.index-large-button button
+{
+    height: 70%;
+    width: 60%;
+    font-size: 50px;
+    text-shadow: black 5px 3px 3px;
+}
+
+.blockLeftPush {
+    width: 80px;
+    float: left;
+}
+

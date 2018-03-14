@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/3/9
  */
 @Controller
-@RequestMapping("/")
 public class LoginController {
 
     @RequestMapping(value = "/login",method = RequestMethod.GET)
@@ -26,7 +25,7 @@ public class LoginController {
     }
 
 
-    @RequestMapping(value = "index",method = RequestMethod.GET)
+    @RequestMapping(value = "/index",method = RequestMethod.GET)
     public String index(ModelMap modelMap, HttpServletRequest request) {
         return "/index";
     }
