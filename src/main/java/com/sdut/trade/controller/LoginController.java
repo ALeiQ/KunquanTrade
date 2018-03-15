@@ -17,17 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/3/9
  */
 @Controller
+@RequestMapping("/login")
 public class LoginController {
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    @RequestMapping(value = "",method = RequestMethod.GET)
     public String login(ModelMap modelMap, HttpServletRequest request) {
         return "/login";
-    }
-
-
-    @RequestMapping(value = "/index",method = RequestMethod.GET)
-    public String index(ModelMap modelMap, HttpServletRequest request) {
-        return "/index";
     }
 
 }

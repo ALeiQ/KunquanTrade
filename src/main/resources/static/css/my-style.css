@@ -12,11 +12,67 @@
     height: 70%;
     width: 60%;
     font-size: 50px;
-    text-shadow: black 5px 3px 3px;
+    text-shadow: black 4px 3px 1px;
 }
 
 .blockLeftPush {
     width: 80px;
     float: left;
 }
+
+.panel-group .panel-heading + .panel-collapse > .panel-body, .panel-group .panel-heading + .panel-collapse > .list-group
+{
+    border-top: 0;
+}
+.panel-body table
+{
+    font-size: 18px;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+.panel-body table th:first-child
+{
+    width:350px;
+}
+
+.panel-group .panel
+{
+    margin-bottom: 10px;
+}
+
+.panel-heading h3
+{
+    color: #a9acbd;
+    font-size: .65em;
+    text-transform: uppercase;
+    margin: 0;
+    font-weight: 600;
+    line-height: 1.5em;
+    letter-spacing: 1px;
+}
+
+.panel-heading ul
+{
+    position: absolute;
+    font-size: 0.8em;
+    right: 25px;
+    top: 1px;
+}
+
+.term-history li h4
+{
+    display: inline-block;
+}
+
+.term-history li h4:first-child
+{
+    color: darkblue;
+}
+
+.term-history li h4:last-child
+{
+    color: #595c66;
+}
+
 

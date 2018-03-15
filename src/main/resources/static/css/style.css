@@ -62,7 +62,7 @@ body a:hover{
     float: right;
 }
 /* ----menu-icon----*/
-button#showLeftPush {
+button#showRightPush {
     font-size: 1.5em;
     width: 80px;
     padding: 0.87em 0;
@@ -89,18 +89,18 @@ button#showLeftPush {
     padding: 2em 0;
 }
 .cbp-spmenu-right {
-    right: 0;
+    right: -309px;
 }
 .cbp-spmenu-right.cbp-spmenu-open {
-	right: -309px;
+	right: 0;
 }
 /* Push classes applied to the body */
 .cbp-spmenu-push {
 	overflow-x: hidden;
 	position: relative;
 }
-.cbp-spmenu-push-toright {
-	right: 0;
+.cbp-spmenu-push-toleft {
+    right: 0;
 }
 /* Transitions */
 
@@ -111,14 +111,14 @@ button#showLeftPush {
 	transition: all 0.3s ease;
 }
 .cbp-spmenu-push div#page-wrapper {
-    margin: 0em 19.3em 0 0;
+    margin: 0;
     transition: .3s all;
     -webkit-transition: .3s all;
     -moz-transition: .3s all;
     transition: .3s all;
 }
-.cbp-spmenu-push.cbp-spmenu-push-toright div#page-wrapper {
-    margin: 0;
+.cbp-spmenu-push.cbp-spmenu-push-toleft div#page-wrapper {
+    margin: 0em 19.3em 0 0;
 }
 /*--//push-menu-css--*/
 /*--side-menu--*/
@@ -896,7 +896,7 @@ ul.dropdown-menu.drp-mnu li {
     padding: 16px 20px;
     margin: -20px;
     background: #FFFFFF;
-    margin-bottom: 5px;
+/*    margin-bottom: 5px; */
     border-bottom: none;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
@@ -931,7 +931,7 @@ ul.dropdown-menu.drp-mnu li {
 }
 .panel-heading {
   font-size: 20px;
-  padding-bottom: 15px;
+/*  padding-bottom: 15px; */
   font-weight: 300;
 }
 .panel .list-group {
@@ -3185,9 +3185,9 @@ ul.nofitications-dropdown {
 	.cbp-spmenu-vertical {
 		width: 230px;
 	}
-	.cbp-spmenu-push div#page-wrapper {
-		margin: 0em 14.3em 0 0;
-	}
+    .cbp-spmenu-push.cbp-spmenu-push-toleft div#page-wrapper {
+        margin: 0em 14.3em 0 0;
+    }
 	.ticket-grid{
 		width:50%;
 	}
@@ -3378,20 +3378,21 @@ ul.nofitications-dropdown {
 		width: 450px;
 	}
 	.cbp-spmenu-right.cbp-spmenu-open {
-		right: 0;
+		right: -309px;
 		z-index: 990;
 	}
 	.cbp-spmenu-vertical {
-		right: -309px;
+		right: 0;
+        z-index: 990;
 	}
 	.cbp-spmenu-vertical {
 		padding: 1em 0;
 		width: 201px;
-		top: 69px;
+		top: 77px;
 	}
-	.cbp-spmenu-push div#page-wrapper {
-		margin: 0em 0em 0 0;
-	}
+    .cbp-spmenu-push.cbp-spmenu-push-toleft div#page-wrapper {
+        margin: 0em 0em 0 0;
+    }
 }
 @media (max-width:768px){
 	.graph-left {
