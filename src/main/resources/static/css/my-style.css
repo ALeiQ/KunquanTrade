@@ -24,14 +24,20 @@
 {
     border-top: 0;
 }
-.panel-body table
+
+.term-table
 {
     font-size: 18px;
     margin-top: 20px;
     margin-bottom: 0;
 }
 
-.panel-body table th:first-child
+.term-table th:first-child
+{
+    width:60px;
+}
+
+.term-table th:nth-child(2)
 {
     width:350px;
 }
@@ -55,9 +61,17 @@
 .panel-heading ul
 {
     position: absolute;
-    font-size: 0.8em;
+    font-size: 0.56em;
     right: 25px;
-    top: 1px;
+    top: 8px;
+}
+
+.panel-heading .add-row-button
+{
+    position: absolute;
+    right: 79px;
+    top: 13px;
+    font-size: 17px;
 }
 
 .term-history li h4
@@ -75,4 +89,50 @@
     color: #595c66;
 }
 
+.term-table .icon
+{
+    font-size: 12px;
+    color: rgba(0, 0, 0, 0.5);
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.term-table a {
+    padding: 3px 8px;
+    display: block;
+    color: inherit;
+    border-radius: 3px;
+}
+
+@media(max-width: 400px)
+{
+    .panel-group .panel:first-child .term-table th:nth-child(2)
+    {
+        width: 80px !important;
+    }
+
+    .term-table th:first-child
+    {
+        width:52px;
+    }
+
+    .term-table th:nth-child(2)
+    {
+        width:157px;
+    }
+
+    .panel-heading ul
+    {
+        font-size: 0.85em;
+        top: 11px;
+        right: 16px;
+    }
+
+    .panel-heading .add-row-button
+    {
+        right: 62px;
+        top: 15px;
+        font-size: 14px;
+    }
+}
 
