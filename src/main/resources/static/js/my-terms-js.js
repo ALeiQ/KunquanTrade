@@ -5,7 +5,8 @@
 $(function () {
 
     $('.collapse-toggle').collapse({
-        parent: accordion
+        parent: accordion,
+        toggle: false
     });
 
     $('#goodsTable').bootstrapTable({
