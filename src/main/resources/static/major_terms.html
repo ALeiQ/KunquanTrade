@@ -53,6 +53,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
+    <!-- bootstrap-table -->
+    <script src="js/bootstrap-table.js"></script>
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <!-- //bootstrap-table -->
     <!--my style-->
     <link href="css/my-style.css" rel="stylesheet" type="text/css" media="all">
     <!--//end my style-->
@@ -84,20 +88,20 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <h2>货物总览</h2>
                                         <ul><h3>合计:</h3>123</ul>
                                     </a>
-                                    <button type="button" class="add-row-button btn btn-success dropdown-toggle">
-                                        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"
-                                              id="addGoods"></span>增加
+                                    <button type="button" class="add-row-button btn btn-success dropdown-toggle"
+                                            id="addGoods">
+                                        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
                                     </button>
                                 </h1>
                             </div>
 
-                            <div class="panel-collapse collapse" id="collapseOne" style="height: auto;">
-                                <div class="panel-body">
+                            <div class="panel-collapse collapse-toggle collapse" id="collapseOne" style="height: auto;">
+                                <div class="panel-body term-panel-body">
                                     <table class="table table-striped term-table" id="goodsTable">
                                         <thead>
                                         <tr>
                                             <th>编号</th>
-                                            <th style="width: 150px;">名称</th>
+                                            <th>名称</th>
                                             <th>型号</th>
                                             <th>操作</th>
                                         </tr>
@@ -141,9 +145,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </h1>
                             </div>
 
-                            <div class="panel-collapse collapse" id="collapseTwo" style="height: auto;">
-                                <div class="panel-body">
-                                    <table class="table table-striped term-table">
+                            <div class="panel-collapse collapse-toggle collapse" id="collapseTwo" style="height: auto;">
+                                <div class="panel-body term-panel-body">
+                                    <table class="table table-striped term-table" id="companysTable">
                                         <thead>
                                         <tr>
                                             <th>编号</th>
@@ -182,9 +186,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </h1>
                             </div>
 
-                            <div class="panel-collapse collapse" id="collapseThree" style="height: auto;">
-                                <div class="panel-body">
-                                    <table class="table table-striped term-table">
+                            <div class="panel-collapse collapse-toggle collapse" id="collapseThree" style="height:
+                            auto;">
+                                <div class="panel-body term-panel-body">
+                                    <table class="table table-striped term-table" id="transportTable">
                                         <thead>
                                         <tr>
                                             <th>编号</th>
@@ -223,9 +228,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                 </h1>
                             </div>
 
-                            <div class="panel-collapse collapse" id="collapseFour" style="height: auto;">
-                                <div class="panel-body">
-                                    <table class="table table-striped term-table">
+                            <div class="panel-collapse collapse-toggle collapse" id="collapseFour" style="height:
+                            auto;">
+                                <div class="panel-body term-panel-body">
+                                    <table class="table table-striped term-table" id="bankTable">
                                         <thead>
                                         <tr>
                                             <th>编号</th>
@@ -388,6 +394,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- status -->
     <script src="js/jquery.fn.gantt.js"></script>
     <!-- //status -->
+
 
     <!-- my JavaScript -->
     <script src="js/my-js.js"></script>
