@@ -53,11 +53,89 @@ $(function () {
         ]
     });
 
-    $('#companysTable').bootstrapTable({});
+    $('#companysTable').bootstrapTable({
+        //url: '/index.xhtml',
+        //method: 'post',
+        editable: true,//开启编辑模式
+        clickToSelect: true,
+        search: true,  //显示检索框
+        showRefresh: true,  //显示刷新按钮
+        pagination: true,
+        uniqueId: 'id',
+        pageList: [5, 25],
+        pageSize: 10,
+        columns: [
+            {
+                field: "id",
+                title: "编号",
+                sortable: true,
+                order: 'desc'
+            }, {
+                field: "name",
+                title: "名称"
+            }, {
+                field: "operate",
+                title: "操作",
+                formatter: delIcon
+            }
+        ]
+    });
 
-    $('#transportTable').bootstrapTable({});
+    $('#transportTable').bootstrapTable({
+        //url: '/index.xhtml',
+        //method: 'post',
+        editable: true,//开启编辑模式
+        clickToSelect: true,
+        search: true,  //显示检索框
+        showRefresh: true,  //显示刷新按钮
+        pagination: true,
+        uniqueId: 'id',
+        pageList: [5, 25],
+        pageSize: 10,
+        columns: [
+            {
+                field: "id",
+                title: "编号",
+                sortable: true,
+                order: 'desc'
+            }, {
+                field: "name",
+                title: "名称"
+            }, {
+                field: "operate",
+                title: "操作",
+                formatter: delIcon
+            }
+        ]
+    });
 
-    $('#bankTable').bootstrapTable({});
+    $('#bankTable').bootstrapTable({
+        //url: '/index.xhtml',
+        //method: 'post',
+        editable: true,//开启编辑模式
+        clickToSelect: true,
+        search: true,  //显示检索框
+        showRefresh: true,  //显示刷新按钮
+        pagination: true,
+        uniqueId: 'id',
+        pageList: [5, 25],
+        pageSize: 10,
+        columns: [
+            {
+                field: "id",
+                title: "编号",
+                sortable: true,
+                order: 'desc'
+            }, {
+                field: "name",
+                title: "名称"
+            }, {
+                field: "operate",
+                title: "操作",
+                formatter: delIcon
+            }
+        ]
+    });
 
     function delIcon(value, row, index) {
         return '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
@@ -77,15 +155,28 @@ $(function () {
 
 
     // "增加"按钮
-    $('#addGoods').click(function () {
+    addItem = function (btn) {
 
-        $('#confirmAdd').show();
+        var confirmBtn = $($(btn).parent()).children('.confirm-add-button');
+        var table = $($(btn).parents('.panel')).find('.table');
+        var rows = $(table)[0].rows;
+        var topics = $(rows[0]).children();
 
-        var table = $("#goodsTable");
-        var tr = {id: "", name: inp_tmp_front + "'name'" + inp_tmp_back,
-            model: inp_tmp_front + "'model'" + inp_tmp_back, operate: ''};
+        $(confirmBtn).show();
+
+        var tr = {id: "", operate: ""};
+
+        for (var i = 1; i < topics.length - 1; ++i) {
+            var field = topics[i].dataset.field;
+            tr[field] = inp_tmp_front + "'" + field + "'" + inp_tmp_back;
+        }
+
+        console.log(tr);
+
         table.bootstrapTable('prepend', tr);
-    });
+
+        return false;
+    };
 
     // 确认增加按钮
     confirmAdd = function (th_button) {
@@ -97,9 +188,6 @@ $(function () {
 
         var topics = $(rows[0]).children();
 
-        console.log(table.bootstrapTable('getData'));
-        console.log($(table.bootstrapTable('getData'))[0]);
-
         for (var i = 1; i < $(rows).length; ++i) {
             var hasText = false;
             var rowJson = {};
@@ -108,7 +196,6 @@ $(function () {
                 var text = $($(rows[i].cells[j])[0].firstChild).val();
 
                 if (typeof(text) !== 'undefined' && text !== '' && !isEmpty.test(text)) {
-                    console.log('i:' + i.toString() + ' j:' + j.toString() + ' text:' + text);
                     hasText = true;
                 }
 
@@ -126,6 +213,8 @@ $(function () {
         table.bootstrapTable('remove', {field: 'id', values: ['']});
         table.bootstrapTable('prepend', newInfo);
         $(th_button).hide();
+
+        return false;
     };
 
     // 删除行（隐藏）
@@ -147,6 +236,8 @@ $(function () {
             '\')" value="' + inp.val() +'" style="width: 100%;"/>';
 
         table.bootstrapTable('getData')[index] = newRow;
+
+        return false;
     };
 
     getRowOfInp = function (inp, table) {
@@ -160,6 +251,8 @@ $(function () {
                 }
             }
         }
+
+        return 0;
     };
 
 });
