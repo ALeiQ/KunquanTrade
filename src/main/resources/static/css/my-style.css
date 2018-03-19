@@ -28,7 +28,7 @@
 .term-panel-body
 {
     font-size: 18px;
-    margin-top: 22px;
+    margin-top: 15px;
     margin-bottom: 0;
 }
 
@@ -114,6 +114,11 @@
 
 @media(max-width: 400px)
 {
+    .term-panel-body
+    {
+        margin-top: 35px;
+    }
+
     .panel-group .panel:first-child .term-table th:nth-child(2)
     {
         width: 80px !important;

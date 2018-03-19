@@ -29,13 +29,15 @@ $(function () {
         search: true,  //显示检索框
         showRefresh: true,  //显示刷新按钮
         pagination: true,
-        uniqueId: "id",
+        uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,
         columns: [
             {
                 field: "id",
-                title: "编号"
+                title: "编号",
+                sortable: true,
+                order: 'desc'
             }, {
                 field: "name",
                 title: "名称",
@@ -93,20 +95,31 @@ $(function () {
 
         var newInfo = [];
 
-        //console.log(rows);
+        var topics = $(rows[0]).children();
+
+        console.log(table.bootstrapTable('getData'));
+        console.log($(table.bootstrapTable('getData'))[0]);
 
         for (var i = 1; i < $(rows).length; ++i) {
-            //console.log(rows[i]);
-            var hasText = true;
+            var hasText = false;
+            var rowJson = {};
+
             for (var j = 1; j < rows[i].cells.length - 1; ++j) {
                 var text = $($(rows[i].cells[j])[0].firstChild).val();
-                if (text !== "" && !isEmpty.test(text)) {
 
-
-
-                    hasText = false;
-                    break;
+                if (typeof(text) !== 'undefined' && text !== '' && !isEmpty.test(text)) {
+                    console.log('i:' + i.toString() + ' j:' + j.toString() + ' text:' + text);
+                    hasText = true;
                 }
+
+                rowJson[topics[j].dataset.field] = text;
+            }
+
+            rowJson['id'] = '1';
+            rowJson['operate'] = '';
+
+            if (hasText) {
+                newInfo.push(rowJson);
             }
         }
 
