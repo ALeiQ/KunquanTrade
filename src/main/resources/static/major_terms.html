@@ -88,6 +88,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                         <h2>货物总览</h2>
                                         <ul><h3>合计:</h3>123</ul>
                                     </a>
+                                    <button type="button" class="confirm-add-button btn btn-warning dropdown-toggle"
+                                            id="confirmAdd" onclick="confirmAdd(this)" style="display: none;">
+                                        <span class="glyphicon glyphicon  glyphicon-ok" aria-hidden="true"></span>确认
+                                    </button>
                                     <button type="button" class="add-row-button btn btn-success dropdown-toggle"
                                             id="addGoods">
                                         <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
@@ -98,32 +102,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             <div class="panel-collapse collapse-toggle collapse" id="collapseOne" style="height: auto;">
                                 <div class="panel-body term-panel-body">
                                     <table class="table table-striped term-table" id="goodsTable">
-                                        <thead>
-                                        <tr>
-                                            <th>编号</th>
-                                            <th>名称</th>
-                                            <th>型号</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
                                         <tbody>
                                         <tr>
                                             <td>1</td>
-                                            <td>水泥</td>
+                                            <td onclick="tdclick(this)">水泥</td>
                                             <td>42.5</td>
-                                            <td><a class="icon closed-tool"><i class="fa fa-times"></i></a></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>2</td>
                                             <td>水泥</td>
                                             <td>52.5</td>
-                                            <td><a class="icon closed-tool"><i class="fa fa-times"></i></a></td>
+                                            <td></td>
                                         </tr>
                                         <tr>
                                             <td>3</td>
                                             <td>石灰</td>
                                             <td>200目</td>
-                                            <td><a class="icon closed-tool"><i class="fa fa-times"></i></a></td>
+                                            <td></td>
                                         </tr>
                                         </tbody>
                                     </table>

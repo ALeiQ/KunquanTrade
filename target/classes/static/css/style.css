@@ -2334,12 +2334,14 @@ canvas#viewport {
 .control3{
 	margin:0 0 1em 0;
 }
+/*
 .btn-warning {
   color: #fff;
   background-color:rgb(6, 217, 149);
   border-color:rgb(6, 217, 149);
   padding:8.5px 12px;
 }
+*/
 .tag_01{
   margin-right:5px;
 }

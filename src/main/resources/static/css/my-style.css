@@ -74,6 +74,14 @@
     font-size: 17px;
 }
 
+.panel-heading .confirm-add-button
+{
+    position: absolute;
+    right: 166px;
+    top: 13px;
+    font-size: 17px;
+}
+
 .term-history li h4
 {
     display: inline-block;
@@ -132,6 +140,13 @@
     {
         right: 62px;
         top: 15px;
+        font-size: 14px;
+    }
+
+    .panel-heading .confirm-add-button
+    {
+        right: 62px;
+        top: 54px;
         font-size: 14px;
     }
 }
