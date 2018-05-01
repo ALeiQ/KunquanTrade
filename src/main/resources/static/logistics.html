@@ -51,6 +51,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="js/custom.js"></script>
     <link href="css/custom.css" rel="stylesheet">
     <!--//Metis Menu -->
+    <!-- bootstrap-table -->
+    <script src="js/bootstrap-table.js"></script>
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <!-- //bootstrap-table -->
     <!--my style-->
     <link href="css/my-style.css" rel="stylesheet" type="text/css" media="all">
     <!--//end my style-->
@@ -68,24 +72,42 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- main content start-->
     <div id="page-wrapper">
         <div class="main-page">
-            <!-- four-buttons -->
-            <div class="row">
-                <div class="index-large-button">
-                    <button onclick="window.location.href='login'" type="button"
-                            class="btn btn-large btn-info btn-block center-block">运输<br/>明细
-                    </button>
-                    <div class="clearfix"></div>
+            <!-- 运输明细表 -->
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-widget">
+                        <table class="table text-nowrap table-striped term-table" id="transTable">
+                            <tbody>
+                            <tr>
+                                <td>2017-10-05</td>
+                                <td>水泥</td>
+                                <td>42.5</td>
+                                <td>32.65</td>
+                                <td>32.60</td>
+                                <td>0.05</td>
+                                <td>华东水泥贸易市场</td>
+                                <td>120.00</td>
+                                <td>3918.00</td>
+                                <td>张店建材公司</td>
+                                <td>200.00</td>
+                                <td>6530.00</td>
+                                <td>淄博运达</td>
+                                <td>30.00</td>
+                                <td>979.50</td>
+                                <td>123323</td>
+                                <td>1632.50</td>
+                                <td>鲁A12345</td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
+                <div class="clearfix"></div>
             </div>
-            <div class="row">
-                <div class="index-large-button">
-                    <button onclick="window.location.href='login'" type="button"
-                            class="btn btn-large btn-info btn-block center-block">运输<br/>明细
-                    </button>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <!-- //end four-buttons-->
+            <!-- //运输明细表 -->
+
         </div>
     </div>
 
@@ -102,7 +124,6 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script type="text/javascript" src="js/dev-loaders.js"></script>
 <script type="text/javascript" src="js/dev-layout-default.js"></script>
 <script type="text/javascript" src="js/jquery.marquee.js"></script>
-<link href="css/bootstrap.min.css" rel="stylesheet">
 
 <!-- candlestick -->
 <script type="text/javascript" src="js/jquery.jqcandlestick.min.js"></script>
@@ -132,6 +153,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <!-- my JavaScript -->
 <script src="js/my-js.js"></script>
+<script src="js/my-logistics.js"></script>
 <!-- //my JavaScript -->
 </body>
 </html>

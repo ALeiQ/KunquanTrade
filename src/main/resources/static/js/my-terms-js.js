@@ -140,7 +140,7 @@ $(function () {
     function delIcon(value, row, index) {
         return '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
             ' fa-times"></i></a>';
-    };
+    }
 
 });
 
@@ -213,13 +213,6 @@ $(function () {
         table.bootstrapTable('remove', {field: 'id', values: ['']});
         table.bootstrapTable('prepend', newInfo);
         $(th_button).hide();
-
-        return false;
-    };
-
-    // 删除行（隐藏）
-    delRow = function (term) {
-        $(term).parents("tr").fadeToggle(400);
 
         return false;
     };

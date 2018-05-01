@@ -24,3 +24,14 @@ $(document).ready(function () {
 });
 
 
+// 共用函数
+$(document).ready(function () {
+
+    // 删除行（隐藏）
+    delRow = function (term) {
+        $(term).parents("tr").fadeToggle(400);
+
+        return false;
+    };
+
+});
