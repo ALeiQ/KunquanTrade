@@ -112,6 +112,10 @@
     border-radius: 3px;
 }
 
+.panel .add-row-button {
+    position: absolute;
+}
+
 @media(max-width: 500px)
 {
     .term-panel-body
@@ -154,5 +158,10 @@
         top: 54px;
         font-size: 14px;
     }
+
+    .panel .add-row-button {
+        display: none;
+    }
+
 }
 

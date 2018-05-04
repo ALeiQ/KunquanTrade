@@ -9,12 +9,12 @@ $(function () {
     $('#transTable').bootstrapTable({
         //url: '/index.xhtml',
         //method: 'post',
-        editable: true,//开启编辑模式
-        clickToSelect: true,
-        search: true,  //显示检索框
-        showRefresh: true,  //显示刷新按钮
-        pagination: true,
-        showColumns: true,
+        editable: true,         // 开启编辑模式
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
+        showColumns: true,      // 显示内容列下拉框
+        showToggle: true,       // 显示视图切换按钮（分页/卡片）
         uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,

@@ -24,11 +24,10 @@ $(function () {
     $('#goodsTable').bootstrapTable({
         //url: '/index.xhtml',
         //method: 'post',
-        editable: true,//开启编辑模式
-        clickToSelect: true,
-        search: true,  //显示检索框
-        showRefresh: true,  //显示刷新按钮
-        pagination: true,
+        editable: true,         // 开启编辑模式
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,
@@ -56,11 +55,10 @@ $(function () {
     $('#companysTable').bootstrapTable({
         //url: '/index.xhtml',
         //method: 'post',
-        editable: true,//开启编辑模式
-        clickToSelect: true,
-        search: true,  //显示检索框
-        showRefresh: true,  //显示刷新按钮
-        pagination: true,
+        editable: true,             // 开启编辑模式
+        search: true,               // 显示检索框
+        showRefresh: true,          // 显示刷新按钮
+        pagination: true,           // 在表格底部显示分页条
         uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,
@@ -84,11 +82,10 @@ $(function () {
     $('#transportTable').bootstrapTable({
         //url: '/index.xhtml',
         //method: 'post',
-        editable: true,//开启编辑模式
-        clickToSelect: true,
-        search: true,  //显示检索框
-        showRefresh: true,  //显示刷新按钮
-        pagination: true,
+        editable: true,             // 开启编辑模式
+        search: true,               // 显示检索框
+        showRefresh: true,          // 显示刷新按钮
+        pagination: true,           // 在表格底部显示分页条
         uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,
@@ -112,11 +109,10 @@ $(function () {
     $('#bankTable').bootstrapTable({
         //url: '/index.xhtml',
         //method: 'post',
-        editable: true,//开启编辑模式
-        clickToSelect: true,
-        search: true,  //显示检索框
-        showRefresh: true,  //显示刷新按钮
-        pagination: true,
+        editable: true,             // 开启编辑模式
+        search: true,               // 显示检索框
+        showRefresh: true,          // 显示刷新按钮
+        pagination: true,           // 在表格底部显示分页条
         uniqueId: 'id',
         pageList: [5, 25],
         pageSize: 10,
