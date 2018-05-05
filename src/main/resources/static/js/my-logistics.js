@@ -91,4 +91,15 @@ $(function () {
 
 });
 
+// 表格功能设置
+$(function () {
+    addItem = function () {
+        $("#myModalLabel").text("新增");
+        $('#myModal').modal();
+    };
 
+    $('#btn_submit').onclick = function() {
+
+    };
+
+});

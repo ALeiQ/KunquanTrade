@@ -77,7 +77,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="panel-group" id="accordion">
                 <div class="panel panel-widget">
                     <button type="button" class="add-row-button btn btn-success dropdown-toggle"
-                            id = 'addGoods' onclick="addItem(this)">
+                            id = 'addGoods' onclick="addItem()">
                         <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
                     </button>
                     <table class="table text-nowrap table-striped term-table" id="transTable">
@@ -112,49 +112,82 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="clearfix"></div>
         </div>
         <!-- //运输明细表 -->
-
-        <!-- 增加数据的提示框 -->
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                        <h4 class="modal-title" id="myModalLabel">新增</h4>
-                    </div>
-                    <div class="modal-body">
-
-                        <div class="form-group">
-                            <label for="txt_departmentname">部门名称</label>
-                            <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="部门名称">
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_parentdepartment">上级部门</label>
-                            <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="上级部门">
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_departmentlevel">部门级别</label>
-                            <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="部门级别">
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_statu">描述</label>
-                            <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="状态">
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
-                        <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- //增加数据的提示框 -->
-
     </div>
 
     <!--footer-->
     <script type="text/javascript" src="footer.js"></script>
     <!--//footer-->
 </div>
+
+<!-- 增加数据的提示框 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="myModalLabel">新增</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                <div class="col-sm-4">
+                <div class="form-group">
+                    <label for="txt_departmentname">装车时间</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="装车时间">
+                    <label for="txt_parentdepartment">物资名称</label>
+                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="物资名称">
+                    <label for="txt_departmentlevel">型号</label>
+                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="型号">
+                    <label for="txt_statu">净重</label>
+                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="净重">
+                    <label for="txt_departmentname">回执数</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="回执数">
+                    <label for="txt_parentdepartment">亏吨</label>
+                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="亏吨">
+                </div>
+                </div>
+                <div class="col-sm-4">
+                    <label for="txt_parentdepartment">物资来源</label>
+                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="物资来源">
+                    <label for="txt_departmentname">厂家结算单价</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="厂家结算单价">
+                    <label for="txt_parentdepartment">厂家结算金额</label>
+                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="厂家结算金额">
+                    <label for="txt_departmentlevel">结算单位</label>
+                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="结算单位">
+                    <label for="txt_statu">结算单价</label>
+                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="结算单价">
+                    <label for="txt_departmentname">结算金额</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="结算金额">
+                </div>
+                <div class="col-sm-4">
+                    <label for="txt_departmentname">运输公司</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="运输公司">
+                    <label for="txt_parentdepartment">运费单价</label>
+                    <input type="text" name="txt_parentdepartment" class="form-control" id="txt_parentdepartment" placeholder="运费单价">
+                    <label for="txt_departmentlevel">运费金额</label>
+                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="运费金额">
+                    <label for="txt_statu">利润</label>
+                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="利润">
+                    <label for="txt_departmentlevel">检斤号</label>
+                    <input type="text" name="txt_departmentlevel" class="form-control" id="txt_departmentlevel" placeholder="检斤号">
+                    <label for="txt_statu">车牌号</label>
+                    <input type="text" name="txt_statu" class="form-control" id="txt_statu" placeholder="车牌号">
+                </div>
+                    <div class="col-sm-12">
+                    <label for="txt_departmentname">备注</label>
+                    <input type="text" name="txt_departmentname" class="form-control" id="txt_departmentname" placeholder="备注">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>关闭</button>
+                <button type="button" id="btn_submit" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- //增加数据的提示框 -->
+
 <!-- Classie -->
 <script src="js/classie.js"></script>
 
@@ -196,4 +229,5 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <script src="js/my-logistics.js"></script>
 <!-- //my JavaScript -->
 </body>
+
 </html>
