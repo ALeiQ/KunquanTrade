@@ -173,8 +173,6 @@ $(function () {
             tr[field] = inp_tmp_front + "'" + field + "'" + inp_tmp_back;
         }
 
-        console.log(tr);
-
         table.bootstrapTable('prepend', tr);
 
         return false;
@@ -213,10 +211,33 @@ $(function () {
         }
 
         table.bootstrapTable('remove', {field: 'id', values: ['']});
+
+        ajaxAddData(table[0].id);
+
         table.bootstrapTable('prepend', newInfo);
+
         $(th_button).hide();
 
         return false;
+    };
+
+    ajaxAddData = function (tableId, data) {
+        $.ajax()({
+        type: "POST",//方法类型
+        dataType: "json",//预期服务器返回的数据类型
+        url: "/users/login" ,//url
+        data: $('#form1').serialize(),
+        success: function (result) {
+            console.log(result);//打印服务端返回的数据(调试用)
+            if (result.resultCode == 200) {
+                alert("SUCCESS");
+            }
+                ;
+            },
+            error : function() {
+                alert("异常！");
+            }
+        });
     };
 
     // 改变 input 编辑框值时，更新 data 数据，便于新增行时原来填写好的数据不会被新增行强制覆盖

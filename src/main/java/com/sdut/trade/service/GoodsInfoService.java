@@ -1,8 +1,6 @@
 package com.sdut.trade.service;
 
-import java.util.List;
-
-import com.sdut.trade.domain.view.GoodsInfoVO;
+import com.sdut.trade.domain.view.ResponseVO;
 
 /**
  * 类描述：货物信息业务层接口
@@ -12,6 +10,6 @@ import com.sdut.trade.domain.view.GoodsInfoVO;
  */
 public interface GoodsInfoService {
 
-    List<GoodsInfoVO> getAllGoodsInfo();
+    ResponseVO getAllGoodsInfo();
 
 }

@@ -6,10 +6,13 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
 import com.sdut.trade.dao.trade.GoodsInfoDao;
 import com.sdut.trade.domain.data.GoodsInfoDO;
 import com.sdut.trade.domain.view.GoodsInfoVO;
+import com.sdut.trade.domain.view.ResponseVO;
+import com.sdut.trade.enums.ResultEnum;
 import com.sdut.trade.service.GoodsInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -32,13 +35,21 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
      * @return 货物信息数组
      */
     @Override
-    public List<GoodsInfoVO> getAllGoodsInfo() {
+    public ResponseVO getAllGoodsInfo() {
+
+        ResponseVO responseVO = new ResponseVO();
 
         List<GoodsInfoVO> goodsInfoVOS = new ArrayList<>();
 
         List<GoodsInfoDO> goodsInfoDOS = goodsInfoDao.getAll();
 
-        /**
+        if (CollectionUtils.isEmpty(goodsInfoDOS)) {
+            log.error("getAllGoodsInfo fromDB is empty!");
+            responseVO.setResultCode(ResultEnum.FAILURE.getValue());
+            return responseVO;
+        }
+
+        /*
          * 将数据库原始数据包装成前端展示数据
          */
         for (GoodsInfoDO goodsInfoDO : goodsInfoDOS) {
@@ -52,7 +63,10 @@ public class GoodsInfoServiceImpl implements GoodsInfoService {
             goodsInfoVOS.add(goodsInfoVO);
         }
 
-        return goodsInfoVOS;
+        responseVO.setData(goodsInfoVOS);
+        responseVO.setResultCode(ResultEnum.SUCCESS.getValue());
+
+        return responseVO;
     }
 
 }

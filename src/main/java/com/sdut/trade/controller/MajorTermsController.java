@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sdut.trade.domain.view.GoodsInfoVO;
+import com.sdut.trade.domain.view.ResponseVO;
 import com.sdut.trade.service.GoodsInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,16 +44,13 @@ public class MajorTermsController {
 
     @ResponseBody
     @RequestMapping(value = "/getGoodsInfo", method = RequestMethod.GET)
-    public Map<String, Object> getGoodsInfo() {
-        Map<String, Object> result = new HashMap<>();
+    public ResponseVO getGoodsInfo() {
 
-        log.info("majorTermsController getGoodsInfo start");
+        log.info("getGoodsInfo start");
 
-        List<GoodsInfoVO> goodsInfoVOS = goodsInfoService.getAllGoodsInfo();
+        ResponseVO result = goodsInfoService.getAllGoodsInfo();
 
-        result.put("data", goodsInfoVOS);
-
-        log.info("majorTermsController getGoodsInfo success");
+        log.info("getGoodsInfo success");
 
         return result;
     }
