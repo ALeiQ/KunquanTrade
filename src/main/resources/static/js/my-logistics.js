@@ -32,10 +32,10 @@ $(function () {
                 field: "netWeight",
                 title: "净重"
             }, {
-                field: "returnNumber",
+                field: "returnWeight",
                 title: "回执数"
             }, {
-                field: "lossTon",
+                field: "lossWeight",
                 title: "亏吨"
             }, {
                 field: "goodsFrom",
@@ -59,10 +59,10 @@ $(function () {
                 field: "transCompany",
                 title: "运输公司"
             }, {
-                field: "transPerCost",
+                field: "transUnitPrice",
                 title: "运费单价"
             }, {
-                field: "transSumCost",
+                field: "transUnitPrice",
                 title: "运费金额"
             }, {
                 field: "profit",

@@ -22,15 +22,21 @@ $(function () {
 $(function () {
 
     $('#goodsTable').bootstrapTable({
-        //url: '/index.xhtml',
-        //method: 'post',
+        url: '/majorTerms/getGoodsInfo',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
         editable: true,         // 开启编辑模式
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
-        pageList: [5, 25],
-        pageSize: 10,
+        pageList: [5, 10, 25],
+        pageSize: 5,
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
         columns: [
             {
                 field: "id",
