@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sdut.trade.mapper.DealDetailsMapper" >
+  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.DealDetails" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="date" property="date" jdbcType="DATE" />
+    <result column="amount" property="amount" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="BIT" />
+    <result column="way" property="way" jdbcType="INTEGER" />
+    <result column="wechat_pay_account" property="wechatPayAccount" jdbcType="VARCHAR" />
+    <result column="wechat_receive_account" property="wechatReceiveAccount" jdbcType="VARCHAR" />
+    <result column="bank_pay_account" property="bankPayAccount" jdbcType="BIGINT" />
+    <result column="bank_receive_account" property="bankReceiveAccount" jdbcType="BIGINT" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="check_number" property="checkNumber" jdbcType="BIGINT" />
+    <result column="check_amount" property="checkAmount" jdbcType="INTEGER" />
+    <result column="check_people_pay" property="checkPeoplePay" jdbcType="VARCHAR" />
+    <result column="check_people_receive" property="checkPeopleReceive" jdbcType="VARCHAR" />
+    <result column="check_date" property="checkDate" jdbcType="DATE" />
+    <result column="check_deadline" property="checkDeadline" jdbcType="DATE" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="delete_date" property="deleteDate" jdbcType="TIMESTAMP" />
+    <result column="enable" property="enable" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, date, amount, type, way, wechat_pay_account, wechat_receive_account, bank_pay_account, 
+    bank_receive_account, bank_name, check_number, check_amount, check_people_pay, check_people_receive, 
+    check_date, check_deadline, remark, create_date, delete_date, enable
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.trade.entity.DealDetailsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from deal_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from deal_details
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from deal_details
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.DealDetailsExample" >
+    delete from deal_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.sdut.trade.entity.DealDetails" >
+    insert into deal_details (id, date, amount, 
+      type, way, wechat_pay_account, 
+      wechat_receive_account, bank_pay_account, bank_receive_account, 
+      bank_name, check_number, check_amount, 
+      check_people_pay, check_people_receive, check_date, 
+      check_deadline, remark, create_date, 
+      delete_date, enable)
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{amount,jdbcType=INTEGER}, 
+      #{type,jdbcType=BIT}, #{way,jdbcType=INTEGER}, #{wechatPayAccount,jdbcType=VARCHAR}, 
+      #{wechatReceiveAccount,jdbcType=VARCHAR}, #{bankPayAccount,jdbcType=BIGINT}, #{bankReceiveAccount,jdbcType=BIGINT}, 
+      #{bankName,jdbcType=VARCHAR}, #{checkNumber,jdbcType=BIGINT}, #{checkAmount,jdbcType=INTEGER}, 
+      #{checkPeoplePay,jdbcType=VARCHAR}, #{checkPeopleReceive,jdbcType=VARCHAR}, #{checkDate,jdbcType=DATE}, 
+      #{checkDeadline,jdbcType=DATE}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sdut.trade.entity.DealDetails" >
+    insert into deal_details
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="date != null" >
+        date,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="way != null" >
+        way,
+      </if>
+      <if test="wechatPayAccount != null" >
+        wechat_pay_account,
+      </if>
+      <if test="wechatReceiveAccount != null" >
+        wechat_receive_account,
+      </if>
+      <if test="bankPayAccount != null" >
+        bank_pay_account,
+      </if>
+      <if test="bankReceiveAccount != null" >
+        bank_receive_account,
+      </if>
+      <if test="bankName != null" >
+        bank_name,
+      </if>
+      <if test="checkNumber != null" >
+        check_number,
+      </if>
+      <if test="checkAmount != null" >
+        check_amount,
+      </if>
+      <if test="checkPeoplePay != null" >
+        check_people_pay,
+      </if>
+      <if test="checkPeopleReceive != null" >
+        check_people_receive,
+      </if>
+      <if test="checkDate != null" >
+        check_date,
+      </if>
+      <if test="checkDeadline != null" >
+        check_deadline,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="deleteDate != null" >
+        delete_date,
+      </if>
+      <if test="enable != null" >
+        enable,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="date != null" >
+        #{date,jdbcType=DATE},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=BIT},
+      </if>
+      <if test="way != null" >
+        #{way,jdbcType=INTEGER},
+      </if>
+      <if test="wechatPayAccount != null" >
+        #{wechatPayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatReceiveAccount != null" >
+        #{wechatReceiveAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPayAccount != null" >
+        #{bankPayAccount,jdbcType=BIGINT},
+      </if>
+      <if test="bankReceiveAccount != null" >
+        #{bankReceiveAccount,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkNumber != null" >
+        #{checkNumber,jdbcType=BIGINT},
+      </if>
+      <if test="checkAmount != null" >
+        #{checkAmount,jdbcType=INTEGER},
+      </if>
+      <if test="checkPeoplePay != null" >
+        #{checkPeoplePay,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPeopleReceive != null" >
+        #{checkPeopleReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null" >
+        #{checkDate,jdbcType=DATE},
+      </if>
+      <if test="checkDeadline != null" >
+        #{checkDeadline,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null" >
+        #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        #{enable,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.sdut.trade.entity.DealDetailsExample" resultType="java.lang.Integer" >
+    select count(*) from deal_details
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update deal_details
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.date != null" >
+        date = #{record.date,jdbcType=DATE},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=INTEGER},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=BIT},
+      </if>
+      <if test="record.way != null" >
+        way = #{record.way,jdbcType=INTEGER},
+      </if>
+      <if test="record.wechatPayAccount != null" >
+        wechat_pay_account = #{record.wechatPayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.wechatReceiveAccount != null" >
+        wechat_receive_account = #{record.wechatReceiveAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankPayAccount != null" >
+        bank_pay_account = #{record.bankPayAccount,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankReceiveAccount != null" >
+        bank_receive_account = #{record.bankReceiveAccount,jdbcType=BIGINT},
+      </if>
+      <if test="record.bankName != null" >
+        bank_name = #{record.bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkNumber != null" >
+        check_number = #{record.checkNumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.checkAmount != null" >
+        check_amount = #{record.checkAmount,jdbcType=INTEGER},
+      </if>
+      <if test="record.checkPeoplePay != null" >
+        check_people_pay = #{record.checkPeoplePay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkPeopleReceive != null" >
+        check_people_receive = #{record.checkPeopleReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkDate != null" >
+        check_date = #{record.checkDate,jdbcType=DATE},
+      </if>
+      <if test="record.checkDeadline != null" >
+        check_deadline = #{record.checkDeadline,jdbcType=DATE},
+      </if>
+      <if test="record.remark != null" >
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteDate != null" >
+        delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.enable != null" >
+        enable = #{record.enable,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update deal_details
+    set id = #{record.id,jdbcType=INTEGER},
+      date = #{record.date,jdbcType=DATE},
+      amount = #{record.amount,jdbcType=INTEGER},
+      type = #{record.type,jdbcType=BIT},
+      way = #{record.way,jdbcType=INTEGER},
+      wechat_pay_account = #{record.wechatPayAccount,jdbcType=VARCHAR},
+      wechat_receive_account = #{record.wechatReceiveAccount,jdbcType=VARCHAR},
+      bank_pay_account = #{record.bankPayAccount,jdbcType=BIGINT},
+      bank_receive_account = #{record.bankReceiveAccount,jdbcType=BIGINT},
+      bank_name = #{record.bankName,jdbcType=VARCHAR},
+      check_number = #{record.checkNumber,jdbcType=BIGINT},
+      check_amount = #{record.checkAmount,jdbcType=INTEGER},
+      check_people_pay = #{record.checkPeoplePay,jdbcType=VARCHAR},
+      check_people_receive = #{record.checkPeopleReceive,jdbcType=VARCHAR},
+      check_date = #{record.checkDate,jdbcType=DATE},
+      check_deadline = #{record.checkDeadline,jdbcType=DATE},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=TIMESTAMP},
+      delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
+      enable = #{record.enable,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.DealDetails" >
+    update deal_details
+    <set >
+      <if test="date != null" >
+        date = #{date,jdbcType=DATE},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=BIT},
+      </if>
+      <if test="way != null" >
+        way = #{way,jdbcType=INTEGER},
+      </if>
+      <if test="wechatPayAccount != null" >
+        wechat_pay_account = #{wechatPayAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatReceiveAccount != null" >
+        wechat_receive_account = #{wechatReceiveAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="bankPayAccount != null" >
+        bank_pay_account = #{bankPayAccount,jdbcType=BIGINT},
+      </if>
+      <if test="bankReceiveAccount != null" >
+        bank_receive_account = #{bankReceiveAccount,jdbcType=BIGINT},
+      </if>
+      <if test="bankName != null" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="checkNumber != null" >
+        check_number = #{checkNumber,jdbcType=BIGINT},
+      </if>
+      <if test="checkAmount != null" >
+        check_amount = #{checkAmount,jdbcType=INTEGER},
+      </if>
+      <if test="checkPeoplePay != null" >
+        check_people_pay = #{checkPeoplePay,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPeopleReceive != null" >
+        check_people_receive = #{checkPeopleReceive,jdbcType=VARCHAR},
+      </if>
+      <if test="checkDate != null" >
+        check_date = #{checkDate,jdbcType=DATE},
+      </if>
+      <if test="checkDeadline != null" >
+        check_deadline = #{checkDeadline,jdbcType=DATE},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteDate != null" >
+        delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="enable != null" >
+        enable = #{enable,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.DealDetails" >
+    update deal_details
+    set date = #{date,jdbcType=DATE},
+      amount = #{amount,jdbcType=INTEGER},
+      type = #{type,jdbcType=BIT},
+      way = #{way,jdbcType=INTEGER},
+      wechat_pay_account = #{wechatPayAccount,jdbcType=VARCHAR},
+      wechat_receive_account = #{wechatReceiveAccount,jdbcType=VARCHAR},
+      bank_pay_account = #{bankPayAccount,jdbcType=BIGINT},
+      bank_receive_account = #{bankReceiveAccount,jdbcType=BIGINT},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      check_number = #{checkNumber,jdbcType=BIGINT},
+      check_amount = #{checkAmount,jdbcType=INTEGER},
+      check_people_pay = #{checkPeoplePay,jdbcType=VARCHAR},
+      check_people_receive = #{checkPeopleReceive,jdbcType=VARCHAR},
+      check_date = #{checkDate,jdbcType=DATE},
+      check_deadline = #{checkDeadline,jdbcType=DATE},
+      remark = #{remark,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      delete_date = #{deleteDate,jdbcType=TIMESTAMP},
+      enable = #{enable,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

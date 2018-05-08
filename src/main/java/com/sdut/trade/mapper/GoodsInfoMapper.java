@@ -1,11 +1,9 @@
 package com.sdut.trade.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.entity.GoodsInfoExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface GoodsInfoMapper {
     int countByExample(GoodsInfoExample example);
