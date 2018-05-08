@@ -13,9 +13,26 @@ import com.sdut.trade.entity.GoodsInfo;
 public interface GoodsInfoDao {
 
     /**
-     * 获取货物信息全部数据
+     * 获取货物信息全部可用（未删除的）数据
+     *
      * @return 全部货物信息
      */
-    List<GoodsInfo> getAll();
+    List<GoodsInfo> getAllEnable();
+
+    /**
+     * 添加货物信息到数据库
+     *
+     * @param goodsInfos 待添加的货物列表
+     * @return 成功插入数据库的条数
+     */
+    int addGoodsInfoBatch(List<GoodsInfo> goodsInfos);
+
+    /**
+     * 删除货物信息到数据库
+     *
+     * @param id 待删除id
+     * @return 成功插入数据库的条数
+     */
+    int delGoodsInfoById(int id);
 
 }

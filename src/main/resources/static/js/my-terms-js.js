@@ -31,8 +31,8 @@ $(function () {
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
-        pageList: [5, 10, 25],
-        pageSize: 5,
+        pageList: [10, 20, 30],
+        pageSize: 10,
         responseHandler : function(res) {
             //在ajax获取到数据，渲染表格之前，修改数据源
             return res;
@@ -140,7 +140,7 @@ $(function () {
     });
 
     function delIcon(value, row, index) {
-        return '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
+        return '<a class="icon closed-tool" onclick="delData(this)"><i class="fa' +
             ' fa-times"></i></a>';
     }
 
@@ -152,8 +152,6 @@ $(function () {
     var isEmpty = new RegExp('^[ ]+$');
     var inp_tmp_front = '<input type="text" onchange="reloadRowData($(this), ';
     var inp_tmp_back = ')" value="" style="width: 100%;"/>';
-    var suc_tmp = '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
-        ' fa-times"></i></a>';
 
 
     // "增加"按钮
@@ -174,6 +172,19 @@ $(function () {
         }
 
         table.bootstrapTable('prepend', tr);
+
+        return false;
+    };
+
+    // 删除行按钮
+    delData = function (del_icon) {
+
+        var row = $(del_icon).parents('tr');
+        var table = $(row).parents('.table');
+
+        ajaxDelData(table[0].id, $(row.children().first())[0].innerText);
+
+        table.bootstrapTable('refresh');
 
         return false;
     };
@@ -214,26 +225,46 @@ $(function () {
             newInfo.push(rowJson);
         }
 
-        table.bootstrapTable('remove', {field: 'id', values: ['']});
-
         ajaxAddData(table[0].id, newInfo);
 
-        table.bootstrapTable('prepend', newInfo);
+        table.bootstrapTable('refresh');
 
         $(th_button).hide();
 
         return false;
     };
 
+    // 添加多条数据ajax请求
     ajaxAddData = function (tableId, data) {
         $.ajax({
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
             url: "/majorTerms/addTerms" ,//url
+            async: false,
             data: {addType: tableId, termsJson: JSON.stringify(data)},
             success: function (result) {
-                console.log(result);//打印服务端返回的数据(调试用)
-                alert(result.resultMsg);
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                }
+            },
+            error : function() {
+                alert("ajax请求异常！");
+            }
+        });
+    };
+
+    // 删除单条数据ajax请求
+    ajaxDelData = function (tableId, id) {
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/majorTerms/delTerm" ,//url
+            async: false,
+            data: {delType: tableId, delId: id},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                }
             },
             error : function() {
                 alert("ajax请求异常！");

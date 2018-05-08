@@ -13,9 +13,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.ListUtils;
 import org.thymeleaf.util.StringUtils;
 
-import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
@@ -69,7 +70,7 @@ public class MajorTermsController {
     }
 
     /**
-     * 增加数据
+     * 增加多条数据
      * @return 数据写入是否成功
      */
     @ResponseBody
@@ -82,18 +83,21 @@ public class MajorTermsController {
 
         try {
 
+            List<AddTermsRequest> addTermsRequestList = JSONArray.parseArray(termsJson, AddTermsRequest.class);
+
             // 写入的数据不可为空
-            if (StringUtils.isEmpty(addType) || StringUtils.isEmpty(termsJson)) {
+            if (StringUtils.isEmpty(addType)
+                    || StringUtils.isEmpty(termsJson)
+                    || ListUtils.isEmpty(addTermsRequestList)) {
                 result.setResult(ExceptionEnum.PARAM_EMPTY);
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
 
-            List<AddTermsRequest> addTermsRequestList = JSON.parseArray(termsJson, AddTermsRequest.class);
 
             // 根据前端提供的类型，分别进行不同数据表的数据添加。
             switch (addType) {
                 case "goodsTable":
-                    result = goodsInfoService.addGoodsInfo(addTermsRequestList);
+                    result = goodsInfoService.addGoodsInfoBatch(addTermsRequestList);
                     break;
                 case "companysTable":
                     break;
@@ -102,19 +106,71 @@ public class MajorTermsController {
                 case "bankTable":
                     break;
                 default:
-                    log.error("add Terms 传参错误！ 没有这个类型");
+                    log.error("addTerms 传参错误！ 没有这个类型");
                     result.setResult(ExceptionEnum.PARAM_ERR);
                     break;
             }
 
         } catch (MyException ex) {
-            log.error("addTerms Error!" + ex);
+            log.error("addTerms Known Error!" + ex);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("addTerms Error!" , ex);
+            log.error("addTerms Unknown Error!" , ex);
         }
 
         log.info("addTerms end");
+
+        return result;
+    }
+
+
+    /**
+     * 删除单条数据
+     * @return 数据写入是否成功
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delTerm", method = RequestMethod.POST)
+    public ResponseVO delTerm(String delType, String delId) {
+
+        log.info("delTerm start");
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+
+            // 写入的数据不可为空
+            if (StringUtils.isEmpty(delType)
+                    || StringUtils.isEmpty(delId)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+
+            // 根据前端提供的类型，分别进行不同数据表的数据添加。
+            switch (delType) {
+                case "goodsTable":
+                    result = goodsInfoService.delGoodsInfoById(Integer.parseInt(delId));
+                    break;
+                case "companysTable":
+                    break;
+                case "transportTable":
+                    break;
+                case "bankTable":
+                    break;
+                default:
+                    log.error("delTerm 传参错误！ 没有这个类型");
+                    result.setResult(ExceptionEnum.PARAM_ERR);
+                    break;
+            }
+
+        } catch (MyException ex) {
+            log.error("delTerm Known Error!" + ex);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("delTerm Unknown Error!" , ex);
+        }
+
+        log.info("delTerm end");
 
         return result;
     }

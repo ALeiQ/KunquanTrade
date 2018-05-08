@@ -21,8 +21,18 @@ public interface GoodsInfoService {
 
     /**
      * 常用名词添加货物信息
+     *
+     * @param addTermsRequests 添加的数据组
      * @return 添加结果
      */
-    ResponseVO addGoodsInfo(List<AddTermsRequest> addTermsRequests);
+    ResponseVO addGoodsInfoBatch(List<AddTermsRequest> addTermsRequests);
+
+    /**
+     * 删除指定id的货物信息
+     *
+     * @param id 需要删除的信息的Id
+     * @return 删除结果
+     */
+    ResponseVO delGoodsInfoById(int id);
 
 }

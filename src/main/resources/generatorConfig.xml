@@ -8,8 +8,16 @@
         location="F:\Haso\.m2\repository\mysql\mysql-connector-java\5.1.31\mysql-connector-java-5.1.31.jar" />
 
     <context id="sqlserverTables" targetRuntime="MyBatis3">
+
         <!-- 生成的pojo，将implements Serializable-->
-        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />
+
+        <!-- 扩展插件的基本插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.ModelColumnPlugin" />
+
+        <!-- 批量插入和批量更新 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin" />
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
@@ -17,7 +25,7 @@
 
         <!-- 数据库链接URL、用户名、密码 -->
         <jdbcConnection driverClass="com.mysql.jdbc.Driver"
-                        connectionURL="jdbc:mysql://localhost:3306/trade"
+                        connectionURL="jdbc:mysql://localhost:3306/trade?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true"
                         userId="root"
                         password="usbw">
         </jdbcConnection>
@@ -50,6 +58,7 @@
         <javaClientGenerator type="XMLMAPPER" targetPackage="com.sdut.trade.mapper" targetProject="./src/main/java">
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
+
 
         <!-- 列出要生成代码的所有表 -->
         <!--

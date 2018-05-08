@@ -11,6 +11,7 @@ import org.springframework.util.CollectionUtils;
 import com.sdut.trade.bean.GoodsInfoVO;
 import com.sdut.trade.dao.GoodsInfoDao;
 import com.sdut.trade.entity.GoodsInfo;
+import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
@@ -42,7 +43,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
         List<GoodsInfoVO> goodsInfoVOS = new ArrayList<>();
 
-        List<GoodsInfo> goodsInfos = goodsInfoDao.getAll();
+        List<GoodsInfo> goodsInfos = goodsInfoDao.getAllEnable();
 
         // 数据库中未获取到数据
         if (CollectionUtils.isEmpty(goodsInfos)) {
@@ -73,12 +74,11 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
     /**
      * 常用名词添加货物信息
      *
-     * @param addTermsRequests
-     *
+     * @param addTermsRequests 添加的数据组
      * @return 添加结果
      */
     @Override
-    public ResponseVO addGoodsInfo(List<AddTermsRequest> addTermsRequests) {
+    public ResponseVO addGoodsInfoBatch(List<AddTermsRequest> addTermsRequests) {
 
         ResponseVO responseVO = new ResponseVO();
 
@@ -93,12 +93,48 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
             goodsInfo.setName(addTermsRequest.getName());
             goodsInfo.setModel(addTermsRequest.getModel());
             goodsInfo.setCreateDate(createDate);
+            goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
 
             goodsInfos.add(goodsInfo);
 
         }
 
+        int addNum = goodsInfoDao.addGoodsInfoBatch(goodsInfos);
 
+        if (addNum != addTermsRequests.size()) {
+            responseVO.setResult(ResultEnum.FAILURE);
+            responseVO.setResultMsg("名次添加失败！"
+                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
+                    + "[实际添加: " + Integer.toString(addNum) + " 条]");
+
+            log.error("addGoodsInfoBatch add to DB less than need! [need = {}][real = {}]",
+                    addTermsRequests.size(), addNum);
+        }
+
+        return responseVO;
+
+    }
+
+    /**
+     * 删除指定id的货物信息
+     *
+     * @param id 需要删除的信息的Id
+     *
+     * @return 删除结果
+     */
+    @Override
+    public ResponseVO delGoodsInfoById(int id) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        int delNum = goodsInfoDao.delGoodsInfoById(id);
+
+        if (delNum != 1) {
+            responseVO.setResult(ResultEnum.FAILURE);
+            responseVO.setResultMsg("数据删除失败");
+
+            log.error("delGoodsInfoBatch del false!");
+        }
 
         return responseVO;
 

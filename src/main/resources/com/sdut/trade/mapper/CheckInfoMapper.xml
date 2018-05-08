@@ -1,39 +1,39 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sdut.trade.mapper.CheckInfoMapper" >
-  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.CheckInfo" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="direction" property="direction" jdbcType="INTEGER" />
-    <result column="date" property="date" jdbcType="DATE" />
-    <result column="pay_company" property="payCompany" jdbcType="VARCHAR" />
-    <result column="receive_company" property="receiveCompany" jdbcType="VARCHAR" />
-    <result column="number" property="number" jdbcType="VARCHAR" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_model" property="goodsModel" jdbcType="VARCHAR" />
-    <result column="type" property="type" jdbcType="INTEGER" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="delete_date" property="deleteDate" jdbcType="TIMESTAMP" />
-    <result column="enable" property="enable" jdbcType="BIT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdut.trade.mapper.CheckInfoMapper">
+  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.CheckInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="direction" jdbcType="INTEGER" property="direction" />
+    <result column="date" jdbcType="DATE" property="date" />
+    <result column="pay_company" jdbcType="VARCHAR" property="payCompany" />
+    <result column="receive_company" jdbcType="VARCHAR" property="receiveCompany" />
+    <result column="number" jdbcType="VARCHAR" property="number" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="enable" jdbcType="BIT" property="enable" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -44,25 +44,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -73,41 +73,41 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, direction, date, pay_company, receive_company, number, goods_name, goods_model, 
     type, create_date, delete_date, enable
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.trade.entity.CheckInfoExample" >
+  <select id="selectByExample" parameterType="com.sdut.trade.entity.CheckInfoExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from check_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from check_info
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from check_info
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.CheckInfoExample" >
+  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.CheckInfoExample">
     delete from check_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sdut.trade.entity.CheckInfo" >
+  <insert id="insert" parameterType="com.sdut.trade.entity.CheckInfo">
     insert into check_info (id, direction, date, 
       pay_company, receive_company, number, 
       goods_name, goods_model, type, 
@@ -119,136 +119,136 @@
       #{createDate,jdbcType=TIMESTAMP}, #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.sdut.trade.entity.CheckInfo" >
+  <insert id="insertSelective" parameterType="com.sdut.trade.entity.CheckInfo">
     insert into check_info
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="direction != null" >
+      <if test="direction != null">
         direction,
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         date,
       </if>
-      <if test="payCompany != null" >
+      <if test="payCompany != null">
         pay_company,
       </if>
-      <if test="receiveCompany != null" >
+      <if test="receiveCompany != null">
         receive_company,
       </if>
-      <if test="number != null" >
+      <if test="number != null">
         number,
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name,
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         goods_model,
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type,
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date,
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         delete_date,
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         enable,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="direction != null" >
+      <if test="direction != null">
         #{direction,jdbcType=INTEGER},
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         #{date,jdbcType=DATE},
       </if>
-      <if test="payCompany != null" >
+      <if test="payCompany != null">
         #{payCompany,jdbcType=VARCHAR},
       </if>
-      <if test="receiveCompany != null" >
+      <if test="receiveCompany != null">
         #{receiveCompany,jdbcType=VARCHAR},
       </if>
-      <if test="number != null" >
+      <if test="number != null">
         #{number,jdbcType=VARCHAR},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         #{goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         #{type,jdbcType=INTEGER},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         #{deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         #{enable,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sdut.trade.entity.CheckInfoExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.sdut.trade.entity.CheckInfoExample" resultType="java.lang.Long">
     select count(*) from check_info
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update check_info
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.direction != null" >
+      <if test="record.direction != null">
         direction = #{record.direction,jdbcType=INTEGER},
       </if>
-      <if test="record.date != null" >
+      <if test="record.date != null">
         date = #{record.date,jdbcType=DATE},
       </if>
-      <if test="record.payCompany != null" >
+      <if test="record.payCompany != null">
         pay_company = #{record.payCompany,jdbcType=VARCHAR},
       </if>
-      <if test="record.receiveCompany != null" >
+      <if test="record.receiveCompany != null">
         receive_company = #{record.receiveCompany,jdbcType=VARCHAR},
       </if>
-      <if test="record.number != null" >
+      <if test="record.number != null">
         number = #{record.number,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsName != null" >
+      <if test="record.goodsName != null">
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsModel != null" >
+      <if test="record.goodsModel != null">
         goods_model = #{record.goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="record.type != null" >
+      <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
       </if>
-      <if test="record.createDate != null" >
+      <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.deleteDate != null" >
+      <if test="record.deleteDate != null">
         delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.enable != null" >
+      <if test="record.enable != null">
         enable = #{record.enable,jdbcType=BIT},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update check_info
     set id = #{record.id,jdbcType=INTEGER},
       direction = #{record.direction,jdbcType=INTEGER},
@@ -262,50 +262,50 @@
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       enable = #{record.enable,jdbcType=BIT}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.CheckInfo" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.CheckInfo">
     update check_info
-    <set >
-      <if test="direction != null" >
+    <set>
+      <if test="direction != null">
         direction = #{direction,jdbcType=INTEGER},
       </if>
-      <if test="date != null" >
+      <if test="date != null">
         date = #{date,jdbcType=DATE},
       </if>
-      <if test="payCompany != null" >
+      <if test="payCompany != null">
         pay_company = #{payCompany,jdbcType=VARCHAR},
       </if>
-      <if test="receiveCompany != null" >
+      <if test="receiveCompany != null">
         receive_company = #{receiveCompany,jdbcType=VARCHAR},
       </if>
-      <if test="number != null" >
+      <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         goods_model = #{goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="type != null" >
+      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         enable = #{enable,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.CheckInfo" >
+  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.CheckInfo">
     update check_info
     set direction = #{direction,jdbcType=INTEGER},
       date = #{date,jdbcType=DATE},
@@ -320,4 +320,77 @@
       enable = #{enable,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into check_info
+    (id, direction, date, pay_company, receive_company, number, goods_name, goods_model, 
+      type, create_date, delete_date, enable)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.direction,jdbcType=INTEGER}, #{item.date,jdbcType=DATE}, 
+        #{item.payCompany,jdbcType=VARCHAR}, #{item.receiveCompany,jdbcType=VARCHAR}, #{item.number,jdbcType=VARCHAR}, 
+        #{item.goodsName,jdbcType=VARCHAR}, #{item.goodsModel,jdbcType=VARCHAR}, #{item.type,jdbcType=INTEGER}, 
+        #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT}
+        )
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into check_info (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id' == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'direction' == column.value">
+          #{item.direction,jdbcType=INTEGER}
+        </if>
+        <if test="'date' == column.value">
+          #{item.date,jdbcType=DATE}
+        </if>
+        <if test="'pay_company' == column.value">
+          #{item.payCompany,jdbcType=VARCHAR}
+        </if>
+        <if test="'receive_company' == column.value">
+          #{item.receiveCompany,jdbcType=VARCHAR}
+        </if>
+        <if test="'number' == column.value">
+          #{item.number,jdbcType=VARCHAR}
+        </if>
+        <if test="'goods_name' == column.value">
+          #{item.goodsName,jdbcType=VARCHAR}
+        </if>
+        <if test="'goods_model' == column.value">
+          #{item.goodsModel,jdbcType=VARCHAR}
+        </if>
+        <if test="'type' == column.value">
+          #{item.type,jdbcType=INTEGER}
+        </if>
+        <if test="'create_date' == column.value">
+          #{item.createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'delete_date' == column.value">
+          #{item.deleteDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'enable' == column.value">
+          #{item.enable,jdbcType=BIT}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>

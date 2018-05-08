@@ -1,7 +1,7 @@
 /*
  * Copyright (C) 2018 Baidu, Inc. All Rights Reserved.
  */
-package com.sdut.trade.interceptor;
+package com.sdut.trade.filter;
 
 import java.io.IOException;
 import java.io.PrintWriter;

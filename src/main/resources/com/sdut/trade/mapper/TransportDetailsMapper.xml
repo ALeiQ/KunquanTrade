@@ -1,50 +1,50 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sdut.trade.mapper.TransportDetailsMapper" >
-  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.TransportDetails" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="load_time" property="loadTime" jdbcType="DATE" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_model" property="goodsModel" jdbcType="VARCHAR" />
-    <result column="net_weight" property="netWeight" jdbcType="REAL" />
-    <result column="return_weight" property="returnWeight" jdbcType="REAL" />
-    <result column="loss_weight" property="lossWeight" jdbcType="REAL" />
-    <result column="goods_from" property="goodsFrom" jdbcType="VARCHAR" />
-    <result column="seller_unit_price" property="sellerUnitPrice" jdbcType="REAL" />
-    <result column="seller_sum_price" property="sellerSumPrice" jdbcType="REAL" />
-    <result column="buyer_company" property="buyerCompany" jdbcType="VARCHAR" />
-    <result column="unit_price" property="unitPrice" jdbcType="REAL" />
-    <result column="sum_price" property="sumPrice" jdbcType="REAL" />
-    <result column="trans_company" property="transCompany" jdbcType="VARCHAR" />
-    <result column="trans_unit_price" property="transUnitPrice" jdbcType="REAL" />
-    <result column="trans_sum_price" property="transSumPrice" jdbcType="REAL" />
-    <result column="profit" property="profit" jdbcType="REAL" />
-    <result column="weighing_number" property="weighingNumber" jdbcType="VARCHAR" />
-    <result column="car_number" property="carNumber" jdbcType="VARCHAR" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="delete_date" property="deleteDate" jdbcType="TIMESTAMP" />
-    <result column="enable" property="enable" jdbcType="BIT" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sdut.trade.mapper.TransportDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.TransportDetails">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="load_time" jdbcType="DATE" property="loadTime" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
+    <result column="net_weight" jdbcType="REAL" property="netWeight" />
+    <result column="return_weight" jdbcType="REAL" property="returnWeight" />
+    <result column="loss_weight" jdbcType="REAL" property="lossWeight" />
+    <result column="goods_from" jdbcType="VARCHAR" property="goodsFrom" />
+    <result column="seller_unit_price" jdbcType="REAL" property="sellerUnitPrice" />
+    <result column="seller_sum_price" jdbcType="REAL" property="sellerSumPrice" />
+    <result column="buyer_company" jdbcType="VARCHAR" property="buyerCompany" />
+    <result column="unit_price" jdbcType="REAL" property="unitPrice" />
+    <result column="sum_price" jdbcType="REAL" property="sumPrice" />
+    <result column="trans_company" jdbcType="VARCHAR" property="transCompany" />
+    <result column="trans_unit_price" jdbcType="REAL" property="transUnitPrice" />
+    <result column="trans_sum_price" jdbcType="REAL" property="transSumPrice" />
+    <result column="profit" jdbcType="REAL" property="profit" />
+    <result column="weighing_number" jdbcType="VARCHAR" property="weighingNumber" />
+    <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
+    <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
+    <result column="enable" jdbcType="BIT" property="enable" />
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -55,25 +55,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -84,43 +84,43 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     id, load_time, goods_name, goods_model, net_weight, return_weight, loss_weight, goods_from, 
     seller_unit_price, seller_sum_price, buyer_company, unit_price, sum_price, trans_company, 
     trans_unit_price, trans_sum_price, profit, weighing_number, car_number, remark, create_date, 
     delete_date, enable
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.sdut.trade.entity.TransportDetailsExample" >
+  <select id="selectByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from transport_details
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from transport_details
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from transport_details
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" >
+  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample">
     delete from transport_details
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sdut.trade.entity.TransportDetails" >
+  <insert id="insert" parameterType="com.sdut.trade.entity.TransportDetails">
     insert into transport_details (id, load_time, goods_name, 
       goods_model, net_weight, return_weight, 
       loss_weight, goods_from, seller_unit_price, 
@@ -138,235 +138,235 @@
       #{carNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.sdut.trade.entity.TransportDetails" >
+  <insert id="insertSelective" parameterType="com.sdut.trade.entity.TransportDetails">
     insert into transport_details
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         id,
       </if>
-      <if test="loadTime != null" >
+      <if test="loadTime != null">
         load_time,
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name,
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         goods_model,
       </if>
-      <if test="netWeight != null" >
+      <if test="netWeight != null">
         net_weight,
       </if>
-      <if test="returnWeight != null" >
+      <if test="returnWeight != null">
         return_weight,
       </if>
-      <if test="lossWeight != null" >
+      <if test="lossWeight != null">
         loss_weight,
       </if>
-      <if test="goodsFrom != null" >
+      <if test="goodsFrom != null">
         goods_from,
       </if>
-      <if test="sellerUnitPrice != null" >
+      <if test="sellerUnitPrice != null">
         seller_unit_price,
       </if>
-      <if test="sellerSumPrice != null" >
+      <if test="sellerSumPrice != null">
         seller_sum_price,
       </if>
-      <if test="buyerCompany != null" >
+      <if test="buyerCompany != null">
         buyer_company,
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         unit_price,
       </if>
-      <if test="sumPrice != null" >
+      <if test="sumPrice != null">
         sum_price,
       </if>
-      <if test="transCompany != null" >
+      <if test="transCompany != null">
         trans_company,
       </if>
-      <if test="transUnitPrice != null" >
+      <if test="transUnitPrice != null">
         trans_unit_price,
       </if>
-      <if test="transSumPrice != null" >
+      <if test="transSumPrice != null">
         trans_sum_price,
       </if>
-      <if test="profit != null" >
+      <if test="profit != null">
         profit,
       </if>
-      <if test="weighingNumber != null" >
+      <if test="weighingNumber != null">
         weighing_number,
       </if>
-      <if test="carNumber != null" >
+      <if test="carNumber != null">
         car_number,
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark,
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date,
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         delete_date,
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         enable,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="loadTime != null" >
+      <if test="loadTime != null">
         #{loadTime,jdbcType=DATE},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         #{goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="netWeight != null" >
+      <if test="netWeight != null">
         #{netWeight,jdbcType=REAL},
       </if>
-      <if test="returnWeight != null" >
+      <if test="returnWeight != null">
         #{returnWeight,jdbcType=REAL},
       </if>
-      <if test="lossWeight != null" >
+      <if test="lossWeight != null">
         #{lossWeight,jdbcType=REAL},
       </if>
-      <if test="goodsFrom != null" >
+      <if test="goodsFrom != null">
         #{goodsFrom,jdbcType=VARCHAR},
       </if>
-      <if test="sellerUnitPrice != null" >
+      <if test="sellerUnitPrice != null">
         #{sellerUnitPrice,jdbcType=REAL},
       </if>
-      <if test="sellerSumPrice != null" >
+      <if test="sellerSumPrice != null">
         #{sellerSumPrice,jdbcType=REAL},
       </if>
-      <if test="buyerCompany != null" >
+      <if test="buyerCompany != null">
         #{buyerCompany,jdbcType=VARCHAR},
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         #{unitPrice,jdbcType=REAL},
       </if>
-      <if test="sumPrice != null" >
+      <if test="sumPrice != null">
         #{sumPrice,jdbcType=REAL},
       </if>
-      <if test="transCompany != null" >
+      <if test="transCompany != null">
         #{transCompany,jdbcType=VARCHAR},
       </if>
-      <if test="transUnitPrice != null" >
+      <if test="transUnitPrice != null">
         #{transUnitPrice,jdbcType=REAL},
       </if>
-      <if test="transSumPrice != null" >
+      <if test="transSumPrice != null">
         #{transSumPrice,jdbcType=REAL},
       </if>
-      <if test="profit != null" >
+      <if test="profit != null">
         #{profit,jdbcType=REAL},
       </if>
-      <if test="weighingNumber != null" >
+      <if test="weighingNumber != null">
         #{weighingNumber,jdbcType=VARCHAR},
       </if>
-      <if test="carNumber != null" >
+      <if test="carNumber != null">
         #{carNumber,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         #{deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         #{enable,jdbcType=BIT},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" resultType="java.lang.Long">
     select count(*) from transport_details
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update transport_details
-    <set >
-      <if test="record.id != null" >
+    <set>
+      <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.loadTime != null" >
+      <if test="record.loadTime != null">
         load_time = #{record.loadTime,jdbcType=DATE},
       </if>
-      <if test="record.goodsName != null" >
+      <if test="record.goodsName != null">
         goods_name = #{record.goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="record.goodsModel != null" >
+      <if test="record.goodsModel != null">
         goods_model = #{record.goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="record.netWeight != null" >
+      <if test="record.netWeight != null">
         net_weight = #{record.netWeight,jdbcType=REAL},
       </if>
-      <if test="record.returnWeight != null" >
+      <if test="record.returnWeight != null">
         return_weight = #{record.returnWeight,jdbcType=REAL},
       </if>
-      <if test="record.lossWeight != null" >
+      <if test="record.lossWeight != null">
         loss_weight = #{record.lossWeight,jdbcType=REAL},
       </if>
-      <if test="record.goodsFrom != null" >
+      <if test="record.goodsFrom != null">
         goods_from = #{record.goodsFrom,jdbcType=VARCHAR},
       </if>
-      <if test="record.sellerUnitPrice != null" >
+      <if test="record.sellerUnitPrice != null">
         seller_unit_price = #{record.sellerUnitPrice,jdbcType=REAL},
       </if>
-      <if test="record.sellerSumPrice != null" >
+      <if test="record.sellerSumPrice != null">
         seller_sum_price = #{record.sellerSumPrice,jdbcType=REAL},
       </if>
-      <if test="record.buyerCompany != null" >
+      <if test="record.buyerCompany != null">
         buyer_company = #{record.buyerCompany,jdbcType=VARCHAR},
       </if>
-      <if test="record.unitPrice != null" >
+      <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=REAL},
       </if>
-      <if test="record.sumPrice != null" >
+      <if test="record.sumPrice != null">
         sum_price = #{record.sumPrice,jdbcType=REAL},
       </if>
-      <if test="record.transCompany != null" >
+      <if test="record.transCompany != null">
         trans_company = #{record.transCompany,jdbcType=VARCHAR},
       </if>
-      <if test="record.transUnitPrice != null" >
+      <if test="record.transUnitPrice != null">
         trans_unit_price = #{record.transUnitPrice,jdbcType=REAL},
       </if>
-      <if test="record.transSumPrice != null" >
+      <if test="record.transSumPrice != null">
         trans_sum_price = #{record.transSumPrice,jdbcType=REAL},
       </if>
-      <if test="record.profit != null" >
+      <if test="record.profit != null">
         profit = #{record.profit,jdbcType=REAL},
       </if>
-      <if test="record.weighingNumber != null" >
+      <if test="record.weighingNumber != null">
         weighing_number = #{record.weighingNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.carNumber != null" >
+      <if test="record.carNumber != null">
         car_number = #{record.carNumber,jdbcType=VARCHAR},
       </if>
-      <if test="record.remark != null" >
+      <if test="record.remark != null">
         remark = #{record.remark,jdbcType=VARCHAR},
       </if>
-      <if test="record.createDate != null" >
+      <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.deleteDate != null" >
+      <if test="record.deleteDate != null">
         delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.enable != null" >
+      <if test="record.enable != null">
         enable = #{record.enable,jdbcType=BIT},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update transport_details
     set id = #{record.id,jdbcType=INTEGER},
       load_time = #{record.loadTime,jdbcType=DATE},
@@ -391,83 +391,83 @@
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       enable = #{record.enable,jdbcType=BIT}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.TransportDetails" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.TransportDetails">
     update transport_details
-    <set >
-      <if test="loadTime != null" >
+    <set>
+      <if test="loadTime != null">
         load_time = #{loadTime,jdbcType=DATE},
       </if>
-      <if test="goodsName != null" >
+      <if test="goodsName != null">
         goods_name = #{goodsName,jdbcType=VARCHAR},
       </if>
-      <if test="goodsModel != null" >
+      <if test="goodsModel != null">
         goods_model = #{goodsModel,jdbcType=VARCHAR},
       </if>
-      <if test="netWeight != null" >
+      <if test="netWeight != null">
         net_weight = #{netWeight,jdbcType=REAL},
       </if>
-      <if test="returnWeight != null" >
+      <if test="returnWeight != null">
         return_weight = #{returnWeight,jdbcType=REAL},
       </if>
-      <if test="lossWeight != null" >
+      <if test="lossWeight != null">
         loss_weight = #{lossWeight,jdbcType=REAL},
       </if>
-      <if test="goodsFrom != null" >
+      <if test="goodsFrom != null">
         goods_from = #{goodsFrom,jdbcType=VARCHAR},
       </if>
-      <if test="sellerUnitPrice != null" >
+      <if test="sellerUnitPrice != null">
         seller_unit_price = #{sellerUnitPrice,jdbcType=REAL},
       </if>
-      <if test="sellerSumPrice != null" >
+      <if test="sellerSumPrice != null">
         seller_sum_price = #{sellerSumPrice,jdbcType=REAL},
       </if>
-      <if test="buyerCompany != null" >
+      <if test="buyerCompany != null">
         buyer_company = #{buyerCompany,jdbcType=VARCHAR},
       </if>
-      <if test="unitPrice != null" >
+      <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=REAL},
       </if>
-      <if test="sumPrice != null" >
+      <if test="sumPrice != null">
         sum_price = #{sumPrice,jdbcType=REAL},
       </if>
-      <if test="transCompany != null" >
+      <if test="transCompany != null">
         trans_company = #{transCompany,jdbcType=VARCHAR},
       </if>
-      <if test="transUnitPrice != null" >
+      <if test="transUnitPrice != null">
         trans_unit_price = #{transUnitPrice,jdbcType=REAL},
       </if>
-      <if test="transSumPrice != null" >
+      <if test="transSumPrice != null">
         trans_sum_price = #{transSumPrice,jdbcType=REAL},
       </if>
-      <if test="profit != null" >
+      <if test="profit != null">
         profit = #{profit,jdbcType=REAL},
       </if>
-      <if test="weighingNumber != null" >
+      <if test="weighingNumber != null">
         weighing_number = #{weighingNumber,jdbcType=VARCHAR},
       </if>
-      <if test="carNumber != null" >
+      <if test="carNumber != null">
         car_number = #{carNumber,jdbcType=VARCHAR},
       </if>
-      <if test="remark != null" >
+      <if test="remark != null">
         remark = #{remark,jdbcType=VARCHAR},
       </if>
-      <if test="createDate != null" >
+      <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="deleteDate != null" >
+      <if test="deleteDate != null">
         delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       </if>
-      <if test="enable != null" >
+      <if test="enable != null">
         enable = #{enable,jdbcType=BIT},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.TransportDetails" >
+  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.TransportDetails">
     update transport_details
     set load_time = #{loadTime,jdbcType=DATE},
       goods_name = #{goodsName,jdbcType=VARCHAR},
@@ -493,4 +493,115 @@
       enable = #{enable,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <insert id="batchInsert" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into transport_details
+    (id, load_time, goods_name, goods_model, net_weight, return_weight, loss_weight, 
+      goods_from, seller_unit_price, seller_sum_price, buyer_company, unit_price, sum_price, 
+      trans_company, trans_unit_price, trans_sum_price, profit, weighing_number, car_number, 
+      remark, create_date, delete_date, enable)
+    values
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id,jdbcType=INTEGER}, #{item.loadTime,jdbcType=DATE}, #{item.goodsName,jdbcType=VARCHAR}, 
+        #{item.goodsModel,jdbcType=VARCHAR}, #{item.netWeight,jdbcType=REAL}, #{item.returnWeight,jdbcType=REAL}, 
+        #{item.lossWeight,jdbcType=REAL}, #{item.goodsFrom,jdbcType=VARCHAR}, #{item.sellerUnitPrice,jdbcType=REAL}, 
+        #{item.sellerSumPrice,jdbcType=REAL}, #{item.buyerCompany,jdbcType=VARCHAR}, #{item.unitPrice,jdbcType=REAL}, 
+        #{item.sumPrice,jdbcType=REAL}, #{item.transCompany,jdbcType=VARCHAR}, #{item.transUnitPrice,jdbcType=REAL}, 
+        #{item.transSumPrice,jdbcType=REAL}, #{item.profit,jdbcType=REAL}, #{item.weighingNumber,jdbcType=VARCHAR}, 
+        #{item.carNumber,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, 
+        #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT})
+    </foreach>
+  </insert>
+  <insert id="batchInsertSelective" parameterType="map">
+    <!--
+      WARNING - @mbg.generated
+      This element is automatically generated by MyBatis Generator, do not modify.
+      @project https://github.com/itfsw/mybatis-generator-plugin
+    -->
+    insert into transport_details (
+    <foreach collection="selective" item="column" separator=",">
+      ${column.value}
+    </foreach>
+    )
+    values
+    <foreach collection="list" item="item" separator=",">
+      (
+      <foreach collection="selective" item="column" separator=",">
+        <if test="'id' == column.value">
+          #{item.id,jdbcType=INTEGER}
+        </if>
+        <if test="'load_time' == column.value">
+          #{item.loadTime,jdbcType=DATE}
+        </if>
+        <if test="'goods_name' == column.value">
+          #{item.goodsName,jdbcType=VARCHAR}
+        </if>
+        <if test="'goods_model' == column.value">
+          #{item.goodsModel,jdbcType=VARCHAR}
+        </if>
+        <if test="'net_weight' == column.value">
+          #{item.netWeight,jdbcType=REAL}
+        </if>
+        <if test="'return_weight' == column.value">
+          #{item.returnWeight,jdbcType=REAL}
+        </if>
+        <if test="'loss_weight' == column.value">
+          #{item.lossWeight,jdbcType=REAL}
+        </if>
+        <if test="'goods_from' == column.value">
+          #{item.goodsFrom,jdbcType=VARCHAR}
+        </if>
+        <if test="'seller_unit_price' == column.value">
+          #{item.sellerUnitPrice,jdbcType=REAL}
+        </if>
+        <if test="'seller_sum_price' == column.value">
+          #{item.sellerSumPrice,jdbcType=REAL}
+        </if>
+        <if test="'buyer_company' == column.value">
+          #{item.buyerCompany,jdbcType=VARCHAR}
+        </if>
+        <if test="'unit_price' == column.value">
+          #{item.unitPrice,jdbcType=REAL}
+        </if>
+        <if test="'sum_price' == column.value">
+          #{item.sumPrice,jdbcType=REAL}
+        </if>
+        <if test="'trans_company' == column.value">
+          #{item.transCompany,jdbcType=VARCHAR}
+        </if>
+        <if test="'trans_unit_price' == column.value">
+          #{item.transUnitPrice,jdbcType=REAL}
+        </if>
+        <if test="'trans_sum_price' == column.value">
+          #{item.transSumPrice,jdbcType=REAL}
+        </if>
+        <if test="'profit' == column.value">
+          #{item.profit,jdbcType=REAL}
+        </if>
+        <if test="'weighing_number' == column.value">
+          #{item.weighingNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="'car_number' == column.value">
+          #{item.carNumber,jdbcType=VARCHAR}
+        </if>
+        <if test="'remark' == column.value">
+          #{item.remark,jdbcType=VARCHAR}
+        </if>
+        <if test="'create_date' == column.value">
+          #{item.createDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'delete_date' == column.value">
+          #{item.deleteDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'enable' == column.value">
+          #{item.enable,jdbcType=BIT}
+        </if>
+      </foreach>
+      )
+    </foreach>
+  </insert>
 </mapper>

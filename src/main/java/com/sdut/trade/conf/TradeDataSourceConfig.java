@@ -40,16 +40,6 @@ public class TradeDataSourceConfig {
             @Qualifier("tradeDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-
-        //ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        //try {
-        //    bean.setMapperLocations(resolver.getResources("classpath*:/mapper/*Mapper.xml"));
-        //    return bean.getObject();
-        //} catch (Exception e) {
-        //    e.printStackTrace();
-        //    throw new RuntimeException(e);
-        //}
-
         return bean.getObject();
     }
 

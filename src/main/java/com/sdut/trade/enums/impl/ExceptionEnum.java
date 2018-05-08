@@ -12,8 +12,8 @@ import lombok.Getter;
  */
 public enum ExceptionEnum implements ResponseEnum {
 
-    PARAM_ERR(20010, "传参有误"),
-    PARAM_EMPTY(20011, "传参不可为空"),
+    PARAM_ERR(20010, "字段有误"),
+    PARAM_EMPTY(20011, "字段不可为空"),
 
     JSON_PARSE_FAILURE(30010, "JSON串解析失败");
 
