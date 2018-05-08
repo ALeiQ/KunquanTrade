@@ -1,4 +1,6 @@
-package com.sdut.trade.enums;
+package com.sdut.trade.enums.impl;
+
+import com.sdut.trade.enums.ResponseEnum;
 
 import lombok.Getter;
 
@@ -8,7 +10,7 @@ import lombok.Getter;
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/7
  */
-public enum ResultEnum {
+public enum ResultEnum implements ResponseEnum {
 
     SUCCESS(0, "成功"),
     FAILURE(-1, "失败");

@@ -1,9 +1,0 @@
-com\sdut\trade\controller\InvoiceController.class
-com\sdut\trade\interceptor\LoginFilter.class
-com\sdut\trade\controller\TransactionDetailsController.class
-com\sdut\trade\controller\IndexController.class
-com\sdut\trade\conf\TradeDataSourceConfig.class
-com\sdut\trade\controller\LogisticsController.class
-com\sdut\trade\Application.class
-com\sdut\trade\controller\MajorTermsController.class
-com\sdut\trade\controller\LoginController.class

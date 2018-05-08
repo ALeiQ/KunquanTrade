@@ -195,24 +195,28 @@ $(function () {
             for (var j = 1; j < rows[i].cells.length - 1; ++j) {
                 var text = $($(rows[i].cells[j])[0].firstChild).val();
 
-                if (typeof(text) !== 'undefined' && text !== '' && !isEmpty.test(text)) {
+                // name字段必须非空
+                if (j === 1 && (typeof(text) === 'undefined' || text === '' || isEmpty.test(text))) {
+                    hasText = false;
+                    break;
+                } else {
                     hasText = true;
                 }
 
                 rowJson[topics[j].dataset.field] = text;
             }
 
+            if (!hasText) continue;
+
             rowJson['id'] = '1';
             rowJson['operate'] = '';
 
-            if (hasText) {
-                newInfo.push(rowJson);
-            }
+            newInfo.push(rowJson);
         }
 
         table.bootstrapTable('remove', {field: 'id', values: ['']});
 
-        ajaxAddData(table[0].id);
+        ajaxAddData(table[0].id, newInfo);
 
         table.bootstrapTable('prepend', newInfo);
 
@@ -222,20 +226,17 @@ $(function () {
     };
 
     ajaxAddData = function (tableId, data) {
-        $.ajax()({
-        type: "POST",//方法类型
-        dataType: "json",//预期服务器返回的数据类型
-        url: "/users/login" ,//url
-        data: $('#form1').serialize(),
-        success: function (result) {
-            console.log(result);//打印服务端返回的数据(调试用)
-            if (result.resultCode == 200) {
-                alert("SUCCESS");
-            }
-                ;
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "/majorTerms/addTerms" ,//url
+            data: {addType: tableId, termsJson: JSON.stringify(data)},
+            success: function (result) {
+                console.log(result);//打印服务端返回的数据(调试用)
+                alert(result.resultMsg);
             },
             error : function() {
-                alert("异常！");
+                alert("ajax请求异常！");
             }
         });
     };

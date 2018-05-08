@@ -1,4 +1,4 @@
-package com.sdut.trade.domain.view;
+package com.sdut.trade.bean;
 
 import lombok.Data;
 

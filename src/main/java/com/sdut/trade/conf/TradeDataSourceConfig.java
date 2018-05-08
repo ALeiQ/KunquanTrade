@@ -13,6 +13,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import javax.sql.DataSource;
 
@@ -23,7 +25,7 @@ import javax.sql.DataSource;
  * @date 2018/3/9
  */
 @Configuration
-@MapperScan(basePackages = "com.trade.dao.trade", sqlSessionTemplateRef = "tradeSqlSessionTemplate")
+@MapperScan(basePackages = "com.sdut.trade.mapper",sqlSessionTemplateRef = "tradeSqlSessionTemplate")
 public class TradeDataSourceConfig {
 
     @Bean(name = "tradeDataSource")
@@ -39,6 +41,16 @@ public class TradeDataSourceConfig {
             @Qualifier("tradeDataSource") DataSource dataSource) throws Exception {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
+
+        //ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
+        //try {
+        //    bean.setMapperLocations(resolver.getResources("classpath*:/mapper/*Mapper.xml"));
+        //    return bean.getObject();
+        //} catch (Exception e) {
+        //    e.printStackTrace();
+        //    throw new RuntimeException(e);
+        //}
+
         return bean.getObject();
     }
 

@@ -36,3 +36,4 @@ target/classes/static/navigation.js
 target/classes/static/transaction_details.html
 target/conf/
 target/generated-sources/
+/target/
