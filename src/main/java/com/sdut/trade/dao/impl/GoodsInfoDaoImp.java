@@ -10,7 +10,6 @@ import com.sdut.trade.dao.GoodsInfoDao;
 import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.entity.GoodsInfoExample;
 import com.sdut.trade.enums.impl.EnableEnum;
-import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.mapper.GoodsInfoMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +56,6 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
     @Override
     public int addGoodsInfoBatch(List<GoodsInfo> goodsInfos) {
 
-        System.out.printf(JSONArray.toJSON(goodsInfos).toString());
         return goodsInfoMapper.batchInsert(goodsInfos);
 
     }

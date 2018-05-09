@@ -22,7 +22,7 @@ $(function () {
 $(function () {
 
     $('#goodsTable').bootstrapTable({
-        url: '/majorTerms/getGoodsInfo',
+        url: '/majorTerms/getTermsInfo',
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
@@ -33,6 +33,11 @@ $(function () {
         uniqueId: 'id',
         pageList: [10, 20, 30],
         pageSize: 10,
+        queryParams: function() {
+            return {
+                getType: "goodsTable"
+            };
+        },
         responseHandler : function(res) {
             //在ajax获取到数据，渲染表格之前，修改数据源
             return res;
@@ -59,15 +64,26 @@ $(function () {
     });
 
     $('#companysTable').bootstrapTable({
-        //url: '/index.xhtml',
-        //method: 'post',
-        editable: true,             // 开启编辑模式
-        search: true,               // 显示检索框
-        showRefresh: true,          // 显示刷新按钮
-        pagination: true,           // 在表格底部显示分页条
+        url: '/majorTerms/getTermsInfo',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
+        editable: true,         // 开启编辑模式
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
-        pageList: [5, 25],
+        pageList: [10, 20, 30],
         pageSize: 10,
+        queryParams: function() {
+            return {
+                getType: "companysTable"
+            };
+        },
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
         columns: [
             {
                 field: "id",
@@ -86,15 +102,26 @@ $(function () {
     });
 
     $('#transportTable').bootstrapTable({
-        //url: '/index.xhtml',
-        //method: 'post',
-        editable: true,             // 开启编辑模式
-        search: true,               // 显示检索框
-        showRefresh: true,          // 显示刷新按钮
-        pagination: true,           // 在表格底部显示分页条
+        url: '/majorTerms/getTermsInfo',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
+        editable: true,         // 开启编辑模式
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
-        pageList: [5, 25],
+        pageList: [10, 20, 30],
         pageSize: 10,
+        queryParams: function() {
+            return {
+                getType: "transportTable"
+            };
+        },
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
         columns: [
             {
                 field: "id",
@@ -113,15 +140,26 @@ $(function () {
     });
 
     $('#bankTable').bootstrapTable({
-        //url: '/index.xhtml',
-        //method: 'post',
-        editable: true,             // 开启编辑模式
-        search: true,               // 显示检索框
-        showRefresh: true,          // 显示刷新按钮
-        pagination: true,           // 在表格底部显示分页条
+        url: '/majorTerms/getTermsInfo',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
+        editable: true,         // 开启编辑模式
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
         uniqueId: 'id',
-        pageList: [5, 25],
+        pageList: [10, 20, 30],
         pageSize: 10,
+        queryParams: function() {
+            return {
+                getType: "bankTable"
+            };
+        },
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
         columns: [
             {
                 field: "id",

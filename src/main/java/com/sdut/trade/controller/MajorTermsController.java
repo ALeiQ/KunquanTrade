@@ -22,7 +22,10 @@ import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
+import com.sdut.trade.service.BankInfoService;
+import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
+import com.sdut.trade.service.TransportCompanyInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -40,6 +43,15 @@ public class MajorTermsController {
     @Autowired
     GoodsInfoService goodsInfoService;
 
+    @Autowired
+    BankInfoService bankInfoService;
+
+    @Autowired
+    CompanyInfoService companyInfoService;
+
+    @Autowired
+    TransportCompanyInfoService transportCompanyInfoService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String majorTerms(ModelMap modelMap, HttpServletRequest request) {
         return "/major_terms";
@@ -50,17 +62,44 @@ public class MajorTermsController {
      * @return 货物信息列表
      */
     @ResponseBody
-    @RequestMapping(value = "/getGoodsInfo", method = RequestMethod.GET)
-    public ResponseVO getGoodsInfo() {
+    @RequestMapping(value = "/getTermsInfo", method = RequestMethod.GET)
+    public ResponseVO getTermsInfo(String getType) {
 
         log.info("getGoodsInfo start");
 
         ResponseVO result = new ResponseVO();
 
         try {
-            result = goodsInfoService.getAllGoodsInfo();
+
+            if (StringUtils.isEmpty(getType)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            // 根据前端提供的类型，分别进行不同数据表的数据添加。
+            switch (getType) {
+                case "goodsTable":
+                    result = goodsInfoService.getAllGoodsInfo();
+                    break;
+                case "companysTable":
+                    result = companyInfoService.getAllCompanyInfo();
+                    break;
+                case "transportTable":
+                    result = transportCompanyInfoService.getAllTransportCompanyInfo();
+                    break;
+                case "bankTable":
+                    result = bankInfoService.getAllBankInfo();
+                    break;
+                default:
+                    log.error("addTerms 传参错误！ 没有这个类型");
+                    result.setResult(ExceptionEnum.PARAM_ERR);
+                    break;
+            }
+
+        } catch (MyException ex) {
+            log.error("getGoodsInfo Known error!", ex);
         } catch (Exception ex) {
-            log.error("getGoodsInfo error!", ex);
+            log.error("getGoodsInfo UnKnown error!", ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
@@ -100,10 +139,13 @@ public class MajorTermsController {
                     result = goodsInfoService.addGoodsInfoBatch(addTermsRequestList);
                     break;
                 case "companysTable":
+                    result = companyInfoService.addCompanyInfoBatch(addTermsRequestList);
                     break;
                 case "transportTable":
+                    result = transportCompanyInfoService.addTransportCompanyInfoBatch(addTermsRequestList);
                     break;
                 case "bankTable":
+                    result = bankInfoService.addBankInfoBatch(addTermsRequestList);
                     break;
                 default:
                     log.error("addTerms 传参错误！ 没有这个类型");
@@ -152,10 +194,13 @@ public class MajorTermsController {
                     result = goodsInfoService.delGoodsInfoById(Integer.parseInt(delId));
                     break;
                 case "companysTable":
+                    result = companyInfoService.delCompanyInfoById(Integer.parseInt(delId));
                     break;
                 case "transportTable":
+                    result = transportCompanyInfoService.delTransportCompanyInfoById(Integer.parseInt(delId));
                     break;
                 case "bankTable":
+                    result = bankInfoService.delBankInfoById(Integer.parseInt(delId));
                     break;
                 default:
                     log.error("delTerm 传参错误！ 没有这个类型");

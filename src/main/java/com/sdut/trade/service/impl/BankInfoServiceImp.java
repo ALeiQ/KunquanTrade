@@ -8,100 +8,98 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.sdut.trade.bean.GoodsInfoVO;
-import com.sdut.trade.dao.GoodsInfoDao;
-import com.sdut.trade.entity.GoodsInfo;
+import com.sdut.trade.bean.BankInfoVO;
+import com.sdut.trade.dao.BankInfoDao;
+import com.sdut.trade.entity.BankInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
-import com.sdut.trade.service.GoodsInfoService;
+import com.sdut.trade.service.BankInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 类描述：货物信息业务层实现
+ * 类描述：银行信息业务层实现
  *
  * @author liuzixiang[liuzixiang@baidu.com]
- * @date 2018/5/7
+ * @date 2018/5/9
  */
 @Component
 @Slf4j
-public class GoodsInfoServiceImp implements GoodsInfoService {
+public class BankInfoServiceImp implements BankInfoService {
 
     @Autowired
-    private GoodsInfoDao goodsInfoDao;
+    private BankInfoDao bankInfoDao;
 
     /**
-     * 常用名词页获取全部货物信息
-     * @return 货物信息数组
+     * 常用名词页获取全部银行信息
+     * @return 银行信息数组
      */
     @Override
-    public ResponseVO getAllGoodsInfo() {
+    public ResponseVO getAllBankInfo() {
 
         ResponseVO responseVO = new ResponseVO();
 
-        List<GoodsInfoVO> goodsInfoVOS = new ArrayList<>();
-        List<GoodsInfo> goodsInfos;
+        List<BankInfoVO> bankInfoVOS = new ArrayList<>();
+
+        List<BankInfo> bankInfos;
 
         try {
-            goodsInfos = goodsInfoDao.getAllEnable();
+            bankInfos = bankInfoDao.getAllEnable();
         } catch (Exception ex) {
             // 数据库读取异常
-            log.error("getAllGoodsInfo fromDB failed", ex);
+            log.error("getAllBankInfo fromDB failed", ex);
             responseVO.setResult(ResultEnum.FAILURE);
             return responseVO;
         }
 
-
         /*
          * 将数据库原始数据包装成前端展示数据
          */
-        for (GoodsInfo goodsInfoDO : goodsInfos) {
+        for (BankInfo bankInfoDO : bankInfos) {
 
-            GoodsInfoVO goodsInfoVO = new GoodsInfoVO();
+            BankInfoVO bankInfoVO = new BankInfoVO();
 
-            goodsInfoVO.setId(goodsInfoDO.getId());
-            goodsInfoVO.setName(goodsInfoDO.getName());
-            goodsInfoVO.setModel(goodsInfoDO.getModel());
+            bankInfoVO.setId(bankInfoDO.getId());
+            bankInfoVO.setName(bankInfoDO.getName());
 
-            goodsInfoVOS.add(goodsInfoVO);
+            bankInfoVOS.add(bankInfoVO);
         }
 
-        responseVO.setData(goodsInfoVOS);
+        responseVO.setData(bankInfoVOS);
 
         return responseVO;
     }
 
     /**
-     * 常用名词添加货物信息
+     * 常用名词添加银行信息
      *
      * @param addTermsRequests 添加的数据组
      * @return 添加结果
      */
     @Override
-    public ResponseVO addGoodsInfoBatch(List<AddTermsRequest> addTermsRequests) {
+    public ResponseVO addBankInfoBatch(List<AddTermsRequest> addTermsRequests) {
 
         ResponseVO responseVO = new ResponseVO();
 
         Date createDate = new Date();
 
-        List<GoodsInfo> goodsInfos = new ArrayList<>();
+        List<BankInfo> bankInfos = new ArrayList<>();
 
         for (AddTermsRequest addTermsRequest : addTermsRequests) {
 
-            GoodsInfo goodsInfo = new GoodsInfo();
+            BankInfo bankInfo = new BankInfo();
 
-            goodsInfo.setName(addTermsRequest.getName());
-            goodsInfo.setModel(addTermsRequest.getModel());
-            goodsInfo.setCreateDate(createDate);
-            goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
+            bankInfo.setName(addTermsRequest.getName());
+            bankInfo.setCreateDate(createDate);
+            bankInfo.setEnable(EnableEnum.ENABLE.isValue());
 
-            goodsInfos.add(goodsInfo);
+            bankInfos.add(bankInfo);
 
         }
 
-        int addNum = goodsInfoDao.addGoodsInfoBatch(goodsInfos);
+        int addNum = bankInfoDao.addBankInfoBatch(bankInfos);
 
         if (addNum != addTermsRequests.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -109,7 +107,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
                     + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
-            log.error("addGoodsInfoBatch add to DB less than need! [need = {}][real = {}]",
+            log.error("addBankInfoBatch add to DB less than need! [need = {}][real = {}]",
                     addTermsRequests.size(), addNum);
         }
 
@@ -118,24 +116,24 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
     }
 
     /**
-     * 删除指定id的货物信息
+     * 删除指定id的银行信息
      *
      * @param id 需要删除的信息的Id
      *
      * @return 删除结果
      */
     @Override
-    public ResponseVO delGoodsInfoById(int id) {
+    public ResponseVO delBankInfoById(int id) {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int delNum = goodsInfoDao.delGoodsInfoById(id);
+        int delNum = bankInfoDao.delBankInfoById(id);
 
         if (delNum != 1) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("数据删除失败");
 
-            log.error("delGoodsInfoBatch del false!");
+            log.error("delBankInfoBatch del false!");
         }
 
         return responseVO;
