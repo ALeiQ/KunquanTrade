@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,18 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
     }
 
     /**
+     * 获取指定id的货物信息
+     *
+     * @param id
+     *
+     * @return
+     */
+    @Override
+    public GoodsInfo getGoodsInfoById(int id) {
+        return goodsInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加货物信息到数据库
      *
      * @param goodsInfos
@@ -63,19 +76,20 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
     /**
      * 删除货物信息到数据库
      *
-     * @param id 待删除id
+     * @param id         待删除id
+     * @param deleteDate 删除时间
      *
      * @return 成功插入数据库的条数
      */
     @Override
-    public int delGoodsInfoById(int id) {
+    public int delGoodsInfoById(int id, Date deleteDate) {
 
         GoodsInfo goodsInfo = goodsInfoMapper.selectByPrimaryKey(id);
 
         goodsInfo.setEnable(EnableEnum.DISABLE.isValue());
+        goodsInfo.setDeleteDate(deleteDate);
 
         return goodsInfoMapper.updateByPrimaryKey(goodsInfo);
-
     }
 
 }

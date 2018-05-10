@@ -19,6 +19,6 @@ public class AddTermsRequest {
     /**
      * 型号
      */
-    private String model;
+    private String model = "";
 
 }

@@ -1,5 +1,6 @@
 package com.sdut.trade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.entity.CompanyInfo;
@@ -20,6 +21,14 @@ public interface CompanyInfoDao {
     List<CompanyInfo> getAllEnable();
 
     /**
+     * 获取指定id的公司信息
+     *
+     * @param id
+     * @return
+     */
+    CompanyInfo getCompanyInfoById(int id);
+
+    /**
      * 添加公司信息到数据库
      *
      * @param companyInfos 待添加的公司列表
@@ -31,8 +40,9 @@ public interface CompanyInfoDao {
      * 删除公司信息到数据库
      *
      * @param id 待删除id
+     * @param deleteDate 删除日期
      * @return 成功插入数据库的条数
      */
-    int delCompanyInfoById(int id);
+    int delCompanyInfoById(int id, Date deleteDate);
 
 }

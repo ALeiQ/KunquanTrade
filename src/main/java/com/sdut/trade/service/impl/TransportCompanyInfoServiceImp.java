@@ -13,6 +13,7 @@ import com.sdut.trade.dao.TransportCompanyInfoDao;
 import com.sdut.trade.entity.TransportCompanyInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.TransportCompanyInfoService;
@@ -31,6 +32,9 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
 
     @Autowired
     private TransportCompanyInfoDao transportCompanyInfoDao;
+
+    @Autowired
+    private TermsRecordServiceImp termsRecordService;
 
     /**
      * 常用名词页获取全部运输公司信息
@@ -108,10 +112,11 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
 
             log.error("addTransportCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",
                     addTermsRequests.size(), addNum);
+
+            return responseVO;
         }
 
-        return responseVO;
-
+        return termsRecordService.addRecords(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequests, createDate);
     }
 
     /**
@@ -126,7 +131,11 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
 
         ResponseVO responseVO = new ResponseVO();
 
-        int delNum = transportCompanyInfoDao.delTransportCompanyInfoById(id);
+        Date deleteDate = new Date();
+
+        TransportCompanyInfo transportCompanyInfo = transportCompanyInfoDao.getTransportCompanyById(id);
+
+        int delNum = transportCompanyInfoDao.delTransportCompanyInfoById(id, deleteDate);
 
         if (delNum != 1) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -134,6 +143,10 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
 
             log.error("delTransportCompanyInfoBatch del false!");
         }
+
+        AddTermsRequest delTermsRequest = new AddTermsRequest();
+        delTermsRequest.setName(transportCompanyInfo.getName());
+        responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, delTermsRequest, deleteDate);
 
         return responseVO;
 

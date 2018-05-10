@@ -10,12 +10,17 @@ import org.springframework.util.CollectionUtils;
 
 import com.sdut.trade.bean.BankInfoVO;
 import com.sdut.trade.dao.BankInfoDao;
+import com.sdut.trade.dao.TermsRecordDao;
 import com.sdut.trade.entity.BankInfo;
+import com.sdut.trade.entity.TermsRecord;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.enums.impl.TermsRecordOperateEnum;
+import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.BankInfoService;
+import com.sdut.trade.service.TermsRecordService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -31,6 +36,9 @@ public class BankInfoServiceImp implements BankInfoService {
 
     @Autowired
     private BankInfoDao bankInfoDao;
+
+    @Autowired
+    private TermsRecordService termsRecordService;
 
     /**
      * 常用名词页获取全部银行信息
@@ -96,23 +104,23 @@ public class BankInfoServiceImp implements BankInfoService {
             bankInfo.setEnable(EnableEnum.ENABLE.isValue());
 
             bankInfos.add(bankInfo);
-
         }
 
+        // 批量添加货物信息到数据库中的货物信息表
         int addNum = bankInfoDao.addBankInfoBatch(bankInfos);
 
-        if (addNum != addTermsRequests.size()) {
+        if (addNum != bankInfos.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
+            responseVO.setResultMsg("名词添加失败！"
+                    + "[需要添加: " + Integer.toString(bankInfos.size()) +" 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addBankInfoBatch add to DB less than need! [need = {}][real = {}]",
-                    addTermsRequests.size(), addNum);
+                    bankInfos.size(), addNum);
+            return responseVO;
         }
 
-        return responseVO;
-
+        return termsRecordService.addRecords(TermsRecordTypeEnum.BANK_INFO, addTermsRequests, createDate);
     }
 
     /**
@@ -127,7 +135,11 @@ public class BankInfoServiceImp implements BankInfoService {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int delNum = bankInfoDao.delBankInfoById(id);
+        Date deleteDate = new Date();
+
+        BankInfo bankInfo = bankInfoDao.getBankInfoById(id);
+
+        int delNum = bankInfoDao.delBankInfoById(id, deleteDate);
 
         if (delNum != 1) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -136,8 +148,11 @@ public class BankInfoServiceImp implements BankInfoService {
             log.error("delBankInfoBatch del false!");
         }
 
-        return responseVO;
+        AddTermsRequest delTermsRequest = new AddTermsRequest();
+        delTermsRequest.setName(bankInfo.getName());
+        responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.BANK_INFO, delTermsRequest, deleteDate);
 
+        return responseVO;
     }
 
 }

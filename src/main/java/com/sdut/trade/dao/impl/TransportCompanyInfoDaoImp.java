@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,18 @@ public class TransportCompanyInfoDaoImp implements TransportCompanyInfoDao {
     }
 
     /**
+     * 获取指定id的运输公司信息
+     *
+     * @param id
+     *
+     * @return
+     */
+    @Override
+    public TransportCompanyInfo getTransportCompanyById(int id) {
+        return transportCompanyInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加运输公司信息到数据库
      *
      * @param transportCompanyInfos
@@ -63,19 +76,20 @@ public class TransportCompanyInfoDaoImp implements TransportCompanyInfoDao {
     /**
      * 删除运输公司信息到数据库
      *
-     * @param id 待删除id
+     * @param id         待删除id
+     * @param deleteDate 删除时间
      *
      * @return 成功插入数据库的条数
      */
     @Override
-    public int delTransportCompanyInfoById(int id) {
+    public int delTransportCompanyInfoById(int id, Date deleteDate) {
 
         TransportCompanyInfo transportCompanyInfo = transportCompanyInfoMapper.selectByPrimaryKey(id);
 
         transportCompanyInfo.setEnable(EnableEnum.DISABLE.isValue());
+        transportCompanyInfo.setDeleteDate(deleteDate);
 
         return transportCompanyInfoMapper.updateByPrimaryKey(transportCompanyInfo);
-
     }
 
 }

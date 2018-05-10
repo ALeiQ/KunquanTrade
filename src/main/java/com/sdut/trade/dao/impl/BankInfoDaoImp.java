@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,18 @@ public class BankInfoDaoImp implements BankInfoDao {
     }
 
     /**
+     * 获取指定id的银行信息
+     *
+     * @param id
+     *
+     * @return 指定编号的银行信息
+     */
+    @Override
+    public BankInfo getBankInfoById(int id) {
+        return bankInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加银行信息到数据库
      *
      * @param bankInfos
@@ -64,15 +77,16 @@ public class BankInfoDaoImp implements BankInfoDao {
      * 删除银行信息到数据库
      *
      * @param id 待删除id
-     *
+     * @param deleteDate 删除时间
      * @return 成功插入数据库的条数
      */
     @Override
-    public int delBankInfoById(int id) {
+    public int delBankInfoById(int id, Date deleteDate) {
 
         BankInfo bankInfo = bankInfoMapper.selectByPrimaryKey(id);
 
         bankInfo.setEnable(EnableEnum.DISABLE.isValue());
+        bankInfo.setDeleteDate(deleteDate);
 
         return bankInfoMapper.updateByPrimaryKey(bankInfo);
 

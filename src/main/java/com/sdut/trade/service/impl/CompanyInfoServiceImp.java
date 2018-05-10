@@ -13,6 +13,7 @@ import com.sdut.trade.dao.CompanyInfoDao;
 import com.sdut.trade.entity.CompanyInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.CompanyInfoService;
@@ -31,6 +32,9 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
     @Autowired
     private CompanyInfoDao companyInfoDao;
+
+    @Autowired
+    private TermsRecordServiceImp termsRecordService;
 
     /**
      * 常用名词页获取全部公司信息
@@ -108,10 +112,10 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
             log.error("addCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",
                     addTermsRequests.size(), addNum);
+            return responseVO;
         }
 
-        return responseVO;
-
+        return termsRecordService.addRecords(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequests, createDate);
     }
 
     /**
@@ -126,7 +130,11 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int delNum = companyInfoDao.delCompanyInfoById(id);
+        Date deleteDate = new Date();
+
+        CompanyInfo companyInfo = companyInfoDao.getCompanyInfoById(id);
+
+        int delNum = companyInfoDao.delCompanyInfoById(id, deleteDate);
 
         if (delNum != 1) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -134,6 +142,10 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
             log.error("delCompanyInfoBatch del false!");
         }
+
+        AddTermsRequest delTermsRequest = new AddTermsRequest();
+        delTermsRequest.setName(companyInfo.getName());
+        responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.COMPANY_INFO, delTermsRequest, deleteDate);
 
         return responseVO;
 

@@ -1,5 +1,6 @@
 package com.sdut.trade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.entity.TransportCompanyInfo;
@@ -20,6 +21,14 @@ public interface TransportCompanyInfoDao {
     List<TransportCompanyInfo> getAllEnable();
 
     /**
+     * 获取指定id的运输公司信息
+     *
+     * @param id
+     * @return
+     */
+    TransportCompanyInfo getTransportCompanyById(int id);
+
+    /**
      * 添加运输公司信息到数据库
      *
      * @param transportCompanyInfos 待添加的运输公司列表
@@ -31,8 +40,9 @@ public interface TransportCompanyInfoDao {
      * 删除运输公司信息到数据库
      *
      * @param id 待删除id
+     * @param deleteDate 删除时间
      * @return 成功插入数据库的条数
      */
-    int delTransportCompanyInfoById(int id);
+    int delTransportCompanyInfoById(int id, Date deleteDate);
 
 }

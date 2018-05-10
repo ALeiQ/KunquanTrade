@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,18 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
     }
 
     /**
+     * 获取指定id的公司信息
+     *
+     * @param id
+     *
+     * @return
+     */
+    @Override
+    public CompanyInfo getCompanyInfoById(int id) {
+        return companyInfoMapper.selectByPrimaryKey(id);
+    }
+
+    /**
      * 添加公司信息到数据库
      *
      * @param companyInfos
@@ -63,19 +76,20 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
     /**
      * 删除公司信息到数据库
      *
-     * @param id 待删除id
+     * @param id         待删除id
+     * @param deleteDate 删除日期
      *
      * @return 成功插入数据库的条数
      */
     @Override
-    public int delCompanyInfoById(int id) {
+    public int delCompanyInfoById(int id, Date deleteDate) {
 
         CompanyInfo companyInfo = companyInfoMapper.selectByPrimaryKey(id);
 
         companyInfo.setEnable(EnableEnum.DISABLE.isValue());
+        companyInfo.setDeleteDate(deleteDate);
 
         return companyInfoMapper.updateByPrimaryKey(companyInfo);
-
     }
 
 }

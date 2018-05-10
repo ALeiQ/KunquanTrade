@@ -18,6 +18,9 @@
         <!-- 批量插入和批量更新 -->
         <plugin type="com.itfsw.mybatis.generator.plugins.BatchInsertPlugin" />
 
+        <!-- MySQL分页插件 -->
+        <plugin type="com.itfsw.mybatis.generator.plugins.LimitPlugin"/>
+
         <commentGenerator>
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
             <property name="suppressAllComments" value="true" />
@@ -76,7 +79,6 @@
 
         <table tableName="terms_record" domainObjectName="TermsRecord">
         </table>
-        <!--
         <table tableName="bank_info" domainObjectName="BankInfo">
         </table>
         <table tableName="check_details" domainObjectName="CheckDetails">
@@ -95,6 +97,7 @@
         </table>
         <table tableName="user_info" domainObjectName="UserInfo">
         </table>
+        <!--
         -->
 
     </context>

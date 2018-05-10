@@ -13,6 +13,7 @@ import com.sdut.trade.dao.GoodsInfoDao;
 import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.GoodsInfoService;
@@ -31,6 +32,9 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
     @Autowired
     private GoodsInfoDao goodsInfoDao;
+
+    @Autowired
+    private TermsRecordServiceImp termsRecordService;
 
     /**
      * 常用名词页获取全部货物信息
@@ -111,10 +115,11 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
             log.error("addGoodsInfoBatch add to DB less than need! [need = {}][real = {}]",
                     addTermsRequests.size(), addNum);
+
+            return responseVO;
         }
 
-        return responseVO;
-
+        return termsRecordService.addRecords(TermsRecordTypeEnum.GOODS_INFO, addTermsRequests, createDate);
     }
 
     /**
@@ -129,7 +134,11 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int delNum = goodsInfoDao.delGoodsInfoById(id);
+        Date deleteDate = new Date();
+
+        GoodsInfo goodsInfo = goodsInfoDao.getGoodsInfoById(id);
+
+        int delNum = goodsInfoDao.delGoodsInfoById(id, deleteDate);
 
         if (delNum != 1) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -138,8 +147,12 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
             log.error("delGoodsInfoBatch del false!");
         }
 
-        return responseVO;
+        AddTermsRequest delTermsRequest = new AddTermsRequest();
+        delTermsRequest.setName(goodsInfo.getName());
+        delTermsRequest.setModel(goodsInfo.getModel());
+        responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.GOODS_INFO, delTermsRequest, deleteDate);
 
+        return responseVO;
     }
 
 }
