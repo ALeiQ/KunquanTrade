@@ -20,9 +20,14 @@ public class ResponseVO {
     private Object data;
 
     /**
-     * 数据总数（用于后端分页）
+     * 总页数（用于后端分页）
      */
-    private int dataLength;
+    private long totalPages;
+
+    /**
+     * 当前页码
+     */
+    private long currentPage;
 
     /**
      * 异常原因

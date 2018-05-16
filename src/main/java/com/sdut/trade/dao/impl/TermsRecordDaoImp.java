@@ -56,11 +56,31 @@ public class TermsRecordDaoImp implements TermsRecordDao {
 
         TermsRecordExample termsRecordExample = new TermsRecordExample();
 
-        termsRecordExample.limit(offset, rows);
+        termsRecordExample
+                .limit(offset, rows)
+                .setOrderByClause("id desc");
+
         termsRecordExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue());
 
         return termsRecordMapper.selectByExample(termsRecordExample);
+    }
+
+    /**
+     * 获取数据总数
+     *
+     * @return 分页页码数
+     */
+    @Override
+    public long getCount() {
+
+        TermsRecordExample termsRecordExample = new TermsRecordExample();
+
+        termsRecordExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue());
+
+        return termsRecordMapper.countByExample(termsRecordExample);
+
     }
 
     /**

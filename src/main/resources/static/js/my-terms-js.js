@@ -224,6 +224,8 @@ $(function () {
 
         table.bootstrapTable('refresh');
 
+        refreshTermHistory();
+
         return false;
     };
 
@@ -268,6 +270,8 @@ $(function () {
         table.bootstrapTable('refresh');
 
         $(th_button).hide();
+
+        refreshTermHistory();
 
         return false;
     };
@@ -343,5 +347,85 @@ $(function () {
 
 });
 
+$(function () {
 
+    var totalPages = 1;
+
+    loadData = function (event, page) {
+        var query = {};
+        query['page'] = page;
+        //这里另每页数量为5，可自行调整
+        query['pageSize'] = 10;
+        $.getJSON("/majorTerms/getTermsRecords", query, function (result) {
+
+            var historyTable = $('#term-history')[0];
+            var innerHtml = "";
+
+            var data = result.data;
+
+            for (i in data) {
+
+                var operateColor = '';
+                var typeColor = '';
+
+                switch (data[i].operateValue) {
+                    case 1:
+                        operateColor = 'green';
+                        break;
+                    case 0:
+                        operateColor = 'red';
+                        break;
+                }
+
+                switch (data[i].typeValue) {
+                    case 1:
+                        typeColor = '#dc11ff';
+                        break;
+                    case 2:
+                        typeColor = '#0093ff';
+                        break;
+                    case 3:
+                        typeColor = '#c75400'
+                        break;
+                    case 4:
+                        typeColor = 'gold';
+                        break;
+                }
+
+                innerHtml += '<li class="list-group-item">';
+                innerHtml += data[i].createDate + '';
+                innerHtml += '   <h4 style="margin-left: 40px; color: ' + typeColor + '">' + data[i].typeDesc + '</h4>';
+                innerHtml += '   <br /><h4 style="color: ' + operateColor + '">' + data[i].operateDesc + '</h4>';
+                innerHtml += '   <h4 style="margin-left: 10px">' + data[i].name + '</h4>';
+                innerHtml += '</li>';
+            }
+
+            historyTable.innerHTML = innerHtml;
+
+            totalPages = result.totalPages;
+
+            $("#pagination-history").twbsPagination({
+                totalPages: totalPages,
+                startPage: 1,
+                onPageClick: loadData
+            });
+
+        });
+    }
+
+});
+
+// 历史记录模块
+$(function () {
+
+    refreshTermHistory = function() {
+        $('#pagination-history').empty();
+        $('#pagination-history').removeData("twbs-pagination");
+        $('#pagination-history').unbind("page");
+        loadData();
+    };
+
+    refreshTermHistory();
+
+});
 

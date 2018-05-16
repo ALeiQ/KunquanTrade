@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.ListUtils;
 
+import com.sdut.trade.bean.TermsRecordVO;
 import com.sdut.trade.dao.TermsRecordDao;
 import com.sdut.trade.entity.TermsRecord;
 import com.sdut.trade.enums.impl.EnableEnum;
+import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordOperateEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
@@ -31,6 +35,52 @@ public class TermsRecordServiceImp implements TermsRecordService {
 
     @Autowired
     TermsRecordDao termsRecordDao;
+
+    /**
+     * 分页查询常用名词增删记录
+     *
+     * @param page 页码
+     * @param rows   行数
+     *
+     * @return 查询页的记录列表
+     */
+    @Override
+    public ResponseVO getAllInRange(int page, int rows) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        int offset = (page-1)*rows;
+        List<TermsRecord> termsRecords = termsRecordDao.getAllInRange(offset, rows);
+
+        if (ListUtils.isEmpty(termsRecords)) {
+            responseVO.setResult(ExceptionEnum.DB_SEARCH_FAILURE);
+            log.error("getAllInRange " + ExceptionEnum.DB_SEARCH_FAILURE.getDesc());
+            return responseVO;
+        }
+
+        List<TermsRecordVO>  termsRecordVOS = new ArrayList<>();
+
+        for (TermsRecord termsRecord : termsRecords) {
+
+            TermsRecordVO termsRecordVO = new TermsRecordVO();
+
+            termsRecordVO.setId(termsRecord.getId());
+            termsRecordVO.setCreateDate(termsRecord.getCreateDate());
+            termsRecordVO.setTypeValue(termsRecord.getType());
+            termsRecordVO.setTypeDesc(TermsRecordTypeEnum.getDesc(termsRecord.getType()));
+            termsRecordVO.setOperateValue(BooleanUtils.toInteger(termsRecord.getOperate()));
+            termsRecordVO.setOperateDesc(TermsRecordOperateEnum.getDesc(termsRecord.getOperate()));
+            termsRecordVO.setName(termsRecord.getName());
+
+            termsRecordVOS.add(termsRecordVO);
+        }
+
+        responseVO.setCurrentPage(page);
+        responseVO.setTotalPages((termsRecordDao.getCount()+rows-1)/rows);
+        responseVO.setData(termsRecordVOS);
+
+        return responseVO;
+    }
 
     /**
      * 批量添加常用名词添加记录

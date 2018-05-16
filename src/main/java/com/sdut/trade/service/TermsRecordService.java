@@ -16,6 +16,14 @@ import com.sdut.trade.httpmodel.response.ResponseVO;
 public interface TermsRecordService {
 
     /**
+     * 分页查询常用名词增删记录
+     * @param page 页码
+     * @param rows 行数
+     * @return 查询页的记录列表
+     */
+    ResponseVO getAllInRange(int page, int rows);
+
+    /**
      * 批量添加常用名词添加记录
      *
      * @param addTermsRequestList 待添加数据列表

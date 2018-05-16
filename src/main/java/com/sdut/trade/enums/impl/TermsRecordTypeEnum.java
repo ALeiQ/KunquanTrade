@@ -10,16 +10,27 @@ import lombok.Getter;
  */
 public enum  TermsRecordTypeEnum {
 
-    GOODS_INFO(1, "货物信息"),
-    COMPANY_INFO(2, "公司信息"),
-    TRANSPORT_COMPANY_INFO(3, "运输公司信息"),
-    BANK_INFO(4, "银行信息");
+    GOODS_INFO(1, "货物总览"),
+    COMPANY_INFO(2, "公司总览"),
+    TRANSPORT_COMPANY_INFO(3, "运输公司"),
+    BANK_INFO(4, "银行汇总");
 
     @Getter
     private int value;
 
     @Getter
     private String desc;
+
+    public static String getDesc(int value) {
+
+        for (TermsRecordTypeEnum termsRecordTypeEnum : values()) {
+            if (termsRecordTypeEnum.value == value) {
+                return termsRecordTypeEnum.getDesc();
+            }
+        }
+
+        return "";
+    }
 
     TermsRecordTypeEnum(int value, String desc) {
         this.value = value;

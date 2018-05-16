@@ -25,6 +25,7 @@ import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.BankInfoService;
 import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
+import com.sdut.trade.service.TermsRecordService;
 import com.sdut.trade.service.TransportCompanyInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -52,6 +53,9 @@ public class MajorTermsController {
     @Autowired
     TransportCompanyInfoService transportCompanyInfoService;
 
+    @Autowired
+    TermsRecordService termRecordService;
+
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String majorTerms(ModelMap modelMap, HttpServletRequest request) {
         return "/major_terms";
@@ -65,7 +69,7 @@ public class MajorTermsController {
     @RequestMapping(value = "/getTermsInfo", method = RequestMethod.GET)
     public ResponseVO getTermsInfo(String getType) {
 
-        log.info("getGoodsInfo start");
+        log.info("getTermsInfo start [type={}]", getType);
 
         ResponseVO result = new ResponseVO();
 
@@ -97,16 +101,55 @@ public class MajorTermsController {
             }
 
         } catch (MyException ex) {
-            log.error("getGoodsInfo Known error!", ex);
+            log.info("getTermsInfo Known error! [type={}]", getType, ex);
         } catch (Exception ex) {
-            log.error("getGoodsInfo UnKnown error!", ex);
+            log.info("getTermsInfo UnKnown error! [type={}]", getType, ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
-        log.info("getGoodsInfo end");
+        log.info("getTermsInfo end [type={}]", getType);
 
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getTermsRecords", method = RequestMethod.GET)
+    public ResponseVO getTermsRecords(Integer page, Integer pageSize) {
+
+        log.info("getTermsRecords start");
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+
+            if (pageSize == null) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            if (page == null) {
+                page = 1;
+            }
+
+            if (page <= 0 || pageSize <= 0) {
+                result.setResult(ExceptionEnum.PARAM_ERR);
+                throw new MyException(ExceptionEnum.PARAM_ERR.getDesc());
+            }
+
+            result = termRecordService.getAllInRange(page, pageSize);
+
+        } catch (MyException ex) {
+            log.error("getTermsRecords Known error!", ex);
+        } catch (Exception ex) {
+            log.error("getTermsRecords UnKnown error!", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("getTermsRecords end");
+
+        return result;
+    }
+
 
     /**
      * 增加多条数据

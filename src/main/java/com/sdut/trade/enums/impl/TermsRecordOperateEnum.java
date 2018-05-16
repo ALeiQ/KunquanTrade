@@ -19,6 +19,17 @@ public enum TermsRecordOperateEnum {
     @Getter
     private String desc;
 
+    public static String getDesc(boolean value) {
+
+        for (TermsRecordOperateEnum termsRecordOperateEnum : values()) {
+            if (termsRecordOperateEnum.value == value) {
+                return termsRecordOperateEnum.getDesc();
+            }
+        }
+
+        return "";
+    }
+
     TermsRecordOperateEnum(boolean value, String desc) {
         this.value = value;
         this.desc = desc;

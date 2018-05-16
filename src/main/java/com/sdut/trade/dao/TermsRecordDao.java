@@ -22,12 +22,18 @@ public interface TermsRecordDao {
     List<TermsRecord> getAllEnable();
 
     /**
-     * 分页查询常用名词增删记录
+     * 分页查询常用名词增删记录（逆序查询，后插入的先查到）
      * @param offset 查询起点
      * @param rows 行数
      * @return 查询页的记录列表
      */
     List<TermsRecord> getAllInRange(int offset, int rows);
+
+    /**
+     * 根据每页数据条数获取总页数
+     * @return 分页页码数
+     */
+    long getCount();
 
     /**
      * 添加多条记录到数据库
