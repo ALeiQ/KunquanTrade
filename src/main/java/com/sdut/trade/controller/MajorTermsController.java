@@ -112,6 +112,12 @@ public class MajorTermsController {
         return result;
     }
 
+    /**
+     * 分页查询常用名词增删记录
+     * @param page 页码
+     * @param pageSize 每页行数
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/getTermsRecords", method = RequestMethod.GET)
     public ResponseVO getTermsRecords(Integer page, Integer pageSize) {

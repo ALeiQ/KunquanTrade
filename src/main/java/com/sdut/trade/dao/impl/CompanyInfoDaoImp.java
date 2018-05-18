@@ -92,4 +92,23 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
         return companyInfoMapper.updateByPrimaryKey(companyInfo);
     }
 
+    /**
+     * 通过公司名中的关键词查询公司信息
+     *
+     * @param query 公司名关键词
+     *
+     * @return
+     */
+    @Override
+    public List<CompanyInfo> getCompanyInfoByKeywordName(String query) {
+
+        CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+
+        companyInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameLike('%' + query + '%');
+
+        return companyInfoMapper.selectByExample(companyInfoExample);
+    }
+
 }

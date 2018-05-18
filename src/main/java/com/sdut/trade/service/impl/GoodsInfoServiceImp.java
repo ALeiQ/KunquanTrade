@@ -2,7 +2,9 @@ package com.sdut.trade.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
+import com.sdut.trade.mapper.GoodsInfoMapper;
 import com.sdut.trade.service.GoodsInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -153,6 +156,55 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
         responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.GOODS_INFO, delTermsRequest, deleteDate);
 
         return responseVO;
+    }
+
+    /**
+     * 根据关键词查询货物名称
+     *
+     * @param query 关键词
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getGoodsNameByKeyword(String query) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<GoodsInfo> goodsInfos = goodsInfoDao.getGoodsInfoByNameKeyword(query);
+        Set<String> goodsNames = new HashSet<>();
+        //List<String> goodsNames = new ArrayList<>();
+
+        for (GoodsInfo goodsInfo : goodsInfos) {
+            goodsNames.add(goodsInfo.getName());
+        }
+
+        responseVO.setData(goodsNames);
+        return responseVO;
+    }
+
+    /**
+     * 根据型号关键词查询匹配的型号
+     *
+     * @param query
+     * @param goodsName
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getGoodsModelByKeyword(String query, String goodsName) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<GoodsInfo> goodsInfos = goodsInfoDao.getGoodsInfoByModelKeyword(query, goodsName);
+        List<String> goodsModels = new ArrayList<>();
+
+        for (GoodsInfo goodsInfo : goodsInfos) {
+            goodsModels.add(goodsInfo.getModel());
+        }
+
+        responseVO.setData(goodsModels);
+        return responseVO;
+
     }
 
 }

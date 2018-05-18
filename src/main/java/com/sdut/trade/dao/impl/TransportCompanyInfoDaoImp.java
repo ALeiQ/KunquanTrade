@@ -92,4 +92,23 @@ public class TransportCompanyInfoDaoImp implements TransportCompanyInfoDao {
         return transportCompanyInfoMapper.updateByPrimaryKey(transportCompanyInfo);
     }
 
+    /**
+     * 根据关键词模糊匹配运输公司名
+     *
+     * @param query 关键词
+     *
+     * @return
+     */
+    @Override
+    public List<TransportCompanyInfo> getTransportCompanyByKeyword(String query) {
+
+        TransportCompanyInfoExample transportCompanyInfoExample = new TransportCompanyInfoExample();
+
+        transportCompanyInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameLike('%' + query + '%');
+
+        return transportCompanyInfoMapper.selectByExample(transportCompanyInfoExample);
+    }
+
 }

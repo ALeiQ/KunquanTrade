@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.collections.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
@@ -148,6 +149,30 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
         delTermsRequest.setName(transportCompanyInfo.getName());
         responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, delTermsRequest, deleteDate);
 
+        return responseVO;
+
+    }
+
+    /**
+     * 查询与关键字匹配的运输公司名
+     *
+     * @param query 匹配关键词
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getTransportCompanyByKeyword(String query) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<TransportCompanyInfo> transportCompanyInfos = transportCompanyInfoDao.getTransportCompanyByKeyword(query);
+        List<String> transportCompanyNames = new ArrayList<>();
+
+        for (TransportCompanyInfo transportCompanyInfo : transportCompanyInfos) {
+            transportCompanyNames.add(transportCompanyInfo.getName());
+        }
+
+        responseVO.setData(transportCompanyNames);
         return responseVO;
 
     }

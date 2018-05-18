@@ -35,4 +35,10 @@ public interface TransportCompanyInfoService {
      */
     ResponseVO delTransportCompanyInfoById(int id);
 
+    /**
+     * 查询与关键字匹配的运输公司名
+     * @param query 匹配关键词
+     * @return
+     */
+    ResponseVO getTransportCompanyByKeyword(String query);
 }

@@ -35,4 +35,18 @@ public interface GoodsInfoService {
      */
     ResponseVO delGoodsInfoById(int id);
 
+    /**
+     * 根据货物名关键词查询货物名称
+     * @param query 关键词
+     * @return
+     */
+    ResponseVO getGoodsNameByKeyword(String query);
+
+    /**
+     * 根据型号关键词查询匹配的型号
+     * @param query
+     * @param goodsName
+     * @return
+     */
+    ResponseVO getGoodsModelByKeyword(String query, String goodsName);
 }

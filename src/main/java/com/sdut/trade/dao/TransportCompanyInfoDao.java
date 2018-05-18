@@ -45,4 +45,10 @@ public interface TransportCompanyInfoDao {
      */
     int delTransportCompanyInfoById(int id, Date deleteDate);
 
+    /**
+     * 根据关键词模糊匹配运输公司名
+     * @param query 关键词
+     * @return
+     */
+    List<TransportCompanyInfo> getTransportCompanyByKeyword(String query);
 }

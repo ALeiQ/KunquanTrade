@@ -35,4 +35,10 @@ public interface CompanyInfoService {
      */
     ResponseVO delCompanyInfoById(int id);
 
+    /**
+     * 通过关键词模糊查询公司名称
+     * @param query 查询关键字
+     * @return
+     */
+    ResponseVO getCompanyByKeyword(String query);
 }

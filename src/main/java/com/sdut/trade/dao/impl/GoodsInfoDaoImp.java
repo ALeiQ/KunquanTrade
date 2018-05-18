@@ -92,4 +92,45 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
         return goodsInfoMapper.updateByPrimaryKey(goodsInfo);
     }
 
+    /**
+     * 通过获取名称关键词查询货物信息
+     *
+     * @param query 货物名称关键字
+     *
+     * @return 匹配的货物
+     */
+    @Override
+    public List<GoodsInfo> getGoodsInfoByNameKeyword(String query) {
+
+        GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
+
+
+        goodsInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameLike('%' + query + '%');
+
+        return goodsInfoMapper.selectByExample(goodsInfoExample);
+    }
+
+    /**
+     * 通过已填的货物名称和模糊匹配的型号关键词查询匹配的型号
+     *
+     * @param query
+     * @param goodsName
+     *
+     * @return
+     */
+    @Override
+    public List<GoodsInfo> getGoodsInfoByModelKeyword(String query, String goodsName) {
+
+        GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
+
+        goodsInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameEqualTo(goodsName)
+                .andModelLike('%' + query + '%');
+
+        return goodsInfoMapper.selectByExample(goodsInfoExample);
+    }
+
 }

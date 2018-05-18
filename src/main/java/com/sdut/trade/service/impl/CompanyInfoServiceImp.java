@@ -151,4 +151,28 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
     }
 
+    /**
+     * 通过关键词模糊查询公司名称
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getCompanyByKeyword(String query) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<CompanyInfo> companyInfos = companyInfoDao.getCompanyInfoByKeywordName(query);
+        List<String> companyNames = new ArrayList<>();
+
+        for (CompanyInfo companyInfo : companyInfos) {
+            companyNames.add(companyInfo.getName());
+        }
+
+        responseVO.setData(companyNames);
+        return responseVO;
+
+    }
+
 }

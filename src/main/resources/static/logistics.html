@@ -66,6 +66,9 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all">
     <script src="js/bootstrap-datetimepicker.js"></script>
     <!-- //datetimepicker -->
+    <!-- typeahead -->
+    <script src="js/bootstrap3-typeahead.js"></script>
+    <!-- //typeahead -->
 </head>
 <body class="cbp-spmenu-push cbp-spmenu-push-toleft">
 <div class="main-content">
@@ -144,7 +147,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="form-group">
                             <label for="txt_goods_from">物资来源</label>
                             <input type="text" name="txt_goods_from" class="form-control" id="txt_goods_from"
-                                   placeholder="物资来源"/>
+                                   placeholder="物资来源" data-provide="typeahead" autoComplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="txt_seller_unit_price">厂家结算单价</label>
@@ -162,7 +165,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="form-group">
                             <label for="txt_buyer_company">结算公司</label>
                             <input type="text" name="txt_buyer_company" class="form-control" id="txt_buyer_company"
-                                   placeholder="结算单位"/>
+                                   placeholder="结算单位" autoComplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="txt_unit_price">结算单价</label>
@@ -180,7 +183,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="form-group">
                             <label for="txt_trans_company">运输公司</label>
                             <input type="text" name="txt_trans_company" class="form-control" id="txt_trans_company"
-                                   placeholder="运输公司"/>
+                                   placeholder="运输公司" autoComplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="txt_trans_unit_price">运费单价</label>
@@ -234,12 +237,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                         <div class="form-group">
                             <label for="txt_goods_name">物资名称</label>
                             <input type="text" name="txt_goods_name" class="form-control" id="txt_goods_name"
-                                   placeholder="物资名称"/>
+                                   placeholder="物资名称" autoComplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="txt_goods_model">型号</label>
                             <input type="text" name="txt_goods_model" class="form-control" id="txt_goods_model"
-                                   placeholder="型号"/>
+                                   placeholder="型号" autoComplete="off"/>
                         </div>
                         <div class="form-group">
                             <label for="txt_profit">利润</label>

@@ -117,7 +117,7 @@ $(function () {
 
     // 清空Modal數據
     clearModal = function() {
-        $('input').val('');
+        $("input").val('');
         form.data("bootstrapValidator").resetForm();
     };
 
@@ -200,7 +200,7 @@ $(function () {
         showMeridian: 1,
         autoclose: 1//选择后自动关闭
     }).on('hide', function (e) {
-        // 日期关闭后收到手动出发校验（否则不自动校验）
+        // 关闭后手动触发校验（否则不自动校验）
         form.data('bootstrapValidator')
             .updateStatus('txt_load_time', 'NOT_VALIDATED',null)
             .validateField('txt_load_time');
@@ -300,21 +300,119 @@ $(function () {
 
         var lossWeigth = returnFloat(netWeight-returnWeight);
         $('#txt_loss_weight').val(lossWeigth);
-    }
+    };
 
     getDoublePoint = function(input) {
         if(!isNaN(eval(input.val())))
         {
             input.val(returnFloat(input.val()));
         }
-    }
+    };
 
 });
 
 // 自动补全配置
 $(function () {
 
+    $('#txt_goods_from').typeahead({
+        items: 'all',
+        minLength: 0,
+        showHintOnFocus: true,
+        autoSelect: false,
+        source: function (query, process) {
+            $.get('/logistics/getTypeaheadData', {getType: 'goodsFrom', query: query}, function (result) {
+                return process(result.data);
+            });
+        },
+        afterSelect: function () {
+            form.data('bootstrapValidator')
+                .updateStatus('txt_goods_from', 'NOT_VALIDATED',null)
+                .validateField('txt_goods_from');
+        }
+    });
+    $('#txt_buyer_company').typeahead({
+        items: 'all',
+        minLength: 0,
+        showHintOnFocus: true,
+        autoSelect: false,
+        source: function (query, process) {
+            $.get('/logistics/getTypeaheadData', {getType: 'buyerCompany', query: query}, function (result) {
+                return process(result.data);
+            });
+        },
+        afterSelect: function () {
+            form.data('bootstrapValidator')
+                .updateStatus('txt_buyer_company', 'NOT_VALIDATED',null)
+                .validateField('txt_buyer_company');
+        }
+    });
+    $('#txt_trans_company').typeahead({
+        items: 'all',
+        minLength: 0,
+        showHintOnFocus: true,
+        autoSelect: false,
+        source: function (query, process) {
+            $.get('/logistics/getTypeaheadData', {getType: 'transCompany', query: query}, function (result) {
+                return process(result.data);
+            });
+        },
+        afterSelect: function () {
+            form.data('bootstrapValidator')
+                .updateStatus('txt_trans_company', 'NOT_VALIDATED',null)
+                .validateField('txt_trans_company');
+        }
+    });
+    $('#txt_goods_name').typeahead({
+        items: 'all',
+        minLength: 0,
+        showHintOnFocus: true,
+        autoSelect: false,
+        source: function (query, process) {
+            $.get('/logistics/getTypeaheadData', {getType: 'goodsName', query: query}, function (result) {
+                return process(result.data);
+            });
+            console.log("????")
+        },
+        afterSelect: function () {
+            form.data('bootstrapValidator')
+                .updateStatus('txt_goods_name', 'NOT_VALIDATED',null)
+                .validateField('txt_goods_name');
+        }
+    });
+    $('#txt_goods_model').typeahead({
+        items: 'all',
+        minLength: 0,
+        showHintOnFocus: true,
+        autoSelect: false,
+        source: function (query, process) {
+            $.get('/logistics/getTypeaheadData',
+                {getType: 'goodsModel', query: query, goodsName: $('#txt_goods_name').val()},
+                function (result) {
+                return process(result.data);
+            });
+        },
+        afterSelect: function () {
+            form.data('bootstrapValidator')
+                .updateStatus('txt_goods_model', 'NOT_VALIDATED',null)
+                .validateField('txt_goods_model');
+        }
+    });
+
+    $('#txt_goods_from').focus(function (){
+        $('#txt_goods_from').typeahead('show')
+    });
+    $('#txt_buyer_company').focus(function (){
+        $('#txt_buyer_company').typeahead('show')
+    });
+    $('#txt_trans_company').focus(function (){
+        $('#txt_trans_company').typeahead('show')
+    });
+    $('#txt_goods_name').focus(function (){
+        $('#txt_goods_name').typeahead('show')
+    });
 });
+
+//
 
 // 校验配置
 $(document).ready(function() {
