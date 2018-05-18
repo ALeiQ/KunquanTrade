@@ -62,6 +62,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <link href="css/bootstrapValidator.css" rel="stylesheet" type="text/css" media="all">
     <script src="js/bootstrapValidator.js"></script>
     <!-- //validator -->
+    <!-- datetimepicker -->
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all">
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <!-- //datetimepicker -->
 </head>
 <body class="cbp-spmenu-push cbp-spmenu-push-toleft">
 <div class="main-content">
@@ -135,12 +139,98 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-industry input-icon" aria-hidden="true"></i>
+                        <div class="form-group">
+                            <label for="txt_goods_from">物资来源</label>
+                            <input type="text" name="txt_goods_from" class="form-control" id="txt_goods_from"
+                                   placeholder="物资来源"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_seller_unit_price">厂家结算单价</label>
+                            <input type="number" name="txt_seller_unit_price" class="form-control"
+                                   id="txt_seller_unit_price" placeholder="厂家结算单价"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_seller_sum_price">厂家结算金额</label>
+                            <input type="number" name="txt_seller_sum_price" class="form-control"
+                                   id="txt_seller_sum_price" placeholder="厂家结算金额"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-briefcase input-icon" aria-hidden="true"></i>
+                        <div class="form-group">
+                            <label for="txt_buyer_company">结算公司</label>
+                            <input type="text" name="txt_buyer_company" class="form-control" id="txt_buyer_company"
+                                   placeholder="结算单位"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_unit_price">结算单价</label>
+                            <input type="number" name="txt_unit_price" class="form-control" id="txt_unit_price"
+                                   placeholder="结算单价"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_sum_price">结算金额</label>
+                            <input type="number" name="txt_sum_price" class="form-control" id="txt_sum_price"
+                                   placeholder="结算金额"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-road input-icon" aria-hidden="true"></i>
+                        <div class="form-group">
+                            <label for="txt_trans_company">运输公司</label>
+                            <input type="text" name="txt_trans_company" class="form-control" id="txt_trans_company"
+                                   placeholder="运输公司"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_trans_unit_price">运费单价</label>
+                            <input type="number" name="txt_trans_unit_price" class="form-control"
+                                   id="txt_trans_unit_price" placeholder="运费单价"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_trans_sum_price">运费金额</label>
+                            <input type="number" name="txt_trans_sum_price" class="form-control"
+                                   id="txt_trans_sum_price" placeholder="运费金额"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-truck input-icon" aria-hidden="true"></i>
                         <div class="form-group">
                             <label for="txt_load_time">装车时间</label>
-                            <input type="text" name="txt_load_time" class="form-control" id="txt_load_time"
+                            <input type="date" name="txt_load_time" class="form-control" id="txt_load_time"
                                    placeholder="装车时间"/>
                         </div>
+                        <div class="form-group">
+                            <label for="txt_weighing_number">检斤号</label>
+                            <input type="text" name="txt_weighing_number" class="form-control"
+                                   id="txt_weighing_number" placeholder="检斤号" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_car_number">车牌号</label>
+                            <input type="text" name="txt_car_number" class="form-control" id="txt_car_number"
+                                   placeholder="车牌号"/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-balance-scale input-icon" aria-hidden="true"></i>
+                        <div class="form-group">
+                            <label for="txt_net_weight">净重</label>
+                            <input type="number" name="txt_net_weight" class="form-control" id="txt_net_weight"
+                                   placeholder="净重" />
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_return_weight">回执数</label>
+                            <input type="number" name="txt_return_weight" class="form-control" id="txt_return_weight"
+                                   placeholder="回执数"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_loss_weight">亏吨</label>
+                            <input type="number" name="txt_loss_weight" class="form-control" id="txt_loss_weight"
+                                   placeholder="亏吨" disabled = 'disabled'/>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 table-alert">
+                        <i class="fa fa-jpy input-icon" aria-hidden="true"></i>
                         <div class="form-group">
                             <label for="txt_goods_name">物资名称</label>
                             <input type="text" name="txt_goods_name" class="form-control" id="txt_goods_name"
@@ -152,88 +242,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                                    placeholder="型号"/>
                         </div>
                         <div class="form-group">
-                            <label for="txt_net_weight">净重</label>
-                            <input type="text" name="txt_net_weight" class="form-control" id="txt_net_weight"
-                                   placeholder="净重" />
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_return_weight">回执数</label>
-                            <input type="text" name="txt_return_weight" class="form-control" id="txt_return_weight"
-                                   placeholder="回执数"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_loss_weight">亏吨</label>
-                            <input type="text" name="txt_loss_weight" class="form-control" id="txt_loss_weight"
-                                   placeholder="亏吨"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="txt_goods_from">物资来源</label>
-                            <input type="text" name="txt_goods_from" class="form-control" id="txt_goods_from"
-                                   placeholder="物资来源"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_seller_unit_price">厂家结算单价</label>
-                            <input type="text" name="txt_seller_unit_price" class="form-control"
-                                   id="txt_seller_unit_price" placeholder="厂家结算单价"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_seller_sum_price">厂家结算金额</label>
-                            <input type="text" name="txt_seller_sum_price" class="form-control"
-                                   id="txt_seller_sum_price" placeholder="厂家结算金额"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_buyer_company">结算单位</label>
-                            <input type="text" name="txt_buyer_company" class="form-control" id="txt_buyer_company"
-                                   placeholder="结算单位"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_unit_price">结算单价</label>
-                            <input type="text" name="txt_unit_price" class="form-control" id="txt_unit_price"
-                                   placeholder="结算单价"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_sum_price">结算金额</label>
-                            <input type="text" name="txt_sum_price" class="form-control" id="txt_sum_price"
-                                   placeholder="结算金额"/>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="txt_trans_company">运输公司</label>
-                            <input type="text" name="txt_trans_company" class="form-control" id="txt_trans_company"
-                                   placeholder="运输公司"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_trans_unit_price">运费单价</label>
-                            <input type="text" name="txt_trans_unit_price" class="form-control"
-                                   id="txt_trans_unit_price" placeholder="运费单价"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_trans_sum_price">运费金额</label>
-                            <input type="text" name="txt_trans_sum_price" class="form-control"
-                                   id="txt_trans_sum_price" placeholder="运费金额"/>
-                        </div>
-                        <div class="form-group">
                             <label for="txt_profit">利润</label>
-                            <input type="text" name="txt_profit" class="form-control" id="txt_profit" placeholder="利润"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_weighing_number">检斤号</label>
-                            <input type="text" name="txt_weighing_number" class="form-control"
-                                   id="txt_weighing_number" placeholder="检斤号"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_car_number">车牌号</label>
-                            <input type="text" name="txt_car_number" class="form-control" id="txt_car_number"
-                                   placeholder="车牌号"/>
+                            <input type="number" name="txt_profit" class="form-control" id="txt_profit"
+                                   placeholder="利润" disabled="disabled"/>
                         </div>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 table-alert">
+                        <i class="fa fa-wpforms input-icon" aria-hidden="true"></i>
                         <div class="form-group">
                             <label for="txt_remark">备注</label>
-                            <input type="text" name="txt_remark" class="form-control" id="txt_remark" placeholder="备注"/>
+                            <input type="text" name="txt_remark" class="form-control" id="txt_remark"
+                                   placeholder="备注"/>
                         </div>
                     </div>
                 </div>
@@ -242,7 +261,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                 <button type="button" id="btn_clear_modal" class="btn btn-default"><span
                         class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空</button>
                 <button type="submit" id="btn_submit" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-floppy-disk"></span>保存</button>
+                    <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
             </div>
             </form>
         </div>

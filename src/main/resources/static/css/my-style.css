@@ -116,6 +116,18 @@
     position: absolute;
 }
 
+.table-alert {
+    border: 1px solid transparent;
+    border-color: #a9f36b;
+}
+
+.input-icon {
+    position: absolute;
+    font-size: 1.2em;
+    right: 5px;
+    top: 2px;
+}
+
 @media(max-width: 500px)
 {
     .term-panel-body
