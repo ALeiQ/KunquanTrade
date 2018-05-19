@@ -29,6 +29,14 @@ public interface CompanyInfoDao {
     CompanyInfo getCompanyInfoById(int id);
 
     /**
+     * 添加单条公司信息到数据库
+     *
+     * @param companyInfo 待添加的公司
+     * @return 是否成功插入数据库
+     */
+    boolean addCompanyInfo(CompanyInfo companyInfo);
+
+    /**
      * 添加公司信息到数据库
      *
      * @param companyInfos 待添加的公司列表
@@ -51,4 +59,13 @@ public interface CompanyInfoDao {
      * @return
      */
     List<CompanyInfo> getCompanyInfoByKeywordName(String query);
+
+    /**
+     * 查询库中是否有该公司名
+     *
+     * @param name
+     * @return
+     */
+    boolean hasCompanyName(String name);
+
 }

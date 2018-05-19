@@ -111,8 +111,14 @@ $(function () {
                 dataType: 'json',
                 url: '/logistics/addTypeaheadData',
                 data: {params: JSON.stringify(form_data)},
+                async: false,
                 success: function (result) {
-                    clearModal();
+                    if (result.resultCode !== 0) {
+                        alert(result.resultMsg);
+                    } else {
+                        showPopover($('#btn_submit').children('span'), "添加成功");
+                        clearModal();
+                    }
                 }
             });
         }

@@ -59,4 +59,19 @@ public interface GoodsInfoDao {
      * @return
      */
     List<GoodsInfo> getGoodsInfoByModelKeyword(String query, String goodsName);
+
+    /**
+     * 查询库中是否有该货品信息
+     * @param goodsName
+     * @param goodsModel
+     * @return
+     */
+    boolean hasGoods(String goodsName, String goodsModel);
+
+    /**
+     * 插入单条货品信息到库中
+     * @param goodsInfo
+     * @return
+     */
+    boolean addGoodsInfo(GoodsInfo goodsInfo);
 }

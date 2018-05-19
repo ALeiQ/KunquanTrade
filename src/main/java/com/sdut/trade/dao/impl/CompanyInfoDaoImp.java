@@ -60,6 +60,20 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
     }
 
     /**
+     * 添加单条公司信息到数据库
+     *
+     * @param companyInfo 待添加的公司
+     *
+     * @return 是否成功插入数据库
+     */
+    @Override
+    public boolean addCompanyInfo(CompanyInfo companyInfo) {
+
+        return companyInfoMapper.insert(companyInfo) == 1;
+
+    }
+
+    /**
      * 添加公司信息到数据库
      *
      * @param companyInfos
@@ -109,6 +123,25 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
                 .andNameLike('%' + query + '%');
 
         return companyInfoMapper.selectByExample(companyInfoExample);
+    }
+
+    /**
+     * 查询库中是否有该公司名
+     *
+     * @param name
+     *
+     * @return
+     */
+    @Override
+    public boolean hasCompanyName(String name) {
+
+        CompanyInfoExample companyInfoExample = new CompanyInfoExample();
+
+        companyInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameEqualTo(name);
+
+        return companyInfoMapper.countByExample(companyInfoExample) != 0;
     }
 
 }

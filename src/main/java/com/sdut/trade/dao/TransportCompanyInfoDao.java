@@ -51,4 +51,18 @@ public interface TransportCompanyInfoDao {
      * @return
      */
     List<TransportCompanyInfo> getTransportCompanyByKeyword(String query);
+
+    /**
+     * 添加单条运输公司信息
+     * @param transportCompanyInfo
+     * @return
+     */
+    boolean addTransportCompanyInfo(TransportCompanyInfo transportCompanyInfo);
+
+    /**
+     * 查询运输公司名是否存在
+     * @param transCompany
+     * @return
+     */
+    boolean hasTransportCompanyName(String transCompany);
 }

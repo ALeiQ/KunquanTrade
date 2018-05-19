@@ -34,6 +34,15 @@ public interface TermsRecordService {
     ResponseVO addRecords(TermsRecordTypeEnum addType, List<AddTermsRequest> addTermsRequestList, Date createDate);
 
     /**
+     * 添加单条常用名词添加纪录
+     * @param addType
+     * @param addTermsRequest
+     * @param createDate
+     * @return
+     */
+    ResponseVO addRecord(TermsRecordTypeEnum addType, AddTermsRequest addTermsRequest, Date createDate);
+
+    /**
      * 删除单条常用名词添加记录
      *
      * @param delTermsRequest 待删除数据列表

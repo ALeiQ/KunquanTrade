@@ -133,4 +133,39 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
         return goodsInfoMapper.selectByExample(goodsInfoExample);
     }
 
+    /**
+     * 查询库中是否有该货品信息
+     *
+     * @param goodsName
+     * @param goodsModel
+     *
+     * @return
+     */
+    @Override
+    public boolean hasGoods(String goodsName, String goodsModel) {
+
+        GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
+
+        goodsInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andModelEqualTo(goodsModel)
+                .andNameEqualTo(goodsName);
+
+        return goodsInfoMapper.countByExample(goodsInfoExample) > 0;
+    }
+
+    /**
+     * 插入单条货品信息到库中
+     *
+     * @param goodsInfo
+     *
+     * @return
+     */
+    @Override
+    public boolean addGoodsInfo(GoodsInfo goodsInfo) {
+
+        return goodsInfoMapper.insert(goodsInfo) == 1;
+
+    }
+
 }

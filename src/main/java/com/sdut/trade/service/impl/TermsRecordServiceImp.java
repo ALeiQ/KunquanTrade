@@ -128,6 +128,41 @@ public class TermsRecordServiceImp implements TermsRecordService {
     }
 
     /**
+     * 添加单条常用名词添加纪录
+     *
+     * @param addType
+     * @param addTermsRequest
+     * @param createDate
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO addRecord(TermsRecordTypeEnum addType, AddTermsRequest addTermsRequest, Date createDate) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        TermsRecord termsRecord = new TermsRecord();
+
+        termsRecord.setName(addTermsRequest.getName() + addTermsRequest.getModel());
+        termsRecord.setCreateDate(createDate);
+        termsRecord.setType(addType.getValue());
+        termsRecord.setOperate(TermsRecordOperateEnum.ADD.isValue());
+        termsRecord.setEnable(EnableEnum.ENABLE.isValue());
+
+        // 添加常用名词增删记录数据到数据库的常用名词增删记录表
+        int addTermNum = termsRecordDao.addTerm(termsRecord);
+
+        if (addTermNum != 1) {
+            responseVO.setResult(ResultEnum.FAILURE);
+            responseVO.setResultMsg("名词记录添加失败");
+
+            log.error("addBankInfoBatch add to DB less than need! [name={}]", termsRecord.getName());
+        }
+
+        return responseVO;
+    }
+
+    /**
      * 删除单条常用名词添加记录
      *
      * @param delType         删除类型

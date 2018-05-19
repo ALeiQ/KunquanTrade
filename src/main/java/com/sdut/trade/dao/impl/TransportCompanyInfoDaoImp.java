@@ -111,4 +111,35 @@ public class TransportCompanyInfoDaoImp implements TransportCompanyInfoDao {
         return transportCompanyInfoMapper.selectByExample(transportCompanyInfoExample);
     }
 
+    /**
+     * 添加单条运输公司信息
+     *
+     * @param transportCompanyInfo
+     *
+     * @return
+     */
+    @Override
+    public boolean addTransportCompanyInfo(TransportCompanyInfo transportCompanyInfo) {
+        return transportCompanyInfoMapper.insert(transportCompanyInfo) == 1;
+    }
+
+    /**
+     * 查询运输公司名是否存在
+     *
+     * @param transCompany
+     *
+     * @return
+     */
+    @Override
+    public boolean hasTransportCompanyName(String transCompany) {
+
+        TransportCompanyInfoExample transportCompanyInfoExample = new TransportCompanyInfoExample();
+
+        transportCompanyInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameEqualTo(transCompany);
+
+        return transportCompanyInfoMapper.countByExample(transportCompanyInfoExample) > 0;
+    }
+
 }
