@@ -1,4 +1,4 @@
-package com.sdut.trade.httpmodel.request;
+package com.sdut.trade.bean;
 
 import java.util.Date;
 
@@ -8,18 +8,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 /**
- * 类描述：运输明细增加数据请求类
+ * 类描述：运输明细展示类
  *
  * @author liuzixiang[liuzixiang@baidu.com]
- * @date 2018/5/16
+ * @date 2018/5/19
  */
 @Data
-public class AddTransportRequest {
+public class LogisticsDetailVO {
+
+    private int id;
 
     /**
      * 装车时间
      */
-    @JSONField(name = "txt_load_time", format = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date loadTime;
 
     /**

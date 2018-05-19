@@ -23,7 +23,7 @@ document.writeln("                            <a href=\'logistics\'><i class=\'f
 document.writeln("                        </li>");
 document.writeln("");
 document.writeln("                        <li>");
-document.writeln("                            <a href=\'transactionDetails\'><i class=\'fa fa-credit-card nav_icon\'></i>资金往来</a>");
+document.writeln("                            <a href=\'transactionDetail\'><i class=\'fa fa-credit-card nav_icon\'></i>资金往来</a>");
 document.writeln("                        </li>");
 document.writeln("");
 document.writeln("                        <li>");

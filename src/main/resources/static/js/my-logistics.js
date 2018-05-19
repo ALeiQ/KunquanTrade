@@ -6,18 +6,28 @@
 $(function () {
 
     $('#transTable').bootstrapTable({
-        //url: '/index.xhtml',
-        //method: 'post',
-        editable: true,         // 开启编辑模式
+        url: '/logistics/getLogisticsDetails',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
         showColumns: true,      // 显示内容列下拉框
         showToggle: true,       // 显示视图切换按钮（分页/卡片）
         uniqueId: 'id',
-        pageList: [5, 25],
+        undefinedText: '',      // null显示空，默认'-'
+        pageList: [10, 15, 20],
         pageSize: 10,
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
         columns: [
+            {
+                field: "id",
+                title: "编号"
+            },
             {
                 field: "loadTime",
                 title: "装车时间"
@@ -37,26 +47,17 @@ $(function () {
                 field: "lossWeight",
                 title: "亏吨"
             }, {
-                field: "goodsFrom",
-                title: "物资来源"
-            }, {
                 field: "sellerUnitPrice",
                 title: "厂家结算单价"
             }, {
                 field: "sellerSumPrice",
                 title: "厂家结算金额"
             }, {
-                field: "buyerCompany",
-                title: "结算单位"
-            }, {
                 field: "unitPrice",
-                title: "结算公司"
+                title: "结算单价"
             }, {
                 field: "sumPrice",
                 title: "结算金额"
-            }, {
-                field: "transCompany",
-                title: "运输公司"
             }, {
                 field: "transUnitPrice",
                 title: "运费单价"
@@ -66,6 +67,15 @@ $(function () {
             }, {
                 field: "profit",
                 title: "利润"
+            }, {
+                field: "goodsFrom",
+                title: "物资来源"
+            }, {
+                field: "buyerCompany",
+                title: "结算公司"
+            }, {
+                field: "transCompany",
+                title: "运输公司"
             }, {
                 field: "weighingNumber",
                 title: "检斤号"
@@ -90,7 +100,7 @@ $(function () {
 
 });
 
-var myModal = $('#addTransportDetailModal');
+var myModal = $('#addLogisticsDetailModal');
 var form = $("#updateForm");
 
 // 表格功能设置
@@ -109,7 +119,7 @@ $(function () {
             $.ajax({
                 type: "post",
                 dataType: 'json',
-                url: '/logistics/addTypeaheadData',
+                url: '/logistics/addLogisticsDetail',
                 data: {params: JSON.stringify(form_data)},
                 async: false,
                 success: function (result) {
@@ -134,62 +144,6 @@ $(function () {
     clearModal = function() {
         $("input").val('');
         form.data("bootstrapValidator").resetForm();
-    };
-
-    // 提交表单
-    check_form = function () {
-        var user_id = $.trim($('#user_id').val());
-        var act     = $.trim($('#act').val());
-
-        if(!user_id)
-        {
-            alert('用户ID不能为空！');
-            return false;
-        }
-        var form_data = $('#form_data').serialize();
-
-        // 异步提交数据到action/add_action.php页面
-        $.ajax(
-            {
-                url: "action/user_action.php",
-                type: "post",
-                contentType: "application/json",
-                dataType: 'json',
-                data:{"form_data":form_data},
-                beforeSend:function()
-                {
-                    $("#tip").html("<span style='color:blue'>正在处理...</span>");
-                    return true;
-                },
-                success:function(data)
-                {
-                    if(data > 0)
-                    {
-
-                        var msg = "添加";
-                        if(act == "edit") msg = "编辑";
-                        $("#tip").html("<span style='color:blueviolet'>恭喜，" +msg+ "成功！</span>");
-                        // document.location.href='system_notice.php'
-                        alert(msg + "OK！");
-                        location.reload();
-                    }
-                    else
-                    {
-                        $("#tip").html("<span style='color:red'>失败，请重试</span>");
-                        alert('操作失败');
-                    }
-                },
-                error:function()
-                {
-                    alert('请求出错');
-                },
-                complete:function()
-                {
-                    $('#acting_tips').hide();
-                }
-            });
-
-        return false;
     };
 
 });
@@ -301,7 +255,7 @@ $(function () {
             trans = 0;
         }
 
-        var profit = returnFloat(buy-sell-trans);
+        var profit = returnFloat(sell-buy-trans);
         $('#txt_profit').val(profit);
     };
 
@@ -547,7 +501,7 @@ $(document).ready(function() {
                 message: '利润不合法',
                 validators: {
                     regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        regexp: '^[-]?(0|([1-9][0-9]*))+([.][0-9]*)?$',
                         message: '请输入非零开头的整数或者小数'
                     }
                 }

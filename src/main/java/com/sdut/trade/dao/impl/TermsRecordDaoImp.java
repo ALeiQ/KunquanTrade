@@ -69,7 +69,7 @@ public class TermsRecordDaoImp implements TermsRecordDao {
     /**
      * 获取数据总数
      *
-     * @return 分页页码数
+     * @return
      */
     @Override
     public long getCount() {

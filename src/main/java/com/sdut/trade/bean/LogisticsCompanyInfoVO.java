@@ -9,7 +9,7 @@ import lombok.Data;
  * @date 2018/5/9
  */
 @Data
-public class TransportCompanyInfoVO {
+public class LogisticsCompanyInfoVO {
 
     /**
      * 编号

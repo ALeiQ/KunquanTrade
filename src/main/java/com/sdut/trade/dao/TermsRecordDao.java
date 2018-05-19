@@ -30,8 +30,8 @@ public interface TermsRecordDao {
     List<TermsRecord> getAllInRange(int offset, int rows);
 
     /**
-     * 根据每页数据条数获取总页数
-     * @return 分页页码数
+     * 获取数据总数
+     * @return
      */
     long getCount();
 

@@ -9,22 +9,20 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
-import com.sdut.trade.httpmodel.request.AddTransportRequest;
+import com.sdut.trade.httpmodel.request.AddLogisticsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
-import com.sdut.trade.service.TransportCompanyInfoService;
-import com.sdut.trade.service.TransportDetailsService;
+import com.sdut.trade.service.LogisticsCompanyInfoService;
+import com.sdut.trade.service.LogisticsDetailService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,13 +41,13 @@ public class LogisticsController {
     private CompanyInfoService companyInfoService;
 
     @Autowired
-    private TransportCompanyInfoService transportCompanyInfoService;
+    private LogisticsCompanyInfoService logisticsCompanyInfoService;
 
     @Autowired
     private GoodsInfoService goodsInfoService;
 
     @Autowired
-    private TransportDetailsService transportDetailsService;
+    private LogisticsDetailService logisticsDetailService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String logistics(ModelMap modelMap, HttpServletRequest httpServletRequest) {
@@ -85,7 +83,7 @@ public class LogisticsController {
                     result = companyInfoService.getCompanyByKeyword(query);
                     break;
                 case "transCompany":
-                    result = transportCompanyInfoService.getTransportCompanyByKeyword(query);
+                    result = logisticsCompanyInfoService.getLogisticsCompanyByKeyword(query);
                     break;
                 case "goodsName":
                     result = goodsInfoService.getGoodsNameByKeyword(query);
@@ -112,8 +110,8 @@ public class LogisticsController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/addTypeaheadData", method = RequestMethod.POST)
-    public ResponseVO addTypeaheadData(String params) {
+    @RequestMapping(value = "/addLogisticsDetail", method = RequestMethod.POST)
+    public ResponseVO addLogisticsDetail(String params) {
 
         ResponseVO result = new ResponseVO();
 
@@ -126,9 +124,9 @@ public class LogisticsController {
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
 
-            AddTransportRequest addTransportRequest = JSON.parseObject(params, AddTransportRequest.class);
+            AddLogisticsRequest addLogisticsRequest = JSON.parseObject(params, AddLogisticsRequest.class);
 
-            result = transportDetailsService.addTransportDetail(addTransportRequest);
+            result = logisticsDetailService.addLogisticsDetail(addLogisticsRequest);
 
         } catch (MyException ex) {
             log.info("getTermsInfo Known error! ", ex);
@@ -141,5 +139,26 @@ public class LogisticsController {
 
         return result;
     }
+
+    @ResponseBody
+    @RequestMapping(value = "/getLogisticsDetails", method = RequestMethod.GET)
+    public ResponseVO getLogisticsDetails() {
+
+        log.info("getLogisticsDetail start");
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+            result = logisticsDetailService.getAll();
+        } catch (Exception ex) {
+            log.error("getLogisticsDetail UnKnown error!", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("getLogisticsDetail end");
+
+        return result;
+
+    };
 
 }

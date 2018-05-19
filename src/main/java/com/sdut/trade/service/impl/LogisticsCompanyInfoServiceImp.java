@@ -9,16 +9,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 
-import com.sdut.trade.bean.TransportCompanyInfoVO;
-import com.sdut.trade.dao.TransportCompanyInfoDao;
-import com.sdut.trade.entity.TransportCompanyInfo;
+import com.sdut.trade.bean.LogisticsCompanyInfoVO;
+import com.sdut.trade.dao.LogisticsCompanyInfoDao;
+import com.sdut.trade.entity.LogisticsCompanyInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
-import com.sdut.trade.service.TransportCompanyInfoService;
+import com.sdut.trade.service.LogisticsCompanyInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +30,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Component
 @Slf4j
-public class TransportCompanyInfoServiceImp implements TransportCompanyInfoService {
+public class LogisticsCompanyInfoServiceImp implements LogisticsCompanyInfoService {
 
     @Autowired
-    private TransportCompanyInfoDao transportCompanyInfoDao;
+    private LogisticsCompanyInfoDao logisticsCompanyInfoDao;
 
     @Autowired
     private TermsRecordServiceImp termsRecordService;
@@ -43,18 +43,18 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
      * @return 运输公司信息数组
      */
     @Override
-    public ResponseVO getAllTransportCompanyInfo() {
+    public ResponseVO getAllLogisticsCompanyInfo() {
 
         ResponseVO responseVO = new ResponseVO();
 
-        List<TransportCompanyInfoVO> transportCompanyInfoVOS = new ArrayList<>();
-        List<TransportCompanyInfo> transportCompanyInfos;
+        List<LogisticsCompanyInfoVO> logisticsCompanyInfoVOS = new ArrayList<>();
+        List<LogisticsCompanyInfo> logisticsCompanyInfos;
 
         try {
-            transportCompanyInfos = transportCompanyInfoDao.getAllEnable();
+            logisticsCompanyInfos = logisticsCompanyInfoDao.getAllEnable();
         } catch (Exception ex) {
             // 数据库读取异常
-            log.error("getAllTransportCompanyInfo fromDB failed", ex);
+            log.error("getAllLogisticsCompanyInfo fromDB failed", ex);
             responseVO.setResult(ResultEnum.FAILURE);
             return responseVO;
         }
@@ -62,17 +62,17 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
         /*
          * 将数据库原始数据包装成前端展示数据
          */
-        for (TransportCompanyInfo transportCompanyInfoDO : transportCompanyInfos) {
+        for (LogisticsCompanyInfo logisticsCompanyInfoDO : logisticsCompanyInfos) {
 
-            TransportCompanyInfoVO transportCompanyInfoVO = new TransportCompanyInfoVO();
+            LogisticsCompanyInfoVO logisticsCompanyInfoVO = new LogisticsCompanyInfoVO();
 
-            transportCompanyInfoVO.setId(transportCompanyInfoDO.getId());
-            transportCompanyInfoVO.setName(transportCompanyInfoDO.getName());
+            logisticsCompanyInfoVO.setId(logisticsCompanyInfoDO.getId());
+            logisticsCompanyInfoVO.setName(logisticsCompanyInfoDO.getName());
 
-            transportCompanyInfoVOS.add(transportCompanyInfoVO);
+            logisticsCompanyInfoVOS.add(logisticsCompanyInfoVO);
         }
 
-        responseVO.setData(transportCompanyInfoVOS);
+        responseVO.setData(logisticsCompanyInfoVOS);
 
         return responseVO;
     }
@@ -84,27 +84,27 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
      * @return 添加结果
      */
     @Override
-    public ResponseVO addTransportCompanyInfoBatch(List<AddTermsRequest> addTermsRequests) {
+    public ResponseVO addLogisticsCompanyInfoBatch(List<AddTermsRequest> addTermsRequests) {
 
         ResponseVO responseVO = new ResponseVO();
 
         Date createDate = new Date();
 
-        List<TransportCompanyInfo> transportCompanyInfos = new ArrayList<>();
+        List<LogisticsCompanyInfo> logisticsCompanyInfos = new ArrayList<>();
 
         for (AddTermsRequest addTermsRequest : addTermsRequests) {
 
-            TransportCompanyInfo transportCompanyInfo = new TransportCompanyInfo();
+            LogisticsCompanyInfo logisticsCompanyInfo = new LogisticsCompanyInfo();
 
-            transportCompanyInfo.setName(addTermsRequest.getName());
-            transportCompanyInfo.setCreateDate(createDate);
-            transportCompanyInfo.setEnable(EnableEnum.ENABLE.isValue());
+            logisticsCompanyInfo.setName(addTermsRequest.getName());
+            logisticsCompanyInfo.setCreateDate(createDate);
+            logisticsCompanyInfo.setEnable(EnableEnum.ENABLE.isValue());
 
-            transportCompanyInfos.add(transportCompanyInfo);
+            logisticsCompanyInfos.add(logisticsCompanyInfo);
 
         }
 
-        int addNum = transportCompanyInfoDao.addTransportCompanyInfoBatch(transportCompanyInfos);
+        int addNum = logisticsCompanyInfoDao.addLogisticsCompanyInfoBatch(logisticsCompanyInfos);
 
         if (addNum != addTermsRequests.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
@@ -112,7 +112,7 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
                     + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
-            log.error("addTransportCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",
+            log.error("addLogisticsCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",
                     addTermsRequests.size(), addNum);
 
             return responseVO;
@@ -129,23 +129,23 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
      * @return 删除结果
      */
     @Override
-    public ResponseVO delTransportCompanyInfoById(int id) {
+    public ResponseVO delLogisticsCompanyInfoById(int id) {
 
         ResponseVO responseVO = new ResponseVO();
 
         Date deleteDate = new Date();
 
-        TransportCompanyInfo transportCompanyInfo = transportCompanyInfoDao.getTransportCompanyById(id);
+        LogisticsCompanyInfo logisticsCompanyInfo = logisticsCompanyInfoDao.getLogisticsCompanyById(id);
 
-        int delNum = transportCompanyInfoDao.delTransportCompanyInfoById(id, deleteDate);
+        int delNum = logisticsCompanyInfoDao.delLogisticsCompanyInfoById(id, deleteDate);
 
         if (delNum != 1) {
             responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
-            log.error("delTransportCompanyInfoBatch del false!");
+            log.error("delLogisticsCompanyInfoBatch del false!");
         }
 
         AddTermsRequest delTermsRequest = new AddTermsRequest();
-        delTermsRequest.setName(transportCompanyInfo.getName());
+        delTermsRequest.setName(logisticsCompanyInfo.getName());
         responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, delTermsRequest, deleteDate);
 
         return responseVO;
@@ -160,18 +160,18 @@ public class TransportCompanyInfoServiceImp implements TransportCompanyInfoServi
      * @return
      */
     @Override
-    public ResponseVO getTransportCompanyByKeyword(String query) {
+    public ResponseVO getLogisticsCompanyByKeyword(String query) {
 
         ResponseVO responseVO = new ResponseVO();
 
-        List<TransportCompanyInfo> transportCompanyInfos = transportCompanyInfoDao.getTransportCompanyByKeyword(query);
-        List<String> transportCompanyNames = new ArrayList<>();
+        List<LogisticsCompanyInfo> logisticsCompanyInfos = logisticsCompanyInfoDao.getLogisticsCompanyByKeyword(query);
+        List<String> logisticsCompanyNames = new ArrayList<>();
 
-        for (TransportCompanyInfo transportCompanyInfo : transportCompanyInfos) {
-            transportCompanyNames.add(transportCompanyInfo.getName());
+        for (LogisticsCompanyInfo logisticsCompanyInfo : logisticsCompanyInfos) {
+            logisticsCompanyNames.add(logisticsCompanyInfo.getName());
         }
 
-        responseVO.setData(transportCompanyNames);
+        responseVO.setData(logisticsCompanyNames);
         return responseVO;
 
     }

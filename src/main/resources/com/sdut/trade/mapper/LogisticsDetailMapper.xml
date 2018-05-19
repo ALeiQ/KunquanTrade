@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sdut.trade.mapper.TransportDetailsMapper">
-  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.TransportDetails">
+<mapper namespace="com.sdut.trade.mapper.LogisticsDetailMapper">
+  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.LogisticsDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="load_time" jdbcType="DATE" property="loadTime" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
@@ -90,13 +90,13 @@
     trans_unit_price, trans_sum_price, profit, weighing_number, car_number, remark, create_date, 
     delete_date, enable
   </sql>
-  <select id="selectByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.sdut.trade.entity.LogisticsDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from transport_details
+    from logistics_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -115,21 +115,21 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from transport_details
+    from logistics_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from transport_details
+    delete from logistics_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample">
-    delete from transport_details
+  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.LogisticsDetailExample">
+    delete from logistics_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sdut.trade.entity.TransportDetails">
-    insert into transport_details (id, load_time, goods_name, 
+  <insert id="insert" parameterType="com.sdut.trade.entity.LogisticsDetail">
+    insert into logistics_detail (id, load_time, goods_name, 
       goods_model, net_weight, return_weight, 
       loss_weight, goods_from, seller_unit_price, 
       seller_sum_price, buyer_company, unit_price, 
@@ -146,8 +146,8 @@
       #{carNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
   </insert>
-  <insert id="insertSelective" parameterType="com.sdut.trade.entity.TransportDetails">
-    insert into transport_details
+  <insert id="insertSelective" parameterType="com.sdut.trade.entity.LogisticsDetail">
+    insert into logistics_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -291,14 +291,14 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sdut.trade.entity.TransportDetailsExample" resultType="java.lang.Long">
-    select count(*) from transport_details
+  <select id="countByExample" parameterType="com.sdut.trade.entity.LogisticsDetailExample" resultType="java.lang.Long">
+    select count(*) from logistics_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update transport_details
+    update logistics_detail
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
@@ -375,7 +375,7 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update transport_details
+    update logistics_detail
     set id = #{record.id,jdbcType=INTEGER},
       load_time = #{record.loadTime,jdbcType=DATE},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
@@ -403,8 +403,8 @@
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.TransportDetails">
-    update transport_details
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.LogisticsDetail">
+    update logistics_detail
     <set>
       <if test="loadTime != null">
         load_time = #{loadTime,jdbcType=DATE},
@@ -475,8 +475,8 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.TransportDetails">
-    update transport_details
+  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.LogisticsDetail">
+    update logistics_detail
     set load_time = #{loadTime,jdbcType=DATE},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_model = #{goodsModel,jdbcType=VARCHAR},
@@ -507,7 +507,7 @@
       This element is automatically generated by MyBatis Generator, do not modify.
       @project https://github.com/itfsw/mybatis-generator-plugin
     -->
-    insert into transport_details
+    insert into logistics_detail
     (id, load_time, goods_name, goods_model, net_weight, return_weight, loss_weight, 
       goods_from, seller_unit_price, seller_sum_price, buyer_company, unit_price, sum_price, 
       trans_company, trans_unit_price, trans_sum_price, profit, weighing_number, car_number, 
@@ -531,7 +531,7 @@
       This element is automatically generated by MyBatis Generator, do not modify.
       @project https://github.com/itfsw/mybatis-generator-plugin
     -->
-    insert into transport_details (
+    insert into logistics_detail (
     <foreach collection="selective" item="column" separator=",">
       ${column.value}
     </foreach>

@@ -72,8 +72,8 @@
         deal_details
         goods_info
         terms_record
-        transport_company_info
-        transport_details
+        logistics_company_info
+        logistics_details
         user_info
         -->
 
@@ -81,19 +81,19 @@
         </table>
         <table tableName="bank_info" domainObjectName="BankInfo">
         </table>
-        <table tableName="check_details" domainObjectName="CheckDetails">
+        <table tableName="check_detail" domainObjectName="CheckDetail">
         </table>
         <table tableName="check_info" domainObjectName="CheckInfo">
         </table>
         <table tableName="company_info" domainObjectName="CompanyInfo">
         </table>
-        <table tableName="deal_details" domainObjectName="DealDetails">
+        <table tableName="deal_detail" domainObjectName="DealDetail">
         </table>
         <table tableName="goods_info" domainObjectName="GoodsInfo">
         </table>
-        <table tableName="transport_company_info" domainObjectName="TransportCompanyInfo">
+        <table tableName="logistics_company_info" domainObjectName="LogisticsCompanyInfo">
         </table>
-        <table tableName="transport_details" domainObjectName="TransportDetails">
+        <table tableName="logistics_detail" domainObjectName="LogisticsDetail">
         </table>
         <table tableName="user_info" domainObjectName="UserInfo">
         </table>

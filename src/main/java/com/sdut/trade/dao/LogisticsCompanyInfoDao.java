@@ -3,7 +3,7 @@ package com.sdut.trade.dao;
 import java.util.Date;
 import java.util.List;
 
-import com.sdut.trade.entity.TransportCompanyInfo;
+import com.sdut.trade.entity.LogisticsCompanyInfo;
 
 /**
  * 类描述：运输公司信息Dao接口层
@@ -11,14 +11,14 @@ import com.sdut.trade.entity.TransportCompanyInfo;
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/9
  */
-public interface TransportCompanyInfoDao {
+public interface LogisticsCompanyInfoDao {
 
     /**
      * 获取运输公司信息全部可用（未删除的）数据
      *
      * @return 全部运输公司信息
      */
-    List<TransportCompanyInfo> getAllEnable();
+    List<LogisticsCompanyInfo> getAllEnable();
 
     /**
      * 获取指定id的运输公司信息
@@ -26,15 +26,15 @@ public interface TransportCompanyInfoDao {
      * @param id
      * @return
      */
-    TransportCompanyInfo getTransportCompanyById(int id);
+    LogisticsCompanyInfo getLogisticsCompanyById(int id);
 
     /**
      * 添加运输公司信息到数据库
      *
-     * @param transportCompanyInfos 待添加的运输公司列表
+     * @param logisticsCompanyInfos 待添加的运输公司列表
      * @return 成功插入数据库的条数
      */
-    int addTransportCompanyInfoBatch(List<TransportCompanyInfo> transportCompanyInfos);
+    int addLogisticsCompanyInfoBatch(List<LogisticsCompanyInfo> logisticsCompanyInfos);
 
     /**
      * 删除运输公司信息到数据库
@@ -43,26 +43,26 @@ public interface TransportCompanyInfoDao {
      * @param deleteDate 删除时间
      * @return 成功插入数据库的条数
      */
-    int delTransportCompanyInfoById(int id, Date deleteDate);
+    int delLogisticsCompanyInfoById(int id, Date deleteDate);
 
     /**
      * 根据关键词模糊匹配运输公司名
      * @param query 关键词
      * @return
      */
-    List<TransportCompanyInfo> getTransportCompanyByKeyword(String query);
+    List<LogisticsCompanyInfo> getLogisticsCompanyByKeyword(String query);
 
     /**
      * 添加单条运输公司信息
-     * @param transportCompanyInfo
+     * @param logisticsCompanyInfo
      * @return
      */
-    boolean addTransportCompanyInfo(TransportCompanyInfo transportCompanyInfo);
+    boolean addLogisticsCompanyInfo(LogisticsCompanyInfo logisticsCompanyInfo);
 
     /**
      * 查询运输公司名是否存在
      * @param transCompany
      * @return
      */
-    boolean hasTransportCompanyName(String transCompany);
+    boolean hasLogisticsCompanyName(String transCompany);
 }

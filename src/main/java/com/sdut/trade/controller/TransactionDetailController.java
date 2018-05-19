@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @date 2018/3/15
  */
 @Controller
-@RequestMapping("transactionDetails")
-public class TransactionDetailsController {
+@RequestMapping("transactionDetail")
+public class TransactionDetailController {
 
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public String TransactionDetailsController(ModelMap modelMap, HttpServletRequest httpServletRequest) {
-        return "/transaction_details";
+    public String TransactionDetailController(ModelMap modelMap, HttpServletRequest httpServletRequest) {
+        return "/transaction_detail";
     }
 
 }

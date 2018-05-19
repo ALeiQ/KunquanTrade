@@ -101,7 +101,7 @@ $(function () {
         ]
     });
 
-    $('#transportTable').bootstrapTable({
+    $('#logisticsTable').bootstrapTable({
         url: '/majorTerms/getTermsInfo',
         method: 'get',
         dataType: 'json',
@@ -115,7 +115,7 @@ $(function () {
         pageSize: 10,
         queryParams: function() {
             return {
-                getType: "transportTable"
+                getType: "logisticsTable"
             };
         },
         responseHandler : function(res) {
@@ -351,6 +351,7 @@ $(function () {
 
     var totalPages = 1;
 
+    // 加载常用名词增删记录
     loadData = function (event, page) {
         var query = {};
         query['page'] = page;

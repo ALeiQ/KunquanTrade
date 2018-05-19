@@ -26,7 +26,7 @@ import com.sdut.trade.service.BankInfoService;
 import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
 import com.sdut.trade.service.TermsRecordService;
-import com.sdut.trade.service.TransportCompanyInfoService;
+import com.sdut.trade.service.LogisticsCompanyInfoService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -51,7 +51,7 @@ public class MajorTermsController {
     CompanyInfoService companyInfoService;
 
     @Autowired
-    TransportCompanyInfoService transportCompanyInfoService;
+    LogisticsCompanyInfoService logisticsCompanyInfoService;
 
     @Autowired
     TermsRecordService termRecordService;
@@ -88,8 +88,8 @@ public class MajorTermsController {
                 case "companysTable":
                     result = companyInfoService.getAllCompanyInfo();
                     break;
-                case "transportTable":
-                    result = transportCompanyInfoService.getAllTransportCompanyInfo();
+                case "logisticsTable":
+                    result = logisticsCompanyInfoService.getAllLogisticsCompanyInfo();
                     break;
                 case "bankTable":
                     result = bankInfoService.getAllBankInfo();
@@ -190,8 +190,8 @@ public class MajorTermsController {
                 case "companysTable":
                     result = companyInfoService.addCompanyInfoBatch(addTermsRequestList);
                     break;
-                case "transportTable":
-                    result = transportCompanyInfoService.addTransportCompanyInfoBatch(addTermsRequestList);
+                case "logisticsTable":
+                    result = logisticsCompanyInfoService.addLogisticsCompanyInfoBatch(addTermsRequestList);
                     break;
                 case "bankTable":
                     result = bankInfoService.addBankInfoBatch(addTermsRequestList);
@@ -245,8 +245,8 @@ public class MajorTermsController {
                 case "companysTable":
                     result = companyInfoService.delCompanyInfoById(Integer.parseInt(delId));
                     break;
-                case "transportTable":
-                    result = transportCompanyInfoService.delTransportCompanyInfoById(Integer.parseInt(delId));
+                case "logisticsTable":
+                    result = logisticsCompanyInfoService.delLogisticsCompanyInfoById(Integer.parseInt(delId));
                     break;
                 case "bankTable":
                     result = bankInfoService.delBankInfoById(Integer.parseInt(delId));
