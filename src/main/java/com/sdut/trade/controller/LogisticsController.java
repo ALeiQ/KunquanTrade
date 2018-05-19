@@ -15,13 +15,16 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
+import com.sdut.trade.httpmodel.request.AddTransportRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
 import com.sdut.trade.service.TransportCompanyInfoService;
+import com.sdut.trade.service.TransportDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,6 +47,9 @@ public class LogisticsController {
 
     @Autowired
     private GoodsInfoService goodsInfoService;
+
+    @Autowired
+    private TransportDetailsService transportDetailsService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String logistics(ModelMap modelMap, HttpServletRequest httpServletRequest) {
@@ -101,6 +107,37 @@ public class LogisticsController {
         }
 
         log.info("getTypeaheadData end [type={}, query={}, goodsName={}]", getType, query, goodsName);
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/addTypeaheadData", method = RequestMethod.POST)
+    public ResponseVO addTypeaheadData(String params) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("addTypeaheadData start [params={}]", params);
+
+        try {
+
+            if (StringUtils.isEmpty(params)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            AddTransportRequest addTransportRequest = JSON.parseObject(params, AddTransportRequest.class);
+
+            result = transportDetailsService.addTransportDetail(addTransportRequest);
+
+        } catch (MyException ex) {
+            log.info("getTermsInfo Known error! ", ex);
+        } catch (Exception ex) {
+            log.info("getTermsInfo UnKnown error! ", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("addTypeaheadData end [params={}]", params);
 
         return result;
     }

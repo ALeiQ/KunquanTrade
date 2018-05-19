@@ -12,31 +12,31 @@ public class TransportDetails implements Serializable {
 
     private String goodsModel;
 
-    private Float netWeight;
+    private Double netWeight;
 
-    private Float returnWeight;
+    private Double returnWeight;
 
-    private Float lossWeight;
+    private Double lossWeight;
 
     private String goodsFrom;
 
-    private Float sellerUnitPrice;
+    private Double sellerUnitPrice;
 
-    private Float sellerSumPrice;
+    private Double sellerSumPrice;
 
     private String buyerCompany;
 
-    private Float unitPrice;
+    private Double unitPrice;
 
-    private Float sumPrice;
+    private Double sumPrice;
 
     private String transCompany;
 
-    private Float transUnitPrice;
+    private Double transUnitPrice;
 
-    private Float transSumPrice;
+    private Double transSumPrice;
 
-    private Float profit;
+    private Double profit;
 
     private String weighingNumber;
 
@@ -84,27 +84,27 @@ public class TransportDetails implements Serializable {
         this.goodsModel = goodsModel == null ? null : goodsModel.trim();
     }
 
-    public Float getNetWeight() {
+    public Double getNetWeight() {
         return netWeight;
     }
 
-    public void setNetWeight(Float netWeight) {
+    public void setNetWeight(Double netWeight) {
         this.netWeight = netWeight;
     }
 
-    public Float getReturnWeight() {
+    public Double getReturnWeight() {
         return returnWeight;
     }
 
-    public void setReturnWeight(Float returnWeight) {
+    public void setReturnWeight(Double returnWeight) {
         this.returnWeight = returnWeight;
     }
 
-    public Float getLossWeight() {
+    public Double getLossWeight() {
         return lossWeight;
     }
 
-    public void setLossWeight(Float lossWeight) {
+    public void setLossWeight(Double lossWeight) {
         this.lossWeight = lossWeight;
     }
 
@@ -116,19 +116,19 @@ public class TransportDetails implements Serializable {
         this.goodsFrom = goodsFrom == null ? null : goodsFrom.trim();
     }
 
-    public Float getSellerUnitPrice() {
+    public Double getSellerUnitPrice() {
         return sellerUnitPrice;
     }
 
-    public void setSellerUnitPrice(Float sellerUnitPrice) {
+    public void setSellerUnitPrice(Double sellerUnitPrice) {
         this.sellerUnitPrice = sellerUnitPrice;
     }
 
-    public Float getSellerSumPrice() {
+    public Double getSellerSumPrice() {
         return sellerSumPrice;
     }
 
-    public void setSellerSumPrice(Float sellerSumPrice) {
+    public void setSellerSumPrice(Double sellerSumPrice) {
         this.sellerSumPrice = sellerSumPrice;
     }
 
@@ -140,19 +140,19 @@ public class TransportDetails implements Serializable {
         this.buyerCompany = buyerCompany == null ? null : buyerCompany.trim();
     }
 
-    public Float getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Float unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public Float getSumPrice() {
+    public Double getSumPrice() {
         return sumPrice;
     }
 
-    public void setSumPrice(Float sumPrice) {
+    public void setSumPrice(Double sumPrice) {
         this.sumPrice = sumPrice;
     }
 
@@ -164,27 +164,27 @@ public class TransportDetails implements Serializable {
         this.transCompany = transCompany == null ? null : transCompany.trim();
     }
 
-    public Float getTransUnitPrice() {
+    public Double getTransUnitPrice() {
         return transUnitPrice;
     }
 
-    public void setTransUnitPrice(Float transUnitPrice) {
+    public void setTransUnitPrice(Double transUnitPrice) {
         this.transUnitPrice = transUnitPrice;
     }
 
-    public Float getTransSumPrice() {
+    public Double getTransSumPrice() {
         return transSumPrice;
     }
 
-    public void setTransSumPrice(Float transSumPrice) {
+    public void setTransSumPrice(Double transSumPrice) {
         this.transSumPrice = transSumPrice;
     }
 
-    public Float getProfit() {
+    public Double getProfit() {
         return profit;
     }
 
-    public void setProfit(Float profit) {
+    public void setProfit(Double profit) {
         this.profit = profit;
     }
 

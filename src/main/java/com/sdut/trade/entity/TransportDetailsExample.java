@@ -504,52 +504,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightEqualTo(Float value) {
+        public Criteria andNetWeightEqualTo(Double value) {
             addCriterion("net_weight =", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightNotEqualTo(Float value) {
+        public Criteria andNetWeightNotEqualTo(Double value) {
             addCriterion("net_weight <>", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightGreaterThan(Float value) {
+        public Criteria andNetWeightGreaterThan(Double value) {
             addCriterion("net_weight >", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightGreaterThanOrEqualTo(Float value) {
+        public Criteria andNetWeightGreaterThanOrEqualTo(Double value) {
             addCriterion("net_weight >=", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightLessThan(Float value) {
+        public Criteria andNetWeightLessThan(Double value) {
             addCriterion("net_weight <", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightLessThanOrEqualTo(Float value) {
+        public Criteria andNetWeightLessThanOrEqualTo(Double value) {
             addCriterion("net_weight <=", value, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightIn(List<Float> values) {
+        public Criteria andNetWeightIn(List<Double> values) {
             addCriterion("net_weight in", values, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightNotIn(List<Float> values) {
+        public Criteria andNetWeightNotIn(List<Double> values) {
             addCriterion("net_weight not in", values, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightBetween(Float value1, Float value2) {
+        public Criteria andNetWeightBetween(Double value1, Double value2) {
             addCriterion("net_weight between", value1, value2, "netWeight");
             return (Criteria) this;
         }
 
-        public Criteria andNetWeightNotBetween(Float value1, Float value2) {
+        public Criteria andNetWeightNotBetween(Double value1, Double value2) {
             addCriterion("net_weight not between", value1, value2, "netWeight");
             return (Criteria) this;
         }
@@ -564,52 +564,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightEqualTo(Float value) {
+        public Criteria andReturnWeightEqualTo(Double value) {
             addCriterion("return_weight =", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightNotEqualTo(Float value) {
+        public Criteria andReturnWeightNotEqualTo(Double value) {
             addCriterion("return_weight <>", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightGreaterThan(Float value) {
+        public Criteria andReturnWeightGreaterThan(Double value) {
             addCriterion("return_weight >", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightGreaterThanOrEqualTo(Float value) {
+        public Criteria andReturnWeightGreaterThanOrEqualTo(Double value) {
             addCriterion("return_weight >=", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightLessThan(Float value) {
+        public Criteria andReturnWeightLessThan(Double value) {
             addCriterion("return_weight <", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightLessThanOrEqualTo(Float value) {
+        public Criteria andReturnWeightLessThanOrEqualTo(Double value) {
             addCriterion("return_weight <=", value, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightIn(List<Float> values) {
+        public Criteria andReturnWeightIn(List<Double> values) {
             addCriterion("return_weight in", values, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightNotIn(List<Float> values) {
+        public Criteria andReturnWeightNotIn(List<Double> values) {
             addCriterion("return_weight not in", values, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightBetween(Float value1, Float value2) {
+        public Criteria andReturnWeightBetween(Double value1, Double value2) {
             addCriterion("return_weight between", value1, value2, "returnWeight");
             return (Criteria) this;
         }
 
-        public Criteria andReturnWeightNotBetween(Float value1, Float value2) {
+        public Criteria andReturnWeightNotBetween(Double value1, Double value2) {
             addCriterion("return_weight not between", value1, value2, "returnWeight");
             return (Criteria) this;
         }
@@ -624,52 +624,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightEqualTo(Float value) {
+        public Criteria andLossWeightEqualTo(Double value) {
             addCriterion("loss_weight =", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightNotEqualTo(Float value) {
+        public Criteria andLossWeightNotEqualTo(Double value) {
             addCriterion("loss_weight <>", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightGreaterThan(Float value) {
+        public Criteria andLossWeightGreaterThan(Double value) {
             addCriterion("loss_weight >", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightGreaterThanOrEqualTo(Float value) {
+        public Criteria andLossWeightGreaterThanOrEqualTo(Double value) {
             addCriterion("loss_weight >=", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightLessThan(Float value) {
+        public Criteria andLossWeightLessThan(Double value) {
             addCriterion("loss_weight <", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightLessThanOrEqualTo(Float value) {
+        public Criteria andLossWeightLessThanOrEqualTo(Double value) {
             addCriterion("loss_weight <=", value, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightIn(List<Float> values) {
+        public Criteria andLossWeightIn(List<Double> values) {
             addCriterion("loss_weight in", values, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightNotIn(List<Float> values) {
+        public Criteria andLossWeightNotIn(List<Double> values) {
             addCriterion("loss_weight not in", values, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightBetween(Float value1, Float value2) {
+        public Criteria andLossWeightBetween(Double value1, Double value2) {
             addCriterion("loss_weight between", value1, value2, "lossWeight");
             return (Criteria) this;
         }
 
-        public Criteria andLossWeightNotBetween(Float value1, Float value2) {
+        public Criteria andLossWeightNotBetween(Double value1, Double value2) {
             addCriterion("loss_weight not between", value1, value2, "lossWeight");
             return (Criteria) this;
         }
@@ -754,52 +754,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceEqualTo(Float value) {
+        public Criteria andSellerUnitPriceEqualTo(Double value) {
             addCriterion("seller_unit_price =", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceNotEqualTo(Float value) {
+        public Criteria andSellerUnitPriceNotEqualTo(Double value) {
             addCriterion("seller_unit_price <>", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceGreaterThan(Float value) {
+        public Criteria andSellerUnitPriceGreaterThan(Double value) {
             addCriterion("seller_unit_price >", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andSellerUnitPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("seller_unit_price >=", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceLessThan(Float value) {
+        public Criteria andSellerUnitPriceLessThan(Double value) {
             addCriterion("seller_unit_price <", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceLessThanOrEqualTo(Float value) {
+        public Criteria andSellerUnitPriceLessThanOrEqualTo(Double value) {
             addCriterion("seller_unit_price <=", value, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceIn(List<Float> values) {
+        public Criteria andSellerUnitPriceIn(List<Double> values) {
             addCriterion("seller_unit_price in", values, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceNotIn(List<Float> values) {
+        public Criteria andSellerUnitPriceNotIn(List<Double> values) {
             addCriterion("seller_unit_price not in", values, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceBetween(Float value1, Float value2) {
+        public Criteria andSellerUnitPriceBetween(Double value1, Double value2) {
             addCriterion("seller_unit_price between", value1, value2, "sellerUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerUnitPriceNotBetween(Float value1, Float value2) {
+        public Criteria andSellerUnitPriceNotBetween(Double value1, Double value2) {
             addCriterion("seller_unit_price not between", value1, value2, "sellerUnitPrice");
             return (Criteria) this;
         }
@@ -814,52 +814,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceEqualTo(Float value) {
+        public Criteria andSellerSumPriceEqualTo(Double value) {
             addCriterion("seller_sum_price =", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceNotEqualTo(Float value) {
+        public Criteria andSellerSumPriceNotEqualTo(Double value) {
             addCriterion("seller_sum_price <>", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceGreaterThan(Float value) {
+        public Criteria andSellerSumPriceGreaterThan(Double value) {
             addCriterion("seller_sum_price >", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andSellerSumPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("seller_sum_price >=", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceLessThan(Float value) {
+        public Criteria andSellerSumPriceLessThan(Double value) {
             addCriterion("seller_sum_price <", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceLessThanOrEqualTo(Float value) {
+        public Criteria andSellerSumPriceLessThanOrEqualTo(Double value) {
             addCriterion("seller_sum_price <=", value, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceIn(List<Float> values) {
+        public Criteria andSellerSumPriceIn(List<Double> values) {
             addCriterion("seller_sum_price in", values, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceNotIn(List<Float> values) {
+        public Criteria andSellerSumPriceNotIn(List<Double> values) {
             addCriterion("seller_sum_price not in", values, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceBetween(Float value1, Float value2) {
+        public Criteria andSellerSumPriceBetween(Double value1, Double value2) {
             addCriterion("seller_sum_price between", value1, value2, "sellerSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSellerSumPriceNotBetween(Float value1, Float value2) {
+        public Criteria andSellerSumPriceNotBetween(Double value1, Double value2) {
             addCriterion("seller_sum_price not between", value1, value2, "sellerSumPrice");
             return (Criteria) this;
         }
@@ -944,52 +944,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceEqualTo(Float value) {
+        public Criteria andUnitPriceEqualTo(Double value) {
             addCriterion("unit_price =", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotEqualTo(Float value) {
+        public Criteria andUnitPriceNotEqualTo(Double value) {
             addCriterion("unit_price <>", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThan(Float value) {
+        public Criteria andUnitPriceGreaterThan(Double value) {
             addCriterion("unit_price >", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andUnitPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("unit_price >=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThan(Float value) {
+        public Criteria andUnitPriceLessThan(Double value) {
             addCriterion("unit_price <", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThanOrEqualTo(Float value) {
+        public Criteria andUnitPriceLessThanOrEqualTo(Double value) {
             addCriterion("unit_price <=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceIn(List<Float> values) {
+        public Criteria andUnitPriceIn(List<Double> values) {
             addCriterion("unit_price in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotIn(List<Float> values) {
+        public Criteria andUnitPriceNotIn(List<Double> values) {
             addCriterion("unit_price not in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceBetween(Float value1, Float value2) {
+        public Criteria andUnitPriceBetween(Double value1, Double value2) {
             addCriterion("unit_price between", value1, value2, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotBetween(Float value1, Float value2) {
+        public Criteria andUnitPriceNotBetween(Double value1, Double value2) {
             addCriterion("unit_price not between", value1, value2, "unitPrice");
             return (Criteria) this;
         }
@@ -1004,52 +1004,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceEqualTo(Float value) {
+        public Criteria andSumPriceEqualTo(Double value) {
             addCriterion("sum_price =", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceNotEqualTo(Float value) {
+        public Criteria andSumPriceNotEqualTo(Double value) {
             addCriterion("sum_price <>", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceGreaterThan(Float value) {
+        public Criteria andSumPriceGreaterThan(Double value) {
             addCriterion("sum_price >", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andSumPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("sum_price >=", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceLessThan(Float value) {
+        public Criteria andSumPriceLessThan(Double value) {
             addCriterion("sum_price <", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceLessThanOrEqualTo(Float value) {
+        public Criteria andSumPriceLessThanOrEqualTo(Double value) {
             addCriterion("sum_price <=", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceIn(List<Float> values) {
+        public Criteria andSumPriceIn(List<Double> values) {
             addCriterion("sum_price in", values, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceNotIn(List<Float> values) {
+        public Criteria andSumPriceNotIn(List<Double> values) {
             addCriterion("sum_price not in", values, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceBetween(Float value1, Float value2) {
+        public Criteria andSumPriceBetween(Double value1, Double value2) {
             addCriterion("sum_price between", value1, value2, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPriceNotBetween(Float value1, Float value2) {
+        public Criteria andSumPriceNotBetween(Double value1, Double value2) {
             addCriterion("sum_price not between", value1, value2, "sumPrice");
             return (Criteria) this;
         }
@@ -1134,52 +1134,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceEqualTo(Float value) {
+        public Criteria andTransUnitPriceEqualTo(Double value) {
             addCriterion("trans_unit_price =", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceNotEqualTo(Float value) {
+        public Criteria andTransUnitPriceNotEqualTo(Double value) {
             addCriterion("trans_unit_price <>", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceGreaterThan(Float value) {
+        public Criteria andTransUnitPriceGreaterThan(Double value) {
             addCriterion("trans_unit_price >", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andTransUnitPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("trans_unit_price >=", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceLessThan(Float value) {
+        public Criteria andTransUnitPriceLessThan(Double value) {
             addCriterion("trans_unit_price <", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceLessThanOrEqualTo(Float value) {
+        public Criteria andTransUnitPriceLessThanOrEqualTo(Double value) {
             addCriterion("trans_unit_price <=", value, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceIn(List<Float> values) {
+        public Criteria andTransUnitPriceIn(List<Double> values) {
             addCriterion("trans_unit_price in", values, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceNotIn(List<Float> values) {
+        public Criteria andTransUnitPriceNotIn(List<Double> values) {
             addCriterion("trans_unit_price not in", values, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceBetween(Float value1, Float value2) {
+        public Criteria andTransUnitPriceBetween(Double value1, Double value2) {
             addCriterion("trans_unit_price between", value1, value2, "transUnitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransUnitPriceNotBetween(Float value1, Float value2) {
+        public Criteria andTransUnitPriceNotBetween(Double value1, Double value2) {
             addCriterion("trans_unit_price not between", value1, value2, "transUnitPrice");
             return (Criteria) this;
         }
@@ -1194,52 +1194,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceEqualTo(Float value) {
+        public Criteria andTransSumPriceEqualTo(Double value) {
             addCriterion("trans_sum_price =", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceNotEqualTo(Float value) {
+        public Criteria andTransSumPriceNotEqualTo(Double value) {
             addCriterion("trans_sum_price <>", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceGreaterThan(Float value) {
+        public Criteria andTransSumPriceGreaterThan(Double value) {
             addCriterion("trans_sum_price >", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andTransSumPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("trans_sum_price >=", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceLessThan(Float value) {
+        public Criteria andTransSumPriceLessThan(Double value) {
             addCriterion("trans_sum_price <", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceLessThanOrEqualTo(Float value) {
+        public Criteria andTransSumPriceLessThanOrEqualTo(Double value) {
             addCriterion("trans_sum_price <=", value, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceIn(List<Float> values) {
+        public Criteria andTransSumPriceIn(List<Double> values) {
             addCriterion("trans_sum_price in", values, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceNotIn(List<Float> values) {
+        public Criteria andTransSumPriceNotIn(List<Double> values) {
             addCriterion("trans_sum_price not in", values, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceBetween(Float value1, Float value2) {
+        public Criteria andTransSumPriceBetween(Double value1, Double value2) {
             addCriterion("trans_sum_price between", value1, value2, "transSumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andTransSumPriceNotBetween(Float value1, Float value2) {
+        public Criteria andTransSumPriceNotBetween(Double value1, Double value2) {
             addCriterion("trans_sum_price not between", value1, value2, "transSumPrice");
             return (Criteria) this;
         }
@@ -1254,52 +1254,52 @@ public class TransportDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andProfitEqualTo(Float value) {
+        public Criteria andProfitEqualTo(Double value) {
             addCriterion("profit =", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitNotEqualTo(Float value) {
+        public Criteria andProfitNotEqualTo(Double value) {
             addCriterion("profit <>", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitGreaterThan(Float value) {
+        public Criteria andProfitGreaterThan(Double value) {
             addCriterion("profit >", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitGreaterThanOrEqualTo(Float value) {
+        public Criteria andProfitGreaterThanOrEqualTo(Double value) {
             addCriterion("profit >=", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitLessThan(Float value) {
+        public Criteria andProfitLessThan(Double value) {
             addCriterion("profit <", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitLessThanOrEqualTo(Float value) {
+        public Criteria andProfitLessThanOrEqualTo(Double value) {
             addCriterion("profit <=", value, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitIn(List<Float> values) {
+        public Criteria andProfitIn(List<Double> values) {
             addCriterion("profit in", values, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitNotIn(List<Float> values) {
+        public Criteria andProfitNotIn(List<Double> values) {
             addCriterion("profit not in", values, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitBetween(Float value1, Float value2) {
+        public Criteria andProfitBetween(Double value1, Double value2) {
             addCriterion("profit between", value1, value2, "profit");
             return (Criteria) this;
         }
 
-        public Criteria andProfitNotBetween(Float value1, Float value2) {
+        public Criteria andProfitNotBetween(Double value1, Double value2) {
             addCriterion("profit not between", value1, value2, "profit");
             return (Criteria) this;
         }

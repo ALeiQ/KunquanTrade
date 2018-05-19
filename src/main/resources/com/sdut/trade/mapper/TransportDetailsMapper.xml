@@ -6,19 +6,19 @@
     <result column="load_time" jdbcType="DATE" property="loadTime" />
     <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
     <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
-    <result column="net_weight" jdbcType="REAL" property="netWeight" />
-    <result column="return_weight" jdbcType="REAL" property="returnWeight" />
-    <result column="loss_weight" jdbcType="REAL" property="lossWeight" />
+    <result column="net_weight" jdbcType="DOUBLE" property="netWeight" />
+    <result column="return_weight" jdbcType="DOUBLE" property="returnWeight" />
+    <result column="loss_weight" jdbcType="DOUBLE" property="lossWeight" />
     <result column="goods_from" jdbcType="VARCHAR" property="goodsFrom" />
-    <result column="seller_unit_price" jdbcType="REAL" property="sellerUnitPrice" />
-    <result column="seller_sum_price" jdbcType="REAL" property="sellerSumPrice" />
+    <result column="seller_unit_price" jdbcType="DOUBLE" property="sellerUnitPrice" />
+    <result column="seller_sum_price" jdbcType="DOUBLE" property="sellerSumPrice" />
     <result column="buyer_company" jdbcType="VARCHAR" property="buyerCompany" />
-    <result column="unit_price" jdbcType="REAL" property="unitPrice" />
-    <result column="sum_price" jdbcType="REAL" property="sumPrice" />
+    <result column="unit_price" jdbcType="DOUBLE" property="unitPrice" />
+    <result column="sum_price" jdbcType="DOUBLE" property="sumPrice" />
     <result column="trans_company" jdbcType="VARCHAR" property="transCompany" />
-    <result column="trans_unit_price" jdbcType="REAL" property="transUnitPrice" />
-    <result column="trans_sum_price" jdbcType="REAL" property="transSumPrice" />
-    <result column="profit" jdbcType="REAL" property="profit" />
+    <result column="trans_unit_price" jdbcType="DOUBLE" property="transUnitPrice" />
+    <result column="trans_sum_price" jdbcType="DOUBLE" property="transSumPrice" />
+    <result column="profit" jdbcType="DOUBLE" property="profit" />
     <result column="weighing_number" jdbcType="VARCHAR" property="weighingNumber" />
     <result column="car_number" jdbcType="VARCHAR" property="carNumber" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -138,11 +138,11 @@
       car_number, remark, create_date, 
       delete_date, enable)
     values (#{id,jdbcType=INTEGER}, #{loadTime,jdbcType=DATE}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsModel,jdbcType=VARCHAR}, #{netWeight,jdbcType=REAL}, #{returnWeight,jdbcType=REAL}, 
-      #{lossWeight,jdbcType=REAL}, #{goodsFrom,jdbcType=VARCHAR}, #{sellerUnitPrice,jdbcType=REAL}, 
-      #{sellerSumPrice,jdbcType=REAL}, #{buyerCompany,jdbcType=VARCHAR}, #{unitPrice,jdbcType=REAL}, 
-      #{sumPrice,jdbcType=REAL}, #{transCompany,jdbcType=VARCHAR}, #{transUnitPrice,jdbcType=REAL}, 
-      #{transSumPrice,jdbcType=REAL}, #{profit,jdbcType=REAL}, #{weighingNumber,jdbcType=VARCHAR}, 
+      #{goodsModel,jdbcType=VARCHAR}, #{netWeight,jdbcType=DOUBLE}, #{returnWeight,jdbcType=DOUBLE}, 
+      #{lossWeight,jdbcType=DOUBLE}, #{goodsFrom,jdbcType=VARCHAR}, #{sellerUnitPrice,jdbcType=DOUBLE}, 
+      #{sellerSumPrice,jdbcType=DOUBLE}, #{buyerCompany,jdbcType=VARCHAR}, #{unitPrice,jdbcType=DOUBLE}, 
+      #{sumPrice,jdbcType=DOUBLE}, #{transCompany,jdbcType=VARCHAR}, #{transUnitPrice,jdbcType=DOUBLE}, 
+      #{transSumPrice,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{weighingNumber,jdbcType=VARCHAR}, 
       #{carNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
   </insert>
@@ -233,43 +233,43 @@
         #{goodsModel,jdbcType=VARCHAR},
       </if>
       <if test="netWeight != null">
-        #{netWeight,jdbcType=REAL},
+        #{netWeight,jdbcType=DOUBLE},
       </if>
       <if test="returnWeight != null">
-        #{returnWeight,jdbcType=REAL},
+        #{returnWeight,jdbcType=DOUBLE},
       </if>
       <if test="lossWeight != null">
-        #{lossWeight,jdbcType=REAL},
+        #{lossWeight,jdbcType=DOUBLE},
       </if>
       <if test="goodsFrom != null">
         #{goodsFrom,jdbcType=VARCHAR},
       </if>
       <if test="sellerUnitPrice != null">
-        #{sellerUnitPrice,jdbcType=REAL},
+        #{sellerUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="sellerSumPrice != null">
-        #{sellerSumPrice,jdbcType=REAL},
+        #{sellerSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="buyerCompany != null">
         #{buyerCompany,jdbcType=VARCHAR},
       </if>
       <if test="unitPrice != null">
-        #{unitPrice,jdbcType=REAL},
+        #{unitPrice,jdbcType=DOUBLE},
       </if>
       <if test="sumPrice != null">
-        #{sumPrice,jdbcType=REAL},
+        #{sumPrice,jdbcType=DOUBLE},
       </if>
       <if test="transCompany != null">
         #{transCompany,jdbcType=VARCHAR},
       </if>
       <if test="transUnitPrice != null">
-        #{transUnitPrice,jdbcType=REAL},
+        #{transUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="transSumPrice != null">
-        #{transSumPrice,jdbcType=REAL},
+        #{transSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="profit != null">
-        #{profit,jdbcType=REAL},
+        #{profit,jdbcType=DOUBLE},
       </if>
       <if test="weighingNumber != null">
         #{weighingNumber,jdbcType=VARCHAR},
@@ -313,43 +313,43 @@
         goods_model = #{record.goodsModel,jdbcType=VARCHAR},
       </if>
       <if test="record.netWeight != null">
-        net_weight = #{record.netWeight,jdbcType=REAL},
+        net_weight = #{record.netWeight,jdbcType=DOUBLE},
       </if>
       <if test="record.returnWeight != null">
-        return_weight = #{record.returnWeight,jdbcType=REAL},
+        return_weight = #{record.returnWeight,jdbcType=DOUBLE},
       </if>
       <if test="record.lossWeight != null">
-        loss_weight = #{record.lossWeight,jdbcType=REAL},
+        loss_weight = #{record.lossWeight,jdbcType=DOUBLE},
       </if>
       <if test="record.goodsFrom != null">
         goods_from = #{record.goodsFrom,jdbcType=VARCHAR},
       </if>
       <if test="record.sellerUnitPrice != null">
-        seller_unit_price = #{record.sellerUnitPrice,jdbcType=REAL},
+        seller_unit_price = #{record.sellerUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.sellerSumPrice != null">
-        seller_sum_price = #{record.sellerSumPrice,jdbcType=REAL},
+        seller_sum_price = #{record.sellerSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.buyerCompany != null">
         buyer_company = #{record.buyerCompany,jdbcType=VARCHAR},
       </if>
       <if test="record.unitPrice != null">
-        unit_price = #{record.unitPrice,jdbcType=REAL},
+        unit_price = #{record.unitPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.sumPrice != null">
-        sum_price = #{record.sumPrice,jdbcType=REAL},
+        sum_price = #{record.sumPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.transCompany != null">
         trans_company = #{record.transCompany,jdbcType=VARCHAR},
       </if>
       <if test="record.transUnitPrice != null">
-        trans_unit_price = #{record.transUnitPrice,jdbcType=REAL},
+        trans_unit_price = #{record.transUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.transSumPrice != null">
-        trans_sum_price = #{record.transSumPrice,jdbcType=REAL},
+        trans_sum_price = #{record.transSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="record.profit != null">
-        profit = #{record.profit,jdbcType=REAL},
+        profit = #{record.profit,jdbcType=DOUBLE},
       </if>
       <if test="record.weighingNumber != null">
         weighing_number = #{record.weighingNumber,jdbcType=VARCHAR},
@@ -380,19 +380,19 @@
       load_time = #{record.loadTime,jdbcType=DATE},
       goods_name = #{record.goodsName,jdbcType=VARCHAR},
       goods_model = #{record.goodsModel,jdbcType=VARCHAR},
-      net_weight = #{record.netWeight,jdbcType=REAL},
-      return_weight = #{record.returnWeight,jdbcType=REAL},
-      loss_weight = #{record.lossWeight,jdbcType=REAL},
+      net_weight = #{record.netWeight,jdbcType=DOUBLE},
+      return_weight = #{record.returnWeight,jdbcType=DOUBLE},
+      loss_weight = #{record.lossWeight,jdbcType=DOUBLE},
       goods_from = #{record.goodsFrom,jdbcType=VARCHAR},
-      seller_unit_price = #{record.sellerUnitPrice,jdbcType=REAL},
-      seller_sum_price = #{record.sellerSumPrice,jdbcType=REAL},
+      seller_unit_price = #{record.sellerUnitPrice,jdbcType=DOUBLE},
+      seller_sum_price = #{record.sellerSumPrice,jdbcType=DOUBLE},
       buyer_company = #{record.buyerCompany,jdbcType=VARCHAR},
-      unit_price = #{record.unitPrice,jdbcType=REAL},
-      sum_price = #{record.sumPrice,jdbcType=REAL},
+      unit_price = #{record.unitPrice,jdbcType=DOUBLE},
+      sum_price = #{record.sumPrice,jdbcType=DOUBLE},
       trans_company = #{record.transCompany,jdbcType=VARCHAR},
-      trans_unit_price = #{record.transUnitPrice,jdbcType=REAL},
-      trans_sum_price = #{record.transSumPrice,jdbcType=REAL},
-      profit = #{record.profit,jdbcType=REAL},
+      trans_unit_price = #{record.transUnitPrice,jdbcType=DOUBLE},
+      trans_sum_price = #{record.transSumPrice,jdbcType=DOUBLE},
+      profit = #{record.profit,jdbcType=DOUBLE},
       weighing_number = #{record.weighingNumber,jdbcType=VARCHAR},
       car_number = #{record.carNumber,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
@@ -416,43 +416,43 @@
         goods_model = #{goodsModel,jdbcType=VARCHAR},
       </if>
       <if test="netWeight != null">
-        net_weight = #{netWeight,jdbcType=REAL},
+        net_weight = #{netWeight,jdbcType=DOUBLE},
       </if>
       <if test="returnWeight != null">
-        return_weight = #{returnWeight,jdbcType=REAL},
+        return_weight = #{returnWeight,jdbcType=DOUBLE},
       </if>
       <if test="lossWeight != null">
-        loss_weight = #{lossWeight,jdbcType=REAL},
+        loss_weight = #{lossWeight,jdbcType=DOUBLE},
       </if>
       <if test="goodsFrom != null">
         goods_from = #{goodsFrom,jdbcType=VARCHAR},
       </if>
       <if test="sellerUnitPrice != null">
-        seller_unit_price = #{sellerUnitPrice,jdbcType=REAL},
+        seller_unit_price = #{sellerUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="sellerSumPrice != null">
-        seller_sum_price = #{sellerSumPrice,jdbcType=REAL},
+        seller_sum_price = #{sellerSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="buyerCompany != null">
         buyer_company = #{buyerCompany,jdbcType=VARCHAR},
       </if>
       <if test="unitPrice != null">
-        unit_price = #{unitPrice,jdbcType=REAL},
+        unit_price = #{unitPrice,jdbcType=DOUBLE},
       </if>
       <if test="sumPrice != null">
-        sum_price = #{sumPrice,jdbcType=REAL},
+        sum_price = #{sumPrice,jdbcType=DOUBLE},
       </if>
       <if test="transCompany != null">
         trans_company = #{transCompany,jdbcType=VARCHAR},
       </if>
       <if test="transUnitPrice != null">
-        trans_unit_price = #{transUnitPrice,jdbcType=REAL},
+        trans_unit_price = #{transUnitPrice,jdbcType=DOUBLE},
       </if>
       <if test="transSumPrice != null">
-        trans_sum_price = #{transSumPrice,jdbcType=REAL},
+        trans_sum_price = #{transSumPrice,jdbcType=DOUBLE},
       </if>
       <if test="profit != null">
-        profit = #{profit,jdbcType=REAL},
+        profit = #{profit,jdbcType=DOUBLE},
       </if>
       <if test="weighingNumber != null">
         weighing_number = #{weighingNumber,jdbcType=VARCHAR},
@@ -480,19 +480,19 @@
     set load_time = #{loadTime,jdbcType=DATE},
       goods_name = #{goodsName,jdbcType=VARCHAR},
       goods_model = #{goodsModel,jdbcType=VARCHAR},
-      net_weight = #{netWeight,jdbcType=REAL},
-      return_weight = #{returnWeight,jdbcType=REAL},
-      loss_weight = #{lossWeight,jdbcType=REAL},
+      net_weight = #{netWeight,jdbcType=DOUBLE},
+      return_weight = #{returnWeight,jdbcType=DOUBLE},
+      loss_weight = #{lossWeight,jdbcType=DOUBLE},
       goods_from = #{goodsFrom,jdbcType=VARCHAR},
-      seller_unit_price = #{sellerUnitPrice,jdbcType=REAL},
-      seller_sum_price = #{sellerSumPrice,jdbcType=REAL},
+      seller_unit_price = #{sellerUnitPrice,jdbcType=DOUBLE},
+      seller_sum_price = #{sellerSumPrice,jdbcType=DOUBLE},
       buyer_company = #{buyerCompany,jdbcType=VARCHAR},
-      unit_price = #{unitPrice,jdbcType=REAL},
-      sum_price = #{sumPrice,jdbcType=REAL},
+      unit_price = #{unitPrice,jdbcType=DOUBLE},
+      sum_price = #{sumPrice,jdbcType=DOUBLE},
       trans_company = #{transCompany,jdbcType=VARCHAR},
-      trans_unit_price = #{transUnitPrice,jdbcType=REAL},
-      trans_sum_price = #{transSumPrice,jdbcType=REAL},
-      profit = #{profit,jdbcType=REAL},
+      trans_unit_price = #{transUnitPrice,jdbcType=DOUBLE},
+      trans_sum_price = #{transSumPrice,jdbcType=DOUBLE},
+      profit = #{profit,jdbcType=DOUBLE},
       weighing_number = #{weighingNumber,jdbcType=VARCHAR},
       car_number = #{carNumber,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
@@ -515,13 +515,14 @@
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.loadTime,jdbcType=DATE}, #{item.goodsName,jdbcType=VARCHAR}, 
-        #{item.goodsModel,jdbcType=VARCHAR}, #{item.netWeight,jdbcType=REAL}, #{item.returnWeight,jdbcType=REAL}, 
-        #{item.lossWeight,jdbcType=REAL}, #{item.goodsFrom,jdbcType=VARCHAR}, #{item.sellerUnitPrice,jdbcType=REAL}, 
-        #{item.sellerSumPrice,jdbcType=REAL}, #{item.buyerCompany,jdbcType=VARCHAR}, #{item.unitPrice,jdbcType=REAL}, 
-        #{item.sumPrice,jdbcType=REAL}, #{item.transCompany,jdbcType=VARCHAR}, #{item.transUnitPrice,jdbcType=REAL}, 
-        #{item.transSumPrice,jdbcType=REAL}, #{item.profit,jdbcType=REAL}, #{item.weighingNumber,jdbcType=VARCHAR}, 
-        #{item.carNumber,jdbcType=VARCHAR}, #{item.remark,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, 
-        #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT})
+        #{item.goodsModel,jdbcType=VARCHAR}, #{item.netWeight,jdbcType=DOUBLE}, #{item.returnWeight,jdbcType=DOUBLE}, 
+        #{item.lossWeight,jdbcType=DOUBLE}, #{item.goodsFrom,jdbcType=VARCHAR}, #{item.sellerUnitPrice,jdbcType=DOUBLE}, 
+        #{item.sellerSumPrice,jdbcType=DOUBLE}, #{item.buyerCompany,jdbcType=VARCHAR}, 
+        #{item.unitPrice,jdbcType=DOUBLE}, #{item.sumPrice,jdbcType=DOUBLE}, #{item.transCompany,jdbcType=VARCHAR}, 
+        #{item.transUnitPrice,jdbcType=DOUBLE}, #{item.transSumPrice,jdbcType=DOUBLE}, 
+        #{item.profit,jdbcType=DOUBLE}, #{item.weighingNumber,jdbcType=VARCHAR}, #{item.carNumber,jdbcType=VARCHAR}, 
+        #{item.remark,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, 
+        #{item.enable,jdbcType=BIT})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -552,43 +553,43 @@
           #{item.goodsModel,jdbcType=VARCHAR}
         </if>
         <if test="'net_weight' == column.value">
-          #{item.netWeight,jdbcType=REAL}
+          #{item.netWeight,jdbcType=DOUBLE}
         </if>
         <if test="'return_weight' == column.value">
-          #{item.returnWeight,jdbcType=REAL}
+          #{item.returnWeight,jdbcType=DOUBLE}
         </if>
         <if test="'loss_weight' == column.value">
-          #{item.lossWeight,jdbcType=REAL}
+          #{item.lossWeight,jdbcType=DOUBLE}
         </if>
         <if test="'goods_from' == column.value">
           #{item.goodsFrom,jdbcType=VARCHAR}
         </if>
         <if test="'seller_unit_price' == column.value">
-          #{item.sellerUnitPrice,jdbcType=REAL}
+          #{item.sellerUnitPrice,jdbcType=DOUBLE}
         </if>
         <if test="'seller_sum_price' == column.value">
-          #{item.sellerSumPrice,jdbcType=REAL}
+          #{item.sellerSumPrice,jdbcType=DOUBLE}
         </if>
         <if test="'buyer_company' == column.value">
           #{item.buyerCompany,jdbcType=VARCHAR}
         </if>
         <if test="'unit_price' == column.value">
-          #{item.unitPrice,jdbcType=REAL}
+          #{item.unitPrice,jdbcType=DOUBLE}
         </if>
         <if test="'sum_price' == column.value">
-          #{item.sumPrice,jdbcType=REAL}
+          #{item.sumPrice,jdbcType=DOUBLE}
         </if>
         <if test="'trans_company' == column.value">
           #{item.transCompany,jdbcType=VARCHAR}
         </if>
         <if test="'trans_unit_price' == column.value">
-          #{item.transUnitPrice,jdbcType=REAL}
+          #{item.transUnitPrice,jdbcType=DOUBLE}
         </if>
         <if test="'trans_sum_price' == column.value">
-          #{item.transSumPrice,jdbcType=REAL}
+          #{item.transSumPrice,jdbcType=DOUBLE}
         </if>
         <if test="'profit' == column.value">
-          #{item.profit,jdbcType=REAL}
+          #{item.profit,jdbcType=DOUBLE}
         </if>
         <if test="'weighing_number' == column.value">
           #{item.weighingNumber,jdbcType=VARCHAR}

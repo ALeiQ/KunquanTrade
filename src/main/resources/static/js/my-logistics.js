@@ -105,7 +105,16 @@ $(function () {
     $("#btn_submit").click(function () {
         form.bootstrapValidator('validate');
         if (form.data('bootstrapValidator').isValid()) {
-            clearModal();
+            var form_data = form.serializeObject();
+            $.ajax({
+                type: "post",
+                dataType: 'json',
+                url: '/logistics/addTypeaheadData',
+                data: {params: JSON.stringify(form_data)},
+                success: function (result) {
+                    clearModal();
+                }
+            });
         }
         return false;
     });
@@ -137,8 +146,10 @@ $(function () {
         $.ajax(
             {
                 url: "action/user_action.php",
-                data:{"form_data":form_data,"act":act},
                 type: "post",
+                contentType: "application/json",
+                dataType: 'json',
+                data:{"form_data":form_data},
                 beforeSend:function()
                 {
                     $("#tip").html("<span style='color:blue'>正在处理...</span>");
@@ -371,7 +382,6 @@ $(function () {
             $.get('/logistics/getTypeaheadData', {getType: 'goodsName', query: query}, function (result) {
                 return process(result.data);
             });
-            console.log("????")
         },
         afterSelect: function () {
             form.data('bootstrapValidator')
@@ -459,8 +469,8 @@ $(document).ready(function() {
                 message: '厂家结算单价不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -468,8 +478,8 @@ $(document).ready(function() {
                 message: '厂家结算金额不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -486,8 +496,8 @@ $(document).ready(function() {
                 message: '结算单价不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -495,8 +505,8 @@ $(document).ready(function() {
                 message: '结算金额不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -513,8 +523,8 @@ $(document).ready(function() {
                 message: '运费单价不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -522,8 +532,8 @@ $(document).ready(function() {
                 message: '运费金额不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -531,8 +541,8 @@ $(document).ready(function() {
                 message: '利润不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -543,8 +553,8 @@ $(document).ready(function() {
                         message: '净重不能为空'
                     },
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -552,8 +562,8 @@ $(document).ready(function() {
                 message: '回执数不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -561,8 +571,8 @@ $(document).ready(function() {
                 message: '亏吨不合法',
                 validators: {
                     regexp: {
-                        regexp: '^([1-9][0-9]*)+([.][0-9]*)?$',
-                        message: '请输入整数或者小数'
+                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                        message: '请输入非零开头的整数或者小数'
                     }
                 }
             },
@@ -613,7 +623,9 @@ $(document).ready(function() {
                         message: '输入超过上限'
                     }
                 }
-            },
+            }
+            /**
+            ,
             loginname: {
                 message: '用户名不合法',
                 validators: {
@@ -663,12 +675,14 @@ $(document).ready(function() {
                     }
                 }
             }
+             **/
         }
     });
 });
 
 // 工具方法
 $(function () {
+    // 将value保留两位小数（截尾）并补全小数点后两个零
     returnFloat = function (value){
         var value=parseInt(parseFloat(value)*100)/100;
         var xsd=value.toString().split(".");

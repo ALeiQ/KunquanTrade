@@ -8,11 +8,11 @@ public class CheckDetails implements Serializable {
 
     private Integer number;
 
-    private Float unitPrice;
+    private Double unitPrice;
 
-    private Float sumPricet;
+    private Double sumPricet;
 
-    private Float tax;
+    private Double tax;
 
     private Integer checkId;
 
@@ -40,27 +40,27 @@ public class CheckDetails implements Serializable {
         this.number = number;
     }
 
-    public Float getUnitPrice() {
+    public Double getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(Float unitPrice) {
+    public void setUnitPrice(Double unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public Float getSumPricet() {
+    public Double getSumPricet() {
         return sumPricet;
     }
 
-    public void setSumPricet(Float sumPricet) {
+    public void setSumPricet(Double sumPricet) {
         this.sumPricet = sumPricet;
     }
 
-    public Float getTax() {
+    public Double getTax() {
         return tax;
     }
 
-    public void setTax(Float tax) {
+    public void setTax(Double tax) {
         this.tax = tax;
     }
 

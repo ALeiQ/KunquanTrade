@@ -14,6 +14,7 @@ import com.sdut.trade.dao.TermsRecordDao;
 import com.sdut.trade.entity.BankInfo;
 import com.sdut.trade.entity.TermsRecord;
 import com.sdut.trade.enums.impl.EnableEnum;
+import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordOperateEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
@@ -142,9 +143,7 @@ public class BankInfoServiceImp implements BankInfoService {
         int delNum = bankInfoDao.delBankInfoById(id, deleteDate);
 
         if (delNum != 1) {
-            responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("数据删除失败");
-
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
             log.error("delBankInfoBatch del false!");
         }
 

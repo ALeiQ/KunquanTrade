@@ -12,6 +12,7 @@ import com.sdut.trade.bean.CompanyInfoVO;
 import com.sdut.trade.dao.CompanyInfoDao;
 import com.sdut.trade.entity.CompanyInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
+import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
@@ -137,9 +138,7 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
         int delNum = companyInfoDao.delCompanyInfoById(id, deleteDate);
 
         if (delNum != 1) {
-            responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("数据删除失败");
-
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
             log.error("delCompanyInfoBatch del false!");
         }
 

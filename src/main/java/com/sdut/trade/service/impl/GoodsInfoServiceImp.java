@@ -14,6 +14,7 @@ import com.sdut.trade.bean.GoodsInfoVO;
 import com.sdut.trade.dao.GoodsInfoDao;
 import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
+import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
@@ -144,9 +145,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
         int delNum = goodsInfoDao.delGoodsInfoById(id, deleteDate);
 
         if (delNum != 1) {
-            responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("数据删除失败");
-
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
             log.error("delGoodsInfoBatch del false!");
         }
 

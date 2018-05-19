@@ -337,52 +337,52 @@ public class CheckDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceEqualTo(Float value) {
+        public Criteria andUnitPriceEqualTo(Double value) {
             addCriterion("unit_price =", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotEqualTo(Float value) {
+        public Criteria andUnitPriceNotEqualTo(Double value) {
             addCriterion("unit_price <>", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThan(Float value) {
+        public Criteria andUnitPriceGreaterThan(Double value) {
             addCriterion("unit_price >", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceGreaterThanOrEqualTo(Float value) {
+        public Criteria andUnitPriceGreaterThanOrEqualTo(Double value) {
             addCriterion("unit_price >=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThan(Float value) {
+        public Criteria andUnitPriceLessThan(Double value) {
             addCriterion("unit_price <", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceLessThanOrEqualTo(Float value) {
+        public Criteria andUnitPriceLessThanOrEqualTo(Double value) {
             addCriterion("unit_price <=", value, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceIn(List<Float> values) {
+        public Criteria andUnitPriceIn(List<Double> values) {
             addCriterion("unit_price in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotIn(List<Float> values) {
+        public Criteria andUnitPriceNotIn(List<Double> values) {
             addCriterion("unit_price not in", values, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceBetween(Float value1, Float value2) {
+        public Criteria andUnitPriceBetween(Double value1, Double value2) {
             addCriterion("unit_price between", value1, value2, "unitPrice");
             return (Criteria) this;
         }
 
-        public Criteria andUnitPriceNotBetween(Float value1, Float value2) {
+        public Criteria andUnitPriceNotBetween(Double value1, Double value2) {
             addCriterion("unit_price not between", value1, value2, "unitPrice");
             return (Criteria) this;
         }
@@ -397,52 +397,52 @@ public class CheckDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetEqualTo(Float value) {
+        public Criteria andSumPricetEqualTo(Double value) {
             addCriterion("sum_pricet =", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotEqualTo(Float value) {
+        public Criteria andSumPricetNotEqualTo(Double value) {
             addCriterion("sum_pricet <>", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetGreaterThan(Float value) {
+        public Criteria andSumPricetGreaterThan(Double value) {
             addCriterion("sum_pricet >", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetGreaterThanOrEqualTo(Float value) {
+        public Criteria andSumPricetGreaterThanOrEqualTo(Double value) {
             addCriterion("sum_pricet >=", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetLessThan(Float value) {
+        public Criteria andSumPricetLessThan(Double value) {
             addCriterion("sum_pricet <", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetLessThanOrEqualTo(Float value) {
+        public Criteria andSumPricetLessThanOrEqualTo(Double value) {
             addCriterion("sum_pricet <=", value, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetIn(List<Float> values) {
+        public Criteria andSumPricetIn(List<Double> values) {
             addCriterion("sum_pricet in", values, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotIn(List<Float> values) {
+        public Criteria andSumPricetNotIn(List<Double> values) {
             addCriterion("sum_pricet not in", values, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetBetween(Float value1, Float value2) {
+        public Criteria andSumPricetBetween(Double value1, Double value2) {
             addCriterion("sum_pricet between", value1, value2, "sumPricet");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotBetween(Float value1, Float value2) {
+        public Criteria andSumPricetNotBetween(Double value1, Double value2) {
             addCriterion("sum_pricet not between", value1, value2, "sumPricet");
             return (Criteria) this;
         }
@@ -457,52 +457,52 @@ public class CheckDetailsExample {
             return (Criteria) this;
         }
 
-        public Criteria andTaxEqualTo(Float value) {
+        public Criteria andTaxEqualTo(Double value) {
             addCriterion("tax =", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxNotEqualTo(Float value) {
+        public Criteria andTaxNotEqualTo(Double value) {
             addCriterion("tax <>", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxGreaterThan(Float value) {
+        public Criteria andTaxGreaterThan(Double value) {
             addCriterion("tax >", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxGreaterThanOrEqualTo(Float value) {
+        public Criteria andTaxGreaterThanOrEqualTo(Double value) {
             addCriterion("tax >=", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxLessThan(Float value) {
+        public Criteria andTaxLessThan(Double value) {
             addCriterion("tax <", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxLessThanOrEqualTo(Float value) {
+        public Criteria andTaxLessThanOrEqualTo(Double value) {
             addCriterion("tax <=", value, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxIn(List<Float> values) {
+        public Criteria andTaxIn(List<Double> values) {
             addCriterion("tax in", values, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxNotIn(List<Float> values) {
+        public Criteria andTaxNotIn(List<Double> values) {
             addCriterion("tax not in", values, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxBetween(Float value1, Float value2) {
+        public Criteria andTaxBetween(Double value1, Double value2) {
             addCriterion("tax between", value1, value2, "tax");
             return (Criteria) this;
         }
 
-        public Criteria andTaxNotBetween(Float value1, Float value2) {
+        public Criteria andTaxNotBetween(Double value1, Double value2) {
             addCriterion("tax not between", value1, value2, "tax");
             return (Criteria) this;
         }

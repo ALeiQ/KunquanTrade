@@ -149,12 +149,11 @@ public class TermsRecordServiceImp implements TermsRecordService {
         termsRecord.setOperate(TermsRecordOperateEnum.DEL.isValue());
         termsRecord.setEnable(EnableEnum.ENABLE.isValue());
 
-        int addNum = termsRecordDao.addTerm(termsRecord);
+        // 逻辑删除
+        int delNum = termsRecordDao.addTerm(termsRecord);
 
-        if (addNum != 1) {
-            responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("增加数据删除记录失败");
-
+        if (delNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
             log.error("delRecord del false!");
         }
 

@@ -19,116 +19,115 @@ public class AddTransportRequest {
     /**
      * 装车时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @JSONField(name = "load_time")
+    @JSONField(name = "txt_load_time", format = "yyyy-MM-dd")
     private Date loadTime;
 
     /**
      * 物资名称
      */
-    @JSONField(name = "goods_name")
+    @JSONField(name = "txt_goods_name")
     private String goodsName;
 
     /**
      * 型号
      */
-    @JSONField(name = "goods_model")
+    @JSONField(name = "txt_goods_model")
     private String goodsModel;
 
     /**
      * 净重
      */
-    @JSONField(name = "net_weight")
+    @JSONField(name = "txt_net_weight")
     private Double netWeight;
 
     /**
      * 回执数
      */
-    @JSONField(name = "return_weight")
+    @JSONField(name = "txt_return_weight")
     private Double returnWeight;
 
     /**
      * 亏吨
      */
-    @JSONField(name = "loss_weight")
+    @JSONField(name = "txt_loss_weight")
     private Double lossWeight;
 
     /**
      * 物资来源
      */
-    @JSONField(name = "goods_from")
+    @JSONField(name = "txt_goods_from")
     private String goodsFrom;
 
     /**
      * 厂家结算单价
      */
-    @JSONField(name = "seller_unit_price")
+    @JSONField(name = "txt_seller_unit_price")
     private Double sellerUnitPrice;
 
     /**
      * 厂家结算金额
      */
-    @JSONField(name = "seller_sum_price")
+    @JSONField(name = "txt_seller_sum_price")
     private Double sellerSumPrice;
 
     /**
      * 结算单位
      */
-    @JSONField(name = "buyer_company")
+    @JSONField(name = "txt_buyer_company")
     private String buyerCompany;
 
     /**
      * 结算单价
      */
-    @JSONField(name = "unit_price")
+    @JSONField(name = "txt_unit_price")
     private Double unitPrice;
 
     /**
      * 结算金额
      */
-    @JSONField(name = "sum_price")
+    @JSONField(name = "txt_sum_price")
     private Double sumPrice;
 
     /**
      * 运输公司
      */
-    @JSONField(name = "trans_company")
+    @JSONField(name = "txt_trans_company")
     private String transCompany;
 
     /**
      * 运费单价
      */
-    @JSONField(name = "trans_unit_price")
+    @JSONField(name = "txt_trans_unit_price")
     private Double transUnitPrice;
 
     /**
      * 运费金额
      */
-    @JSONField(name = "trans_sum_price")
+    @JSONField(name = "txt_trans_sum_price")
     private Double transSumPrice;
 
     /**
      * 利润
      */
-    @JSONField(name = "profit")
+    @JSONField(name = "txt_profit")
     private Double profit;
 
     /**
      * 检斤号
      */
-    @JSONField(name = "weighing_number")
+    @JSONField(name = "txt_weighing_number")
     private String weighingNumber;
 
     /**
      * 车牌号
      */
-    @JSONField(name = "car_number")
+    @JSONField(name = "txt_car_number")
     private String carNumber;
 
     /**
      * 备注
      */
-    @JSONField(name = "remark")
+    @JSONField(name = "txt_remark")
     private String remark;
 
 }
