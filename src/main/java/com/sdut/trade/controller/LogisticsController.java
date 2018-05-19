@@ -92,50 +92,19 @@ public class LogisticsController {
                     result = goodsInfoService.getGoodsModelByKeyword(query, goodsName);
                     break;
                 default:
-                    log.error("addTerms 传参错误！ 没有这个类型");
+                    log.error("getTypeaheadData 传参错误！ 没有这个类型");
                     result.setResult(ExceptionEnum.PARAM_ERR);
                     break;
             }
 
         } catch (MyException ex) {
-            log.info("getTermsInfo Known error! [type={}]", getType, ex);
+            log.info("getTypeaheadData Known error! [type={}]", getType, ex);
         } catch (Exception ex) {
-            log.info("getTermsInfo UnKnown error! [type={}]", getType, ex);
+            log.info("getTypeaheadData UnKnown error! [type={}]", getType, ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
         log.info("getTypeaheadData end [type={}, query={}, goodsName={}]", getType, query, goodsName);
-
-        return result;
-    }
-
-    @ResponseBody
-    @RequestMapping(value = "/addLogisticsDetail", method = RequestMethod.POST)
-    public ResponseVO addLogisticsDetail(String params) {
-
-        ResponseVO result = new ResponseVO();
-
-        log.info("addTypeaheadData start [params={}]", params);
-
-        try {
-
-            if (StringUtils.isEmpty(params)) {
-                result.setResult(ExceptionEnum.PARAM_EMPTY);
-                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
-            }
-
-            AddLogisticsRequest addLogisticsRequest = JSON.parseObject(params, AddLogisticsRequest.class);
-
-            result = logisticsDetailService.addLogisticsDetail(addLogisticsRequest);
-
-        } catch (MyException ex) {
-            log.info("getTermsInfo Known error! ", ex);
-        } catch (Exception ex) {
-            log.info("getTermsInfo UnKnown error! ", ex);
-            result.setResult(ResultEnum.FAILURE);
-        }
-
-        log.info("addTypeaheadData end [params={}]", params);
 
         return result;
     }
@@ -161,4 +130,65 @@ public class LogisticsController {
 
     };
 
+    @ResponseBody
+    @RequestMapping(value = "/addLogisticsDetail", method = RequestMethod.POST)
+    public ResponseVO addLogisticsDetail(String params) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("addLogisticsDetail start [params={}]", params);
+
+        try {
+
+            if (StringUtils.isEmpty(params)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            AddLogisticsRequest addLogisticsRequest = JSON.parseObject(params, AddLogisticsRequest.class);
+
+            result = logisticsDetailService.addLogisticsDetail(addLogisticsRequest);
+
+        } catch (MyException ex) {
+            log.info("addLogisticsDetail Known error! ", ex);
+        } catch (Exception ex) {
+            log.info("addLogisticsDetail UnKnown error! ", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("addLogisticsDetail end [params={}]", params);
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/updateLogisticsDetail", method = RequestMethod.POST)
+    public ResponseVO updateLogisticsDetail(int id, String params) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("updateLogisticsDetail start [id = {}], [params = {}]", id, params);
+
+        try {
+
+            if (StringUtils.isEmpty(params)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            AddLogisticsRequest addLogisticsRequest = JSON.parseObject(params, AddLogisticsRequest.class);
+
+            result = logisticsDetailService.updateLogisticsDetail(id, addLogisticsRequest);
+
+        } catch (MyException ex) {
+            log.info("updateLogisticsDetail Known error! ", ex);
+        } catch (Exception ex) {
+            log.info("updateLogisticsDetail UnKnown error! ", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("updateLogisticsDetail end [id = {}], [params = {}]", id, params);
+
+        return result;
+    }
 }

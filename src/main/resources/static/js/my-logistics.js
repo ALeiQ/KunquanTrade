@@ -2,10 +2,14 @@
  * Copyright (C) 2018 Baidu, Inc. All Rights Reserved.
  */
 
+var myModal = $('#addLogisticsDetailModal');
+var form = $("#updateForm");
+var table = $('#transTable');
+
 // bootstrap表格属性设定
 $(function () {
 
-    $('#transTable').bootstrapTable({
+    table.bootstrapTable({
         url: '/logistics/getLogisticsDetails',
         method: 'get',
         dataType: 'json',
@@ -90,8 +94,34 @@ $(function () {
                 title: "操作",
                 formatter: delIcon
             }
-        ]
+        ],
+        onClickRow: editRow
     });
+
+    function editRow(row) {
+        clearModal();
+        myModal.find('.modal-title').text('编号：' + row['id']);
+        $('#txt_goods_from').val(row['goodsFrom']);
+        $('#txt_seller_unit_price').val(row['sellerUnitPrice']);
+        $('#txt_seller_sum_price').val(row['sellerSumPrice']);
+        $('#txt_buyer_company').val(row['buyerCompany']);
+        $('#txt_unit_price').val(row['unitPrice']);
+        $('#txt_sum_price').val(row['sumPrice']);
+        $('#txt_trans_company').val(row['transCompany']);
+        $('#txt_trans_unit_price').val(row['transUnitPrice']);
+        $('#txt_trans_sum_price').val(row['transSumPrice']);
+        $('#txt_load_time').val(row['loadTime']);
+        $('#txt_weighing_number').val(row['weighingNumber']);
+        $('#txt_car_number').val(row['carNumber']);
+        $('#txt_net_weight').val(row['netWeight']);
+        $('#txt_return_weight').val(row['returnWeight']);
+        $('#txt_loss_weight').val(row['lossWeight']);
+        $('#txt_goods_name').val(row['goodsName']);
+        $('#txt_goods_model').val(row['goodsModel']);
+        $('#txt_profit').val(row['profit']);
+        $('#txt_remark').val(row['remark']);
+        myModal.modal();
+    }
 
     function delIcon(value, row, index) {
         return '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
@@ -100,40 +130,81 @@ $(function () {
 
 });
 
-var myModal = $('#addLogisticsDetailModal');
-var form = $("#updateForm");
-
 // 表格功能设置
 $(function () {
 
     // “增加”按钮显示模态框
     addItem = function () {
+        var title = myModal.find('.modal-title');
+
+        if (title[0].innerHTML !== '新增') {
+            title.text('新增');
+            clearModal();
+        }
+
         myModal.modal();
     };
 
     // 表单提交按钮
     $("#btn_submit").click(function () {
+
         form.bootstrapValidator('validate');
+
         if (form.data('bootstrapValidator').isValid()) {
             var form_data = form.serializeObject();
-            $.ajax({
-                type: "post",
-                dataType: 'json',
-                url: '/logistics/addLogisticsDetail',
-                data: {params: JSON.stringify(form_data)},
-                async: false,
-                success: function (result) {
-                    if (result.resultCode !== 0) {
-                        alert(result.resultMsg);
-                    } else {
-                        showPopover($('#btn_submit').children('span'), "添加成功");
-                        clearModal();
-                    }
-                }
-            });
+
+            var title = $.trim(myModal.find('.modal-title')[0].textContent);
+
+
+            if (title === '新增') {
+                addLogisticsDetail(form_data);
+            } else {
+                var id = $.trim((title.split('：'))[1]);
+                updateLogisticsDetail(id, form_data);
+            }
         }
+
         return false;
     });
+
+    updateLogisticsDetail = function(id, form_data) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/logistics/updateLogisticsDetail',
+            data: {id: id, params: JSON.stringify(form_data)},
+            async: false,
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    showPopover($('#btn_submit').children('span'), "修改成功");
+                    myModal.modal('hide');
+                    resetValidator();
+                    table.bootstrapTable('refresh');
+                }
+            }
+        });
+    };
+
+    addLogisticsDetail = function(form_data) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/logistics/addLogisticsDetail',
+            data: {params: JSON.stringify(form_data)},
+            async: false,
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    showPopover($('#btn_submit').children('span'), "添加成功");
+                    clearModal();
+                    table.bootstrapTable('refresh');
+                }
+            }
+        });
+    };
 
     // 表单清空按钮
     $('#btn_clear_modal').click(function () {
@@ -143,7 +214,13 @@ $(function () {
     // 清空Modal數據
     clearModal = function() {
         $("input").val('');
-        form.data("bootstrapValidator").resetForm();
+        resetValidator();
+    };
+
+    resetValidator = function () {
+        form.data('bootstrapValidator').destroy();
+        form.data('bootstrapValidator', null);
+        formValidator();
     };
 
 });
@@ -386,207 +463,208 @@ $(function () {
 
 // 校验配置
 $(document).ready(function() {
-    form.bootstrapValidator({
-        //excluded:[":hidden",":disabled",":not(visible)"], // 默认不验证隐藏域和不可用域
-        excluded:[":hidden"],
-        message: '输入值不合法',
-        submitButtons: 'button[type="submit"]',
-        feedbackIcons: {
-            valid: 'glyphicon glyphicon-ok',
-            invalid: 'glyphicon glyphicon-remove',
-            validating: 'glyphicon glyphicon-refresh'
-        },
-        fields: {
-            txt_load_time: {
-                message: '装车时间不合法',
-                validators: {
-                    callback: {
-                        callback: function (value, validator, $field) {
+    formValidator = function () {
+        form.bootstrapValidator({
+            //excluded:[":hidden",":disabled",":not(visible)"], // 默认不验证隐藏域和不可用域
+            excluded: [":hidden"],
+            message: '输入值不合法',
+            submitButtons: 'button[type="submit"]',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                txt_load_time: {
+                    message: '装车时间不合法',
+                    validators: {
+                        callback: {
+                            callback: function (value, validator, $field) {
 
-                            var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
+                                var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
 
-                            if (!dateFailure.test(value)) {
-                                return {
-                                    valid: false,
-                                    message: '装车时间不合法，日期不存在'
-                                };
+                                if (!dateFailure.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '装车时间不合法，日期不存在'
+                                    };
+                                }
+                                return true;
                             }
-                            return true;
+                        }
+                    }
+                },
+                txt_goods_from: {
+                    message: '物资来源不合法',
+                    validators: {
+                        stringLength: {
+                            max: 25,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_seller_unit_price: {
+                    message: '厂家结算单价不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_seller_sum_price: {
+                    message: '厂家结算金额不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_buyer_company: {
+                    message: '结算公司不合法',
+                    validators: {
+                        stringLength: {
+                            max: 25,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_unit_price: {
+                    message: '结算单价不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_sum_price: {
+                    message: '结算金额不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_trans_company: {
+                    message: '运输公司不合法',
+                    validators: {
+                        stringLength: {
+                            max: 25,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_trans_unit_price: {
+                    message: '运费单价不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_trans_sum_price: {
+                    message: '运费金额不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_profit: {
+                    message: '利润不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^[-]?(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_net_weight: {
+                    message: '净重不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '净重不能为空'
+                        },
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_return_weight: {
+                    message: '回执数不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_loss_weight: {
+                    message: '亏吨不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_goods_name: {
+                    message: '物资名称不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '物资名称不可为空'
+                        },
+                        stringLength: {
+                            max: 10,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_goods_model: {
+                    message: '物资型号不合法',
+                    validators: {
+                        stringLength: {
+                            max: 10,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_weighing_number: {
+                    message: '检斤号不合法',
+                    validators: {
+                        stringLength: {
+                            max: 25,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_car_number: {
+                    message: '车牌号不合法',
+                    validators: {
+                        stringLength: {
+                            max: 25,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_remark: {
+                    message: '备注不合法',
+                    validators: {
+                        stringLength: {
+                            max: 100,
+                            message: '输入超过上限'
                         }
                     }
                 }
-            },
-            txt_goods_from: {
-                message: '物资来源不合法',
-                validators: {
-                    stringLength: {
-                        max: 25,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_seller_unit_price: {
-                message: '厂家结算单价不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_seller_sum_price: {
-                message: '厂家结算金额不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_buyer_company: {
-                message: '结算公司不合法',
-                validators: {
-                    stringLength: {
-                        max: 25,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_unit_price: {
-                message: '结算单价不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_sum_price: {
-                message: '结算金额不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_trans_company: {
-                message: '运输公司不合法',
-                validators: {
-                    stringLength: {
-                        max: 25,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_trans_unit_price: {
-                message: '运费单价不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_trans_sum_price: {
-                message: '运费金额不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_profit: {
-                message: '利润不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^[-]?(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_net_weight: {
-                message: '净重不合法',
-                validators: {
-                    notEmpty: {
-                        message: '净重不能为空'
-                    },
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_return_weight: {
-                message: '回执数不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_loss_weight: {
-                message: '亏吨不合法',
-                validators: {
-                    regexp: {
-                        regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
-                        message: '请输入非零开头的整数或者小数'
-                    }
-                }
-            },
-            txt_goods_name: {
-                message: '物资名称不合法',
-                validators: {
-                    notEmpty: {
-                        message: '物资名称不可为空'
-                    },
-                    stringLength: {
-                        max: 10,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_goods_model: {
-                message: '物资型号不合法',
-                validators: {
-                    stringLength: {
-                        max: 10,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_weighing_number: {
-                message: '检斤号不合法',
-                validators: {
-                    stringLength: {
-                        max: 25,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_car_number: {
-                message: '车牌号不合法',
-                validators: {
-                    stringLength: {
-                        max: 25,
-                        message: '输入超过上限'
-                    }
-                }
-            },
-            txt_remark: {
-                message: '备注不合法',
-                validators: {
-                    stringLength: {
-                        max: 100,
-                        message: '输入超过上限'
-                    }
-                }
-            }
-            /**
-            ,
-            loginname: {
+                /**
+                 ,
+                 loginname: {
                 message: '用户名不合法',
                 validators: {
                     notEmpty: {
@@ -603,7 +681,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            email: {
+                 email: {
                 validators: {
                     notEmpty: {
                         message: 'email不能为空'
@@ -613,7 +691,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            phone: {
+                 phone: {
                 validators: {
                     notEmpty: {
                         message: '手机号不能为空'
@@ -624,7 +702,7 @@ $(document).ready(function() {
                     }
                 }
             },
-            address: {
+                 address: {
                 validators: {
                     notEmpty: {
                         message: '地址不能为空'
@@ -635,9 +713,12 @@ $(document).ready(function() {
                     }
                 }
             }
-             **/
-        }
-    });
+                 **/
+            }
+        });
+    };
+
+    formValidator();
 });
 
 // 工具方法

@@ -13,13 +13,14 @@ import lombok.Getter;
 public enum ExceptionEnum implements ResponseEnum {
 
     PARAM_ERR(20010, "字段有误"),
-    PARAM_EMPTY(20011, "字段不可为空"),
+    PARAM_EMPTY(20020, "字段不可为空"),
 
     JSON_PARSE_FAILURE(30010, "JSON串解析失败"),
 
     DB_SEARCH_FAILURE(40010, "数据库查询失败"),
-    DB_ADD_FAILURE(40011, "数据库增加数据失败"),
-    DB_DEL_FAILURE(40012, "数据库删除数据失败");
+    DB_ADD_FAILURE(40020, "数据库增加数据失败"),
+    DB_DEL_FAILURE(40030, "数据库删除数据失败"),
+    DB_UPDATE_FAILURE(40040, "数据库修改数据失败");
 
     @Getter
     private int value;

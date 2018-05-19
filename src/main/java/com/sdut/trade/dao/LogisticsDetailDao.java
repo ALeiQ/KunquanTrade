@@ -30,4 +30,12 @@ public interface LogisticsDetailDao {
      * @return
      */
     long getCount();
+
+    /**
+     * 更新id的运输明细
+     * @param id
+     * @param logisticsDetail
+     * @return
+     */
+    int updateLogisticsDetail(int id, LogisticsDetail logisticsDetail);
 }

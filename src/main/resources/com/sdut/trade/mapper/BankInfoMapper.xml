@@ -7,6 +7,7 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
     <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, create_date, delete_date, enable
+    id, name, create_date, delete_date, enable, update_date
   </sql>
   <select id="selectByExample" parameterType="com.sdut.trade.entity.BankInfoExample" resultMap="BaseResultMap">
     select
@@ -109,9 +110,11 @@
   </delete>
   <insert id="insert" parameterType="com.sdut.trade.entity.BankInfo">
     insert into bank_info (id, name, create_date, 
-      delete_date, enable)
+      delete_date, enable, update_date
+      )
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
+      #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}, #{updateDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sdut.trade.entity.BankInfo">
     insert into bank_info
@@ -131,6 +134,9 @@
       <if test="enable != null">
         enable,
       </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -147,6 +153,9 @@
       </if>
       <if test="enable != null">
         #{enable,jdbcType=BIT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -174,6 +183,9 @@
       <if test="record.enable != null">
         enable = #{record.enable,jdbcType=BIT},
       </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -185,7 +197,8 @@
       name = #{record.name,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
-      enable = #{record.enable,jdbcType=BIT}
+      enable = #{record.enable,jdbcType=BIT},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -205,6 +218,9 @@
       <if test="enable != null">
         enable = #{enable,jdbcType=BIT},
       </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -213,7 +229,8 @@
     set name = #{name,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       delete_date = #{deleteDate,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
+      enable = #{enable,jdbcType=BIT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <insert id="batchInsert" parameterType="map">
@@ -223,11 +240,12 @@
       @project https://github.com/itfsw/mybatis-generator-plugin
     -->
     insert into bank_info
-    (id, name, create_date, delete_date, enable)
+    (id, name, create_date, delete_date, enable, update_date)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, 
-        #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT})
+        #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT}, #{item.updateDate,jdbcType=TIMESTAMP}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -259,6 +277,9 @@
         </if>
         <if test="'enable' == column.value">
           #{item.enable,jdbcType=BIT}
+        </if>
+        <if test="'update_date' == column.value">
+          #{item.updateDate,jdbcType=TIMESTAMP}
         </if>
       </foreach>
       )

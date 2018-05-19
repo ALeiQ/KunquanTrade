@@ -80,111 +80,7 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
             log.error("addLogisticsRequest add logisticsDetail false!", logisticsDetail.toString());
         }
 
-        // 如果物资来源不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addLogisticsRequest.getGoodsFrom())) {
-
-            if (!companyInfoDao.hasCompanyName(addLogisticsRequest.getGoodsFrom())) {
-
-                CompanyInfo companyInfo = new CompanyInfo();
-
-                companyInfo.setName(addLogisticsRequest.getGoodsFrom());
-                companyInfo.setCreateDate(createDate);
-                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
-                    log.warn("addLogisticsRequest add GoodsFrom false!");
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addLogisticsRequest.getGoodsFrom());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addLogisticsRequest add GoodsFromRecord false!");
-                }
-            }
-        }
-
-        // 如果结算公司不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addLogisticsRequest.getBuyerCompany())) {
-
-            if (!companyInfoDao.hasCompanyName(addLogisticsRequest.getBuyerCompany())) {
-
-                CompanyInfo companyInfo = new CompanyInfo();
-
-                companyInfo.setName(addLogisticsRequest.getBuyerCompany());
-                companyInfo.setCreateDate(createDate);
-                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
-                    log.warn("addLogisticsRequest add BuyerCompany false!");
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addLogisticsRequest.getBuyerCompany());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addLogisticsRequest add BuyerCompanyRecord false!");
-                }
-            }
-        }
-
-        // 如果运输公司不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addLogisticsRequest.getTransCompany())) {
-
-            if (!logisticsCompanyInfoDao.hasLogisticsCompanyName(addLogisticsRequest.getTransCompany())) {
-
-                LogisticsCompanyInfo logisticsCompanyInfo = new LogisticsCompanyInfo();
-
-                logisticsCompanyInfo.setName(addLogisticsRequest.getTransCompany());
-                logisticsCompanyInfo.setCreateDate(createDate);
-                logisticsCompanyInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!logisticsCompanyInfoDao.addLogisticsCompanyInfo(logisticsCompanyInfo)) {
-                    log.warn("addLogisticsRequest add LogisticsCompany false!");
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addLogisticsRequest.getTransCompany());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addLogisticsRequest add LogisticsCompany false!");
-                }
-            }
-        }
-
-        // 如果货物信息不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addLogisticsRequest.getGoodsName())) {
-
-            if (!goodsInfoDao.hasGoods(addLogisticsRequest.getGoodsName(), addLogisticsRequest.getGoodsModel())) {
-
-                GoodsInfo goodsInfo = new GoodsInfo();
-
-                goodsInfo.setName(addLogisticsRequest.getGoodsName());
-                goodsInfo.setModel(addLogisticsRequest.getGoodsModel());
-                goodsInfo.setCreateDate(createDate);
-                goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!goodsInfoDao.addGoodsInfo(goodsInfo)) {
-                    log.warn("addLogisticsRequest add GoodsInfo false!");
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addLogisticsRequest.getGoodsName());
-                addTermsRequest.setModel(addLogisticsRequest.getGoodsModel());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addLogisticsRequest add GoodsInfo false!");
-                }
-            }
-        }
+        addMajorTerms(addLogisticsRequest, createDate);
 
         log.info("addLogisticsRequest add sucess!");
 
@@ -192,7 +88,7 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
     }
 
     /**
-     * 分页查询运输明细
+     * 查询运输明细
      *
      * @return
      */
@@ -219,6 +115,43 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
         }
 
         responseVO.setData(logisticsDetailVOS);
+
+        return responseVO;
+    }
+
+    /**
+     * 修改给定id的运输明细信息
+     *
+     * @param id
+     * @param addLogisticsRequest
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO updateLogisticsDetail(int id, AddLogisticsRequest addLogisticsRequest) {
+
+
+        ResponseVO responseVO = new ResponseVO();
+
+        log.info("updateLogisticsRequest add start!");
+
+        Date updateDate = new Date();
+
+        LogisticsDetail logisticsDetail = parseRequestToModel(addLogisticsRequest, null);
+
+        logisticsDetail.setId(id);
+        logisticsDetail.setUpdateDate(updateDate);
+
+        int addNum = logisticsDetailDao.updateLogisticsDetail(id, logisticsDetail);
+
+        if (addNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_UPDATE_FAILURE);
+            log.error("updateLogisticsRequest add logisticsDetail false!", logisticsDetail.toString());
+        }
+
+        addMajorTerms(addLogisticsRequest, updateDate);
+
+        log.info("updateLogisticsRequest add sucess!");
 
         return responseVO;
     }
@@ -302,6 +235,120 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
         logisticsDetailVO.setRemark(logisticsDetail.getRemark());
 
         return logisticsDetailVO;
+    }
+
+    /**
+     * 添加新名词
+     *
+     * @param addLogisticsRequest
+     */
+    private void addMajorTerms(AddLogisticsRequest addLogisticsRequest, Date createDate) {
+
+        // 如果物资来源不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addLogisticsRequest.getGoodsFrom())) {
+
+            if (!companyInfoDao.hasCompanyName(addLogisticsRequest.getGoodsFrom())) {
+
+                CompanyInfo companyInfo = new CompanyInfo();
+
+                companyInfo.setName(addLogisticsRequest.getGoodsFrom());
+                companyInfo.setCreateDate(createDate);
+                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
+                    log.warn("addMajorTerms add GoodsFrom false!");
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addLogisticsRequest.getGoodsFrom());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addMajorTerms add GoodsFromRecord false!");
+                }
+            }
+        }
+
+        // 如果结算公司不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addLogisticsRequest.getBuyerCompany())) {
+
+            if (!companyInfoDao.hasCompanyName(addLogisticsRequest.getBuyerCompany())) {
+
+                CompanyInfo companyInfo = new CompanyInfo();
+
+                companyInfo.setName(addLogisticsRequest.getBuyerCompany());
+                companyInfo.setCreateDate(createDate);
+                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
+                    log.warn("addMajorTerms add BuyerCompany false!");
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addLogisticsRequest.getBuyerCompany());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addMajorTerms add BuyerCompanyRecord false!");
+                }
+            }
+        }
+
+        // 如果运输公司不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addLogisticsRequest.getTransCompany())) {
+
+            if (!logisticsCompanyInfoDao.hasLogisticsCompanyName(addLogisticsRequest.getTransCompany())) {
+
+                LogisticsCompanyInfo logisticsCompanyInfo = new LogisticsCompanyInfo();
+
+                logisticsCompanyInfo.setName(addLogisticsRequest.getTransCompany());
+                logisticsCompanyInfo.setCreateDate(createDate);
+                logisticsCompanyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!logisticsCompanyInfoDao.addLogisticsCompanyInfo(logisticsCompanyInfo)) {
+                    log.warn("addMajorTerms add LogisticsCompany false!");
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addLogisticsRequest.getTransCompany());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addMajorTerms add LogisticsCompany false!");
+                }
+            }
+        }
+
+        // 如果货物信息不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addLogisticsRequest.getGoodsName())) {
+
+            if (!goodsInfoDao.hasGoods(addLogisticsRequest.getGoodsName(), addLogisticsRequest.getGoodsModel())) {
+
+                GoodsInfo goodsInfo = new GoodsInfo();
+
+                goodsInfo.setName(addLogisticsRequest.getGoodsName());
+                goodsInfo.setModel(addLogisticsRequest.getGoodsModel());
+                goodsInfo.setCreateDate(createDate);
+                goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!goodsInfoDao.addGoodsInfo(goodsInfo)) {
+                    log.warn("addMajorTerms add GoodsInfo false!");
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addLogisticsRequest.getGoodsName());
+                addTermsRequest.setModel(addLogisticsRequest.getGoodsModel());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addMajorTerms add GoodsInfo false!");
+                }
+            }
+        }
     }
 
 }

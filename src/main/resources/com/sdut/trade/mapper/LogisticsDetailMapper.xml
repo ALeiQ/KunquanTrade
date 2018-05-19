@@ -25,6 +25,7 @@
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
     <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -88,7 +89,7 @@
     id, load_time, goods_name, goods_model, net_weight, return_weight, loss_weight, goods_from, 
     seller_unit_price, seller_sum_price, buyer_company, unit_price, sum_price, trans_company, 
     trans_unit_price, trans_sum_price, profit, weighing_number, car_number, remark, create_date, 
-    delete_date, enable
+    delete_date, enable, update_date
   </sql>
   <select id="selectByExample" parameterType="com.sdut.trade.entity.LogisticsDetailExample" resultMap="BaseResultMap">
     select
@@ -136,7 +137,8 @@
       sum_price, trans_company, trans_unit_price, 
       trans_sum_price, profit, weighing_number, 
       car_number, remark, create_date, 
-      delete_date, enable)
+      delete_date, enable, update_date
+      )
     values (#{id,jdbcType=INTEGER}, #{loadTime,jdbcType=DATE}, #{goodsName,jdbcType=VARCHAR}, 
       #{goodsModel,jdbcType=VARCHAR}, #{netWeight,jdbcType=DOUBLE}, #{returnWeight,jdbcType=DOUBLE}, 
       #{lossWeight,jdbcType=DOUBLE}, #{goodsFrom,jdbcType=VARCHAR}, #{sellerUnitPrice,jdbcType=DOUBLE}, 
@@ -144,7 +146,8 @@
       #{sumPrice,jdbcType=DOUBLE}, #{transCompany,jdbcType=VARCHAR}, #{transUnitPrice,jdbcType=DOUBLE}, 
       #{transSumPrice,jdbcType=DOUBLE}, #{profit,jdbcType=DOUBLE}, #{weighingNumber,jdbcType=VARCHAR}, 
       #{carNumber,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
-      #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT})
+      #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}, #{updateDate,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.sdut.trade.entity.LogisticsDetail">
     insert into logistics_detail
@@ -218,6 +221,9 @@
       <if test="enable != null">
         enable,
       </if>
+      <if test="updateDate != null">
+        update_date,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -288,6 +294,9 @@
       </if>
       <if test="enable != null">
         #{enable,jdbcType=BIT},
+      </if>
+      <if test="updateDate != null">
+        #{updateDate,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -369,6 +378,9 @@
       <if test="record.enable != null">
         enable = #{record.enable,jdbcType=BIT},
       </if>
+      <if test="record.updateDate != null">
+        update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -398,7 +410,8 @@
       remark = #{record.remark,jdbcType=VARCHAR},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
-      enable = #{record.enable,jdbcType=BIT}
+      enable = #{record.enable,jdbcType=BIT},
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -472,6 +485,9 @@
       <if test="enable != null">
         enable = #{enable,jdbcType=BIT},
       </if>
+      <if test="updateDate != null">
+        update_date = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -498,7 +514,8 @@
       remark = #{remark,jdbcType=VARCHAR},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       delete_date = #{deleteDate,jdbcType=TIMESTAMP},
-      enable = #{enable,jdbcType=BIT}
+      enable = #{enable,jdbcType=BIT},
+      update_date = #{updateDate,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <insert id="batchInsert" parameterType="map">
@@ -511,7 +528,7 @@
     (id, load_time, goods_name, goods_model, net_weight, return_weight, loss_weight, 
       goods_from, seller_unit_price, seller_sum_price, buyer_company, unit_price, sum_price, 
       trans_company, trans_unit_price, trans_sum_price, profit, weighing_number, car_number, 
-      remark, create_date, delete_date, enable)
+      remark, create_date, delete_date, enable, update_date)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.loadTime,jdbcType=DATE}, #{item.goodsName,jdbcType=VARCHAR}, 
@@ -522,7 +539,7 @@
         #{item.transUnitPrice,jdbcType=DOUBLE}, #{item.transSumPrice,jdbcType=DOUBLE}, 
         #{item.profit,jdbcType=DOUBLE}, #{item.weighingNumber,jdbcType=VARCHAR}, #{item.carNumber,jdbcType=VARCHAR}, 
         #{item.remark,jdbcType=VARCHAR}, #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, 
-        #{item.enable,jdbcType=BIT})
+        #{item.enable,jdbcType=BIT}, #{item.updateDate,jdbcType=TIMESTAMP})
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -608,6 +625,9 @@
         </if>
         <if test="'enable' == column.value">
           #{item.enable,jdbcType=BIT}
+        </if>
+        <if test="'update_date' == column.value">
+          #{item.updateDate,jdbcType=TIMESTAMP}
         </if>
       </foreach>
       )

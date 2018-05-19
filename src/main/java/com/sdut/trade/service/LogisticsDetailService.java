@@ -24,4 +24,12 @@ public interface LogisticsDetailService {
      * @return
      */
     ResponseVO getAll();
+
+    /**
+     * 修改给定id的运输明细信息
+     * @param id
+     * @param addLogisticsRequest
+     * @return
+     */
+    ResponseVO updateLogisticsDetail(int id, AddLogisticsRequest addLogisticsRequest);
 }

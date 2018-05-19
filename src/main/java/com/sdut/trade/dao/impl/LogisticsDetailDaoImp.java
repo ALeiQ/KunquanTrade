@@ -75,4 +75,24 @@ public class LogisticsDetailDaoImp implements LogisticsDetailDao {
 
         return logisticsDetailMapper.countByExample(logisticsDetailExample);
     }
+
+    /**
+     * 更新id的运输明细
+     *
+     * @param id
+     * @param logisticsDetail
+     *
+     * @return
+     */
+    @Override
+    public int updateLogisticsDetail(int id, LogisticsDetail logisticsDetail) {
+
+        LogisticsDetailExample logisticsDetailExample = new LogisticsDetailExample();
+
+        logisticsDetailExample.createCriteria()
+                .andIdEqualTo(id)
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue());
+
+        return logisticsDetailMapper.updateByExampleSelective(logisticsDetail, logisticsDetailExample);
+    }
 }
