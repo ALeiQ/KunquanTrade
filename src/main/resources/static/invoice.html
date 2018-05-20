@@ -54,6 +54,21 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!--my style-->
     <link href="css/my-style.css" rel="stylesheet" type="text/css" media="all">
     <!--//end my style-->
+    <!-- bootstrap-table -->
+    <script src="js/bootstrap-table.js"></script>
+    <link href="css/bootstrap-table.css" rel="stylesheet">
+    <!-- //bootstrap-table -->
+    <!-- validator -->
+    <link href="css/bootstrapValidator.css" rel="stylesheet" type="text/css" media="all">
+    <script src="js/bootstrapValidator.js"></script>
+    <!-- //validator -->
+    <!-- datetimepicker -->
+    <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all">
+    <script src="js/bootstrap-datetimepicker.js"></script>
+    <!-- //datetimepicker -->
+    <!-- typeahead -->
+    <script src="js/bootstrap3-typeahead.js"></script>
+    <!-- //typeahead -->
 </head>
 <body class="cbp-spmenu-push cbp-spmenu-push-toleft">
 <div class="main-content">
@@ -68,24 +83,22 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <!-- main content start-->
     <div id="page-wrapper">
         <div class="main-page">
-            <!-- four-buttons -->
-            <div class="row">
-                <div class="index-large-button">
-                    <button onclick="window.location.href='login'" type="button"
-                            class="btn btn-large btn-info btn-block center-block">开票<br/>明细
+
+            <!-- 开票明细表 -->
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-widget">
+                    <button type="button" class="add-row-button btn btn-success dropdown-toggle"
+                            id = 'addInvoic' onclick="addItem()">
+                        <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
                     </button>
-                    <div class="clearfix"></div>
+                    <table class="table text-nowrap table-striped" id="invoiceTable">
+                    </table>
                 </div>
+
             </div>
-            <div class="row">
-                <div class="index-large-button">
-                    <button onclick="window.location.href='login'" type="button"
-                            class="btn btn-large btn-info btn-block center-block">开票<br/>明细
-                    </button>
-                    <div class="clearfix"></div>
-                </div>
-            </div>
-            <!-- //end four-buttons-->
+            <!-- //开票明细表 -->
+
+            <div class="clearfix"></div>
         </div>
     </div>
 
@@ -148,6 +161,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <!-- my JavaScript -->
 <script src="js/my-js.js"></script>
+<script src="js/my-invoice.js"></script>
 <!-- //my JavaScript -->
 </body>
 </html>

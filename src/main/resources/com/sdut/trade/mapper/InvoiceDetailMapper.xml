@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sdut.trade.mapper.CheckDetailMapper">
-  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.CheckDetail">
+<mapper namespace="com.sdut.trade.mapper.InvoiceDetailMapper">
+  <resultMap id="BaseResultMap" type="com.sdut.trade.entity.InvoiceDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="number" jdbcType="INTEGER" property="number" />
+    <result column="number" jdbcType="DOUBLE" property="number" />
     <result column="unit_price" jdbcType="DOUBLE" property="unitPrice" />
     <result column="sum_pricet" jdbcType="DOUBLE" property="sumPricet" />
     <result column="tax" jdbcType="DOUBLE" property="tax" />
-    <result column="check_id" jdbcType="INTEGER" property="checkId" />
+    <result column="invoice_id" jdbcType="INTEGER" property="invoiceId" />
     <result column="create_date" jdbcType="TIMESTAMP" property="createDate" />
     <result column="delete_date" jdbcType="TIMESTAMP" property="deleteDate" />
     <result column="enable" jdbcType="BIT" property="enable" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
+    <result column="goods_name" jdbcType="VARCHAR" property="goodsName" />
+    <result column="goods_model" jdbcType="VARCHAR" property="goodsModel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,16 +74,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, number, unit_price, sum_pricet, tax, check_id, create_date, delete_date, enable, 
-    update_date
+    id, number, unit_price, sum_pricet, tax, invoice_id, create_date, delete_date, enable, 
+    update_date, goods_name, goods_model
   </sql>
-  <select id="selectByExample" parameterType="com.sdut.trade.entity.CheckDetailExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.sdut.trade.entity.InvoiceDetailExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from check_detail
+    from invoice_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -100,31 +102,33 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from check_detail
+    from invoice_detail
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from check_detail
+    delete from invoice_detail
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.CheckDetailExample">
-    delete from check_detail
+  <delete id="deleteByExample" parameterType="com.sdut.trade.entity.InvoiceDetailExample">
+    delete from invoice_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.sdut.trade.entity.CheckDetail">
-    insert into check_detail (id, number, unit_price, 
-      sum_pricet, tax, check_id, 
+  <insert id="insert" parameterType="com.sdut.trade.entity.InvoiceDetail">
+    insert into invoice_detail (id, number, unit_price, 
+      sum_pricet, tax, invoice_id, 
       create_date, delete_date, enable, 
-      update_date)
-    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=INTEGER}, #{unitPrice,jdbcType=DOUBLE}, 
-      #{sumPricet,jdbcType=DOUBLE}, #{tax,jdbcType=DOUBLE}, #{checkId,jdbcType=INTEGER}, 
+      update_date, goods_name, goods_model
+      )
+    values (#{id,jdbcType=INTEGER}, #{number,jdbcType=DOUBLE}, #{unitPrice,jdbcType=DOUBLE}, 
+      #{sumPricet,jdbcType=DOUBLE}, #{tax,jdbcType=DOUBLE}, #{invoiceId,jdbcType=INTEGER}, 
       #{createDate,jdbcType=TIMESTAMP}, #{deleteDate,jdbcType=TIMESTAMP}, #{enable,jdbcType=BIT}, 
-      #{updateDate,jdbcType=TIMESTAMP})
+      #{updateDate,jdbcType=TIMESTAMP}, #{goodsName,jdbcType=VARCHAR}, #{goodsModel,jdbcType=VARCHAR}
+      )
   </insert>
-  <insert id="insertSelective" parameterType="com.sdut.trade.entity.CheckDetail">
-    insert into check_detail
+  <insert id="insertSelective" parameterType="com.sdut.trade.entity.InvoiceDetail">
+    insert into invoice_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -141,8 +145,8 @@
       <if test="tax != null">
         tax,
       </if>
-      <if test="checkId != null">
-        check_id,
+      <if test="invoiceId != null">
+        invoice_id,
       </if>
       <if test="createDate != null">
         create_date,
@@ -156,13 +160,19 @@
       <if test="updateDate != null">
         update_date,
       </if>
+      <if test="goodsName != null">
+        goods_name,
+      </if>
+      <if test="goodsModel != null">
+        goods_model,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
       </if>
       <if test="number != null">
-        #{number,jdbcType=INTEGER},
+        #{number,jdbcType=DOUBLE},
       </if>
       <if test="unitPrice != null">
         #{unitPrice,jdbcType=DOUBLE},
@@ -173,8 +183,8 @@
       <if test="tax != null">
         #{tax,jdbcType=DOUBLE},
       </if>
-      <if test="checkId != null">
-        #{checkId,jdbcType=INTEGER},
+      <if test="invoiceId != null">
+        #{invoiceId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
         #{createDate,jdbcType=TIMESTAMP},
@@ -188,22 +198,28 @@
       <if test="updateDate != null">
         #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="goodsName != null">
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsModel != null">
+        #{goodsModel,jdbcType=VARCHAR},
+      </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.sdut.trade.entity.CheckDetailExample" resultType="java.lang.Long">
-    select count(*) from check_detail
+  <select id="countByExample" parameterType="com.sdut.trade.entity.InvoiceDetailExample" resultType="java.lang.Long">
+    select count(*) from invoice_detail
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update check_detail
+    update invoice_detail
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
       <if test="record.number != null">
-        number = #{record.number,jdbcType=INTEGER},
+        number = #{record.number,jdbcType=DOUBLE},
       </if>
       <if test="record.unitPrice != null">
         unit_price = #{record.unitPrice,jdbcType=DOUBLE},
@@ -214,8 +230,8 @@
       <if test="record.tax != null">
         tax = #{record.tax,jdbcType=DOUBLE},
       </if>
-      <if test="record.checkId != null">
-        check_id = #{record.checkId,jdbcType=INTEGER},
+      <if test="record.invoiceId != null">
+        invoice_id = #{record.invoiceId,jdbcType=INTEGER},
       </if>
       <if test="record.createDate != null">
         create_date = #{record.createDate,jdbcType=TIMESTAMP},
@@ -229,32 +245,40 @@
       <if test="record.updateDate != null">
         update_date = #{record.updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.goodsName != null">
+        goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.goodsModel != null">
+        goods_model = #{record.goodsModel,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update check_detail
+    update invoice_detail
     set id = #{record.id,jdbcType=INTEGER},
-      number = #{record.number,jdbcType=INTEGER},
+      number = #{record.number,jdbcType=DOUBLE},
       unit_price = #{record.unitPrice,jdbcType=DOUBLE},
       sum_pricet = #{record.sumPricet,jdbcType=DOUBLE},
       tax = #{record.tax,jdbcType=DOUBLE},
-      check_id = #{record.checkId,jdbcType=INTEGER},
+      invoice_id = #{record.invoiceId,jdbcType=INTEGER},
       create_date = #{record.createDate,jdbcType=TIMESTAMP},
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       enable = #{record.enable,jdbcType=BIT},
-      update_date = #{record.updateDate,jdbcType=TIMESTAMP}
+      update_date = #{record.updateDate,jdbcType=TIMESTAMP},
+      goods_name = #{record.goodsName,jdbcType=VARCHAR},
+      goods_model = #{record.goodsModel,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.CheckDetail">
-    update check_detail
+  <update id="updateByPrimaryKeySelective" parameterType="com.sdut.trade.entity.InvoiceDetail">
+    update invoice_detail
     <set>
       <if test="number != null">
-        number = #{number,jdbcType=INTEGER},
+        number = #{number,jdbcType=DOUBLE},
       </if>
       <if test="unitPrice != null">
         unit_price = #{unitPrice,jdbcType=DOUBLE},
@@ -265,8 +289,8 @@
       <if test="tax != null">
         tax = #{tax,jdbcType=DOUBLE},
       </if>
-      <if test="checkId != null">
-        check_id = #{checkId,jdbcType=INTEGER},
+      <if test="invoiceId != null">
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
       </if>
       <if test="createDate != null">
         create_date = #{createDate,jdbcType=TIMESTAMP},
@@ -280,20 +304,28 @@
       <if test="updateDate != null">
         update_date = #{updateDate,jdbcType=TIMESTAMP},
       </if>
+      <if test="goodsName != null">
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsModel != null">
+        goods_model = #{goodsModel,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.CheckDetail">
-    update check_detail
-    set number = #{number,jdbcType=INTEGER},
+  <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.InvoiceDetail">
+    update invoice_detail
+    set number = #{number,jdbcType=DOUBLE},
       unit_price = #{unitPrice,jdbcType=DOUBLE},
       sum_pricet = #{sumPricet,jdbcType=DOUBLE},
       tax = #{tax,jdbcType=DOUBLE},
-      check_id = #{checkId,jdbcType=INTEGER},
+      invoice_id = #{invoiceId,jdbcType=INTEGER},
       create_date = #{createDate,jdbcType=TIMESTAMP},
       delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       enable = #{enable,jdbcType=BIT},
-      update_date = #{updateDate,jdbcType=TIMESTAMP}
+      update_date = #{updateDate,jdbcType=TIMESTAMP},
+      goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_model = #{goodsModel,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <insert id="batchInsert" parameterType="map">
@@ -302,15 +334,16 @@
       This element is automatically generated by MyBatis Generator, do not modify.
       @project https://github.com/itfsw/mybatis-generator-plugin
     -->
-    insert into check_detail
-    (id, number, unit_price, sum_pricet, tax, check_id, create_date, delete_date, enable, 
-      update_date)
+    insert into invoice_detail
+    (id, number, unit_price, sum_pricet, tax, invoice_id, create_date, delete_date, enable, 
+      update_date, goods_name, goods_model)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=INTEGER}, #{item.number,jdbcType=INTEGER}, #{item.unitPrice,jdbcType=DOUBLE}, 
-        #{item.sumPricet,jdbcType=DOUBLE}, #{item.tax,jdbcType=DOUBLE}, #{item.checkId,jdbcType=INTEGER}, 
+      (#{item.id,jdbcType=INTEGER}, #{item.number,jdbcType=DOUBLE}, #{item.unitPrice,jdbcType=DOUBLE}, 
+        #{item.sumPricet,jdbcType=DOUBLE}, #{item.tax,jdbcType=DOUBLE}, #{item.invoiceId,jdbcType=INTEGER}, 
         #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT}, 
-        #{item.updateDate,jdbcType=TIMESTAMP})
+        #{item.updateDate,jdbcType=TIMESTAMP}, #{item.goodsName,jdbcType=VARCHAR}, #{item.goodsModel,jdbcType=VARCHAR}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -319,7 +352,7 @@
       This element is automatically generated by MyBatis Generator, do not modify.
       @project https://github.com/itfsw/mybatis-generator-plugin
     -->
-    insert into check_detail (
+    insert into invoice_detail (
     <foreach collection="selective" item="column" separator=",">
       ${column.value}
     </foreach>
@@ -332,7 +365,7 @@
           #{item.id,jdbcType=INTEGER}
         </if>
         <if test="'number' == column.value">
-          #{item.number,jdbcType=INTEGER}
+          #{item.number,jdbcType=DOUBLE}
         </if>
         <if test="'unit_price' == column.value">
           #{item.unitPrice,jdbcType=DOUBLE}
@@ -343,8 +376,8 @@
         <if test="'tax' == column.value">
           #{item.tax,jdbcType=DOUBLE}
         </if>
-        <if test="'check_id' == column.value">
-          #{item.checkId,jdbcType=INTEGER}
+        <if test="'invoice_id' == column.value">
+          #{item.invoiceId,jdbcType=INTEGER}
         </if>
         <if test="'create_date' == column.value">
           #{item.createDate,jdbcType=TIMESTAMP}
@@ -357,6 +390,12 @@
         </if>
         <if test="'update_date' == column.value">
           #{item.updateDate,jdbcType=TIMESTAMP}
+        </if>
+        <if test="'goods_name' == column.value">
+          #{item.goodsName,jdbcType=VARCHAR}
+        </if>
+        <if test="'goods_model' == column.value">
+          #{item.goodsModel,jdbcType=VARCHAR}
         </if>
       </foreach>
       )

@@ -5,10 +5,20 @@ package com.sdut.trade.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.sdut.trade.enums.impl.ExceptionEnum;
+import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.exception.MyException;
+import com.sdut.trade.httpmodel.response.ResponseVO;
+import com.sdut.trade.service.InvoiceService;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 类描述：开票明细部分控制层
@@ -18,11 +28,79 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/invoice")
+@Slf4j
 public class InvoiceController {
+
+    @Autowired
+    InvoiceService invoiceService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String invoice(ModelMap modelMap, HttpServletRequest httpServletRequest) {
         return "/invoice";
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getAllByDirection", method = RequestMethod.GET)
+    public ResponseVO getAllByDirection(Integer direction) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("getByDirection start direction={}", direction);
+
+        try {
+
+            if (direction == null) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            // 0.全查询 1.开进 2.开出 3.中转
+            if (direction < 0 || direction > 3) {
+                result.setResult(ExceptionEnum.PARAM_ERR);
+                throw new MyException(ExceptionEnum.PARAM_ERR.getDesc());
+            }
+
+            result = invoiceService.getAllByDirection(direction);
+
+        } catch (MyException ex) {
+            log.error("getByDirection Known Error!", ex);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("getByDirection UnKnown Error!", ex);
+        }
+
+        log.info("getByDirection end direction={}", direction);
+
+        return result;
+    }
+
+    @ResponseBody
+    @RequestMapping(value = "/getInvoiceDetailsById", method = RequestMethod.GET)
+    public ResponseVO getInvoiceDetailsById(Integer queryId) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("getInvoiceDetailsById start queryId={}", queryId);
+
+        try {
+
+            if (queryId == null) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            result = invoiceService.getInvoiceDetailsById(queryId);
+
+        } catch (MyException ex) {
+            log.error("getInvoiceDetailsById Known Error!", ex);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("getInvoiceDetailsById UnKnown Error!", ex);
+        }
+
+        log.info("getInvoiceDetailsById end queryId={}", queryId);
+
+        return result;
     }
 
 }

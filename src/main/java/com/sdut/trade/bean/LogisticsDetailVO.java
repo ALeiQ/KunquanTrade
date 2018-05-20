@@ -16,6 +16,9 @@ import lombok.Data;
 @Data
 public class LogisticsDetailVO {
 
+    /**
+     * 编号
+     */
     private int id;
 
     /**
