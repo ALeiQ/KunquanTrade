@@ -30,7 +30,7 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "编号"
+                title: "#"
             },
             {
                 field: "loadTime",

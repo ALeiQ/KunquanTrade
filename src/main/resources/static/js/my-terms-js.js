@@ -45,7 +45,7 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "编号",
+                title: "#",
                 sortable: true,
                 order: 'desc'
             }, {
@@ -87,7 +87,7 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "编号",
+                title: "#",
                 sortable: true,
                 order: 'desc'
             }, {
@@ -125,7 +125,7 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "编号",
+                title: "#",
                 sortable: true,
                 order: 'desc'
             }, {
@@ -163,7 +163,7 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "编号",
+                title: "#",
                 sortable: true,
                 order: 'desc'
             }, {
