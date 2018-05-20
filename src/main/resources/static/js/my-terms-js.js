@@ -224,7 +224,7 @@ $(function () {
 
         table.bootstrapTable('refresh');
 
-        refreshTermHistory();
+        refreshTermHistory(0);
 
         return false;
     };
@@ -271,7 +271,7 @@ $(function () {
 
         $(th_button).hide();
 
-        refreshTermHistory();
+        refreshTermHistory(0);
 
         return false;
     };
@@ -347,16 +347,21 @@ $(function () {
 
 });
 
+var termHistorySwitch;
+// 常用名词增删记录模块
 $(function () {
 
     var totalPages = 1;
 
     // 加载常用名词增删记录
     loadData = function (event, page) {
+        console.log(event);
+        console.log(page);
         var query = {};
         query['page'] = page;
         //这里另每页数量为5，可自行调整
         query['pageSize'] = 10;
+        query['getType'] = termHistorySwitch;
         $.getJSON("/majorTerms/getTermsRecords", query, function (result) {
 
             var historyTable = $('#term-history')[0];
@@ -419,14 +424,22 @@ $(function () {
 // 历史记录模块
 $(function () {
 
-    refreshTermHistory = function() {
-        $('#pagination-history').empty();
-        $('#pagination-history').removeData("twbs-pagination");
-        $('#pagination-history').unbind("page");
+    var switchBtnGroup = $('#term-history-switch');
+
+    switchBtnGroup.children('.btn').click(function () {
+        refreshTermHistory($(this).val());
+    });
+
+    refreshTermHistory = function(getType) {
+        var paginationHistory = $('#pagination-history');
+        paginationHistory.empty();
+        paginationHistory.removeData("twbs-pagination");
+        paginationHistory.unbind("page");
+        termHistorySwitch = getType;
         loadData();
     };
 
-    refreshTermHistory();
+    refreshTermHistory(0);
 
 });
 

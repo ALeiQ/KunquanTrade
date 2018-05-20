@@ -24,6 +24,15 @@ public interface TermsRecordService {
     ResponseVO getAllInRange(int page, int rows);
 
     /**
+     * 分页查询某类的名词增删记录
+     * @param page
+     * @param rows
+     * @param getType
+     * @return
+     */
+    ResponseVO getInRangeByTye(Integer page, Integer rows, Integer getType);
+
+    /**
      * 批量添加常用名词添加记录
      *
      * @param addTermsRequestList 待添加数据列表
@@ -51,5 +60,4 @@ public interface TermsRecordService {
      * @return 数据库添加结果
      */
     ResponseVO delRecord(TermsRecordTypeEnum delType, AddTermsRequest delTermsRequest, Date delDate);
-
 }

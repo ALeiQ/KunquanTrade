@@ -120,7 +120,7 @@ public class MajorTermsController {
      */
     @ResponseBody
     @RequestMapping(value = "/getTermsRecords", method = RequestMethod.GET)
-    public ResponseVO getTermsRecords(Integer page, Integer pageSize) {
+    public ResponseVO getTermsRecords(Integer page, Integer pageSize, Integer getType) {
 
         log.info("getTermsRecords start");
 
@@ -128,7 +128,7 @@ public class MajorTermsController {
 
         try {
 
-            if (pageSize == null) {
+            if (pageSize == null || getType == null) {
                 result.setResult(ExceptionEnum.PARAM_EMPTY);
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
@@ -142,7 +142,7 @@ public class MajorTermsController {
                 throw new MyException(ExceptionEnum.PARAM_ERR.getDesc());
             }
 
-            result = termRecordService.getAllInRange(page, pageSize);
+            result = termRecordService.getInRangeByTye(page, pageSize, getType);
 
         } catch (MyException ex) {
             log.error("getTermsRecords Known error!", ex);

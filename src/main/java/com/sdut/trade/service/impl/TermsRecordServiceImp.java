@@ -83,6 +83,63 @@ public class TermsRecordServiceImp implements TermsRecordService {
     }
 
     /**
+     * 分页查询某类的名词增删记录
+     *
+     * @param page
+     * @param rows
+     * @param getType
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getInRangeByTye(Integer page, Integer rows,  Integer getType) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        int offset = (page-1)*rows;
+
+        List<TermsRecord> termsRecords;
+        if (getType == 0) {
+            termsRecords = termsRecordDao.getAllInRange(offset, rows);
+        } else {
+            termsRecords = termsRecordDao.getInRangeByType(offset, rows, getType);
+        }
+
+        if (ListUtils.isEmpty(termsRecords)) {
+            responseVO.setResult(ExceptionEnum.DB_SEARCH_FAILURE);
+            log.error("getAllInRange " + ExceptionEnum.DB_SEARCH_FAILURE.getDesc());
+            return responseVO;
+        }
+
+        List<TermsRecordVO>  termsRecordVOS = new ArrayList<>();
+
+        for (TermsRecord termsRecord : termsRecords) {
+
+            TermsRecordVO termsRecordVO = new TermsRecordVO();
+
+            termsRecordVO.setId(termsRecord.getId());
+            termsRecordVO.setCreateDate(termsRecord.getCreateDate());
+            termsRecordVO.setTypeValue(termsRecord.getType());
+            termsRecordVO.setTypeDesc(TermsRecordTypeEnum.getDesc(termsRecord.getType()));
+            termsRecordVO.setOperateValue(BooleanUtils.toInteger(termsRecord.getOperate()));
+            termsRecordVO.setOperateDesc(TermsRecordOperateEnum.getDesc(termsRecord.getOperate()));
+            termsRecordVO.setName(termsRecord.getName());
+
+            termsRecordVOS.add(termsRecordVO);
+        }
+
+        responseVO.setCurrentPage(page);
+        if (getType == 0) {
+            responseVO.setTotalPages((termsRecordDao.getCount()+rows-1)/rows);
+        } else {
+            responseVO.setTotalPages((termsRecordDao.getCountByType(getType)+rows-1)/rows);
+        }
+        responseVO.setData(termsRecordVOS);
+
+        return responseVO;
+    }
+
+    /**
      * 批量添加常用名词添加记录
      *
      * @param addType             添加类型

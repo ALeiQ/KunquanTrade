@@ -30,10 +30,27 @@ public interface TermsRecordDao {
     List<TermsRecord> getAllInRange(int offset, int rows);
 
     /**
+     * 分页查询某类常用名词增删记录（逆序查询，后插入的先查到）
+     *
+     * @param offset
+     * @param rows
+     * @param getType
+     * @return
+     */
+    List<TermsRecord> getInRangeByType(int offset, Integer rows, Integer getType);
+
+    /**
      * 获取数据总数
      * @return
      */
     long getCount();
+
+    /**
+     * 获取某类的数据总数
+     * @param getType
+     * @return
+     */
+    long getCountByType(Integer getType);
 
     /**
      * 添加多条记录到数据库

@@ -67,6 +67,31 @@ public class TermsRecordDaoImp implements TermsRecordDao {
     }
 
     /**
+     * 分页查询某类常用名词增删记录（逆序查询，后插入的先查到）
+     *
+     * @param offset
+     * @param rows
+     * @param getType
+     *
+     * @return
+     */
+    @Override
+    public List<TermsRecord> getInRangeByType(int offset, Integer rows, Integer getType) {
+
+        TermsRecordExample termsRecordExample = new TermsRecordExample();
+
+        termsRecordExample
+                .limit(offset, rows)
+                .setOrderByClause("id desc");
+
+        termsRecordExample.createCriteria()
+                .andTypeEqualTo(getType)
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue());
+
+        return termsRecordMapper.selectByExample(termsRecordExample);
+    }
+
+    /**
      * 获取数据总数
      *
      * @return
@@ -80,7 +105,25 @@ public class TermsRecordDaoImp implements TermsRecordDao {
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue());
 
         return termsRecordMapper.countByExample(termsRecordExample);
+    }
 
+    /**
+     * 获取某类的数据总数
+     *
+     * @param getType
+     *
+     * @return
+     */
+    @Override
+    public long getCountByType(Integer getType) {
+
+        TermsRecordExample termsRecordExample = new TermsRecordExample();
+
+        termsRecordExample.createCriteria()
+                .andTypeEqualTo(getType)
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue());
+
+        return termsRecordMapper.countByExample(termsRecordExample);
     }
 
     /**
