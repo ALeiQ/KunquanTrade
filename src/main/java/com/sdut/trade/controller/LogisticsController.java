@@ -191,4 +191,38 @@ public class LogisticsController {
 
         return result;
     }
+
+    /**
+     * 删除单条数据
+     * @return 数据写入是否成功
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delLogisticsDetail", method = RequestMethod.POST)
+    public ResponseVO delLogisticsDetail(Integer delId) {
+
+        log.info("delLogisticsDetail start");
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+
+            // 写入的数据不可为空
+            if (delId == null) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            result = logisticsDetailService.delLogisticsDetail(delId);
+
+        } catch (MyException ex) {
+            log.error("delLogisticsDetail Known Error!" + ex);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("delLogisticsDetail Unknown Error!" , ex);
+        }
+
+        log.info("delLogisticsDetail end");
+
+        return result;
+    }
 }

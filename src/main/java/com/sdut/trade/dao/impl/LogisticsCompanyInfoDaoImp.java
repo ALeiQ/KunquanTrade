@@ -84,12 +84,13 @@ public class LogisticsCompanyInfoDaoImp implements LogisticsCompanyInfoDao {
     @Override
     public int delLogisticsCompanyInfoById(int id, Date deleteDate) {
 
-        LogisticsCompanyInfo logisticsCompanyInfo = logisticsCompanyInfoMapper.selectByPrimaryKey(id);
+        LogisticsCompanyInfo logisticsCompanyInfo = new LogisticsCompanyInfo();
 
+        logisticsCompanyInfo.setId(id);
         logisticsCompanyInfo.setEnable(EnableEnum.DISABLE.isValue());
         logisticsCompanyInfo.setDeleteDate(deleteDate);
 
-        return logisticsCompanyInfoMapper.updateByPrimaryKey(logisticsCompanyInfo);
+        return logisticsCompanyInfoMapper.updateByPrimaryKeySelective(logisticsCompanyInfo);
     }
 
     /**

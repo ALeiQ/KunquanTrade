@@ -21,8 +21,8 @@ $(function () {
         showToggle: true,       // 显示视图切换按钮（分页/卡片）
         uniqueId: 'id',
         undefinedText: '',      // null显示空，默认'-'
-        pageList: [10, 15, 20],
         pageSize: 10,
+        pageList: [10, 15, 20],
         responseHandler : function(res) {
             //在ajax获取到数据，渲染表格之前，修改数据源
             return res;
@@ -124,8 +124,9 @@ $(function () {
     }
 
     function delIcon(value, row, index) {
-        return '<a class="icon closed-tool" onclick="delRow(this)"><i class="fa' +
+        return '<a class="icon closed-tool" onclick="delData(this)"><i class="fa' +
             ' fa-times"></i></a>';
+
     }
 
 });
@@ -166,6 +167,39 @@ $(function () {
 
         return false;
     });
+
+    // 删除行按钮
+    delData = function (del_icon) {
+
+        var row = $(del_icon).parents('tr');
+
+        delLogisticsDetail($(row.children().first())[0].innerText);
+
+        table.bootstrapTable('refresh');
+
+        return false;
+    };
+
+    // 删除单条数据ajax请求
+    delLogisticsDetail = function (id) {
+        $.ajax({
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: '/logistics/delLogisticsDetail',
+            async: false,
+            data: {delId: id},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    table.bootstrapTable('refresh');
+                }
+            },
+            error : function() {
+                alert("ajax请求异常！");
+            }
+        });
+    };
 
     updateLogisticsDetail = function(id, form_data) {
         $.ajax({
@@ -367,6 +401,7 @@ $(function () {
         minLength: 0,
         showHintOnFocus: true,
         autoSelect: false,
+        hint: false,
         source: function (query, process) {
             $.get('/logistics/getTypeaheadData', {getType: 'goodsFrom', query: query}, function (result) {
                 return process(result.data);
@@ -383,6 +418,7 @@ $(function () {
         minLength: 0,
         showHintOnFocus: true,
         autoSelect: false,
+        hint: false,
         source: function (query, process) {
             $.get('/logistics/getTypeaheadData', {getType: 'buyerCompany', query: query}, function (result) {
                 return process(result.data);
@@ -399,6 +435,7 @@ $(function () {
         minLength: 0,
         showHintOnFocus: true,
         autoSelect: false,
+        hint: false,
         source: function (query, process) {
             $.get('/logistics/getTypeaheadData', {getType: 'transCompany', query: query}, function (result) {
                 return process(result.data);
@@ -415,6 +452,7 @@ $(function () {
         minLength: 0,
         showHintOnFocus: true,
         autoSelect: false,
+        hint: false,
         source: function (query, process) {
             $.get('/logistics/getTypeaheadData', {getType: 'goodsName', query: query}, function (result) {
                 return process(result.data);
@@ -431,6 +469,7 @@ $(function () {
         minLength: 0,
         showHintOnFocus: true,
         autoSelect: false,
+        hint: false,
         source: function (query, process) {
             $.get('/logistics/getTypeaheadData',
                 {getType: 'goodsModel', query: query, goodsName: $('#txt_goods_name').val()},

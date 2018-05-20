@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,5 +95,25 @@ public class LogisticsDetailDaoImp implements LogisticsDetailDao {
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue());
 
         return logisticsDetailMapper.updateByExampleSelective(logisticsDetail, logisticsDetailExample);
+    }
+
+    /**
+     * 删除单条运输明细记录
+     *
+     * @param delId
+     *
+     * @return
+     */
+    @Override
+    public int delLogisticsDetail(Integer delId, Date deleteDate) {
+
+        LogisticsDetail logisticsDetail = new LogisticsDetail();
+
+        logisticsDetail.setId(delId);
+        logisticsDetail.setDeleteDate(deleteDate);
+        logisticsDetail.setEnable(EnableEnum.DISABLE.isValue());
+
+        return logisticsDetailMapper.updateByPrimaryKeySelective(logisticsDetail);
+
     }
 }

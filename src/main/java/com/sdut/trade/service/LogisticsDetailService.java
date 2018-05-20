@@ -32,4 +32,11 @@ public interface LogisticsDetailService {
      * @return
      */
     ResponseVO updateLogisticsDetail(int id, AddLogisticsRequest addLogisticsRequest);
+
+    /**
+     * 删除单条运输明细信息
+     * @param delId
+     * @return
+     */
+    ResponseVO delLogisticsDetail(Integer delId);
 }

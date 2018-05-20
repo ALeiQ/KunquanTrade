@@ -84,12 +84,13 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
     @Override
     public int delGoodsInfoById(int id, Date deleteDate) {
 
-        GoodsInfo goodsInfo = goodsInfoMapper.selectByPrimaryKey(id);
+        GoodsInfo goodsInfo = new GoodsInfo();
 
+        goodsInfo.setId(id);
         goodsInfo.setEnable(EnableEnum.DISABLE.isValue());
         goodsInfo.setDeleteDate(deleteDate);
 
-        return goodsInfoMapper.updateByPrimaryKey(goodsInfo);
+        return goodsInfoMapper.updateByPrimaryKeySelective(goodsInfo);
     }
 
     /**

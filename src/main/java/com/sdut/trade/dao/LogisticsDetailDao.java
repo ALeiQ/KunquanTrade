@@ -1,5 +1,6 @@
 package com.sdut.trade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.entity.LogisticsDetail;
@@ -38,4 +39,12 @@ public interface LogisticsDetailDao {
      * @return
      */
     int updateLogisticsDetail(int id, LogisticsDetail logisticsDetail);
+
+    /**
+     * 删除单条运输明细记录
+     * @param delId
+     * @param deleteDate
+     * @return
+     */
+    int delLogisticsDetail(Integer delId, Date deleteDate);
 }

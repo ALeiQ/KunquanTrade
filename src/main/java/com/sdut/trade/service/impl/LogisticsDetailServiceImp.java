@@ -157,6 +157,34 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
     }
 
     /**
+     * 删除单条运输明细信息
+     *
+     * @param delId
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO delLogisticsDetail(Integer delId) {
+
+        log.info("delLogisticsDetail del start delId={}", delId);
+
+        ResponseVO responseVO = new ResponseVO();
+
+        Date deleteDate = new Date();
+
+        int delNum = logisticsDetailDao.delLogisticsDetail(delId, deleteDate);
+
+        if (delNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
+            log.error("delLogisticsDetail del false!");
+        }
+
+        log.info("delLogisticsDetail del end delId={}", delId);
+
+        return responseVO;
+    }
+
+    /**
      * 将请求对象转换为存储对象
      *
      * @return

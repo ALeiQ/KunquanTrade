@@ -83,12 +83,13 @@ public class BankInfoDaoImp implements BankInfoDao {
     @Override
     public int delBankInfoById(int id, Date deleteDate) {
 
-        BankInfo bankInfo = bankInfoMapper.selectByPrimaryKey(id);
+        BankInfo bankInfo = new BankInfo();
 
+        bankInfo.setId(id);
         bankInfo.setEnable(EnableEnum.DISABLE.isValue());
         bankInfo.setDeleteDate(deleteDate);
 
-        return bankInfoMapper.updateByPrimaryKey(bankInfo);
+        return bankInfoMapper.updateByPrimaryKeySelective(bankInfo);
 
     }
 

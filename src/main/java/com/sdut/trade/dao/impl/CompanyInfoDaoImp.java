@@ -98,12 +98,13 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
     @Override
     public int delCompanyInfoById(int id, Date deleteDate) {
 
-        CompanyInfo companyInfo = companyInfoMapper.selectByPrimaryKey(id);
+        CompanyInfo companyInfo = new CompanyInfo();
 
+        companyInfo.setId(id);
         companyInfo.setEnable(EnableEnum.DISABLE.isValue());
         companyInfo.setDeleteDate(deleteDate);
 
-        return companyInfoMapper.updateByPrimaryKey(companyInfo);
+        return companyInfoMapper.updateByPrimaryKeySelective(companyInfo);
     }
 
     /**
