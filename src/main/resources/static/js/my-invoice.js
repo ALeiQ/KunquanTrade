@@ -212,9 +212,20 @@ $(function () {
     $('#btn_add_invoice_detail_input').click(function () {
         var list = createInvoiceDetailInput();
 
-        for (i in list) {
+        var goodsNameInp;
+        var goodsModelInp;
+
+        for (var i in list) {
             this.before(list[i]);
+            if (i === "0") {
+                goodsNameInp = $(this).prev().find('input');
+            } else if (i === "1") {
+                goodsModelInp = $(this).prev().find('input');
+            }
         }
+
+        $(goodsNameInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
+        $(goodsModelInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
 
         resetValidator();
     });
@@ -225,12 +236,12 @@ $(function () {
     });
 
     // 清空Modal數據
-    clearModal = function() {
+    var clearModal = function() {
         $("input").val('');
         resetValidator();
     };
 
-    resetValidator = function () {
+    var resetValidator = function () {
         form.data('bootstrapValidator').destroy();
         form.data('bootstrapValidator', null);
         formValidator();
@@ -261,31 +272,33 @@ $(function () {
 // 自动补全配置
 $(function () {
 
-    makeTypeahead($('#txt_pay_company'), '/logistics/getTypeaheadData', {getType: 'company'});
-    makeTypeahead($('#txt_receive_company'), '/logistics/getTypeaheadData', {getType: 'company'});
-
-    function makeTypeahead(inp, url, params) {
-        inp.typeahead({
+    // 自动补全配置
+    $.fn.makeTypeahead = function (url, params, goodsName) {
+        var inp = this;
+        this.typeahead({
             items: 'all',
             minLength: 0,
             showHintOnFocus: true,
             autoSelect: false,
             hint: false,
             source: function (query, process) {
+                if (typeof(goodsName) !== "undefined") {
+                    params['goodsName'] = goodsName.val();
+                }
                 params['query'] = query;
                 $.get(url, params,
                     function (result) {
                         return process(result.data);
                     });
             },
-            afterSelect: function () {
-                form.data('bootstrapValidator')
-                    .updateStatus(inp, 'NOT_VALIDATED',null)
-                    .validateField(inp);
+            afterSelect: function (){
+                startValidator(inp);
             }
         });
     };
 
+    $('#txt_pay_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
+    $('#txt_receive_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
 });
 
 // 校验配置

@@ -381,13 +381,8 @@ $(function () {
 // 自动补全配置
 $(function () {
 
-    makeTypeahead($('#txt_goods_model'), '/logistics/getTypeaheadData', {getType: 'goodsModel'});
-    makeTypeahead($('#txt_goods_name'), '/logistics/getTypeaheadData', {getType: 'goodsName'});
-    makeTypeahead($('#txt_trans_company'), '/logistics/getTypeaheadData', {getType: 'transCompany'});
-    makeTypeahead($('#txt_buyer_company'), '/logistics/getTypeaheadData', {getType: 'company'});
-    makeTypeahead($('#txt_goods_from'), '/logistics/getTypeaheadData', {getType: 'company'});
-
-    function makeTypeahead(inp, url, params) {
+    $.fn.makeTypeahead = function(url, params) {
+        var inp = this;
         inp.typeahead({
             items: 'all',
             minLength: 0,
@@ -403,12 +398,16 @@ $(function () {
                     });
             },
             afterSelect: function () {
-                form.data('bootstrapValidator')
-                    .updateStatus(inp, 'NOT_VALIDATED',null)
-                    .validateField(inp);
+                startValidator(inp);
             }
         });
     };
+
+    $('#txt_goods_model').makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'});
+    $('#txt_goods_name').makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
+    $('#txt_trans_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'transCompany'});
+    $('#txt_buyer_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
+    $('#txt_goods_from').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
 
     $('#txt_goods_from').focus(function (){
         $('#txt_goods_from').typeahead('show')

@@ -83,8 +83,14 @@ $(document).ready(function () {
                 .updateStatus(inp, 'NOT_VALIDATED',null)
                 .validateField(inp);
         });
-    }
+    };
 
+    // 开启inp的校验
+    startValidator = function(inp) {
+        form.data('bootstrapValidator')
+            .updateStatus($(inp), 'NOT_VALIDATED',null)
+            .validateField($(inp));
+    };
 });
 
 // 工具方法
