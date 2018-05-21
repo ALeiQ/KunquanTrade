@@ -68,3 +68,23 @@ $(document).ready(function () {
         );
     };
 });
+
+// 工具方法
+$(function () {
+    // 将value保留两位小数（截尾）并补全小数点后两个零
+    returnFloat = function (value){
+        var value=parseInt(parseFloat(value)*100)/100;
+        var xsd=value.toString().split(".");
+        if(xsd.length==1){
+            value=value.toString()+".00";
+            return value;
+        }
+        if(xsd.length>1){
+            if(xsd[1].length<2){
+                value=value.toString()+"0";
+            }
+            return value;
+        }
+    }
+});
+

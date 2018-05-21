@@ -76,10 +76,7 @@ public class LogisticsController {
 
             // 根据前端提供的类型，分别进行不同数据表的数据添加。
             switch (getType) {
-                case "goodsFrom":
-                    result = companyInfoService.getCompanyByKeyword(query);
-                    break;
-                case "buyerCompany":
+                case "company":
                     result = companyInfoService.getCompanyByKeyword(query);
                     break;
                 case "transCompany":
@@ -109,6 +106,10 @@ public class LogisticsController {
         return result;
     }
 
+    /**
+     * 获取运输明细详情数据
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/getLogisticsDetails", method = RequestMethod.GET)
     public ResponseVO getLogisticsDetails() {
@@ -130,6 +131,11 @@ public class LogisticsController {
 
     };
 
+    /**
+     * 添加单条运输明细
+     * @param params
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/addLogisticsDetail", method = RequestMethod.POST)
     public ResponseVO addLogisticsDetail(String params) {
@@ -161,6 +167,12 @@ public class LogisticsController {
         return result;
     }
 
+    /**
+     * 更新单条运输明细
+     * @param id
+     * @param params
+     * @return
+     */
     @ResponseBody
     @RequestMapping(value = "/updateLogisticsDetail", method = RequestMethod.POST)
     public ResponseVO updateLogisticsDetail(int id, String params) {
