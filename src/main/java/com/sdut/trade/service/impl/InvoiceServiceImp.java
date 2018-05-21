@@ -111,7 +111,7 @@ public class InvoiceServiceImp implements InvoiceService {
             invoiceDetailVO.setGoodsModel(invoiceDetail.getGoodsModel());
             invoiceDetailVO.setNumber(invoiceDetail.getNumber());
             invoiceDetailVO.setUnitPrice(invoiceDetail.getUnitPrice());
-            invoiceDetailVO.setSumPrice(invoiceDetail.getSumPricet());
+            invoiceDetailVO.setSumPrice(invoiceDetail.getSumPrice());
             invoiceDetailVO.setTax(invoiceDetail.getTax());
 
             invoiceDetailVOS.add(invoiceDetailVO);
@@ -179,7 +179,7 @@ public class InvoiceServiceImp implements InvoiceService {
 
             invoiceDetail.setUnitPrice(addInvoiceDetailRequest.getUnitPrice());
             invoiceDetail.setTax(addInvoiceDetailRequest.getTax());
-            invoiceDetail.setSumPricet(addInvoiceDetailRequest.getSumPrice());
+            invoiceDetail.setSumPrice(addInvoiceDetailRequest.getSumPrice());
             invoiceDetail.setNumber(addInvoiceDetailRequest.getNumber());
             invoiceDetail.setInvoiceId(id);
             invoiceDetail.setGoodsName(addInvoiceDetailRequest.getGoodsName());

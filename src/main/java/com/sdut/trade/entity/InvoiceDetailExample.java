@@ -387,63 +387,63 @@ public class InvoiceDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetIsNull() {
-            addCriterion("sum_pricet is null");
+        public Criteria andSumPriceIsNull() {
+            addCriterion("sum_price is null");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetIsNotNull() {
-            addCriterion("sum_pricet is not null");
+        public Criteria andSumPriceIsNotNull() {
+            addCriterion("sum_price is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetEqualTo(Double value) {
-            addCriterion("sum_pricet =", value, "sumPricet");
+        public Criteria andSumPriceEqualTo(Double value) {
+            addCriterion("sum_price =", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotEqualTo(Double value) {
-            addCriterion("sum_pricet <>", value, "sumPricet");
+        public Criteria andSumPriceNotEqualTo(Double value) {
+            addCriterion("sum_price <>", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetGreaterThan(Double value) {
-            addCriterion("sum_pricet >", value, "sumPricet");
+        public Criteria andSumPriceGreaterThan(Double value) {
+            addCriterion("sum_price >", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetGreaterThanOrEqualTo(Double value) {
-            addCriterion("sum_pricet >=", value, "sumPricet");
+        public Criteria andSumPriceGreaterThanOrEqualTo(Double value) {
+            addCriterion("sum_price >=", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetLessThan(Double value) {
-            addCriterion("sum_pricet <", value, "sumPricet");
+        public Criteria andSumPriceLessThan(Double value) {
+            addCriterion("sum_price <", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetLessThanOrEqualTo(Double value) {
-            addCriterion("sum_pricet <=", value, "sumPricet");
+        public Criteria andSumPriceLessThanOrEqualTo(Double value) {
+            addCriterion("sum_price <=", value, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetIn(List<Double> values) {
-            addCriterion("sum_pricet in", values, "sumPricet");
+        public Criteria andSumPriceIn(List<Double> values) {
+            addCriterion("sum_price in", values, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotIn(List<Double> values) {
-            addCriterion("sum_pricet not in", values, "sumPricet");
+        public Criteria andSumPriceNotIn(List<Double> values) {
+            addCriterion("sum_price not in", values, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetBetween(Double value1, Double value2) {
-            addCriterion("sum_pricet between", value1, value2, "sumPricet");
+        public Criteria andSumPriceBetween(Double value1, Double value2) {
+            addCriterion("sum_price between", value1, value2, "sumPrice");
             return (Criteria) this;
         }
 
-        public Criteria andSumPricetNotBetween(Double value1, Double value2) {
-            addCriterion("sum_pricet not between", value1, value2, "sumPricet");
+        public Criteria andSumPriceNotBetween(Double value1, Double value2) {
+            addCriterion("sum_price not between", value1, value2, "sumPrice");
             return (Criteria) this;
         }
 

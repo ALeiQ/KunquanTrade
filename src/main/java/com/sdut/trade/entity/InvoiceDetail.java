@@ -10,7 +10,7 @@ public class InvoiceDetail implements Serializable {
 
     private Double unitPrice;
 
-    private Double sumPricet;
+    private Double sumPrice;
 
     private Double tax;
 
@@ -54,12 +54,12 @@ public class InvoiceDetail implements Serializable {
         this.unitPrice = unitPrice;
     }
 
-    public Double getSumPricet() {
-        return sumPricet;
+    public Double getSumPrice() {
+        return sumPrice;
     }
 
-    public void setSumPricet(Double sumPricet) {
-        this.sumPricet = sumPricet;
+    public void setSumPrice(Double sumPrice) {
+        this.sumPrice = sumPrice;
     }
 
     public Double getTax() {
@@ -137,7 +137,7 @@ public class InvoiceDetail implements Serializable {
         id("id"),
         number("number"),
         unitPrice("unit_price"),
-        sumPricet("sum_pricet"),
+        sumPrice("sum_price"),
         tax("tax"),
         invoiceId("invoice_id"),
         createDate("create_date"),
