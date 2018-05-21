@@ -215,6 +215,8 @@ $(function () {
         for (i in list) {
             this.before(list[i]);
         }
+
+        resetValidator();
     });
 
     // 表单清空按钮
@@ -402,6 +404,60 @@ $(document).ready(function () {
                         stringLength: {
                             max: 100,
                             message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_invoice_goods_name: {
+                    message: '物资名称不合法',
+                    validators: {
+                        stringLength: {
+                            max: 10,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_invoice_goods_model: {
+                    message: '物资型号不合法',
+                    validators: {
+                        stringLength: {
+                            max: 10,
+                            message: '输入超过上限'
+                        }
+                    }
+                },
+                txt_invoice_number: {
+                    message: '数量不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_invoice_unit_price: {
+                    message: '单价不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_invoice_sum_price: {
+                    message: '总额不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
+                },
+                txt_invoice_tax: {
+                    message: '税额不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
                         }
                     }
                 }

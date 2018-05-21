@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.thymeleaf.util.ListUtils;
 
 import com.sdut.trade.dao.InvoiceDetailDao;
 import com.sdut.trade.entity.InvoiceDetail;
@@ -55,6 +56,11 @@ public class InvoiceDetailDaoImp implements InvoiceDetailDao {
      */
     @Override
     public int addInvoiceDetails(List<InvoiceDetail> invoiceDetailList) {
+
+        if (ListUtils.isEmpty(invoiceDetailList)) {
+            return 0;
+        }
+
         return invoiceDetailMapper.batchInsert(invoiceDetailList);
     }
 }

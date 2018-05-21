@@ -146,7 +146,7 @@ public class InvoiceServiceImp implements InvoiceService {
 
         int addNum = invoiceDetailDao.addInvoiceDetails(invoiceDetailList);
 
-        if (addNum != invoiceDetailList.size()) {
+        if (addNum != detailList.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
                     + "[需要添加: " + Integer.toString(invoiceDetailList.size()) +" 条]"
