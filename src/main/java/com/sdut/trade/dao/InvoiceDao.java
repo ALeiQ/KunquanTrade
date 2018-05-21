@@ -24,4 +24,11 @@ public interface InvoiceDao {
      * @return
      */
     List<InvoiceInfo> getAllByDirection(Integer direction);
+
+    /**
+     * 添加开票简要信息
+     * @param invoiceInfo
+     * @return id
+     */
+    int addInvoiceInfo(InvoiceInfo invoiceInfo);
 }

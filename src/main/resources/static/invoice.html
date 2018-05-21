@@ -88,7 +88,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <div class="panel-group" id="accordion">
                 <div class="panel panel-widget">
                     <button type="button" class="add-row-button btn btn-success dropdown-toggle"
-                            id = 'addInvoic' onclick="addItem()">
+                            id = 'addInvoic'>
                         <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
                     </button>
                     <table class="table text-nowrap table-striped" id="invoiceTable">
@@ -106,6 +106,107 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script type="text/javascript" src="footer.js"></script>
     <!--//footer-->
 </div>
+
+<!-- 增加数据的提示框 -->
+<div class="modal fade" id="addInvoiceModal" tabindex="-1" role="dialog"
+     aria-labelledby="addInvoiceModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form  id="updateInvoiceForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="addInvoiceModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row ">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_make_date">开票时间</label>
+                                <input type="text" name="txt_make_date" class="form-control" id="txt_make_date"
+                                       placeholder="开票时间" data-provide="typeahead" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_number">票号</label>
+                                <input type="text" name="txt_number" class="form-control" id="txt_number"
+                                       placeholder="票号" data-provide="typeahead" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_use_date">抵扣时间</label>
+                                <input type="text" name="txt_use_date" class="form-control"
+                                       id="txt_use_date" placeholder="抵扣时间" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_type">发票类别</label>
+                                <select  name="txt_type" class="form-control" id="txt_type" placeholder="发票类别"
+                                         autocomplete="off">
+                                    <option value="1">专票</option>
+                                    <option value="2">普票</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_pay_company">开票单位</label>
+                                <input type="text" name="txt_pay_company" class="form-control" id="txt_pay_company"
+                                       placeholder="开票单位" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_amount">发票总额</label>
+                                <input type="text" name="txt_amount" class="form-control" id="txt_amount"
+                                       placeholder="发票总额" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_receive_company">受票单位</label>
+                                <input type="text" name="txt_receive_company" class="form-control" id="txt_receive_company"
+                                       placeholder="受票单位" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_invoice_remark">备注</label>
+                                <input type="text" name="txt_invoice_remark" class="form-control" id="txt_invoice_remark"
+                                       placeholder="备注" autoComplete="off"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row inbox-detail">
+                        <div class="col-sm-2">
+                                <label>物资名称</label>
+                        </div>
+                        <div class="col-sm-2">
+                                <label>型号</label>
+                        </div>
+                        <div class="col-sm-2">
+                                <label>数量</label>
+                        </div>
+                        <div class="col-sm-2">
+                                <label>单价（含税）</label>
+                        </div>
+                        <div class="col-sm-2">
+                                <label>总额（含税）</label>
+                        </div>
+                        <div class="col-sm-2">
+                                <label>税额</label>
+                        </div>
+                        <button type="button" class="add-btn-circle" id="btn_add_invoice_detail_input">
+                            <i class="fa fa-plus-circle fa-2x" style="color: green" aria-hidden="true" ></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_clear_invoice_modal" class="btn btn-default"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空</button>
+                    <button type="submit" id="btn_submit_invoice" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //增加数据的提示框 -->
+
 <!-- Classie -->
 <script src="js/classie.js"></script>
 

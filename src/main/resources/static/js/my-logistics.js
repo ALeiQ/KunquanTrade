@@ -156,7 +156,6 @@ $(function () {
 
             var title = $.trim(myModal.find('.modal-title')[0].textContent);
 
-
             if (title === '新增') {
                 addLogisticsDetail(form_data);
             } else {
@@ -167,6 +166,45 @@ $(function () {
 
         return false;
     });
+
+    addLogisticsDetail = function(form_data) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/logistics/addLogisticsDetail',
+            data: {params: JSON.stringify(form_data)},
+            async: false,
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    showPopover($('#btn_submit').children('span'), "添加成功");
+                    clearModal();
+                    table.bootstrapTable('refresh');
+                }
+            }
+        });
+    };
+
+    updateLogisticsDetail = function(id, form_data) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/logistics/updateLogisticsDetail',
+            data: {id: id, params: JSON.stringify(form_data)},
+            async: false,
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    showPopover($('#btn_submit').children('span'), "修改成功");
+                    myModal.modal('hide');
+                    resetValidator();
+                    table.bootstrapTable('refresh');
+                }
+            }
+        });
+    };
 
     // 删除行按钮
     delData = function (del_icon) {
@@ -197,45 +235,6 @@ $(function () {
             },
             error : function() {
                 alert("ajax请求异常！");
-            }
-        });
-    };
-
-    updateLogisticsDetail = function(id, form_data) {
-        $.ajax({
-            type: "post",
-            dataType: 'json',
-            url: '/logistics/updateLogisticsDetail',
-            data: {id: id, params: JSON.stringify(form_data)},
-            async: false,
-            success: function (result) {
-                if (result.resultCode !== 0) {
-                    alert(result.resultMsg);
-                } else {
-                    showPopover($('#btn_submit').children('span'), "修改成功");
-                    myModal.modal('hide');
-                    resetValidator();
-                    table.bootstrapTable('refresh');
-                }
-            }
-        });
-    };
-
-    addLogisticsDetail = function(form_data) {
-        $.ajax({
-            type: "post",
-            dataType: 'json',
-            url: '/logistics/addLogisticsDetail',
-            data: {params: JSON.stringify(form_data)},
-            async: false,
-            success: function (result) {
-                if (result.resultCode !== 0) {
-                    alert(result.resultMsg);
-                } else {
-                    showPopover($('#btn_submit').children('span'), "添加成功");
-                    clearModal();
-                    table.bootstrapTable('refresh');
-                }
             }
         });
     };
@@ -272,21 +271,7 @@ $(function () {
         }
     });
 
-    // 发车时间的日历组件
-    $('#txt_load_time').datetimepicker({
-        format: 'yyyy-mm-dd',//显示格式
-        todayHighlight: 1,//今天高亮
-        minView: "month",//设置只显示到月份
-        startView:2,
-        forceParse: 0,
-        showMeridian: 1,
-        autoclose: 1//选择后自动关闭
-    }).on('hide', function (e) {
-        // 关闭后手动触发校验（否则不自动校验）
-        form.data('bootstrapValidator')
-            .updateStatus('txt_load_time', 'NOT_VALIDATED',null)
-            .validateField('txt_load_time');
-    });
+    setDateYYMMDD($('#txt_load_time'));
 
     // 净重监听
     $('#txt_net_weight').change(function () {
@@ -396,13 +381,13 @@ $(function () {
 // 自动补全配置
 $(function () {
 
-    makeTypeahead($('#txt_goods_model'), 'txt_goods_model', '/logistics/getTypeaheadData', {getType: 'goodsModel'});
-    makeTypeahead($('#txt_goods_name'), 'txt_goods_name', '/logistics/getTypeaheadData', {getType: 'goodsName'});
-    makeTypeahead($('#txt_trans_company'), 'txt_trans_company', '/logistics/getTypeaheadData', {getType: 'transCompany'});
-    makeTypeahead($('#txt_buyer_company'), 'txt_buyer_company', '/logistics/getTypeaheadData', {getType: 'company'});
-    makeTypeahead($('#txt_goods_from'), 'txt_goods_from', '/logistics/getTypeaheadData', {getType: 'company'});
+    makeTypeahead($('#txt_goods_model'), '/logistics/getTypeaheadData', {getType: 'goodsModel'});
+    makeTypeahead($('#txt_goods_name'), '/logistics/getTypeaheadData', {getType: 'goodsName'});
+    makeTypeahead($('#txt_trans_company'), '/logistics/getTypeaheadData', {getType: 'transCompany'});
+    makeTypeahead($('#txt_buyer_company'), '/logistics/getTypeaheadData', {getType: 'company'});
+    makeTypeahead($('#txt_goods_from'), '/logistics/getTypeaheadData', {getType: 'company'});
 
-    function makeTypeahead(inp, inp_name, url, params) {
+    function makeTypeahead(inp, url, params) {
         inp.typeahead({
             items: 'all',
             minLength: 0,
@@ -419,8 +404,8 @@ $(function () {
             },
             afterSelect: function () {
                 form.data('bootstrapValidator')
-                    .updateStatus(inp_name, 'NOT_VALIDATED',null)
-                    .validateField(inp_name);
+                    .updateStatus(inp, 'NOT_VALIDATED',null)
+                    .validateField(inp);
             }
         });
     };
@@ -461,8 +446,19 @@ $(document).ready(function() {
                         callback: {
                             callback: function (value, validator, $field) {
 
+                                var dateFormat = /^\d{4}-\d{1,2}-\d{1,2}/;
                                 var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
 
+                                if (value === "") {
+                                    return true;
+                                }
+
+                                if (!dateFormat.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '装车时间不合法，请输入正确的日期格式（如2018-05-12）'
+                                    };
+                                }
                                 if (!dateFailure.test(value)) {
                                     return {
                                         valid: false,

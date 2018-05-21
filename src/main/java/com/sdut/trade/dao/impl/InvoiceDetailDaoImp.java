@@ -45,4 +45,16 @@ public class InvoiceDetailDaoImp implements InvoiceDetailDao {
 
         return invoiceDetailMapper.selectByExample(invoiceDetailExample);
     }
+
+    /**
+     * 批量添加开票附加信息
+     *
+     * @param invoiceDetailList
+     *
+     * @return
+     */
+    @Override
+    public int addInvoiceDetails(List<InvoiceDetail> invoiceDetailList) {
+        return invoiceDetailMapper.batchInsert(invoiceDetailList);
+    }
 }

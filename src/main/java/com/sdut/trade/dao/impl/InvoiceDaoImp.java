@@ -1,6 +1,5 @@
 package com.sdut.trade.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,5 +63,18 @@ public class InvoiceDaoImp implements InvoiceDao {
                 .andDirectionEqualTo(direction);
 
         return invoiceInfoMapper.selectByExample(invoiceInfoExample);
+    }
+
+    /**
+     * 添加开票简要信息
+     *
+     * @param invoiceInfo
+     *
+     * @return id
+     */
+    @Override
+    public int addInvoiceInfo(InvoiceInfo invoiceInfo) {
+        invoiceInfoMapper.insertSelective(invoiceInfo);
+        return invoiceInfo.getId();
     }
 }

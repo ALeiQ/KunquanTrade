@@ -1,5 +1,9 @@
 package com.sdut.trade.service;
 
+import java.util.List;
+
+import com.sdut.trade.httpmodel.request.AddInvoiceDetailRequest;
+import com.sdut.trade.httpmodel.request.AddInvoiceRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 
 /**
@@ -23,4 +27,12 @@ public interface InvoiceService {
      * @return
      */
     ResponseVO getInvoiceDetailsById(Integer queryId);
+
+    /**
+     * 添加开票信息
+     * @param addInvoiceRequest
+     * @param detailList
+     * @return
+     */
+    ResponseVO addInvoice(AddInvoiceRequest addInvoiceRequest, List<AddInvoiceDetailRequest> detailList);
 }

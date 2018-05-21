@@ -19,4 +19,10 @@ public interface InvoiceDetailDao {
      */
     List<InvoiceDetail> getAllByInvoiceId(Integer queryId);
 
+    /**
+     * 批量添加开票附加信息
+     * @param invoiceDetailList
+     * @return
+     */
+    int addInvoiceDetails(List<InvoiceDetail> invoiceDetailList);
 }

@@ -40,13 +40,13 @@ $(document).ready(function () {
        var o = {};
        var a = this.serializeArray();
        $.each(a, function() {
-           if (o[this.name]) {
+           if (typeof(o[this.name]) !== "undefined") {
                if (!o[this.name].push) {
                    o[this.name] = [o[this.name]];
                }
-               o[this.name].push(this.value || '');
+               o[this.name].push(this.value || "");
            } else {
-               o[this.name] = this.value || '';
+               o[this.name] = this.value || "";
            }
        });
        return o;
@@ -67,6 +67,24 @@ $(document).ready(function () {
             }, 3000
         );
     };
+
+    setDateYYMMDD = function (inp) {
+        inp.datetimepicker({
+            format: 'yyyy-mm-dd',//显示格式
+            todayHighlight: 1,//今天高亮
+            minView: "month",//设置只显示到月份
+            startView:2,
+            forceParse: 0,
+            showMeridian: 1,
+            autoclose: 1//选择后自动关闭
+        }).on('hide', function (e) {
+            // 关闭后手动触发校验（否则不自动校验）
+            form.data('bootstrapValidator')
+                .updateStatus(inp, 'NOT_VALIDATED',null)
+                .validateField(inp);
+        });
+    }
+
 });
 
 // 工具方法
