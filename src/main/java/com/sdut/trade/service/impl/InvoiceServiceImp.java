@@ -10,16 +10,22 @@ import org.thymeleaf.util.StringUtils;
 
 import com.sdut.trade.bean.InvoiceDetailVO;
 import com.sdut.trade.bean.InvoiceInfoVO;
+import com.sdut.trade.dao.CompanyInfoDao;
+import com.sdut.trade.dao.GoodsInfoDao;
 import com.sdut.trade.dao.InvoiceDao;
 import com.sdut.trade.dao.InvoiceDetailDao;
+import com.sdut.trade.entity.CompanyInfo;
+import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.entity.InvoiceDetail;
 import com.sdut.trade.entity.InvoiceInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.InvoiceInfoDircetionEnum;
 import com.sdut.trade.enums.impl.InvoiceInfoTypeEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddInvoiceDetailRequest;
 import com.sdut.trade.httpmodel.request.AddInvoiceRequest;
+import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.InvoiceService;
 
@@ -36,10 +42,19 @@ import lombok.extern.slf4j.Slf4j;
 public class InvoiceServiceImp implements InvoiceService {
 
     @Autowired
-    InvoiceDao invoiceDao;
+    private InvoiceDao invoiceDao;
 
     @Autowired
-    InvoiceDetailDao invoiceDetailDao;
+    private InvoiceDetailDao invoiceDetailDao;
+
+    @Autowired
+    private CompanyInfoDao companyInfoDao;
+
+    @Autowired
+    private TermsRecordServiceImp termsRecordService;
+
+    @Autowired
+    private GoodsInfoDao goodsInfoDao;
 
     /**
      * 根据开票流向获取全数据
@@ -146,6 +161,12 @@ public class InvoiceServiceImp implements InvoiceService {
 
         int addNum = invoiceDetailDao.addInvoiceDetails(invoiceDetailList);
 
+        addCompanyTerms(addInvoiceRequest, createDate);
+
+        for (AddInvoiceDetailRequest addInvoiceDetailRequest : detailList) {
+            addGoodsTerms(addInvoiceDetailRequest, createDate);
+        }
+
         if (addNum != detailList.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
@@ -234,5 +255,101 @@ public class InvoiceServiceImp implements InvoiceService {
         invoiceInfo.setAmount(addInvoiceRequest.getAmount());
 
         return invoiceInfo;
+    }
+
+    /**
+     * 从开票信息中获取新名词
+     * @param addInvoiceRequest
+     * @param createDate
+     */
+    private void addCompanyTerms(AddInvoiceRequest addInvoiceRequest, Date createDate) {
+
+        // 如果开票单位公司不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addInvoiceRequest.getPayCompany())) {
+
+            if (!companyInfoDao.hasCompanyName(addInvoiceRequest.getPayCompany())) {
+
+                CompanyInfo companyInfo = new CompanyInfo();
+
+                companyInfo.setName(addInvoiceRequest.getPayCompany());
+                companyInfo.setCreateDate(createDate);
+                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
+                    log.warn("addCompanyInfo add payCompany false! requset={}", addInvoiceRequest);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addInvoiceRequest.getPayCompany());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addCompanyInfo add payCompanyRecord false! requset={}", addInvoiceRequest);
+                }
+            }
+        }
+
+        // 如果受票单位不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addInvoiceRequest.getReceiveCompany())) {
+
+            if (!companyInfoDao.hasCompanyName(addInvoiceRequest.getReceiveCompany())) {
+
+                CompanyInfo companyInfo = new CompanyInfo();
+
+                companyInfo.setName(addInvoiceRequest.getReceiveCompany());
+                companyInfo.setCreateDate(createDate);
+                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
+                    log.warn("addCompanyInfo add receiveCompany false! requset={}", addInvoiceRequest);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addInvoiceRequest.getReceiveCompany());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addCompanyInfo add receiveCompanyRecord false! requset={}", addInvoiceRequest);
+                }
+            }
+        }
+    }
+
+    /**
+     * 从开票详情中获取货物新名词
+     * @param addInvoiceDetailRequest
+     * @param createDate
+     */
+    private void addGoodsTerms(AddInvoiceDetailRequest addInvoiceDetailRequest, Date createDate) {
+
+        // 如果货物信息不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(addInvoiceDetailRequest.getGoodsName())) {
+
+            if (!goodsInfoDao.hasGoods(addInvoiceDetailRequest.getGoodsName(), addInvoiceDetailRequest.getGoodsModel())) {
+
+                GoodsInfo goodsInfo = new GoodsInfo();
+
+                goodsInfo.setName(addInvoiceDetailRequest.getGoodsName());
+                goodsInfo.setModel(addInvoiceDetailRequest.getGoodsModel());
+                goodsInfo.setCreateDate(createDate);
+                goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!goodsInfoDao.addGoodsInfo(goodsInfo)) {
+                    log.warn("addGoodsTerms add GoodsInfo false! detail={}", addInvoiceDetailRequest);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(addInvoiceDetailRequest.getGoodsName());
+                addTermsRequest.setModel(addInvoiceDetailRequest.getGoodsModel());
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addGoodsTerms add GoodsInfoRecord false! detail={}", addInvoiceDetailRequest);
+                }
+            }
+        }
     }
 }

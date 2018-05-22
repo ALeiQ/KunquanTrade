@@ -140,27 +140,31 @@ $(function () {
         form.bootstrapValidator('validate');
 
         if (form.data('bootstrapValidator').isValid()) {
+            var load = $(this).prev().prev()[0];
+            console.log(load);
+            load.style.display="";
             var form_data = form.serializeObject();
             var details_data = getDetails(form_data);
 
-            addInvoice(form_data, details_data);
+            addInvoice(load, form_data, details_data);
         }
 
         return false;
     });
 
-    addInvoice = function(form_data, invoiceDetails) {
+    // 扩充详细货品信息按钮
+    addInvoice = function(load, form_data, invoiceDetails) {
         $.ajax({
             type: "post",
             dataType: 'json',
             url: '/invoice/addInvoice',
             data: {params: JSON.stringify(form_data),
                 details: JSON.stringify(invoiceDetails)},
-            async: false,
             success: function (result) {
                 if (result.resultCode !== 0) {
                     alert(result.resultMsg);
                 } else {
+                    load.style.display="none";
                     showPopover($('#btn_submit_invoice').children('span'), "添加成功");
                     clearModal();
                     mainTable.bootstrapTable('refresh');
@@ -280,6 +284,7 @@ $(function () {
             minLength: 0,
             showHintOnFocus: true,
             autoSelect: false,
+            changeInputOnMove: false,
             hint: false,
             source: function (query, process) {
                 if (typeof(goodsName) !== "undefined") {

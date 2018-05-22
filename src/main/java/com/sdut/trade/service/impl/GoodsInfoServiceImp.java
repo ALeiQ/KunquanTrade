@@ -9,6 +9,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 
 import com.sdut.trade.bean.GoodsInfoVO;
 import com.sdut.trade.dao.GoodsInfoDao;
@@ -171,9 +172,11 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
         List<GoodsInfo> goodsInfos = goodsInfoDao.getGoodsInfoByNameKeyword(query);
         Set<String> goodsNames = new HashSet<>();
-        //List<String> goodsNames = new ArrayList<>();
 
         for (GoodsInfo goodsInfo : goodsInfos) {
+            if (StringUtils.isEmpty(goodsInfo.getName())) {
+                continue;
+            }
             goodsNames.add(goodsInfo.getName());
         }
 
@@ -198,6 +201,9 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
         List<String> goodsModels = new ArrayList<>();
 
         for (GoodsInfo goodsInfo : goodsInfos) {
+            if (StringUtils.isEmpty(goodsInfo.getModel())) {
+                continue;
+            }
             goodsModels.add(goodsInfo.getModel());
         }
 

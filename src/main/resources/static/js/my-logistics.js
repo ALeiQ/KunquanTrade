@@ -388,6 +388,7 @@ $(function () {
             minLength: 0,
             showHintOnFocus: true,
             autoSelect: false,
+            changeInputOnMove: false,
             hint: false,
             source: function (query, process) {
                 params['goodsName'] = $('#txt_goods_name').val();
@@ -408,19 +409,6 @@ $(function () {
     $('#txt_trans_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'transCompany'});
     $('#txt_buyer_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
     $('#txt_goods_from').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
-
-    $('#txt_goods_from').focus(function (){
-        $('#txt_goods_from').typeahead('show')
-    });
-    $('#txt_buyer_company').focus(function (){
-        $('#txt_buyer_company').typeahead('show')
-    });
-    $('#txt_trans_company').focus(function (){
-        $('#txt_trans_company').typeahead('show')
-    });
-    $('#txt_goods_name').focus(function (){
-        $('#txt_goods_name').typeahead('show')
-    });
 });
 
 //

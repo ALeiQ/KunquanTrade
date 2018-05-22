@@ -119,6 +119,8 @@ public class CompanyInfoDaoImp implements CompanyInfoDao {
 
         CompanyInfoExample companyInfoExample = new CompanyInfoExample();
 
+        companyInfoExample.setOrderByClause("convert(name using gbk) asc");
+
         companyInfoExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue())
                 .andNameLike('%' + query + '%');

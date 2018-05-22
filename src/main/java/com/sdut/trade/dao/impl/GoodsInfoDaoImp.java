@@ -105,6 +105,7 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
 
         GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
 
+        goodsInfoExample.setOrderByClause("convert(name using gbk) asc");
 
         goodsInfoExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue())
@@ -125,6 +126,8 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
     public List<GoodsInfo> getGoodsInfoByModelKeyword(String query, String goodsName) {
 
         GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
+
+        goodsInfoExample.setOrderByClause("convert(model using gbk) asc");
 
         goodsInfoExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue())

@@ -345,7 +345,7 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
 
                 if (termsRecordService.addRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequest, createDate)
                         .getResultCode() != 0) {
-                    log.warn("addMajorTerms add LogisticsCompany false!");
+                    log.warn("addMajorTerms add LogisticsCompanyRecord false!");
                 }
             }
         }
@@ -373,7 +373,7 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
 
                 if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
                         .getResultCode() != 0) {
-                    log.warn("addMajorTerms add GoodsInfo false!");
+                    log.warn("addMajorTerms add GoodsInfoRecord false!");
                 }
             }
         }

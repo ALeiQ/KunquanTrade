@@ -105,6 +105,8 @@ public class LogisticsCompanyInfoDaoImp implements LogisticsCompanyInfoDao {
 
         LogisticsCompanyInfoExample logisticsCompanyInfoExample = new LogisticsCompanyInfoExample();
 
+        logisticsCompanyInfoExample.setOrderByClause("convert(name using gbk) asc");
+
         logisticsCompanyInfoExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue())
                 .andNameLike('%' + query + '%');
