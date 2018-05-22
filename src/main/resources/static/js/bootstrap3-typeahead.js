@@ -623,7 +623,9 @@
         },
 
         blur: function (e) {
-            if (!this.mousedover && !this.mouseddown && this.shown) {
+            // 修复input.val('')不刷新的bug 只要有操作 就会刷新补全栏
+            // if (!this.mousedover && !this.mouseddown && this.shown) {
+            if (!this.mousedover && !this.mouseddown) {
                 if (this.selectOnBlur) {
                     this.select();
                 }
