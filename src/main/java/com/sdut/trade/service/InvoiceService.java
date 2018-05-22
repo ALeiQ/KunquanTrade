@@ -35,4 +35,18 @@ public interface InvoiceService {
      * @return
      */
     ResponseVO addInvoice(AddInvoiceRequest addInvoiceRequest, List<AddInvoiceDetailRequest> detailList);
+
+    /**
+     * 删除开票信息
+     * @param delId
+     * @return
+     */
+    ResponseVO delInvoice(int delId);
+
+    /**
+     * 删除单条开票详情
+     * @param delId
+     * @return
+     */
+    ResponseVO delInvoiceDetail(int delId);
 }

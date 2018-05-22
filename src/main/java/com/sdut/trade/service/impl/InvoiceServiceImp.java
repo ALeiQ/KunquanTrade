@@ -19,6 +19,7 @@ import com.sdut.trade.entity.GoodsInfo;
 import com.sdut.trade.entity.InvoiceDetail;
 import com.sdut.trade.entity.InvoiceInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
+import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.InvoiceInfoDircetionEnum;
 import com.sdut.trade.enums.impl.InvoiceInfoTypeEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
@@ -180,6 +181,65 @@ public class InvoiceServiceImp implements InvoiceService {
         }
 
         log.info("addInvoice end [addInvoiceRequest={}], [detailList={}]", addInvoiceRequest, detailList);
+
+        return responseVO;
+    }
+
+    /**
+     * 删除开票信息
+     *
+     * @param delId
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO delInvoice(int delId) {
+
+        log.info("delInvoice del start delId={}", delId);
+
+        ResponseVO responseVO = new ResponseVO();
+
+        Date deleteDate = new Date();
+
+        int delNum = invoiceDao.delInvoiceById(delId, deleteDate);
+
+        if (delNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
+            log.error("delInvoice del false!");
+            return responseVO;
+        }
+
+        invoiceDetailDao.delInvoiceDetailsByInvoiceId(delId, deleteDate);
+
+        log.info("delInvoice del end delId={}", delId);
+
+        return responseVO;
+    }
+
+    /**
+     * 删除单条开票详情
+     *
+     * @param delId
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO delInvoiceDetail(int delId) {
+
+        log.info("delInvoiceDetail del start delId={}", delId);
+
+        ResponseVO responseVO = new ResponseVO();
+
+        Date deleteDate = new Date();
+
+        int delNum = invoiceDetailDao.delInvoiceDetailsById(delId, deleteDate);
+
+        if (delNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
+            log.error("delInvoiceDetail del false!");
+        }
+
+        log.info("delInvoiceDetail del end delId={}", delId);
 
         return responseVO;
     }

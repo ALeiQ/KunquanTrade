@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,5 +77,25 @@ public class InvoiceDaoImp implements InvoiceDao {
     public int addInvoiceInfo(InvoiceInfo invoiceInfo) {
         invoiceInfoMapper.insertSelective(invoiceInfo);
         return invoiceInfo.getId();
+    }
+
+    /**
+     * 通过开票详情id删除数据
+     *
+     * @param delId
+     * @param deleteDate
+     *
+     * @return
+     */
+    @Override
+    public int delInvoiceById(int delId, Date deleteDate) {
+
+        InvoiceInfo invoiceInfo = new InvoiceInfo();
+
+        invoiceInfo.setId(delId);
+        invoiceInfo.setEnable(EnableEnum.DISABLE.isValue());
+        invoiceInfo.setDeleteDate(deleteDate);
+
+        return invoiceInfoMapper.updateByPrimaryKeySelective(invoiceInfo);
     }
 }

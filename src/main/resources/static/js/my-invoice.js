@@ -66,7 +66,7 @@ $(function () {
             }, {
                 field: "operate",
                 title: "操作",
-                formatter: delIcon
+                formatter: delIcon(1)
             }
         ],
         onExpandRow: showDetails
@@ -91,33 +91,43 @@ $(function () {
                 };
             },
             columns: [
-            {
-                field: 'goodsName',
-                title: '名称'
-            }, {
-                field: 'goodsModel',
-                title: '型号'
-            }, {
-                field: 'number',
-                title: '数量'
-            }, {
-                field: 'unitPrice',
-                title: '单价（含税）'
-            }, {
-                field: 'sumPrice',
-                title: '总额（含税）'
-            }, {
-                field: 'tax',
-                title: '税额'
-            }]
+                {
+                    field: "id",
+                    title: "#"
+                },
+                {
+                    field: 'goodsName',
+                    title: '名称'
+                }, {
+                    field: 'goodsModel',
+                    title: '型号'
+                }, {
+                    field: 'number',
+                    title: '数量'
+                }, {
+                    field: 'unitPrice',
+                    title: '单价（含税）'
+                }, {
+                    field: 'sumPrice',
+                    title: '总额（含税）'
+                }, {
+                    field: 'tax',
+                    title: '税额'
+                }, {
+                    field: "operate",
+                    title: "操作",
+                    formatter: delIcon(2)
+                }
+            ]
         });
     }
 
-    function delIcon(value, row, index) {
-        return '<a class="icon closed-tool" onclick="delData(this)"><i class="fa' +
+    function delIcon(type, value, row, index) {
+        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + type + ', this)"><i' +
+            ' class="fa' +
             ' fa-times"></i></a>';
-
     }
+
 });
 
 // 表格功能设置
@@ -134,6 +144,25 @@ $(function () {
 
         myModal.modal();
     });
+
+    // 删除行按钮
+    delData = function (type, del_icon) {
+
+        var row = $(del_icon).parent().parent();
+        var table = row.parent().parent();
+
+        var url;
+        if (type === 1) {
+            url = "/invoice/delInvoice";
+            delInvoice(url, $(table), $(row.children()[1])[0].innerText);
+        } else if (type === 2) {
+            url = "/invoice/delInvoiceDetail";
+            delInvoice(url, $(table), $(row.children()[0])[0].innerText);
+        }
+
+
+        return false;
+    };
 
     // 表单提交按钮
     $("#btn_submit_invoice").click(function () {
@@ -171,6 +200,27 @@ $(function () {
                 }
             }
         })
+    };
+
+    delInvoice = function(url, table, id) {
+        console.log(url, table, id);
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            async: false,
+            data: {delId: id},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    table.bootstrapTable('refresh');
+                }
+            },
+            error : function() {
+                alert("ajax请求异常！");
+            }
+        });
     };
 
     getDetails = function(form_data) {

@@ -159,4 +159,55 @@ public class InvoiceController {
 
         return result;
     }
+
+    /**
+     * 删除发票信息
+     * @param delId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delInvoice", method = RequestMethod.POST)
+    public ResponseVO delInvoice(int delId) {
+
+        log.info("delInvoice start [delId={}]", delId);
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+            result = invoiceService.delInvoice(delId);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("delLogisticsDetail Unknown Error!" , ex);
+        }
+
+        log.info("delInvoice end [delId={}]", delId);
+
+        return result;
+    }
+
+    /**
+     * 删除发票详情信息
+     * @param delId
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/delInvoiceDetail", method = RequestMethod.POST)
+    public ResponseVO delInvoiceDetail(int delId) {
+
+        log.info("delInvoiceDetail start [delId={}]", delId);
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+            result = invoiceService.delInvoiceDetail(delId);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("delLogisticsDetail Unknown Error!" , ex);
+        }
+
+        log.info("delInvoiceDetail end [delId={}]", delId);
+
+        return result;
+    }
+
 }

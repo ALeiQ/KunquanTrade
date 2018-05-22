@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,49 @@ public class InvoiceDetailDaoImp implements InvoiceDetailDao {
         }
 
         return invoiceDetailMapper.batchInsert(invoiceDetailList);
+    }
+
+    /**
+     * 通过开票附表id删除开票附加信息
+     *
+     * @param delId
+     * @param deleteDate
+     *
+     * @return
+     */
+    @Override
+    public int delInvoiceDetailsById(int delId, Date deleteDate) {
+
+        InvoiceDetail invoiceDetail = new InvoiceDetail();
+
+        invoiceDetail.setId(delId);
+        invoiceDetail.setEnable(EnableEnum.DISABLE.isValue());
+        invoiceDetail.setDeleteDate(deleteDate);
+
+        return invoiceDetailMapper.updateByPrimaryKeySelective(invoiceDetail);
+    }
+
+    /**
+     * 通过开票id删除开票附加信息
+     *
+     * @param delId
+     * @param deleteDate
+     *
+     * @return
+     */
+    @Override
+    public int delInvoiceDetailsByInvoiceId(int delId, Date deleteDate) {
+
+        InvoiceDetailExample invoiceDetailExample = new InvoiceDetailExample();
+
+        invoiceDetailExample.createCriteria()
+                .andInvoiceIdEqualTo(delId);
+
+        InvoiceDetail invoiceDetail = new InvoiceDetail();
+
+        invoiceDetail.setEnable(EnableEnum.DISABLE.isValue());
+        invoiceDetail.setDeleteDate(deleteDate);
+
+        return invoiceDetailMapper.updateByExampleSelective(invoiceDetail, invoiceDetailExample);
     }
 }

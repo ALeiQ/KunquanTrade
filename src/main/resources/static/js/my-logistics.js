@@ -98,7 +98,12 @@ $(function () {
         onClickRow: editRow
     });
 
-    function editRow(row) {
+    function editRow(row, $element, field) {
+
+        if (field === "operate") {
+            return false;
+        }
+
         clearModal();
         myModal.find('.modal-title').text('编号：' + row['id']);
         $('#txt_goods_from').val(row['goodsFrom']);
@@ -124,7 +129,7 @@ $(function () {
     }
 
     function delIcon(value, row, index) {
-        return '<a class="icon closed-tool" onclick="delData(this)"><i class="fa' +
+        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(this)"><i class="fa' +
             ' fa-times"></i></a>';
 
     }
@@ -209,11 +214,9 @@ $(function () {
     // 删除行按钮
     delData = function (del_icon) {
 
-        var row = $(del_icon).parents('tr');
+        var row = $(del_icon).parent().parent();
 
-        delLogisticsDetail($(row.children().first())[0].innerText);
-
-        table.bootstrapTable('refresh');
+        delLogisticsDetail($(row.children()[0])[0].innerText);
 
         return false;
     };

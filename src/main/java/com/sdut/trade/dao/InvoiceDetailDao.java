@@ -1,5 +1,6 @@
 package com.sdut.trade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.entity.InvoiceDetail;
@@ -25,4 +26,20 @@ public interface InvoiceDetailDao {
      * @return
      */
     int addInvoiceDetails(List<InvoiceDetail> invoiceDetailList);
+
+    /**
+     * 通过开票附表id删除开票附加信息
+     * @param delId
+     * @param deleteDate
+     * @return
+     */
+    int delInvoiceDetailsById(int delId, Date deleteDate);
+
+    /**
+     * 通过开票id删除开票附加信息
+     * @param delId
+     * @param deleteDate
+     * @return
+     */
+    int delInvoiceDetailsByInvoiceId(int delId, Date deleteDate);
 }
