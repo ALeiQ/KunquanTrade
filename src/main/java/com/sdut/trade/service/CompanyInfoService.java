@@ -15,6 +15,7 @@ public interface CompanyInfoService {
 
     /**
      * 常用名词页获取全部公司信息
+     *
      * @return 公司信息数组
      */
     ResponseVO getAllCompanyInfo();
@@ -23,6 +24,7 @@ public interface CompanyInfoService {
      * 常用名词添加公司信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     ResponseVO addCompanyInfoBatch(List<AddTermsRequest> addTermsRequests);
@@ -31,13 +33,16 @@ public interface CompanyInfoService {
      * 删除指定id的公司信息
      *
      * @param id 需要删除的信息的Id
+     *
      * @return 删除结果
      */
     ResponseVO delCompanyInfoById(int id);
 
     /**
      * 通过关键词模糊查询公司名称
+     *
      * @param query 查询关键字
+     *
      * @return
      */
     ResponseVO getCompanyByKeyword(String query);

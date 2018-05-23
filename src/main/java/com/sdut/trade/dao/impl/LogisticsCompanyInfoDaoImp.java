@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONArray;
 import com.sdut.trade.dao.LogisticsCompanyInfoDao;
 import com.sdut.trade.entity.LogisticsCompanyInfo;
 import com.sdut.trade.entity.LogisticsCompanyInfoExample;
@@ -42,7 +41,8 @@ public class LogisticsCompanyInfoDaoImp implements LogisticsCompanyInfoDao {
 
         logisticsCompanyInfoExample.setOrderByClause("id desc");
 
-        List<LogisticsCompanyInfo> logisticsCompanyInfos = logisticsCompanyInfoMapper.selectByExample(logisticsCompanyInfoExample);
+        List<LogisticsCompanyInfo> logisticsCompanyInfos =
+                logisticsCompanyInfoMapper.selectByExample(logisticsCompanyInfoExample);
 
         return logisticsCompanyInfos;
     }

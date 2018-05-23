@@ -25,8 +25,8 @@ import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.BankInfoService;
 import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.GoodsInfoService;
-import com.sdut.trade.service.TermsRecordService;
 import com.sdut.trade.service.LogisticsCompanyInfoService;
+import com.sdut.trade.service.TermsRecordService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -63,6 +63,7 @@ public class MajorTermsController {
 
     /**
      * 获取货物信息
+     *
      * @return 货物信息列表
      */
     @ResponseBody
@@ -114,8 +115,10 @@ public class MajorTermsController {
 
     /**
      * 分页查询常用名词增删记录
-     * @param page 页码
+     *
+     * @param page     页码
      * @param pageSize 每页行数
+     *
      * @return
      */
     @ResponseBody
@@ -156,9 +159,9 @@ public class MajorTermsController {
         return result;
     }
 
-
     /**
      * 增加多条数据
+     *
      * @return 数据写入是否成功
      */
     @ResponseBody
@@ -180,7 +183,6 @@ public class MajorTermsController {
                 result.setResult(ExceptionEnum.PARAM_EMPTY);
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
-
 
             // 根据前端提供的类型，分别进行不同数据表的数据添加。
             switch (addType) {
@@ -206,7 +208,7 @@ public class MajorTermsController {
             log.error("addTerms Known Error!" + ex);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("addTerms Unknown Error!" , ex);
+            log.error("addTerms Unknown Error!", ex);
         }
 
         log.info("addTerms end");
@@ -214,9 +216,9 @@ public class MajorTermsController {
         return result;
     }
 
-
     /**
      * 删除单条数据
+     *
      * @return 数据写入是否成功
      */
     @ResponseBody
@@ -235,7 +237,6 @@ public class MajorTermsController {
                 result.setResult(ExceptionEnum.PARAM_EMPTY);
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
-
 
             // 根据前端提供的类型，分别进行不同数据表的数据添加。
             switch (delType) {
@@ -261,7 +262,7 @@ public class MajorTermsController {
             log.error("delTerm Known Error!" + ex);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("delTerm Unknown Error!" , ex);
+            log.error("delTerm Unknown Error!", ex);
         }
 
         log.info("delTerm end");

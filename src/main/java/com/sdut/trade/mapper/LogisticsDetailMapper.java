@@ -1,9 +1,11 @@
 package com.sdut.trade.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sdut.trade.entity.LogisticsDetail;
 import com.sdut.trade.entity.LogisticsDetailExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface LogisticsDetailMapper {
     long countByExample(LogisticsDetailExample example);
@@ -20,7 +22,8 @@ public interface LogisticsDetailMapper {
 
     LogisticsDetail selectByPrimaryKey(Integer id);
 
-    int updateByExampleSelective(@Param("record") LogisticsDetail record, @Param("example") LogisticsDetailExample example);
+    int updateByExampleSelective(@Param("record") LogisticsDetail record,
+                                 @Param("example") LogisticsDetailExample example);
 
     int updateByExample(@Param("record") LogisticsDetail record, @Param("example") LogisticsDetailExample example);
 
@@ -44,5 +47,6 @@ public interface LogisticsDetailMapper {
      * @mbg.generated
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
-    int batchInsertSelective(@Param("list") List<LogisticsDetail> list, @Param("selective") LogisticsDetail.Column ... selective);
+    int batchInsertSelective(@Param("list") List<LogisticsDetail> list,
+                             @Param("selective") LogisticsDetail.Column... selective);
 }

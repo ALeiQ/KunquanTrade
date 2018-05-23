@@ -15,6 +15,7 @@ public interface BankInfoService {
 
     /**
      * 常用名词页获取全部银行信息
+     *
      * @return 银行信息数组
      */
     ResponseVO getAllBankInfo();
@@ -23,6 +24,7 @@ public interface BankInfoService {
      * 常用名词添加银行信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     ResponseVO addBankInfoBatch(List<AddTermsRequest> addTermsRequests);
@@ -31,6 +33,7 @@ public interface BankInfoService {
      * 删除指定id的银行信息
      *
      * @param id 需要删除的信息的Id
+     *
      * @return 删除结果
      */
     ResponseVO delBankInfoById(int id);

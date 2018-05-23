@@ -16,17 +16,16 @@ import com.sdut.trade.dao.LogisticsCompanyInfoDao;
 import com.sdut.trade.dao.LogisticsDetailDao;
 import com.sdut.trade.entity.CompanyInfo;
 import com.sdut.trade.entity.GoodsInfo;
-import com.sdut.trade.entity.TermsRecord;
 import com.sdut.trade.entity.LogisticsCompanyInfo;
 import com.sdut.trade.entity.LogisticsDetail;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
-import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.request.AddLogisticsRequest;
+import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
-import com.sdut.trade.service.TermsRecordService;
 import com.sdut.trade.service.LogisticsDetailService;
+import com.sdut.trade.service.TermsRecordService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -129,7 +128,6 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
      */
     @Override
     public ResponseVO updateLogisticsDetail(int id, AddLogisticsRequest addLogisticsRequest) {
-
 
         ResponseVO responseVO = new ResponseVO();
 
@@ -343,7 +341,8 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
 
                 addTermsRequest.setName(addLogisticsRequest.getTransCompany());
 
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequest, createDate)
+                if (termsRecordService
+                        .addRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, addTermsRequest, createDate)
                         .getResultCode() != 0) {
                     log.warn("addMajorTerms add LogisticsCompanyRecord false!");
                 }

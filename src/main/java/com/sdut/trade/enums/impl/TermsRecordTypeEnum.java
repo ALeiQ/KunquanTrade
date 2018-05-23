@@ -8,7 +8,7 @@ import lombok.Getter;
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/10
  */
-public enum  TermsRecordTypeEnum {
+public enum TermsRecordTypeEnum {
 
     GOODS_INFO(1, "货物总览"),
     COMPANY_INFO(2, "公司总览"),

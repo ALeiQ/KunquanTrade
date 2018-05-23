@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 
 import com.sdut.trade.bean.GoodsInfoVO;
@@ -20,7 +19,6 @@ import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
-import com.sdut.trade.mapper.GoodsInfoMapper;
 import com.sdut.trade.service.GoodsInfoService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +41,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
 
     /**
      * 常用名词页获取全部货物信息
+     *
      * @return 货物信息数组
      */
     @Override
@@ -86,6 +85,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
      * 常用名词添加货物信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     @Override
@@ -115,7 +115,7 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
         if (addNum != addTermsRequests.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addGoodsInfoBatch add to DB less than need! [need = {}][real = {}]",

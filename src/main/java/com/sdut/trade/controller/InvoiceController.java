@@ -11,7 +11,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,7 +48,9 @@ public class InvoiceController {
 
     /**
      * 获取指定流向的发票
+     *
      * @param direction
+     *
      * @return
      */
     @ResponseBody
@@ -89,7 +90,9 @@ public class InvoiceController {
 
     /**
      * 获取指定ID的开票详情
+     *
      * @param queryId
+     *
      * @return
      */
     @ResponseBody
@@ -123,8 +126,10 @@ public class InvoiceController {
 
     /**
      * 添加发票信息
+     *
      * @param params
      * @param details
+     *
      * @return
      */
     @ResponseBody
@@ -162,7 +167,9 @@ public class InvoiceController {
 
     /**
      * 删除发票信息
+     *
      * @param delId
+     *
      * @return
      */
     @ResponseBody
@@ -177,7 +184,7 @@ public class InvoiceController {
             result = invoiceService.delInvoice(delId);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("delLogisticsDetail Unknown Error!" , ex);
+            log.error("delLogisticsDetail Unknown Error!", ex);
         }
 
         log.info("delInvoice end [delId={}]", delId);
@@ -187,7 +194,9 @@ public class InvoiceController {
 
     /**
      * 删除发票详情信息
+     *
      * @param delId
+     *
      * @return
      */
     @ResponseBody
@@ -202,7 +211,7 @@ public class InvoiceController {
             result = invoiceService.delInvoiceDetail(delId);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("delLogisticsDetail Unknown Error!" , ex);
+            log.error("delLogisticsDetail Unknown Error!", ex);
         }
 
         log.info("delInvoiceDetail end [delId={}]", delId);

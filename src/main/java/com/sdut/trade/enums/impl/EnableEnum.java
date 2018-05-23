@@ -8,7 +8,7 @@ import lombok.Getter;
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/8
  */
-public enum  EnableEnum {
+public enum EnableEnum {
 
     ENABLE(true, "可用（未删除）"),
     DISABLE(false, "已删除");

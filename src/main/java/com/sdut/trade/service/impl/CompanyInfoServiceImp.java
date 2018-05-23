@@ -6,7 +6,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import com.sdut.trade.bean.CompanyInfoVO;
 import com.sdut.trade.dao.CompanyInfoDao;
@@ -39,6 +38,7 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
     /**
      * 常用名词页获取全部公司信息
+     *
      * @return 公司信息数组
      */
     @Override
@@ -80,6 +80,7 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
      * 常用名词添加公司信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     @Override
@@ -108,7 +109,7 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
         if (addNum != addTermsRequests.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",

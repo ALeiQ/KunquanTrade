@@ -32,6 +32,7 @@ public class InvoiceDetailDaoImp implements InvoiceDetailDao {
      * 查询票务信息Id为queryId的发票详情
      *
      * @param queryId
+     *
      * @return
      */
     @Override

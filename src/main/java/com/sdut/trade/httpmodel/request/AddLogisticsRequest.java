@@ -3,7 +3,6 @@ package com.sdut.trade.httpmodel.request;
 import java.util.Date;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Data;
 

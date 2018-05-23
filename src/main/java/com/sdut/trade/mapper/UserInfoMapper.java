@@ -1,9 +1,11 @@
 package com.sdut.trade.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sdut.trade.entity.UserInfo;
 import com.sdut.trade.entity.UserInfoExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface UserInfoMapper {
     long countByExample(UserInfoExample example);
@@ -44,5 +46,5 @@ public interface UserInfoMapper {
      * @mbg.generated
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
-    int batchInsertSelective(@Param("list") List<UserInfo> list, @Param("selective") UserInfo.Column ... selective);
+    int batchInsertSelective(@Param("list") List<UserInfo> list, @Param("selective") UserInfo.Column... selective);
 }

@@ -141,7 +141,7 @@ public class InvoiceServiceImp implements InvoiceService {
      * 添加开票信息
      *
      * @param addInvoiceRequest 开票信息
-     * @param detailList 票据明细
+     * @param detailList        票据明细
      *
      * @return
      */
@@ -171,7 +171,7 @@ public class InvoiceServiceImp implements InvoiceService {
         if (addNum != detailList.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(invoiceDetailList.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(invoiceDetailList.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addInvoice add to DB less than need! [need = {}][real = {}]",
@@ -246,12 +246,15 @@ public class InvoiceServiceImp implements InvoiceService {
 
     /**
      * 添加开票信息附属详情
+     *
      * @param id
      * @param detailList
      * @param createDate
+     *
      * @return
      */
-    private List<InvoiceDetail> parseRequsetDetailToModel(int id, List<AddInvoiceDetailRequest> detailList, Date createDate) {
+    private List<InvoiceDetail> parseRequsetDetailToModel(int id, List<AddInvoiceDetailRequest> detailList,
+                                                          Date createDate) {
 
         List<InvoiceDetail> invoiceDetailList = new ArrayList<>();
 
@@ -276,8 +279,10 @@ public class InvoiceServiceImp implements InvoiceService {
 
     /**
      * 解析开票请求到票务信息对象
+     *
      * @param addInvoiceRequest
      * @param createDate
+     *
      * @return
      */
     private InvoiceInfo parseRequsetToModel(AddInvoiceRequest addInvoiceRequest, Date createDate) {
@@ -295,7 +300,7 @@ public class InvoiceServiceImp implements InvoiceService {
                 // 仅有受票方
                 invoiceInfo.setDirection(InvoiceInfoDircetionEnum.OUTPUT.getValue());
             }
-        } else if(StringUtils.isEmpty(receive)){
+        } else if (StringUtils.isEmpty(receive)) {
             // 仅有开票方
             invoiceInfo.setDirection(InvoiceInfoDircetionEnum.INPUT.getValue());
         } else {
@@ -319,6 +324,7 @@ public class InvoiceServiceImp implements InvoiceService {
 
     /**
      * 从开票信息中获取新名词
+     *
      * @param addInvoiceRequest
      * @param createDate
      */
@@ -379,6 +385,7 @@ public class InvoiceServiceImp implements InvoiceService {
 
     /**
      * 从开票详情中获取货物新名词
+     *
      * @param addInvoiceDetailRequest
      * @param createDate
      */
@@ -387,7 +394,8 @@ public class InvoiceServiceImp implements InvoiceService {
         // 如果货物信息不在常用名词库，则添加到库
         if (!StringUtils.isEmpty(addInvoiceDetailRequest.getGoodsName())) {
 
-            if (!goodsInfoDao.hasGoods(addInvoiceDetailRequest.getGoodsName(), addInvoiceDetailRequest.getGoodsModel())) {
+            if (!goodsInfoDao
+                    .hasGoods(addInvoiceDetailRequest.getGoodsName(), addInvoiceDetailRequest.getGoodsModel())) {
 
                 GoodsInfo goodsInfo = new GoodsInfo();
 

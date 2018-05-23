@@ -4,10 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.commons.collections.ArrayStack;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import com.sdut.trade.bean.LogisticsCompanyInfoVO;
 import com.sdut.trade.dao.LogisticsCompanyInfoDao;
@@ -40,6 +38,7 @@ public class LogisticsCompanyInfoServiceImp implements LogisticsCompanyInfoServi
 
     /**
      * 常用名词页获取全部运输公司信息
+     *
      * @return 运输公司信息数组
      */
     @Override
@@ -81,6 +80,7 @@ public class LogisticsCompanyInfoServiceImp implements LogisticsCompanyInfoServi
      * 常用名词添加运输公司信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     @Override
@@ -109,7 +109,7 @@ public class LogisticsCompanyInfoServiceImp implements LogisticsCompanyInfoServi
         if (addNum != addTermsRequests.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(addTermsRequests.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addLogisticsCompanyInfoBatch add to DB less than need! [need = {}][real = {}]",
@@ -146,7 +146,8 @@ public class LogisticsCompanyInfoServiceImp implements LogisticsCompanyInfoServi
 
         AddTermsRequest delTermsRequest = new AddTermsRequest();
         delTermsRequest.setName(logisticsCompanyInfo.getName());
-        responseVO = termsRecordService.delRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, delTermsRequest, deleteDate);
+        responseVO =
+                termsRecordService.delRecord(TermsRecordTypeEnum.TRANSPORT_COMPANY_INFO, delTermsRequest, deleteDate);
 
         return responseVO;
 

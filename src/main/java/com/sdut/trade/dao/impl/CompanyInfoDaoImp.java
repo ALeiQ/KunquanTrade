@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONArray;
 import com.sdut.trade.dao.CompanyInfoDao;
 import com.sdut.trade.entity.CompanyInfo;
 import com.sdut.trade.entity.CompanyInfoExample;

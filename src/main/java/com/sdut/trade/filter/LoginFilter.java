@@ -26,7 +26,6 @@ import javax.servlet.http.HttpSession;
  */
 public class LoginFilter implements Filter {
 
-
     public static List<String> pattenURL = new ArrayList<String>();
 
     @Override
@@ -37,7 +36,7 @@ public class LoginFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,
-            FilterChain chain) throws IOException, ServletException {
+                         FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession();
@@ -50,7 +49,7 @@ public class LoginFilter implements Filter {
          * url.indexOf(urlStr) > -1  表示urlStr在url中出现过，出现就不拦截
          * */
         for (String urlStr : pattenURL) {
-            if(url.indexOf(urlStr) > -1){
+            if (url.indexOf(urlStr) > -1) {
                 chain.doFilter(request, response);
                 return;
             }

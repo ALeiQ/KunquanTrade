@@ -24,7 +24,7 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
  * @date 2018/3/9
  */
 @Configuration
-@MapperScan(basePackages = "com.sdut.trade.mapper",sqlSessionTemplateRef = "tradeSqlSessionTemplate")
+@MapperScan(basePackages = "com.sdut.trade.mapper", sqlSessionTemplateRef = "tradeSqlSessionTemplate")
 public class TradeDataSourceConfig {
 
     @Bean(name = "tradeDataSource")

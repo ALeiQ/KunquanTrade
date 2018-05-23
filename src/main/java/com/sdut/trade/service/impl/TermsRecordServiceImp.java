@@ -40,7 +40,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
      * 分页查询常用名词增删记录
      *
      * @param page 页码
-     * @param rows   行数
+     * @param rows 行数
      *
      * @return 查询页的记录列表
      */
@@ -49,7 +49,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int offset = (page-1)*rows;
+        int offset = (page - 1) * rows;
         List<TermsRecord> termsRecords = termsRecordDao.getAllInRange(offset, rows);
 
         if (ListUtils.isEmpty(termsRecords)) {
@@ -58,7 +58,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
             return responseVO;
         }
 
-        List<TermsRecordVO>  termsRecordVOS = new ArrayList<>();
+        List<TermsRecordVO> termsRecordVOS = new ArrayList<>();
 
         for (TermsRecord termsRecord : termsRecords) {
 
@@ -76,7 +76,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
         }
 
         responseVO.setCurrentPage(page);
-        responseVO.setTotalPages((termsRecordDao.getCount()+rows-1)/rows);
+        responseVO.setTotalPages((termsRecordDao.getCount() + rows - 1) / rows);
         responseVO.setData(termsRecordVOS);
 
         return responseVO;
@@ -92,11 +92,11 @@ public class TermsRecordServiceImp implements TermsRecordService {
      * @return
      */
     @Override
-    public ResponseVO getInRangeByTye(Integer page, Integer rows,  Integer getType) {
+    public ResponseVO getInRangeByTye(Integer page, Integer rows, Integer getType) {
 
         ResponseVO responseVO = new ResponseVO();
 
-        int offset = (page-1)*rows;
+        int offset = (page - 1) * rows;
 
         List<TermsRecord> termsRecords;
         if (getType == 0) {
@@ -111,7 +111,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
             return responseVO;
         }
 
-        List<TermsRecordVO>  termsRecordVOS = new ArrayList<>();
+        List<TermsRecordVO> termsRecordVOS = new ArrayList<>();
 
         for (TermsRecord termsRecord : termsRecords) {
 
@@ -130,9 +130,9 @@ public class TermsRecordServiceImp implements TermsRecordService {
 
         responseVO.setCurrentPage(page);
         if (getType == 0) {
-            responseVO.setTotalPages((termsRecordDao.getCount()+rows-1)/rows);
+            responseVO.setTotalPages((termsRecordDao.getCount() + rows - 1) / rows);
         } else {
-            responseVO.setTotalPages((termsRecordDao.getCountByType(getType)+rows-1)/rows);
+            responseVO.setTotalPages((termsRecordDao.getCountByType(getType) + rows - 1) / rows);
         }
         responseVO.setData(termsRecordVOS);
 
@@ -149,7 +149,8 @@ public class TermsRecordServiceImp implements TermsRecordService {
      * @return
      */
     @Override
-    public ResponseVO addRecords(TermsRecordTypeEnum addType, List<AddTermsRequest> addTermsRequestList, Date createDate) {
+    public ResponseVO addRecords(TermsRecordTypeEnum addType, List<AddTermsRequest> addTermsRequestList,
+                                 Date createDate) {
 
         ResponseVO responseVO = new ResponseVO();
 
@@ -174,7 +175,7 @@ public class TermsRecordServiceImp implements TermsRecordService {
         if (addTermNum != termsRecords.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名词记录添加失败！"
-                    + "[需要添加: " + Integer.toString(termsRecords.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(termsRecords.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addTermNum) + " 条]");
 
             log.error("addBankInfoBatch add to DB less than need! [need = {}][real = {}]",

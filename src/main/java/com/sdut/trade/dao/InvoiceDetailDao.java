@@ -15,30 +15,38 @@ public interface InvoiceDetailDao {
 
     /**
      * 查询票务信息Id为queryId的发票详情
+     *
      * @param queryId
+     *
      * @return
      */
     List<InvoiceDetail> getAllByInvoiceId(Integer queryId);
 
     /**
      * 批量添加开票附加信息
+     *
      * @param invoiceDetailList
+     *
      * @return
      */
     int addInvoiceDetails(List<InvoiceDetail> invoiceDetailList);
 
     /**
      * 通过开票附表id删除开票附加信息
+     *
      * @param delId
      * @param deleteDate
+     *
      * @return
      */
     int delInvoiceDetailsById(int delId, Date deleteDate);
 
     /**
      * 通过开票id删除开票附加信息
+     *
      * @param delId
      * @param deleteDate
+     *
      * @return
      */
     int delInvoiceDetailsByInvoiceId(int delId, Date deleteDate);

@@ -15,27 +15,33 @@ public interface LogisticsDetailService {
      * 添加单条运输明细数据
      *
      * @param addLogisticsRequest 待处理添加的原生数据（前端传来）
+     *
      * @return
      */
     ResponseVO addLogisticsDetail(AddLogisticsRequest addLogisticsRequest);
 
     /**
      * 查询全部运输明细
+     *
      * @return
      */
     ResponseVO getAll();
 
     /**
      * 修改给定id的运输明细信息
+     *
      * @param id
      * @param addLogisticsRequest
+     *
      * @return
      */
     ResponseVO updateLogisticsDetail(int id, AddLogisticsRequest addLogisticsRequest);
 
     /**
      * 删除单条运输明细信息
+     *
      * @param delId
+     *
      * @return
      */
     ResponseVO delLogisticsDetail(Integer delId);

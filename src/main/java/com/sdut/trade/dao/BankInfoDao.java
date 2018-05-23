@@ -24,6 +24,7 @@ public interface BankInfoDao {
      * 获取指定id的银行信息
      *
      * @param id
+     *
      * @return 指定编号的银行信息
      */
     BankInfo getBankInfoById(int id);
@@ -32,6 +33,7 @@ public interface BankInfoDao {
      * 添加银行信息到数据库
      *
      * @param bankInfos 待添加的银行列表
+     *
      * @return 成功插入数据库的条数
      */
     int addBankInfoBatch(List<BankInfo> bankInfos);
@@ -39,8 +41,9 @@ public interface BankInfoDao {
     /**
      * 删除银行信息到数据库
      *
-     * @param id 待删除id
+     * @param id         待删除id
      * @param deleteDate 删除日期
+     *
      * @return 成功插入数据库的条数
      */
     int delBankInfoById(int id, Date deleteDate);

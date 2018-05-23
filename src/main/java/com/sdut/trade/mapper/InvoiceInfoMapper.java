@@ -1,9 +1,11 @@
 package com.sdut.trade.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.sdut.trade.entity.InvoiceInfo;
 import com.sdut.trade.entity.InvoiceInfoExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface InvoiceInfoMapper {
     long countByExample(InvoiceInfoExample example);
@@ -44,5 +46,6 @@ public interface InvoiceInfoMapper {
      * @mbg.generated
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
-    int batchInsertSelective(@Param("list") List<InvoiceInfo> list, @Param("selective") InvoiceInfo.Column ... selective);
+    int batchInsertSelective(@Param("list") List<InvoiceInfo> list,
+                             @Param("selective") InvoiceInfo.Column... selective);
 }

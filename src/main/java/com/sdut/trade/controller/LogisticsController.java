@@ -56,7 +56,9 @@ public class LogisticsController {
 
     /**
      * 运输明细页面下拉框数据获取
+     *
      * @param getType
+     *
      * @return
      */
     @ResponseBody
@@ -108,6 +110,7 @@ public class LogisticsController {
 
     /**
      * 获取运输明细详情数据
+     *
      * @return
      */
     @ResponseBody
@@ -129,11 +132,15 @@ public class LogisticsController {
 
         return result;
 
-    };
+    }
+
+    ;
 
     /**
      * 添加单条运输明细
+     *
      * @param params
+     *
      * @return
      */
     @ResponseBody
@@ -169,8 +176,10 @@ public class LogisticsController {
 
     /**
      * 更新单条运输明细
+     *
      * @param id
      * @param params
+     *
      * @return
      */
     @ResponseBody
@@ -206,6 +215,7 @@ public class LogisticsController {
 
     /**
      * 删除单条数据
+     *
      * @return 数据写入是否成功
      */
     @ResponseBody
@@ -230,7 +240,7 @@ public class LogisticsController {
             log.error("delLogisticsDetail Known Error!" + ex);
         } catch (Exception ex) {
             result.setResult(ResultEnum.FAILURE);
-            log.error("delLogisticsDetail Unknown Error!" , ex);
+            log.error("delLogisticsDetail Unknown Error!", ex);
         }
 
         log.info("delLogisticsDetail end");

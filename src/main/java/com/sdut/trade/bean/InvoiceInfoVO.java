@@ -8,6 +8,7 @@ import lombok.Data;
 
 /**
  * 类描述：开票明细展示层
+ *
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/20
  */

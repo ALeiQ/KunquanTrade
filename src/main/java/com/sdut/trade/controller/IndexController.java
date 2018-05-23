@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/index")
 public class IndexController {
 
-    @RequestMapping(value = "",method = RequestMethod.GET)
+    @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap modelMap, HttpServletRequest request) {
         return "/index";
     }

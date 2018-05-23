@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.fastjson.JSONArray;
 import com.sdut.trade.dao.BankInfoDao;
 import com.sdut.trade.entity.BankInfo;
 import com.sdut.trade.entity.BankInfoExample;
@@ -76,8 +75,9 @@ public class BankInfoDaoImp implements BankInfoDao {
     /**
      * 删除银行信息到数据库
      *
-     * @param id 待删除id
+     * @param id         待删除id
      * @param deleteDate 删除时间
+     *
      * @return 成功插入数据库的条数
      */
     @Override

@@ -6,17 +6,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.util.CollectionUtils;
 
 import com.sdut.trade.bean.BankInfoVO;
 import com.sdut.trade.dao.BankInfoDao;
-import com.sdut.trade.dao.TermsRecordDao;
 import com.sdut.trade.entity.BankInfo;
-import com.sdut.trade.entity.TermsRecord;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
-import com.sdut.trade.enums.impl.TermsRecordOperateEnum;
 import com.sdut.trade.enums.impl.TermsRecordTypeEnum;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
@@ -43,6 +39,7 @@ public class BankInfoServiceImp implements BankInfoService {
 
     /**
      * 常用名词页获取全部银行信息
+     *
      * @return 银行信息数组
      */
     @Override
@@ -85,6 +82,7 @@ public class BankInfoServiceImp implements BankInfoService {
      * 常用名词添加银行信息
      *
      * @param addTermsRequests 添加的数据组
+     *
      * @return 添加结果
      */
     @Override
@@ -113,7 +111,7 @@ public class BankInfoServiceImp implements BankInfoService {
         if (addNum != bankInfos.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
             responseVO.setResultMsg("名词添加失败！"
-                    + "[需要添加: " + Integer.toString(bankInfos.size()) +" 条]"
+                    + "[需要添加: " + Integer.toString(bankInfos.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addBankInfoBatch add to DB less than need! [need = {}][real = {}]",

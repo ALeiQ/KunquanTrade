@@ -16,36 +16,46 @@ public interface InvoiceService {
 
     /**
      * 根据开票流向获取全数据
+     *
      * @param direction 0.全部 1.进项 2.销项 3.中转
+     *
      * @return
      */
     ResponseVO getAllByDirection(Integer direction);
 
     /**
      * 根据票据id获取票据详细内容
+     *
      * @param queryId
+     *
      * @return
      */
     ResponseVO getInvoiceDetailsById(Integer queryId);
 
     /**
      * 添加开票信息
+     *
      * @param addInvoiceRequest
      * @param detailList
+     *
      * @return
      */
     ResponseVO addInvoice(AddInvoiceRequest addInvoiceRequest, List<AddInvoiceDetailRequest> detailList);
 
     /**
      * 删除开票信息
+     *
      * @param delId
+     *
      * @return
      */
     ResponseVO delInvoice(int delId);
 
     /**
      * 删除单条开票详情
+     *
      * @param delId
+     *
      * @return
      */
     ResponseVO delInvoiceDetail(int delId);

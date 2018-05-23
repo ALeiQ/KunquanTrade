@@ -40,5 +40,4 @@ public enum InvoiceInfoDircetionEnum {
         this.desc = desc;
     }
 
-
 }

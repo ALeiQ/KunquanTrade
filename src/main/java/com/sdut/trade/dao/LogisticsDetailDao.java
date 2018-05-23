@@ -15,35 +15,43 @@ public interface LogisticsDetailDao {
 
     /**
      * 添加单条运输明细数据
+     *
      * @param logisticsDetail
+     *
      * @return
      */
     int addLogisticsDetail(LogisticsDetail logisticsDetail);
 
     /**
      * 查询运输明细（逆序查询，后插入的先查到）
+     *
      * @return
      */
     List<LogisticsDetail> getAll();
 
     /**
      * 获取数据总数
+     *
      * @return
      */
     long getCount();
 
     /**
      * 更新id的运输明细
+     *
      * @param id
      * @param logisticsDetail
+     *
      * @return
      */
     int updateLogisticsDetail(int id, LogisticsDetail logisticsDetail);
 
     /**
      * 删除单条运输明细记录
+     *
      * @param delId
      * @param deleteDate
+     *
      * @return
      */
     int delLogisticsDetail(Integer delId, Date deleteDate);
