@@ -414,8 +414,6 @@ $(function () {
     $('#txt_goods_from').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
 });
 
-//
-
 // 校验配置
 $(document).ready(function() {
     formValidator = function () {

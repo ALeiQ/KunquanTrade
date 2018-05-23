@@ -69,7 +69,8 @@ $(function () {
                 formatter: delIcon(1)
             }
         ],
-        onExpandRow: showDetails
+        onExpandRow: showDetails,
+        onClickRow: editRow
     });
 
     function showDetails(index, row, $detail) {
@@ -122,11 +123,63 @@ $(function () {
         });
     }
 
+    function editRow(row, $element, field) {
+
+        if (field === "operate") {
+            return false;
+        }
+
+        form.data('bootstrapValidator').destroy();
+        form.data('bootstrapValidator', null);
+        var inbox = $('.inbox-detail');
+        var inputs = inbox.find('input');
+        inputs.parent().parent().remove();
+        formValidator();
+
+        myModal.find('.modal-title').text('编号：' + row['id']);
+        $('#txt_make_date').val(row['makeDate']);
+        $('#txt_use_date').val(row['useDate']);
+        $('#txt_pay_company').val(row['payCompany']);
+        $('#txt_receive_company').val(row['receiveCompany']);
+        $('#txt_number').val(row['number']);
+        $('#txt_type').val(row['type']);
+        $('#txt_amount').val(row['amount']);
+        $('#txt_invoice_remark').val(row['remark']);
+
+        var data = ajaxGetDetails(row['id']);
+        var btn = $('#btn_add_invoice_detail_input');
+
+        for (var i in data) {
+            addInvoiceDetailInput(btn, data[i]);
+        }
+
+        myModal.modal();
+    }
+
     function delIcon(type, value, row, index) {
         return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + type + ', this)"><i' +
             ' class="fa' +
             ' fa-times"></i></a>';
     }
+
+    ajaxGetDetails = function (invoidId) {
+        var data;
+        $.ajax({
+            type: "get",
+            dataType: 'json',
+            url: '/invoice/getInvoiceDetailsById',
+            async: false,
+            data: {queryId: invoidId},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    data = result.data;
+                }
+            }
+        });
+        return data;
+    };
 
 });
 
@@ -170,7 +223,6 @@ $(function () {
 
         if (form.data('bootstrapValidator').isValid()) {
             var load = $(this).prev().prev()[0];
-            console.log(load);
             load.style.display="";
             var form_data = form.serializeObject();
             var details_data = getDetails(form_data);
@@ -181,7 +233,7 @@ $(function () {
         return false;
     });
 
-    // 扩充详细货品信息按钮
+    // 添加详细货品信息按钮
     addInvoice = function(load, form_data, invoiceDetails) {
         $.ajax({
             type: "post",
@@ -202,8 +254,8 @@ $(function () {
         })
     };
 
+    // 删除单条附加信息
     delInvoice = function(url, table, id) {
-        console.log(url, table, id);
         $.ajax({
             type: "POST",
             dataType: "json",
@@ -223,6 +275,7 @@ $(function () {
         });
     };
 
+    // 获取表单中附加信息的输入
     getDetails = function(form_data) {
         var details_data = [];
         var names = ['txt_invoice_goods_name',
@@ -264,24 +317,7 @@ $(function () {
 
     // 增加开票明细详情输入栏
     $('#btn_add_invoice_detail_input').click(function () {
-        var list = createInvoiceDetailInput();
-
-        var goodsNameInp;
-        var goodsModelInp;
-
-        for (var i in list) {
-            this.before(list[i]);
-            if (i === "0") {
-                goodsNameInp = $(this).prev().find('input');
-            } else if (i === "1") {
-                goodsModelInp = $(this).prev().find('input');
-            }
-        }
-
-        $(goodsNameInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
-        $(goodsModelInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
-
-        resetValidator();
+        addInvoiceDetailInput($(this), {});
     });
 
     // 表单清空按钮
@@ -289,13 +325,53 @@ $(function () {
         clearModal();
     });
 
+    addInvoiceDetailInput = function(btn, detail) {
+
+        var list = createInvoiceDetailInput();
+
+        var goodsNameInp;
+        var goodsModelInp;
+
+        for (var i in list) {
+            $(btn).before(list[i]);
+
+            switch (i) {
+                case "0":
+                    goodsNameInp = $(btn).prev().find('input');
+                    $(btn).prev().find('input').val(detail['goodsName']);
+                    break;
+                case "1":
+                    goodsModelInp = $(btn).prev().find('input');
+                    $(btn).prev().find('input').val(detail['goodsModel']);
+                    break;
+                case "2":
+                    $(btn).prev().find('input').val(detail['number']);
+                    break;
+                case "3":
+                    $(btn).prev().find('input').val(detail['unitPrice']);
+                    break;
+                case "4":
+                    $(btn).prev().find('input').val(detail['sumPrice']);
+                    break;
+                case "5":
+                    $(btn).prev().find('input').val(detail['tax']);
+                    break;
+            }
+        }
+
+        $(goodsNameInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
+        $(goodsModelInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
+
+        resetValidator();
+    };
+
     // 清空Modal數據
-    var clearModal = function() {
+    clearModal = function() {
         $("input").val('');
         resetValidator();
     };
 
-    var resetValidator = function () {
+    resetValidator = function () {
         form.data('bootstrapValidator').destroy();
         form.data('bootstrapValidator', null);
         formValidator();
@@ -578,17 +654,4 @@ $(function () {
 
 });
 
-/**
-    <input type="text" name="txt_invoice_goods_name" class="form-control"
-placeholder="物资名称" autoComplete="off"/>
-    <input type="text" name="txt_invoice_goods_model" class="form-control"
-placeholder="型号" autoComplete="off"/>
-    <input type="text" name="txt_invoice_number" class="form-control"
-placeholder="数量" autoComplete="off"/>
-    <input type="text" name="txt_invoice_unit_price" class="form-control"
-placeholder="单价（含税）" autoComplete="off"/>
-    <input type="text" name="txt_invoice_sum_price" class="form-control"
-placeholder="总额（含税）" autoComplete="off"/>
-    <input type="text" name="txt_invoice_tax" class="form-control"
-placeholder="税额" autoComplete="off"/>
- */
+
