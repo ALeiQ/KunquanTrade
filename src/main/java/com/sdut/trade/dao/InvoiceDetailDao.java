@@ -50,4 +50,13 @@ public interface InvoiceDetailDao {
      * @return
      */
     int delInvoiceDetailsByInvoiceId(int delId, Date deleteDate);
+
+    /**
+     * 更新开票信息
+     *
+     * @param updateDetail
+     *
+     * @return
+     */
+    int updateInvoiceDetail(InvoiceDetail updateDetail);
 }

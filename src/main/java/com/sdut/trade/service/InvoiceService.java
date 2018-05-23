@@ -43,6 +43,18 @@ public interface InvoiceService {
     ResponseVO addInvoice(AddInvoiceRequest addInvoiceRequest, List<AddInvoiceDetailRequest> detailList);
 
     /**
+     * 更新开票信息
+     *
+     * @param invoiceId
+     * @param updateInvoiceRequest
+     * @param detailList
+     *
+     * @return
+     */
+    ResponseVO updateInvoice(int invoiceId, AddInvoiceRequest updateInvoiceRequest,
+                             List<AddInvoiceDetailRequest> detailList);
+
+    /**
      * 删除开票信息
      *
      * @param delId
@@ -59,4 +71,5 @@ public interface InvoiceService {
      * @return
      */
     ResponseVO delInvoiceDetail(int delId);
+
 }

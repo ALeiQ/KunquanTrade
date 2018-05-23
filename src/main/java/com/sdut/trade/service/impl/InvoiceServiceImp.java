@@ -2,7 +2,9 @@ package com.sdut.trade.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -170,8 +172,8 @@ public class InvoiceServiceImp implements InvoiceService {
 
         if (addNum != detailList.size()) {
             responseVO.setResult(ResultEnum.FAILURE);
-            responseVO.setResultMsg("名次添加失败！"
-                    + "[需要添加: " + Integer.toString(invoiceDetailList.size()) + " 条]"
+            responseVO.setResultMsg("开票详情添加失败！"
+                    + "[需要添加: " + Integer.toString(detailList.size()) + " 条]"
                     + "[实际添加: " + Integer.toString(addNum) + " 条]");
 
             log.error("addInvoice add to DB less than need! [need = {}][real = {}]",
@@ -181,6 +183,101 @@ public class InvoiceServiceImp implements InvoiceService {
         }
 
         log.info("addInvoice end [addInvoiceRequest={}], [detailList={}]", addInvoiceRequest, detailList);
+
+        return responseVO;
+    }
+
+    /**
+     * 更新开票信息
+     *
+     * @param invoiceId
+     * @param updateInvoiceRequest
+     * @param detailList
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO updateInvoice(int invoiceId, AddInvoiceRequest updateInvoiceRequest,
+                                    List<AddInvoiceDetailRequest> detailList) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        log.info("updateInvoice start [updateInvoiceRequest={}], [detailList={}]", updateInvoiceRequest, detailList);
+
+        Date updateDate = new Date();
+
+        InvoiceInfo oldInfo = invoiceDao.getById(invoiceId);
+
+        InvoiceInfo invoiceInfo = parseRequsetToModel(updateInvoiceRequest, null);
+        invoiceInfo.setCreateDate(oldInfo.getCreateDate());
+        invoiceInfo.setUpdateDate(updateDate);
+        invoiceInfo.setId(invoiceId);
+
+        invoiceDao.updateInvoiceInfo(invoiceInfo);
+
+        // 前端表单发票详情
+        List<InvoiceDetail> invoiceDetailList = parseRequsetDetailToModel(invoiceId, detailList, null);
+        // 库中已有的发票详情
+        List<InvoiceDetail> existentDetailList = invoiceDetailDao.getAllByInvoiceId(invoiceId);
+
+        // 待添加的新增发票详情
+        List<InvoiceDetail> addDetailList = new ArrayList<>();
+
+        Map<Integer, InvoiceDetail> updateDetailMap = new HashMap<>();
+
+        for (InvoiceDetail invoiceDetail : invoiceDetailList) {
+            if (invoiceDetail.getId() != null) {
+                updateDetailMap.put(invoiceDetail.getId(), invoiceDetail);
+            } else {
+                invoiceDetail.setCreateDate(updateDate);
+                addDetailList.add(invoiceDetail);
+            }
+        }
+
+        for (InvoiceDetail existentDetail : existentDetailList) {
+            if (updateDetailMap.containsKey(existentDetail.getId())) {
+
+                InvoiceDetail invoiceDetail = updateDetailMap.get(existentDetail.getId());
+                try {
+                    invoiceDetail.setCreateDate(existentDetail.getCreateDate());
+                    invoiceDetail.setUpdateDate(updateDate);
+                    invoiceDetailDao.updateInvoiceDetail(invoiceDetail);
+                } catch (Exception ex) {
+                    log.error("updateInvoice update to DB false! [detail={}]", invoiceDetail);
+                }
+            } else {
+
+                existentDetail.setDeleteDate(updateDate);
+                existentDetail.setEnable(EnableEnum.DISABLE.isValue());
+                try {
+                    invoiceDetailDao.updateInvoiceDetail(existentDetail);
+                } catch (Exception ex) {
+                    log.error("updateInvoice del from DB false! [detail={}]", existentDetail);
+                }
+            }
+        }
+
+        int addNum = invoiceDetailDao.addInvoiceDetails(addDetailList);
+
+        addCompanyTerms(updateInvoiceRequest, updateDate);
+
+        for (AddInvoiceDetailRequest updateInvoiceDetailRequest : detailList) {
+            addGoodsTerms(updateInvoiceDetailRequest, updateDate);
+        }
+
+        if (addNum != addDetailList.size()) {
+            responseVO.setResult(ResultEnum.FAILURE);
+            responseVO.setResultMsg("开票详情添加失败！"
+                    + "[需要添加: " + Integer.toString(addDetailList.size()) + " 条]"
+                    + "[实际添加: " + Integer.toString(addNum) + " 条]");
+
+            log.error("updateInvoice add to DB less than need! [need = {}][real = {}]",
+                    invoiceDetailList.size(), addNum);
+
+            return responseVO;
+        }
+
+        log.info("updateInvoice end [updateInvoiceRequest={}], [detailList={}]", updateInvoiceRequest, detailList);
 
         return responseVO;
     }
@@ -261,6 +358,7 @@ public class InvoiceServiceImp implements InvoiceService {
         for (AddInvoiceDetailRequest addInvoiceDetailRequest : detailList) {
             InvoiceDetail invoiceDetail = new InvoiceDetail();
 
+            invoiceDetail.setId(addInvoiceDetailRequest.getId());
             invoiceDetail.setUnitPrice(addInvoiceDetailRequest.getUnitPrice());
             invoiceDetail.setTax(addInvoiceDetailRequest.getTax());
             invoiceDetail.setSumPrice(addInvoiceDetailRequest.getSumPrice());

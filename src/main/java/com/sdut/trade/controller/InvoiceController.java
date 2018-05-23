@@ -154,13 +154,54 @@ public class InvoiceController {
             result = invoiceService.addInvoice(addInvoiceRequest, detailList);
 
         } catch (MyException ex) {
-            log.info("addInvoice Known error! ", ex);
+            log.error("addInvoice Known error! ", ex);
         } catch (Exception ex) {
-            log.info("addInvoice UnKnown error! ", ex);
+            log.error("addInvoice UnKnown error! ", ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
         log.info("addInvoice end [params={}], [details={}]", params, details);
+
+        return result;
+    }
+
+    /**
+     * 更新发票信息
+     *
+     * @param params
+     * @param details
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/updateInvoice", method = RequestMethod.POST)
+    public ResponseVO addInvoice(int invoiceId, String params, String details) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("updateInvoice start [invoiceId = {}], [params={}], [details={}]", invoiceId, params, details);
+
+        try {
+
+            if (StringUtils.isEmpty(params) || StringUtils.isEmpty(details)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            AddInvoiceRequest updateInvoiceRequest = JSON.parseObject(params, AddInvoiceRequest.class);
+            List<AddInvoiceDetailRequest> detailList = JSONArray.parseArray(details,
+                    AddInvoiceDetailRequest.class);
+
+            result = invoiceService.updateInvoice(invoiceId, updateInvoiceRequest, detailList);
+
+        } catch (MyException ex) {
+            log.error("updateInvoice Known error! ", ex);
+        } catch (Exception ex) {
+            log.error("updateInvoice UnKnown error! ", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("updateInvoice end [invoiceId={}], [params={}], [details={}]", invoiceId, params, details);
 
         return result;
     }

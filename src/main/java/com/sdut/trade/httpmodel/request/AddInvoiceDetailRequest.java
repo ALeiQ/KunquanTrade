@@ -13,6 +13,9 @@ import lombok.Data;
 @Data
 public class AddInvoiceDetailRequest {
 
+    @JSONField(name = "id")
+    private Integer id;
+
     /**
      * 物资名称
      */

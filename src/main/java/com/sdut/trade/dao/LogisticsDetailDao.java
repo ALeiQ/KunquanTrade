@@ -55,4 +55,13 @@ public interface LogisticsDetailDao {
      * @return
      */
     int delLogisticsDetail(Integer delId, Date deleteDate);
+
+    /**
+     * 获取id的运输明细
+     *
+     * @param id
+     *
+     * @return
+     */
+    LogisticsDetail getById(int id);
 }

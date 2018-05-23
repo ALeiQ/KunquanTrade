@@ -219,6 +219,7 @@ $(function () {
 
     // 表单提交按钮
     $("#btn_submit_invoice").click(function () {
+
         form.bootstrapValidator('validate');
 
         if (form.data('bootstrapValidator').isValid()) {
@@ -227,7 +228,13 @@ $(function () {
             var form_data = form.serializeObject();
             var details_data = getDetails(form_data);
 
-            addInvoice(load, form_data, details_data);
+            var title = $.trim(myModal.find('.modal-title')[0].textContent);
+            if (title === '新增') {
+                addInvoice(load, form_data, details_data);
+            } else {
+                var id = $.trim((title.split('：'))[1]);
+                updateInvoice(id, load, form_data, details_data);
+            }
         }
 
         return false;
@@ -248,6 +255,29 @@ $(function () {
                     load.style.display="none";
                     showPopover($('#btn_submit_invoice').children('span'), "添加成功");
                     clearModal();
+                    mainTable.bootstrapTable('refresh');
+                }
+            }
+        })
+    };
+
+    // 更新详细货品信息按钮
+    updateInvoice = function(id, load, form_data, invoiceDetails) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/invoice/updateInvoice',
+            async: false,
+            data: {invoiceId: id,
+                params: JSON.stringify(form_data),
+                details: JSON.stringify(invoiceDetails)},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    myModal.modal('hide');
+                    load.style.display="none";
+                    resetValidator();
                     mainTable.bootstrapTable('refresh');
                 }
             }
@@ -286,12 +316,14 @@ $(function () {
             'txt_invoice_tax'];
 
         var list = [];
+        var details = $('#btn_add_invoice_detail_input').prevAll();
+        var len = details.length;
 
-        for (i in names) {
+        for (var i in names) {
             list.push(form_data[names[i]]);
         }
 
-        for (i in list[0]) {
+        for (var i in list[0]) {
 
             var flag = false;
             for (j in names) {
@@ -309,6 +341,7 @@ $(function () {
             for (j in names) {
                 detail[names[j]] = list[j][i];
             }
+            detail['id'] = $(details[len-(eval(i)+1)*6-1]).val();
             details_data.push(detail);
         }
 
@@ -339,6 +372,7 @@ $(function () {
                 case "0":
                     goodsNameInp = $(btn).prev().find('input');
                     $(btn).prev().find('input').val(detail['goodsName']);
+                    $(btn).prev().val(detail['id']);
                     break;
                 case "1":
                     goodsModelInp = $(btn).prev().find('input');

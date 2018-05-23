@@ -1,6 +1,9 @@
 package com.sdut.trade.service.impl;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -180,7 +183,14 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
             goodsNames.add(goodsInfo.getName());
         }
 
-        responseVO.setData(goodsNames);
+        List<String> orderGoodsNames = new ArrayList<>(goodsNames);
+
+        Collections.sort(orderGoodsNames, (o1, o2) -> {
+            Comparator<Object> com = Collator.getInstance(java.util.Locale.CHINA);
+            return com.compare(o1, o2);
+        });
+
+        responseVO.setData(orderGoodsNames);
         return responseVO;
     }
 

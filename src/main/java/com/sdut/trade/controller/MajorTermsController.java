@@ -102,9 +102,9 @@ public class MajorTermsController {
             }
 
         } catch (MyException ex) {
-            log.info("getTermsInfo Known error! [type={}]", getType, ex);
+            log.error("getTermsInfo Known error! [type={}]", getType, ex);
         } catch (Exception ex) {
-            log.info("getTermsInfo UnKnown error! [type={}]", getType, ex);
+            log.error("getTermsInfo UnKnown error! [type={}]", getType, ex);
             result.setResult(ResultEnum.FAILURE);
         }
 

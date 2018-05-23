@@ -202,7 +202,6 @@ $(function () {
                 if (result.resultCode !== 0) {
                     alert(result.resultMsg);
                 } else {
-                    showPopover($('#btn_submit').children('span'), "修改成功");
                     myModal.modal('hide');
                     resetValidator();
                     table.bootstrapTable('refresh');

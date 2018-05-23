@@ -97,9 +97,9 @@ public class LogisticsController {
             }
 
         } catch (MyException ex) {
-            log.info("getTypeaheadData Known error! [type={}]", getType, ex);
+            log.error("getTypeaheadData Known error! [type={}]", getType, ex);
         } catch (Exception ex) {
-            log.info("getTypeaheadData UnKnown error! [type={}]", getType, ex);
+            log.error("getTypeaheadData UnKnown error! [type={}]", getType, ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
@@ -163,9 +163,9 @@ public class LogisticsController {
             result = logisticsDetailService.addLogisticsDetail(addLogisticsRequest);
 
         } catch (MyException ex) {
-            log.info("addLogisticsDetail Known error! ", ex);
+            log.error("addLogisticsDetail Known error! ", ex);
         } catch (Exception ex) {
-            log.info("addLogisticsDetail UnKnown error! ", ex);
+            log.error("addLogisticsDetail UnKnown error! ", ex);
             result.setResult(ResultEnum.FAILURE);
         }
 
@@ -202,9 +202,9 @@ public class LogisticsController {
             result = logisticsDetailService.updateLogisticsDetail(id, addLogisticsRequest);
 
         } catch (MyException ex) {
-            log.info("updateLogisticsDetail Known error! ", ex);
+            log.error("updateLogisticsDetail Known error! ", ex);
         } catch (Exception ex) {
-            log.info("updateLogisticsDetail UnKnown error! ", ex);
+            log.error("updateLogisticsDetail UnKnown error! ", ex);
             result.setResult(ResultEnum.FAILURE);
         }
 

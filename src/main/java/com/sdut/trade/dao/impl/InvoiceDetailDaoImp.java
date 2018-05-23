@@ -109,4 +109,17 @@ public class InvoiceDetailDaoImp implements InvoiceDetailDao {
 
         return invoiceDetailMapper.updateByExampleSelective(invoiceDetail, invoiceDetailExample);
     }
+
+    /**
+     * 更新开票信息
+     *
+     * @param updateDetail
+     *
+     * @return
+     */
+    @Override
+    public int updateInvoiceDetail(InvoiceDetail updateDetail) {
+
+        return invoiceDetailMapper.updateByPrimaryKey(updateDetail);
+    }
 }

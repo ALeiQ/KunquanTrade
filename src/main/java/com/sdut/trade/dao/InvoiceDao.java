@@ -30,6 +30,15 @@ public interface InvoiceDao {
     List<InvoiceInfo> getAllByDirection(Integer direction);
 
     /**
+     * 获取指定id的发票信息
+     *
+     * @param invoiceId
+     *
+     * @return
+     */
+    InvoiceInfo getById(int invoiceId);
+
+    /**
      * 添加开票简要信息
      *
      * @param invoiceInfo
@@ -37,6 +46,15 @@ public interface InvoiceDao {
      * @return id
      */
     int addInvoiceInfo(InvoiceInfo invoiceInfo);
+
+    /**
+     * 更新开票简要信息
+     *
+     * @param invoiceInfo
+     *
+     * @return
+     */
+    int updateInvoiceInfo(InvoiceInfo invoiceInfo);
 
     /**
      * 通过开票详情id删除数据
@@ -47,4 +65,5 @@ public interface InvoiceDao {
      * @return
      */
     int delInvoiceById(int delId, Date deleteDate);
+
 }

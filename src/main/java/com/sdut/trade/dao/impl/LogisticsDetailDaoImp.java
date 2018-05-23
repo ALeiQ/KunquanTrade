@@ -94,7 +94,7 @@ public class LogisticsDetailDaoImp implements LogisticsDetailDao {
                 .andIdEqualTo(id)
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue());
 
-        return logisticsDetailMapper.updateByExampleSelective(logisticsDetail, logisticsDetailExample);
+        return logisticsDetailMapper.updateByExample(logisticsDetail, logisticsDetailExample);
     }
 
     /**
@@ -115,5 +115,17 @@ public class LogisticsDetailDaoImp implements LogisticsDetailDao {
 
         return logisticsDetailMapper.updateByPrimaryKeySelective(logisticsDetail);
 
+    }
+
+    /**
+     * 获取id的运输明细
+     *
+     * @param id
+     *
+     * @return
+     */
+    @Override
+    public LogisticsDetail getById(int id) {
+        return logisticsDetailMapper.selectByPrimaryKey(id);
     }
 }

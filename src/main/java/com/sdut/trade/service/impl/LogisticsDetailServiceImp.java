@@ -135,7 +135,9 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
 
         Date updateDate = new Date();
 
-        LogisticsDetail logisticsDetail = parseRequestToModel(addLogisticsRequest, null);
+        LogisticsDetail oldDetail = logisticsDetailDao.getById(id);
+
+        LogisticsDetail logisticsDetail = parseRequestToModel(addLogisticsRequest, oldDetail.getCreateDate());
 
         logisticsDetail.setId(id);
         logisticsDetail.setUpdateDate(updateDate);

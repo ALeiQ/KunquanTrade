@@ -104,8 +104,6 @@ public class GoodsInfoDaoImp implements GoodsInfoDao {
 
         GoodsInfoExample goodsInfoExample = new GoodsInfoExample();
 
-        goodsInfoExample.setOrderByClause("convert(name using gbk) asc");
-
         goodsInfoExample.createCriteria()
                 .andEnableEqualTo(EnableEnum.ENABLE.isValue())
                 .andNameLike('%' + query + '%');
