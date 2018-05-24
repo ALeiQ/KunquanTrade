@@ -1,6 +1,9 @@
 package com.sdut.trade.service.impl;
 
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +12,9 @@ import org.springframework.stereotype.Component;
 
 import com.sdut.trade.bean.CompanyInfoVO;
 import com.sdut.trade.dao.CompanyInfoDao;
+import com.sdut.trade.dao.LogisticsCompanyInfoDao;
 import com.sdut.trade.entity.CompanyInfo;
+import com.sdut.trade.entity.LogisticsCompanyInfo;
 import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
@@ -32,6 +37,9 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
     @Autowired
     private CompanyInfoDao companyInfoDao;
+
+    @Autowired
+    private LogisticsCompanyInfoDao logisticsCompanyInfoDao;
 
     @Autowired
     private TermsRecordServiceImp termsRecordService;
@@ -175,4 +183,38 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
 
     }
 
+    /**
+     * 通过关键词模糊查询公司名称（包括运输公司）
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getAllCompanyByKeyword(String query) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<CompanyInfo> companyInfos = companyInfoDao.getCompanyInfoByKeywordName(query);
+        List<String> companyNames = new ArrayList<>();
+
+        for (CompanyInfo companyInfo : companyInfos) {
+            companyNames.add(companyInfo.getName());
+        }
+
+        List<LogisticsCompanyInfo> logisticsCompanyInfos = logisticsCompanyInfoDao.getLogisticsCompanyByKeyword(query);
+
+        for (LogisticsCompanyInfo logisticsCompanyInfo : logisticsCompanyInfos) {
+            companyNames.add(logisticsCompanyInfo.getName());
+        }
+
+        Collections.sort(companyNames, (o1, o2) -> {
+            Comparator<Object> com = Collator.getInstance(java.util.Locale.CHINA);
+            return com.compare(o1, o2);
+        });
+
+        responseVO.setData(companyNames);
+        return responseVO;
+
+    }
 }

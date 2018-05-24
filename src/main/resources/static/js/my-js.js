@@ -68,19 +68,6 @@ $(document).ready(function () {
         );
     };
 
-    // 检查Input是否全空
-    checkInputsEmpty = function(inputs) {
-
-        for (var i  = 0; i < inputs.length; ++i) {
-            if (typeof($(inputs[i]).val()) !== "undefined"
-                && $(inputs[i]).val() !== "") {
-                return false;
-            }
-        }
-
-        return true;
-    };
-
     setDateYYMMDD = function (form, inp) {
         $(inp).datetimepicker({
             format: 'yyyy-mm-dd',//显示格式
@@ -105,6 +92,35 @@ $(document).ready(function () {
             .updateStatus($(inp), 'NOT_VALIDATED',null)
             .validateField($(inp));
     };
+
+    // 自动补全配置
+    $.fn.makeTypeahead = function (form, url, params, goodsName) {
+        var inp = this;
+        this.typeahead({
+            items: 'all',
+            minLength: 0,
+            showHintOnFocus: true,
+            autoSelect: false,
+            changeInputOnMove: false,
+            hint: false,
+            source: function (query, process) {
+                if (typeof(goodsName) !== "undefined") {
+                    params['goodsName'] = $(goodsName).val();
+                }
+                params['query'] = query;
+                $.get(url, params,
+                    function (result) {
+                        if(result.resultCode === 0) {
+                            return process(result.data);
+                        }
+                    });
+            },
+            afterSelect: function (){
+                startValidator(form, inp);
+            }
+        });
+    };
+
 });
 
 // 工具方法
@@ -124,5 +140,19 @@ $(function () {
             return value;
         }
     }
+
+    // 检查Input是否全空
+    checkInputsEmpty = function(inputs) {
+
+        for (var i  = 0; i < inputs.length; ++i) {
+            if (typeof($(inputs[i]).val()) !== "undefined"
+                && $(inputs[i]).val() !== "") {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
 });
 

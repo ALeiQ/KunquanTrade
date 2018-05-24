@@ -46,4 +46,13 @@ public interface CompanyInfoService {
      * @return
      */
     ResponseVO getCompanyByKeyword(String query);
+
+    /**
+     * 通过关键词模糊查询公司名称（包括运输公司）
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    ResponseVO getAllCompanyByKeyword(String query);
 }

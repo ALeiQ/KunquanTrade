@@ -355,8 +355,6 @@ $(function () {
 
     // 加载常用名词增删记录
     loadData = function (event, page) {
-        console.log(event);
-        console.log(page);
         var query = {};
         query['page'] = page;
         //这里另每页数量为5，可自行调整

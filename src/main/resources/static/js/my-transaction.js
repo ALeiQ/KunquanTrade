@@ -195,6 +195,12 @@ $(function () {
 
 });
 
+// 自动补全配置
+$(function () {
+    $('#txt_deal_company').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'allCompany'});
+    $('#txt_bank_name').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'bank'})
+});
+
 // 校验配置
 $(function () {
 
@@ -232,6 +238,9 @@ $(function () {
 
                 },
                 txt_bank_receive_account: {
+
+                },
+                txt_bank_name: {
 
                 },
                 txt_check_pay_account: {

@@ -2,7 +2,7 @@
 var mainTable = $('#invoiceTable');
 var queryDirection = 0;
 var myModal = $('#addInvoiceModal');
-var form = $("#updateInvoiceForm");
+var mainForm = $("#updateInvoiceForm");
 
 // 表格属性设定
 $(function () {
@@ -129,8 +129,8 @@ $(function () {
             return false;
         }
 
-        form.data('bootstrapValidator').destroy();
-        form.data('bootstrapValidator', null);
+        mainForm.data('bootstrapValidator').destroy();
+        mainForm.data('bootstrapValidator', null);
         var inbox = $('.inbox-detail');
         var inputs = inbox.find('input');
         inputs.parent().parent().remove();
@@ -220,12 +220,12 @@ $(function () {
     // 表单提交按钮
     $("#btn_submit_invoice").click(function () {
 
-        form.bootstrapValidator('validate');
+        mainForm.bootstrapValidator('validate');
 
-        if (form.data('bootstrapValidator').isValid()) {
+        if (mainForm.data('bootstrapValidator').isValid()) {
             var load = $(this).prev().prev()[0];
             load.style.display="";
-            var form_data = form.serializeObject();
+            var form_data = mainForm.serializeObject();
             var details_data = getDetails(form_data);
 
             var title = $.trim(myModal.find('.modal-title')[0].textContent);
@@ -393,8 +393,8 @@ $(function () {
             }
         }
 
-        $(goodsNameInp).makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsName'});
-        $(goodsModelInp).makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
+        $(goodsNameInp).makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'goodsName'});
+        $(goodsModelInp).makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
 
         resetValidator();
     };
@@ -406,8 +406,8 @@ $(function () {
     };
 
     resetValidator = function () {
-        form.data('bootstrapValidator').destroy();
-        form.data('bootstrapValidator', null);
+        mainForm.data('bootstrapValidator').destroy();
+        mainForm.data('bootstrapValidator', null);
         formValidator();
     };
 });
@@ -418,7 +418,7 @@ $(function () {
     // 手动绑定回车触发表单提交，解决回车刷新页面的问题
     $(document).keydown(function(event){
         if (event.keyCode == 13) {
-            form.each(function() {
+            mainForm.each(function() {
                 $('#btn_submit').click();
                 event.preventDefault();
             });
@@ -426,49 +426,22 @@ $(function () {
     });
 
     // 抵扣时间的日历组件
-    setDateYYMMDD(form, $('#txt_use_date'));
+    setDateYYMMDD(mainForm, $('#txt_use_date'));
     // 开票时间的日历组件
-    setDateYYMMDD(form, $('#txt_make_date'));
+    setDateYYMMDD(mainForm, $('#txt_make_date'));
 
 });
 
 // 自动补全配置
 $(function () {
-
-    // 自动补全配置
-    $.fn.makeTypeahead = function (url, params, goodsName) {
-        var inp = this;
-        this.typeahead({
-            items: 'all',
-            minLength: 0,
-            showHintOnFocus: true,
-            autoSelect: false,
-            changeInputOnMove: false,
-            hint: false,
-            source: function (query, process) {
-                if (typeof(goodsName) !== "undefined") {
-                    params['goodsName'] = goodsName.val();
-                }
-                params['query'] = query;
-                $.get(url, params,
-                    function (result) {
-                        return process(result.data);
-                    });
-            },
-            afterSelect: function (){
-                startValidator(form, inp);
-            }
-        });
-    };
-
-    $('#txt_pay_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
-    $('#txt_receive_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_pay_company').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_receive_company').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'company'});
 });
 
 // 校验配置
 $(document).ready(function () {
     formValidator = function () {
-        form.bootstrapValidator({
+        mainForm.bootstrapValidator({
             //excluded:[":hidden",":disabled",":not(visible)"], // 默认不验证隐藏域和不可用域
             excluded: [":hidden"],
             message: '输入值不合法',

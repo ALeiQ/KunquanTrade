@@ -38,4 +38,12 @@ public interface BankInfoService {
      */
     ResponseVO delBankInfoById(int id);
 
+    /**
+     * 通过关键词模糊查询银行名称
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    ResponseVO getBankByKeyword(String query);
 }

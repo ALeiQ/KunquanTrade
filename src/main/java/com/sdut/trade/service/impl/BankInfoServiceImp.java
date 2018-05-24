@@ -152,4 +152,27 @@ public class BankInfoServiceImp implements BankInfoService {
         return responseVO;
     }
 
+    /**
+     * 通过关键词模糊查询银行名称
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getBankByKeyword(String query) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<BankInfo> bankInfoList = bankInfoDao.getBankInfoByKeywordName(query);
+        List<String> bankNameList = new ArrayList<>();
+
+        for (BankInfo bankInfo : bankInfoList) {
+            bankNameList.add(bankInfo.getName());
+        }
+
+        responseVO.setData(bankNameList);
+        return responseVO;
+    }
+
 }

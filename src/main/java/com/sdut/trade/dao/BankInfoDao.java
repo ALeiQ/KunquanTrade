@@ -30,6 +30,14 @@ public interface BankInfoDao {
     BankInfo getBankInfoById(int id);
 
     /**
+     * 根据银行名称关键词模糊查找银行信息
+     *
+     * @return
+     * @param query
+     */
+    List<BankInfo> getBankInfoByKeywordName(String query);
+
+    /**
      * 添加银行信息到数据库
      *
      * @param bankInfos 待添加的银行列表
@@ -47,5 +55,4 @@ public interface BankInfoDao {
      * @return 成功插入数据库的条数
      */
     int delBankInfoById(int id, Date deleteDate);
-
 }

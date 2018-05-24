@@ -30,6 +30,15 @@ public interface CompanyInfoDao {
     CompanyInfo getCompanyInfoById(int id);
 
     /**
+     * 通过公司名中的关键词查询公司信息
+     *
+     * @param query 公司名关键词
+     *
+     * @return
+     */
+    List<CompanyInfo> getCompanyInfoByKeywordName(String query);
+
+    /**
      * 添加单条公司信息到数据库
      *
      * @param companyInfo 待添加的公司
@@ -56,15 +65,6 @@ public interface CompanyInfoDao {
      * @return 成功插入数据库的条数
      */
     int delCompanyInfoById(int id, Date deleteDate);
-
-    /**
-     * 通过公司名中的关键词查询公司信息
-     *
-     * @param query 公司名关键词
-     *
-     * @return
-     */
-    List<CompanyInfo> getCompanyInfoByKeywordName(String query);
 
     /**
      * 查询库中是否有该公司名

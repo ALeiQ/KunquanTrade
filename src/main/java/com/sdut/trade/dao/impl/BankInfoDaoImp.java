@@ -59,6 +59,27 @@ public class BankInfoDaoImp implements BankInfoDao {
     }
 
     /**
+     * 根据银行名称关键词模糊查找银行信息
+     *
+     * @param query
+     *
+     * @return
+     */
+    @Override
+    public List<BankInfo> getBankInfoByKeywordName(String query) {
+
+        BankInfoExample BankInfoExample = new BankInfoExample();
+
+        BankInfoExample.setOrderByClause("convert(name using gbk) asc");
+
+        BankInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameLike('%' + query + '%');
+
+        return bankInfoMapper.selectByExample(BankInfoExample);
+    }
+
+    /**
      * 添加银行信息到数据库
      *
      * @param bankInfos

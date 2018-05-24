@@ -183,11 +183,17 @@ public class MajorTermsController {
 
             // 根据前端提供的类型，分别进行不同数据表的数据添加。
             switch (getType) {
+                case "allCompany":
+                    result = companyInfoService.getAllCompanyByKeyword(query);
+                    break;
                 case "company":
                     result = companyInfoService.getCompanyByKeyword(query);
                     break;
                 case "transCompany":
                     result = logisticsCompanyInfoService.getLogisticsCompanyByKeyword(query);
+                    break;
+                case "bank":
+                    result = bankInfoService.getBankByKeyword(query);
                     break;
                 case "goodsName":
                     result = goodsInfoService.getGoodsNameByKeyword(query);
