@@ -29,6 +29,7 @@ document.writeln("");
 document.writeln("                        <li>");
 document.writeln("                            <a href=\'invoice\'>&nbsp;<i class=\'fa fa-yen nav_icon\'></i>&nbsp;开票明细</a>");
 document.writeln("                        </li>");
+/**
 document.writeln("");
 document.writeln("                        <li>");
 document.writeln("                            <a href=\'#\'><i class=\'fa fa-cogs nav_icon\'></i>Components <span class=\'fa arrow\'></span></a>");
@@ -113,6 +114,7 @@ document.writeln("                                </li>");
 document.writeln("                            </ul>");
 document.writeln("                            <!-- //nav-second-level -->");
 document.writeln("                        </li>");
+ */
 document.writeln("                    </ul>");
 document.writeln("                </div>");
 document.writeln("                <!-- //sidebar-collapse -->");
