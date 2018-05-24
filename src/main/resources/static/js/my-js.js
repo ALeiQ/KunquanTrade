@@ -99,10 +99,8 @@ $(document).ready(function () {
         this.typeahead({
             items: 'all',
             minLength: 0,
+            selectOnBlur: false,    //默认为true，自动选取高亮(select)元素
             showHintOnFocus: true,
-            autoSelect: false,
-            changeInputOnMove: false,
-            hint: false,
             source: function (query, process) {
                 if (typeof(goodsName) !== "undefined") {
                     params['goodsName'] = $(goodsName).val();
