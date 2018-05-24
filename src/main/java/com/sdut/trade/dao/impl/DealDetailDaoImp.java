@@ -43,4 +43,16 @@ public class DealDetailDaoImp implements DealDetailDao {
 
         return dealDetailMapper.selectByExample(dealDetailExample);
     }
+
+    /**
+     * 添加单条资金往来数据
+     *
+     * @param dealDetail
+     *
+     * @return
+     */
+    @Override
+    public int addDetail(DealDetail dealDetail) {
+        return dealDetailMapper.insertSelective(dealDetail);
+    }
 }

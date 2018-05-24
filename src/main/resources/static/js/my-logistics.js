@@ -3,13 +3,13 @@
  */
 
 var myModal = $('#addLogisticsDetailModal');
-var form = $("#updateForm");
-var table = $('#transTable');
+var mainForm = $("#updateForm");
+var mainTable = $('#transTable');
 
 // bootstrap表格属性设定
 $(function () {
 
-    table.bootstrapTable({
+    mainTable.bootstrapTable({
         url: '/logistics/getLogisticsDetails',
         method: 'get',
         dataType: 'json',
@@ -154,10 +154,10 @@ $(function () {
     // 表单提交按钮
     $("#btn_submit").click(function () {
 
-        form.bootstrapValidator('validate');
+        mainForm.bootstrapValidator('validate');
 
-        if (form.data('bootstrapValidator').isValid()) {
-            var form_data = form.serializeObject();
+        if (mainForm.data('bootstrapValidator').isValid()) {
+            var form_data = mainForm.serializeObject();
 
             var title = $.trim(myModal.find('.modal-title')[0].textContent);
 
@@ -185,7 +185,7 @@ $(function () {
                 } else {
                     showPopover($('#btn_submit').children('span'), "添加成功");
                     clearModal();
-                    table.bootstrapTable('refresh');
+                    mainTable.bootstrapTable('refresh');
                 }
             }
         });
@@ -204,7 +204,7 @@ $(function () {
                 } else {
                     myModal.modal('hide');
                     resetValidator();
-                    table.bootstrapTable('refresh');
+                    mainTable.bootstrapTable('refresh');
                 }
             }
         });
@@ -232,7 +232,7 @@ $(function () {
                 if (result.resultCode !== 0) {
                     alert(result.resultMsg);
                 } else {
-                    table.bootstrapTable('refresh');
+                    mainTable.bootstrapTable('refresh');
                 }
             },
             error : function() {
@@ -253,8 +253,8 @@ $(function () {
     };
 
     resetValidator = function () {
-        form.data('bootstrapValidator').destroy();
-        form.data('bootstrapValidator', null);
+        mainForm.data('bootstrapValidator').destroy();
+        mainForm.data('bootstrapValidator', null);
         formValidator();
     };
 
@@ -266,14 +266,14 @@ $(function () {
     // 手动绑定回车触发表单提交，解决回车刷新页面的问题
     $(document).keydown(function(event){
         if (event.keyCode == 13) {
-            form.each(function() {
+            mainForm.each(function() {
                 $('#btn_submit').click();
                 event.preventDefault();
             });
         }
     });
 
-    setDateYYMMDD(form, $('#txt_load_time'));
+    setDateYYMMDD(mainForm, $('#txt_load_time'));
 
     // 净重监听
     $('#txt_net_weight').change(function () {
@@ -382,17 +382,17 @@ $(function () {
 
 // 自动补全配置
 $(function () {
-    $('#txt_goods_model').makeTypeahead(form, '/majorTerms/getTypeaheadData', {getType: 'goodsModel'}, $('#txt_goods_name'));
-    $('#txt_goods_name').makeTypeahead(form, '/majorTerms/getTypeaheadData', {getType: 'goodsName'});
-    $('#txt_trans_company').makeTypeahead(form, '/majorTerms/getTypeaheadData', {getType: 'transCompany'});
-    $('#txt_buyer_company').makeTypeahead(form, '/majorTerms/getTypeaheadData', {getType: 'company'});
-    $('#txt_goods_from').makeTypeahead(form, '/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_goods_model').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'goodsModel'}, $('#txt_goods_name'));
+    $('#txt_goods_name').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'goodsName'});
+    $('#txt_trans_company').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'transCompany'});
+    $('#txt_buyer_company').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_goods_from').makeTypeahead(mainForm, '/majorTerms/getTypeaheadData', {getType: 'company'});
 });
 
 // 校验配置
 $(document).ready(function() {
     formValidator = function () {
-        form.bootstrapValidator({
+        mainForm.bootstrapValidator({
             //excluded:[":hidden",":disabled",":not(visible)"], // 默认不验证隐藏域和不可用域
             excluded: [":hidden"],
             message: '输入值不合法',

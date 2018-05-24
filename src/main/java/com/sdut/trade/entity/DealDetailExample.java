@@ -364,52 +364,52 @@ public class DealDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andAmountEqualTo(Integer value) {
+        public Criteria andAmountEqualTo(Double value) {
             addCriterion("amount =", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotEqualTo(Integer value) {
+        public Criteria andAmountNotEqualTo(Double value) {
             addCriterion("amount <>", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThan(Integer value) {
+        public Criteria andAmountGreaterThan(Double value) {
             addCriterion("amount >", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountGreaterThanOrEqualTo(Integer value) {
+        public Criteria andAmountGreaterThanOrEqualTo(Double value) {
             addCriterion("amount >=", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThan(Integer value) {
+        public Criteria andAmountLessThan(Double value) {
             addCriterion("amount <", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountLessThanOrEqualTo(Integer value) {
+        public Criteria andAmountLessThanOrEqualTo(Double value) {
             addCriterion("amount <=", value, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountIn(List<Integer> values) {
+        public Criteria andAmountIn(List<Double> values) {
             addCriterion("amount in", values, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotIn(List<Integer> values) {
+        public Criteria andAmountNotIn(List<Double> values) {
             addCriterion("amount not in", values, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountBetween(Integer value1, Integer value2) {
+        public Criteria andAmountBetween(Double value1, Double value2) {
             addCriterion("amount between", value1, value2, "amount");
             return (Criteria) this;
         }
 
-        public Criteria andAmountNotBetween(Integer value1, Integer value2) {
+        public Criteria andAmountNotBetween(Double value1, Double value2) {
             addCriterion("amount not between", value1, value2, "amount");
             return (Criteria) this;
         }

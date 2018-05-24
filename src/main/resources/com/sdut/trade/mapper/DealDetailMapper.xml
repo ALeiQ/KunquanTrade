@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.sdut.trade.entity.DealDetail">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="date" jdbcType="DATE" property="date" />
-    <result column="amount" jdbcType="INTEGER" property="amount" />
+    <result column="amount" jdbcType="DOUBLE" property="amount" />
     <result column="type" jdbcType="INTEGER" property="type" />
     <result column="way" jdbcType="INTEGER" property="way" />
     <result column="wechat_pay_account" jdbcType="VARCHAR" property="wechatPayAccount" />
@@ -135,7 +135,7 @@
       remark, create_date, delete_date, 
       enable, update_date, company
       )
-    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{amount,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{amount,jdbcType=DOUBLE}, 
       #{type,jdbcType=INTEGER}, #{way,jdbcType=INTEGER}, #{wechatPayAccount,jdbcType=VARCHAR}, 
       #{wechatReceiveAccount,jdbcType=VARCHAR}, #{bankPayAccount,jdbcType=BIGINT}, #{bankReceiveAccount,jdbcType=BIGINT}, 
       #{bankName,jdbcType=VARCHAR}, #{checkNumber,jdbcType=BIGINT}, #{checkPayPeople,jdbcType=VARCHAR}, 
@@ -219,7 +219,7 @@
         #{date,jdbcType=DATE},
       </if>
       <if test="amount != null">
-        #{amount,jdbcType=INTEGER},
+        #{amount,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         #{type,jdbcType=INTEGER},
@@ -293,7 +293,7 @@
         date = #{record.date,jdbcType=DATE},
       </if>
       <if test="record.amount != null">
-        amount = #{record.amount,jdbcType=INTEGER},
+        amount = #{record.amount,jdbcType=DOUBLE},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=INTEGER},
@@ -358,7 +358,7 @@
     update deal_detail
     set id = #{record.id,jdbcType=INTEGER},
       date = #{record.date,jdbcType=DATE},
-      amount = #{record.amount,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=DOUBLE},
       type = #{record.type,jdbcType=INTEGER},
       way = #{record.way,jdbcType=INTEGER},
       wechat_pay_account = #{record.wechatPayAccount,jdbcType=VARCHAR},
@@ -388,7 +388,7 @@
         date = #{date,jdbcType=DATE},
       </if>
       <if test="amount != null">
-        amount = #{amount,jdbcType=INTEGER},
+        amount = #{amount,jdbcType=DOUBLE},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=INTEGER},
@@ -450,7 +450,7 @@
   <update id="updateByPrimaryKey" parameterType="com.sdut.trade.entity.DealDetail">
     update deal_detail
     set date = #{date,jdbcType=DATE},
-      amount = #{amount,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DOUBLE},
       type = #{type,jdbcType=INTEGER},
       way = #{way,jdbcType=INTEGER},
       wechat_pay_account = #{wechatPayAccount,jdbcType=VARCHAR},
@@ -484,7 +484,7 @@
       company)
     values
     <foreach collection="list" item="item" separator=",">
-      (#{item.id,jdbcType=INTEGER}, #{item.date,jdbcType=DATE}, #{item.amount,jdbcType=INTEGER}, 
+      (#{item.id,jdbcType=INTEGER}, #{item.date,jdbcType=DATE}, #{item.amount,jdbcType=DOUBLE}, 
         #{item.type,jdbcType=INTEGER}, #{item.way,jdbcType=INTEGER}, #{item.wechatPayAccount,jdbcType=VARCHAR}, 
         #{item.wechatReceiveAccount,jdbcType=VARCHAR}, #{item.bankPayAccount,jdbcType=BIGINT}, 
         #{item.bankReceiveAccount,jdbcType=BIGINT}, #{item.bankName,jdbcType=VARCHAR}, 
@@ -516,7 +516,7 @@
           #{item.date,jdbcType=DATE}
         </if>
         <if test="'amount' == column.value">
-          #{item.amount,jdbcType=INTEGER}
+          #{item.amount,jdbcType=DOUBLE}
         </if>
         <if test="'type' == column.value">
           #{item.type,jdbcType=INTEGER}

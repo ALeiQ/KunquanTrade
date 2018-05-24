@@ -60,10 +60,10 @@ $(function () {
                 field: "bankName",
                 title: "银行名称"
             }, {
-                field: "checkPeoplePay",
+                field: "checkPayPeople",
                 title: "出票方"
             }, {
-                field: "checkPeopleReceive",
+                field: "checkReceivePeople",
                 title: "受票方"
             }, {
                 field: "checkNumber",
@@ -95,6 +95,8 @@ $(function () {
 
 });
 
+var dealDetail = myModal.find('.modal-body').find('.row')[1];
+
 // 表格功能设定
 $(function () {
 
@@ -110,15 +112,55 @@ $(function () {
         myModal.modal();
     });
 
+    // 表格提交按钮
+    $("#btn_submit_deal").click(function () {
+
+        mainForm.bootstrapValidator('validate');
+
+        if (mainForm.data('bootstrapValidator').isValid()) {
+            var form_data = mainForm.serializeObject();
+
+            var title = $.trim(myModal.find('.modal-title')[0].textContent);
+            if (title === '新增') {
+                addDeal(form_data);
+            } else {
+                var id = $.trim((title.split('：'))[1]);
+                //updateInvoice(id, load, form_data, details_data);
+            }
+        }
+
+        return false;
+    });
+
+    addDeal = function(form_data) {
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/transactionDetail/addDeal',
+            data: {params: JSON.stringify(form_data)},
+            async: false,
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    showPopover($('#btn_submit_deal').children('span'), "添加成功");
+                    clearModal();
+                    mainTable.bootstrapTable('refresh');
+                }
+            }
+        });
+    };
+
     // 清空Modal數據
     clearModal = function() {
         $("input").val('');
+        $(dealDetail).find('input').attr("disabled", false);
         resetValidator();
     };
 
     resetValidator = function () {
-        form.data('bootstrapValidator').destroy();
-        form.data('bootstrapValidator', null);
+        mainForm.data('bootstrapValidator').destroy();
+        mainForm.data('bootstrapValidator', null);
         formValidator();
     };
 
@@ -130,7 +172,7 @@ $(function () {
     // 手动绑定回车触发表单提交，解决回车刷新页面的问题
     $(document).keydown(function(event){
         if (event.keyCode == 13) {
-            form.each(function() {
+            mainForm.each(function() {
                 $('#btn_submit').click();
                 event.preventDefault();
             });
@@ -140,8 +182,6 @@ $(function () {
     setDateYYMMDD(mainForm, $('#txt_deal_date'));
     setDateYYMMDD(mainForm, $('#txt_check_date'));
     setDateYYMMDD(mainForm, $('#txt_check_deadline'));
-
-    var dealDetail = myModal.find('.modal-body').find('.row')[1];
 
     var weChatInputs = $($(dealDetail).find('.col-sm-3')[0]).find('input');
     var bankInputs = $($(dealDetail).find('.col-sm-3')[1]).find('input');

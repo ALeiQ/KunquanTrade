@@ -8,7 +8,7 @@ public class DealDetail implements Serializable {
 
     private Date date;
 
-    private Integer amount;
+    private Double amount;
 
     private Integer type;
 
@@ -64,11 +64,11 @@ public class DealDetail implements Serializable {
         this.date = date;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 

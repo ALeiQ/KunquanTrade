@@ -17,4 +17,11 @@ public interface DealDetailDao {
      * @return
      */
     List<DealDetail> getAll();
+
+    /**
+     * 添加单条资金往来数据
+     * @param dealDetail
+     * @return
+     */
+    int addDetail(DealDetail dealDetail);
 }

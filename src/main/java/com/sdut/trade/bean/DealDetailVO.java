@@ -51,7 +51,7 @@ public class DealDetailVO {
     /**
      * 交易金额
      */
-    private Integer amount;
+    private Double amount;
 
     /**
      * 交易公司

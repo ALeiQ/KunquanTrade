@@ -1,5 +1,6 @@
 package com.sdut.trade.service;
 
+import com.sdut.trade.httpmodel.request.AddDealRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 
 /**
@@ -15,4 +16,11 @@ public interface TransactionDetailService {
      * @return
      */
     ResponseVO getAll();
+
+    /**
+     * 添加资金往来记录
+     * @param addDealRequest
+     * @return
+     */
+    ResponseVO addDeal(AddDealRequest addDealRequest);
 }
