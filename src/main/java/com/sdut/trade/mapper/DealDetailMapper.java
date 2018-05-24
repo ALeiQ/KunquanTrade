@@ -1,11 +1,9 @@
 package com.sdut.trade.mapper;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.sdut.trade.entity.DealDetail;
 import com.sdut.trade.entity.DealDetailExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface DealDetailMapper {
     long countByExample(DealDetailExample example);
@@ -46,5 +44,5 @@ public interface DealDetailMapper {
      * @mbg.generated
      * @project https://github.com/itfsw/mybatis-generator-plugin
      */
-    int batchInsertSelective(@Param("list") List<DealDetail> list, @Param("selective") DealDetail.Column... selective);
+    int batchInsertSelective(@Param("list") List<DealDetail> list, @Param("selective") DealDetail.Column ... selective);
 }

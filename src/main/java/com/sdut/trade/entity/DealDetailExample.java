@@ -424,52 +424,52 @@ public class DealDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andTypeEqualTo(Boolean value) {
+        public Criteria andTypeEqualTo(Integer value) {
             addCriterion("type =", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotEqualTo(Boolean value) {
+        public Criteria andTypeNotEqualTo(Integer value) {
             addCriterion("type <>", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThan(Boolean value) {
+        public Criteria andTypeGreaterThan(Integer value) {
             addCriterion("type >", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeGreaterThanOrEqualTo(Boolean value) {
+        public Criteria andTypeGreaterThanOrEqualTo(Integer value) {
             addCriterion("type >=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThan(Boolean value) {
+        public Criteria andTypeLessThan(Integer value) {
             addCriterion("type <", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeLessThanOrEqualTo(Boolean value) {
+        public Criteria andTypeLessThanOrEqualTo(Integer value) {
             addCriterion("type <=", value, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeIn(List<Boolean> values) {
+        public Criteria andTypeIn(List<Integer> values) {
             addCriterion("type in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotIn(List<Boolean> values) {
+        public Criteria andTypeNotIn(List<Integer> values) {
             addCriterion("type not in", values, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeBetween(Boolean value1, Boolean value2) {
+        public Criteria andTypeBetween(Integer value1, Integer value2) {
             addCriterion("type between", value1, value2, "type");
             return (Criteria) this;
         }
 
-        public Criteria andTypeNotBetween(Boolean value1, Boolean value2) {
+        public Criteria andTypeNotBetween(Integer value1, Integer value2) {
             addCriterion("type not between", value1, value2, "type");
             return (Criteria) this;
         }
@@ -921,66 +921,6 @@ public class DealDetailExample {
 
         public Criteria andCheckNumberNotBetween(Long value1, Long value2) {
             addCriterion("check_number not between", value1, value2, "checkNumber");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountIsNull() {
-            addCriterion("check_amount is null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountIsNotNull() {
-            addCriterion("check_amount is not null");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountEqualTo(Integer value) {
-            addCriterion("check_amount =", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountNotEqualTo(Integer value) {
-            addCriterion("check_amount <>", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountGreaterThan(Integer value) {
-            addCriterion("check_amount >", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountGreaterThanOrEqualTo(Integer value) {
-            addCriterion("check_amount >=", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountLessThan(Integer value) {
-            addCriterion("check_amount <", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountLessThanOrEqualTo(Integer value) {
-            addCriterion("check_amount <=", value, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountIn(List<Integer> values) {
-            addCriterion("check_amount in", values, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountNotIn(List<Integer> values) {
-            addCriterion("check_amount not in", values, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountBetween(Integer value1, Integer value2) {
-            addCriterion("check_amount between", value1, value2, "checkAmount");
-            return (Criteria) this;
-        }
-
-        public Criteria andCheckAmountNotBetween(Integer value1, Integer value2) {
-            addCriterion("check_amount not between", value1, value2, "checkAmount");
             return (Criteria) this;
         }
 
@@ -1551,6 +1491,76 @@ public class DealDetailExample {
 
         public Criteria andUpdateDateNotBetween(Date value1, Date value2) {
             addCriterion("update_date not between", value1, value2, "updateDate");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyIsNull() {
+            addCriterion("company is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyIsNotNull() {
+            addCriterion("company is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyEqualTo(String value) {
+            addCriterion("company =", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNotEqualTo(String value) {
+            addCriterion("company <>", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyGreaterThan(String value) {
+            addCriterion("company >", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyGreaterThanOrEqualTo(String value) {
+            addCriterion("company >=", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyLessThan(String value) {
+            addCriterion("company <", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyLessThanOrEqualTo(String value) {
+            addCriterion("company <=", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyLike(String value) {
+            addCriterion("company like", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNotLike(String value) {
+            addCriterion("company not like", value, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyIn(List<String> values) {
+            addCriterion("company in", values, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNotIn(List<String> values) {
+            addCriterion("company not in", values, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyBetween(String value1, String value2) {
+            addCriterion("company between", value1, value2, "company");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanyNotBetween(String value1, String value2) {
+            addCriterion("company not between", value1, value2, "company");
             return (Criteria) this;
         }
     }

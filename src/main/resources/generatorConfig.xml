@@ -77,19 +77,19 @@
         user_info
         -->
 
-        <table tableName="invoice_detail" domainObjectName="InvoiceDetail">
+        <table tableName="deal_detail" domainObjectName="DealDetail">
         </table>
         <!--
         <table tableName="invoice_info" domainObjectName="InvoiceInfo">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+        </table>
+        <table tableName="invoice_detail" domainObjectName="InvoiceDetail">
         </table>
         <table tableName="terms_record" domainObjectName="TermsRecord">
         </table>
         <table tableName="bank_info" domainObjectName="BankInfo">
         </table>
         <table tableName="company_info" domainObjectName="CompanyInfo">
-        </table>
-        <table tableName="deal_detail" domainObjectName="DealDetail">
         </table>
         <table tableName="goods_info" domainObjectName="GoodsInfo">
         </table>
