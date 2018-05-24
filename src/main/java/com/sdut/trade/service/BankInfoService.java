@@ -1,5 +1,6 @@
 package com.sdut.trade.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
@@ -21,6 +22,15 @@ public interface BankInfoService {
     ResponseVO getAllBankInfo();
 
     /**
+     * 通过关键词模糊查询银行名称
+     *
+     * @param query 查询关键字
+     *
+     * @return
+     */
+    ResponseVO getBankByKeyword(String query);
+
+    /**
      * 常用名词添加银行信息
      *
      * @param addTermsRequests 添加的数据组
@@ -28,6 +38,13 @@ public interface BankInfoService {
      * @return 添加结果
      */
     ResponseVO addBankInfoBatch(List<AddTermsRequest> addTermsRequests);
+
+    /**
+     * 添加单条银行信息
+     * @param bankName
+     * @param createDate
+     */
+    void addBankTerm(String bankName, Date createDate);
 
     /**
      * 删除指定id的银行信息
@@ -38,12 +55,4 @@ public interface BankInfoService {
      */
     ResponseVO delBankInfoById(int id);
 
-    /**
-     * 通过关键词模糊查询银行名称
-     *
-     * @param query 查询关键字
-     *
-     * @return
-     */
-    ResponseVO getBankByKeyword(String query);
 }

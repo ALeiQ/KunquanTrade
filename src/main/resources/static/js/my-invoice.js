@@ -402,6 +402,7 @@ $(function () {
     // 清空Modal數據
     clearModal = function() {
         $("input").val('');
+        $('#btn_add_invoice_detail_input').prevAll().val('');
         resetValidator();
     };
 

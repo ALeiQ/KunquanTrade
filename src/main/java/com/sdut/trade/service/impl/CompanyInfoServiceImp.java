@@ -7,6 +7,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -126,6 +127,41 @@ public class CompanyInfoServiceImp implements CompanyInfoService {
         }
 
         return termsRecordService.addRecords(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequests, createDate);
+    }
+
+    /**
+     * 添加单条公司信息
+     *
+     * @param name
+     */
+    @Override
+    public void addCompanyTerm(String name, Date createDate) {
+
+        // 如果不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(name)) {
+
+            if (!companyInfoDao.hasCompanyName(name)) {
+
+                CompanyInfo companyInfo = new CompanyInfo();
+
+                companyInfo.setName(name);
+                companyInfo.setCreateDate(createDate);
+                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
+                    log.warn("addCompanyInfo add payCompany false! name={}", name);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(name);
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addCompanyInfo add payCompanyRecord false! name={}", name);
+                }
+            }
+        }
     }
 
     /**

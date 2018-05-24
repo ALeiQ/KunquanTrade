@@ -47,6 +47,13 @@ public interface BankInfoDao {
     int addBankInfoBatch(List<BankInfo> bankInfos);
 
     /**
+     * 添加单条银行信息
+     * @param bankInfo
+     * @return
+     */
+    boolean addBankInfo(BankInfo bankInfo);
+
+    /**
      * 删除银行信息到数据库
      *
      * @param id         待删除id
@@ -55,4 +62,11 @@ public interface BankInfoDao {
      * @return 成功插入数据库的条数
      */
     int delBankInfoById(int id, Date deleteDate);
+
+    /**
+     * 判断数据库是否有该银行
+     * @param bankName
+     * @return
+     */
+    boolean hasBankName(String bankName);
 }

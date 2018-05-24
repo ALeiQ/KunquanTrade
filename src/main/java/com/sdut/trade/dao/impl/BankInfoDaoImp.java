@@ -94,6 +94,18 @@ public class BankInfoDaoImp implements BankInfoDao {
     }
 
     /**
+     * 添加单条银行信息
+     *
+     * @param bankInfo
+     *
+     * @return
+     */
+    @Override
+    public boolean addBankInfo(BankInfo bankInfo) {
+        return bankInfoMapper.insertSelective(bankInfo) == 1;
+    }
+
+    /**
      * 删除银行信息到数据库
      *
      * @param id         待删除id
@@ -112,6 +124,25 @@ public class BankInfoDaoImp implements BankInfoDao {
 
         return bankInfoMapper.updateByPrimaryKeySelective(bankInfo);
 
+    }
+
+    /**
+     * 判断数据库是否有该银行
+     *
+     * @param bankName
+     *
+     * @return
+     */
+    @Override
+    public boolean hasBankName(String bankName) {
+
+        BankInfoExample bankInfoExample = new BankInfoExample();
+
+        bankInfoExample.createCriteria()
+                .andEnableEqualTo(EnableEnum.ENABLE.isValue())
+                .andNameEqualTo(bankName);
+
+        return bankInfoMapper.countByExample(bankInfoExample) != 0;
     }
 
 }

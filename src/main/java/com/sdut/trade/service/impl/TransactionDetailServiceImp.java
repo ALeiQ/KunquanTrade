@@ -17,6 +17,8 @@ import com.sdut.trade.enums.impl.EnableEnum;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.httpmodel.request.AddDealRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
+import com.sdut.trade.service.BankInfoService;
+import com.sdut.trade.service.CompanyInfoService;
 import com.sdut.trade.service.TransactionDetailService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +32,12 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @Slf4j
 public class TransactionDetailServiceImp implements TransactionDetailService {
+
+    @Autowired
+    CompanyInfoService companyInfoService;
+
+    @Autowired
+    BankInfoService bankInfoService;
 
     @Autowired
     DealDetailDao dealDetailDao;
@@ -99,6 +107,9 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
             responseVO.setResult(ExceptionEnum.DB_ADD_FAILURE);
             log.error("addDeal add dealDetail false!", dealDetail.toString());
         }
+
+        companyInfoService.addCompanyTerm(addDealRequest.getCompany(), createDate);
+        bankInfoService.addBankTerm(addDealRequest.getBankName(), createDate);
 
         return responseVO;
     }

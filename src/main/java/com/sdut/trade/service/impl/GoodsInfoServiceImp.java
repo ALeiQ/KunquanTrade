@@ -131,6 +131,46 @@ public class GoodsInfoServiceImp implements GoodsInfoService {
     }
 
     /**
+     * 添加单条货物信息
+     *
+     * @param goodsName
+     * @param goodsModel
+     * @param createDate
+     */
+    @Override
+    public void addGoodsTerm(String goodsName, String goodsModel, Date createDate) {
+
+        // 如果货物信息不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(goodsName)) {
+
+            if (!goodsInfoDao
+                    .hasGoods(goodsName, goodsModel)) {
+
+                GoodsInfo goodsInfo = new GoodsInfo();
+
+                goodsInfo.setName(goodsName);
+                goodsInfo.setModel(goodsModel);
+                goodsInfo.setCreateDate(createDate);
+                goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!goodsInfoDao.addGoodsInfo(goodsInfo)) {
+                    log.warn("addGoodsTerms add GoodsInfo false! [name={}, model={}]", goodsName, goodsModel);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(goodsName);
+                addTermsRequest.setModel(goodsModel);
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addGoodsTerms add GoodsInfoRecord false! [name={}, model={}]", goodsName, goodsModel);
+                }
+            }
+        }
+    }
+
+    /**
      * 删除指定id的货物信息
      *
      * @param id 需要删除的信息的Id

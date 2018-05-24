@@ -18,9 +18,6 @@ public class AddDealRequest {
     @JSONField(name = "txt_deal_date", format = "yyyy-MM-dd")
     private Date date;
 
-    @JSONField(name = "txt_deal_company")
-    private String rompany;
-
     @JSONField(name = "txt_deal_amount")
     private Double amount;
 

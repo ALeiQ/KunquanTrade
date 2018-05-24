@@ -30,6 +30,8 @@ import com.sdut.trade.httpmodel.request.AddInvoiceDetailRequest;
 import com.sdut.trade.httpmodel.request.AddInvoiceRequest;
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
+import com.sdut.trade.service.CompanyInfoService;
+import com.sdut.trade.service.GoodsInfoService;
 import com.sdut.trade.service.InvoiceService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -45,19 +47,16 @@ import lombok.extern.slf4j.Slf4j;
 public class InvoiceServiceImp implements InvoiceService {
 
     @Autowired
+    private GoodsInfoService goodsInfoService;
+
+    @Autowired
+    private CompanyInfoService companyInfoService;
+
+    @Autowired
     private InvoiceDao invoiceDao;
 
     @Autowired
     private InvoiceDetailDao invoiceDetailDao;
-
-    @Autowired
-    private CompanyInfoDao companyInfoDao;
-
-    @Autowired
-    private TermsRecordServiceImp termsRecordService;
-
-    @Autowired
-    private GoodsInfoDao goodsInfoDao;
 
     /**
      * 根据开票流向获取全数据
@@ -164,10 +163,12 @@ public class InvoiceServiceImp implements InvoiceService {
 
         int addNum = invoiceDetailDao.addInvoiceDetails(invoiceDetailList);
 
-        addCompanyTerms(addInvoiceRequest, createDate);
+        companyInfoService.addCompanyTerm(addInvoiceRequest.getPayCompany(), createDate);
+        companyInfoService.addCompanyTerm(addInvoiceRequest.getReceiveCompany(), createDate);
 
         for (AddInvoiceDetailRequest addInvoiceDetailRequest : detailList) {
-            addGoodsTerms(addInvoiceDetailRequest, createDate);
+            goodsInfoService.addGoodsTerm(addInvoiceDetailRequest.getGoodsName(),
+                    addInvoiceDetailRequest.getGoodsModel(), createDate);
         }
 
         if (addNum != detailList.size()) {
@@ -259,10 +260,12 @@ public class InvoiceServiceImp implements InvoiceService {
 
         int addNum = invoiceDetailDao.addInvoiceDetails(addDetailList);
 
-        addCompanyTerms(updateInvoiceRequest, updateDate);
+        companyInfoService.addCompanyTerm(updateInvoiceRequest.getPayCompany(), updateDate);
+        companyInfoService.addCompanyTerm(updateInvoiceRequest.getReceiveCompany(), updateDate);
 
         for (AddInvoiceDetailRequest updateInvoiceDetailRequest : detailList) {
-            addGoodsTerms(updateInvoiceDetailRequest, updateDate);
+            goodsInfoService.addGoodsTerm(updateInvoiceDetailRequest.getGoodsName(),
+                    updateInvoiceDetailRequest.getGoodsModel(), updateDate);
         }
 
         if (addNum != addDetailList.size()) {
@@ -421,67 +424,6 @@ public class InvoiceServiceImp implements InvoiceService {
     }
 
     /**
-     * 从开票信息中获取新名词
-     *
-     * @param addInvoiceRequest
-     * @param createDate
-     */
-    private void addCompanyTerms(AddInvoiceRequest addInvoiceRequest, Date createDate) {
-
-        // 如果开票单位公司不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addInvoiceRequest.getPayCompany())) {
-
-            if (!companyInfoDao.hasCompanyName(addInvoiceRequest.getPayCompany())) {
-
-                CompanyInfo companyInfo = new CompanyInfo();
-
-                companyInfo.setName(addInvoiceRequest.getPayCompany());
-                companyInfo.setCreateDate(createDate);
-                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
-                    log.warn("addCompanyInfo add payCompany false! requset={}", addInvoiceRequest);
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addInvoiceRequest.getPayCompany());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addCompanyInfo add payCompanyRecord false! requset={}", addInvoiceRequest);
-                }
-            }
-        }
-
-        // 如果受票单位不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addInvoiceRequest.getReceiveCompany())) {
-
-            if (!companyInfoDao.hasCompanyName(addInvoiceRequest.getReceiveCompany())) {
-
-                CompanyInfo companyInfo = new CompanyInfo();
-
-                companyInfo.setName(addInvoiceRequest.getReceiveCompany());
-                companyInfo.setCreateDate(createDate);
-                companyInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!companyInfoDao.addCompanyInfo(companyInfo)) {
-                    log.warn("addCompanyInfo add receiveCompany false! requset={}", addInvoiceRequest);
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addInvoiceRequest.getReceiveCompany());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.COMPANY_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addCompanyInfo add receiveCompanyRecord false! requset={}", addInvoiceRequest);
-                }
-            }
-        }
-    }
-
-    /**
      * 从开票详情中获取货物新名词
      *
      * @param addInvoiceDetailRequest
@@ -489,33 +431,5 @@ public class InvoiceServiceImp implements InvoiceService {
      */
     private void addGoodsTerms(AddInvoiceDetailRequest addInvoiceDetailRequest, Date createDate) {
 
-        // 如果货物信息不在常用名词库，则添加到库
-        if (!StringUtils.isEmpty(addInvoiceDetailRequest.getGoodsName())) {
-
-            if (!goodsInfoDao
-                    .hasGoods(addInvoiceDetailRequest.getGoodsName(), addInvoiceDetailRequest.getGoodsModel())) {
-
-                GoodsInfo goodsInfo = new GoodsInfo();
-
-                goodsInfo.setName(addInvoiceDetailRequest.getGoodsName());
-                goodsInfo.setModel(addInvoiceDetailRequest.getGoodsModel());
-                goodsInfo.setCreateDate(createDate);
-                goodsInfo.setEnable(EnableEnum.ENABLE.isValue());
-
-                if (!goodsInfoDao.addGoodsInfo(goodsInfo)) {
-                    log.warn("addGoodsTerms add GoodsInfo false! detail={}", addInvoiceDetailRequest);
-                }
-
-                AddTermsRequest addTermsRequest = new AddTermsRequest();
-
-                addTermsRequest.setName(addInvoiceDetailRequest.getGoodsName());
-                addTermsRequest.setModel(addInvoiceDetailRequest.getGoodsModel());
-
-                if (termsRecordService.addRecord(TermsRecordTypeEnum.GOODS_INFO, addTermsRequest, createDate)
-                        .getResultCode() != 0) {
-                    log.warn("addGoodsTerms add GoodsInfoRecord false! detail={}", addInvoiceDetailRequest);
-                }
-            }
-        }
     }
 }

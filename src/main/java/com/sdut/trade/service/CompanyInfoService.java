@@ -1,5 +1,6 @@
 package com.sdut.trade.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
@@ -28,6 +29,12 @@ public interface CompanyInfoService {
      * @return 添加结果
      */
     ResponseVO addCompanyInfoBatch(List<AddTermsRequest> addTermsRequests);
+
+    /**
+     * 添加单条公司信息
+     * @param name
+     */
+    void addCompanyTerm(String name, Date createDate);
 
     /**
      * 删除指定id的公司信息

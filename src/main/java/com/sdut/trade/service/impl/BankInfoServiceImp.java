@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -120,6 +121,42 @@ public class BankInfoServiceImp implements BankInfoService {
         }
 
         return termsRecordService.addRecords(TermsRecordTypeEnum.BANK_INFO, addTermsRequests, createDate);
+    }
+
+    /**
+     * 添加单条银行信息
+     *
+     * @param bankName
+     * @param createDate
+     */
+    @Override
+    public void addBankTerm(String bankName, Date createDate) {
+
+        // 如果不在常用名词库，则添加到库
+        if (!StringUtils.isEmpty(bankName)) {
+
+            if (!bankInfoDao.hasBankName(bankName)) {
+
+                BankInfo bankInfo = new BankInfo();
+
+                bankInfo.setName(bankName);
+                bankInfo.setCreateDate(createDate);
+                bankInfo.setEnable(EnableEnum.ENABLE.isValue());
+
+                if (!bankInfoDao.addBankInfo(bankInfo)) {
+                    log.warn("addBankTerm add bank false! name={}", bankName);
+                }
+
+                AddTermsRequest addTermsRequest = new AddTermsRequest();
+
+                addTermsRequest.setName(bankName);
+
+                if (termsRecordService.addRecord(TermsRecordTypeEnum.BANK_INFO, addTermsRequest, createDate)
+                        .getResultCode() != 0) {
+                    log.warn("addBankTerm add bank false! name={}", bankName);
+                }
+            }
+        }
     }
 
     /**

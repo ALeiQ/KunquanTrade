@@ -1,5 +1,6 @@
 package com.sdut.trade.service;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.httpmodel.request.AddTermsRequest;
@@ -21,24 +22,6 @@ public interface GoodsInfoService {
     ResponseVO getAllGoodsInfo();
 
     /**
-     * 常用名词添加货物信息
-     *
-     * @param addTermsRequests 添加的数据组
-     *
-     * @return 添加结果
-     */
-    ResponseVO addGoodsInfoBatch(List<AddTermsRequest> addTermsRequests);
-
-    /**
-     * 删除指定id的货物信息
-     *
-     * @param id 需要删除的信息的Id
-     *
-     * @return 删除结果
-     */
-    ResponseVO delGoodsInfoById(int id);
-
-    /**
      * 根据货物名关键词查询货物名称
      *
      * @param query 关键词
@@ -56,4 +39,30 @@ public interface GoodsInfoService {
      * @return
      */
     ResponseVO getGoodsModelByKeyword(String query, String goodsName);
+
+    /**
+     * 常用名词添加货物信息
+     *
+     * @param addTermsRequests 添加的数据组
+     *
+     * @return 添加结果
+     */
+    ResponseVO addGoodsInfoBatch(List<AddTermsRequest> addTermsRequests);
+
+    /**
+     * 添加单条货物信息
+     * @param goodsName
+     * @param goodsModel
+     * @param createDate
+     */
+    void addGoodsTerm(String goodsName, String goodsModel, Date createDate);
+
+    /**
+     * 删除指定id的货物信息
+     *
+     * @param id 需要删除的信息的Id
+     *
+     * @return 删除结果
+     */
+    ResponseVO delGoodsInfoById(int id);
 }
