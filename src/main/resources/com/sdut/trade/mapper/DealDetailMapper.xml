@@ -13,8 +13,8 @@
     <result column="bank_receive_account" jdbcType="BIGINT" property="bankReceiveAccount" />
     <result column="bank_name" jdbcType="VARCHAR" property="bankName" />
     <result column="check_number" jdbcType="BIGINT" property="checkNumber" />
-    <result column="check_people_pay" jdbcType="VARCHAR" property="checkPeoplePay" />
-    <result column="check_people_receive" jdbcType="VARCHAR" property="checkPeopleReceive" />
+    <result column="check_pay_people" jdbcType="VARCHAR" property="checkPayPeople" />
+    <result column="check_receive_people" jdbcType="VARCHAR" property="checkReceivePeople" />
     <result column="check_date" jdbcType="DATE" property="checkDate" />
     <result column="check_deadline" jdbcType="DATE" property="checkDeadline" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
@@ -84,7 +84,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, date, amount, type, way, wechat_pay_account, wechat_receive_account, bank_pay_account, 
-    bank_receive_account, bank_name, check_number, check_people_pay, check_people_receive, 
+    bank_receive_account, bank_name, check_number, check_pay_people, check_receive_people, 
     check_date, check_deadline, remark, create_date, delete_date, enable, update_date, 
     company
   </sql>
@@ -130,16 +130,16 @@
     insert into deal_detail (id, date, amount, 
       type, way, wechat_pay_account, 
       wechat_receive_account, bank_pay_account, bank_receive_account, 
-      bank_name, check_number, check_people_pay, 
-      check_people_receive, check_date, check_deadline, 
+      bank_name, check_number, check_pay_people, 
+      check_receive_people, check_date, check_deadline, 
       remark, create_date, delete_date, 
       enable, update_date, company
       )
     values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{amount,jdbcType=INTEGER}, 
       #{type,jdbcType=INTEGER}, #{way,jdbcType=INTEGER}, #{wechatPayAccount,jdbcType=VARCHAR}, 
       #{wechatReceiveAccount,jdbcType=VARCHAR}, #{bankPayAccount,jdbcType=BIGINT}, #{bankReceiveAccount,jdbcType=BIGINT}, 
-      #{bankName,jdbcType=VARCHAR}, #{checkNumber,jdbcType=BIGINT}, #{checkPeoplePay,jdbcType=VARCHAR}, 
-      #{checkPeopleReceive,jdbcType=VARCHAR}, #{checkDate,jdbcType=DATE}, #{checkDeadline,jdbcType=DATE}, 
+      #{bankName,jdbcType=VARCHAR}, #{checkNumber,jdbcType=BIGINT}, #{checkPayPeople,jdbcType=VARCHAR}, 
+      #{checkReceivePeople,jdbcType=VARCHAR}, #{checkDate,jdbcType=DATE}, #{checkDeadline,jdbcType=DATE}, 
       #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{deleteDate,jdbcType=TIMESTAMP}, 
       #{enable,jdbcType=BIT}, #{updateDate,jdbcType=TIMESTAMP}, #{company,jdbcType=VARCHAR}
       )
@@ -180,11 +180,11 @@
       <if test="checkNumber != null">
         check_number,
       </if>
-      <if test="checkPeoplePay != null">
-        check_people_pay,
+      <if test="checkPayPeople != null">
+        check_pay_people,
       </if>
-      <if test="checkPeopleReceive != null">
-        check_people_receive,
+      <if test="checkReceivePeople != null">
+        check_receive_people,
       </if>
       <if test="checkDate != null">
         check_date,
@@ -245,11 +245,11 @@
       <if test="checkNumber != null">
         #{checkNumber,jdbcType=BIGINT},
       </if>
-      <if test="checkPeoplePay != null">
-        #{checkPeoplePay,jdbcType=VARCHAR},
+      <if test="checkPayPeople != null">
+        #{checkPayPeople,jdbcType=VARCHAR},
       </if>
-      <if test="checkPeopleReceive != null">
-        #{checkPeopleReceive,jdbcType=VARCHAR},
+      <if test="checkReceivePeople != null">
+        #{checkReceivePeople,jdbcType=VARCHAR},
       </if>
       <if test="checkDate != null">
         #{checkDate,jdbcType=DATE},
@@ -319,11 +319,11 @@
       <if test="record.checkNumber != null">
         check_number = #{record.checkNumber,jdbcType=BIGINT},
       </if>
-      <if test="record.checkPeoplePay != null">
-        check_people_pay = #{record.checkPeoplePay,jdbcType=VARCHAR},
+      <if test="record.checkPayPeople != null">
+        check_pay_people = #{record.checkPayPeople,jdbcType=VARCHAR},
       </if>
-      <if test="record.checkPeopleReceive != null">
-        check_people_receive = #{record.checkPeopleReceive,jdbcType=VARCHAR},
+      <if test="record.checkReceivePeople != null">
+        check_receive_people = #{record.checkReceivePeople,jdbcType=VARCHAR},
       </if>
       <if test="record.checkDate != null">
         check_date = #{record.checkDate,jdbcType=DATE},
@@ -367,8 +367,8 @@
       bank_receive_account = #{record.bankReceiveAccount,jdbcType=BIGINT},
       bank_name = #{record.bankName,jdbcType=VARCHAR},
       check_number = #{record.checkNumber,jdbcType=BIGINT},
-      check_people_pay = #{record.checkPeoplePay,jdbcType=VARCHAR},
-      check_people_receive = #{record.checkPeopleReceive,jdbcType=VARCHAR},
+      check_pay_people = #{record.checkPayPeople,jdbcType=VARCHAR},
+      check_receive_people = #{record.checkReceivePeople,jdbcType=VARCHAR},
       check_date = #{record.checkDate,jdbcType=DATE},
       check_deadline = #{record.checkDeadline,jdbcType=DATE},
       remark = #{record.remark,jdbcType=VARCHAR},
@@ -414,11 +414,11 @@
       <if test="checkNumber != null">
         check_number = #{checkNumber,jdbcType=BIGINT},
       </if>
-      <if test="checkPeoplePay != null">
-        check_people_pay = #{checkPeoplePay,jdbcType=VARCHAR},
+      <if test="checkPayPeople != null">
+        check_pay_people = #{checkPayPeople,jdbcType=VARCHAR},
       </if>
-      <if test="checkPeopleReceive != null">
-        check_people_receive = #{checkPeopleReceive,jdbcType=VARCHAR},
+      <if test="checkReceivePeople != null">
+        check_receive_people = #{checkReceivePeople,jdbcType=VARCHAR},
       </if>
       <if test="checkDate != null">
         check_date = #{checkDate,jdbcType=DATE},
@@ -459,8 +459,8 @@
       bank_receive_account = #{bankReceiveAccount,jdbcType=BIGINT},
       bank_name = #{bankName,jdbcType=VARCHAR},
       check_number = #{checkNumber,jdbcType=BIGINT},
-      check_people_pay = #{checkPeoplePay,jdbcType=VARCHAR},
-      check_people_receive = #{checkPeopleReceive,jdbcType=VARCHAR},
+      check_pay_people = #{checkPayPeople,jdbcType=VARCHAR},
+      check_receive_people = #{checkReceivePeople,jdbcType=VARCHAR},
       check_date = #{checkDate,jdbcType=DATE},
       check_deadline = #{checkDeadline,jdbcType=DATE},
       remark = #{remark,jdbcType=VARCHAR},
@@ -479,7 +479,7 @@
     -->
     insert into deal_detail
     (id, date, amount, type, way, wechat_pay_account, wechat_receive_account, bank_pay_account, 
-      bank_receive_account, bank_name, check_number, check_people_pay, check_people_receive, 
+      bank_receive_account, bank_name, check_number, check_pay_people, check_receive_people, 
       check_date, check_deadline, remark, create_date, delete_date, enable, update_date, 
       company)
     values
@@ -488,7 +488,7 @@
         #{item.type,jdbcType=INTEGER}, #{item.way,jdbcType=INTEGER}, #{item.wechatPayAccount,jdbcType=VARCHAR}, 
         #{item.wechatReceiveAccount,jdbcType=VARCHAR}, #{item.bankPayAccount,jdbcType=BIGINT}, 
         #{item.bankReceiveAccount,jdbcType=BIGINT}, #{item.bankName,jdbcType=VARCHAR}, 
-        #{item.checkNumber,jdbcType=BIGINT}, #{item.checkPeoplePay,jdbcType=VARCHAR}, #{item.checkPeopleReceive,jdbcType=VARCHAR}, 
+        #{item.checkNumber,jdbcType=BIGINT}, #{item.checkPayPeople,jdbcType=VARCHAR}, #{item.checkReceivePeople,jdbcType=VARCHAR}, 
         #{item.checkDate,jdbcType=DATE}, #{item.checkDeadline,jdbcType=DATE}, #{item.remark,jdbcType=VARCHAR}, 
         #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT}, 
         #{item.updateDate,jdbcType=TIMESTAMP}, #{item.company,jdbcType=VARCHAR})
@@ -542,11 +542,11 @@
         <if test="'check_number' == column.value">
           #{item.checkNumber,jdbcType=BIGINT}
         </if>
-        <if test="'check_people_pay' == column.value">
-          #{item.checkPeoplePay,jdbcType=VARCHAR}
+        <if test="'check_pay_people' == column.value">
+          #{item.checkPayPeople,jdbcType=VARCHAR}
         </if>
-        <if test="'check_people_receive' == column.value">
-          #{item.checkPeopleReceive,jdbcType=VARCHAR}
+        <if test="'check_receive_people' == column.value">
+          #{item.checkReceivePeople,jdbcType=VARCHAR}
         </if>
         <if test="'check_date' == column.value">
           #{item.checkDate,jdbcType=DATE}

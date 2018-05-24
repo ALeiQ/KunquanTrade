@@ -86,12 +86,12 @@ public class DealDetailVO {
     /**
      * 出票方
      */
-    private String checkPeoplePay;
+    private String checkPayPeople;
 
     /**
      * 受票方
      */
-    private String checkPeopleReceive;
+    private String checkReceivePeople;
 
     /**
      * 承兑票号

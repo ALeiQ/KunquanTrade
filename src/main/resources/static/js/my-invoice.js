@@ -393,8 +393,8 @@ $(function () {
             }
         }
 
-        $(goodsNameInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
-        $(goodsModelInp).makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
+        $(goodsNameInp).makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsName'});
+        $(goodsModelInp).makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsModel'}, goodsNameInp);
 
         resetValidator();
     };
@@ -426,10 +426,9 @@ $(function () {
     });
 
     // 抵扣时间的日历组件
-    setDateYYMMDD($('#txt_use_date'));
-
+    setDateYYMMDD(form, $('#txt_use_date'));
     // 开票时间的日历组件
-    setDateYYMMDD($('#txt_make_date'));
+    setDateYYMMDD(form, $('#txt_make_date'));
 
 });
 
@@ -457,13 +456,13 @@ $(function () {
                     });
             },
             afterSelect: function (){
-                startValidator(inp);
+                startValidator(form, inp);
             }
         });
     };
 
-    $('#txt_pay_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
-    $('#txt_receive_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
+    $('#txt_pay_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_receive_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
 });
 
 // 校验配置

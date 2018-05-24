@@ -59,8 +59,8 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
             dealDetailVO.setBankPayAccount(dealDetail.getBankPayAccount());
             dealDetailVO.setBankReceiveAccount(dealDetail.getBankReceiveAccount());
             dealDetailVO.setBankName(dealDetail.getBankName());
-            dealDetailVO.setCheckPeopleReceive(dealDetail.getCheckPeopleReceive());
-            dealDetailVO.setCheckPeoplePay(dealDetail.getCheckPeoplePay());
+            dealDetailVO.setCheckReceivePeople(dealDetail.getCheckReceivePeople());
+            dealDetailVO.setCheckPayPeople(dealDetail.getCheckPayPeople());
             dealDetailVO.setCheckNumber(dealDetail.getCheckNumber());
             dealDetailVO.setCheckDate(dealDetail.getCheckDate());
             dealDetailVO.setCheckDeadLine(dealDetail.getCheckDeadline());

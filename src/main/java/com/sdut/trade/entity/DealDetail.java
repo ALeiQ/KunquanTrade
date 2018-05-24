@@ -26,9 +26,9 @@ public class DealDetail implements Serializable {
 
     private Long checkNumber;
 
-    private String checkPeoplePay;
+    private String checkPayPeople;
 
-    private String checkPeopleReceive;
+    private String checkReceivePeople;
 
     private Date checkDate;
 
@@ -136,20 +136,20 @@ public class DealDetail implements Serializable {
         this.checkNumber = checkNumber;
     }
 
-    public String getCheckPeoplePay() {
-        return checkPeoplePay;
+    public String getCheckPayPeople() {
+        return checkPayPeople;
     }
 
-    public void setCheckPeoplePay(String checkPeoplePay) {
-        this.checkPeoplePay = checkPeoplePay == null ? null : checkPeoplePay.trim();
+    public void setCheckPayPeople(String checkPayPeople) {
+        this.checkPayPeople = checkPayPeople == null ? null : checkPayPeople.trim();
     }
 
-    public String getCheckPeopleReceive() {
-        return checkPeopleReceive;
+    public String getCheckReceivePeople() {
+        return checkReceivePeople;
     }
 
-    public void setCheckPeopleReceive(String checkPeopleReceive) {
-        this.checkPeopleReceive = checkPeopleReceive == null ? null : checkPeopleReceive.trim();
+    public void setCheckReceivePeople(String checkReceivePeople) {
+        this.checkReceivePeople = checkReceivePeople == null ? null : checkReceivePeople.trim();
     }
 
     public Date getCheckDate() {
@@ -235,8 +235,8 @@ public class DealDetail implements Serializable {
         bankReceiveAccount("bank_receive_account"),
         bankName("bank_name"),
         checkNumber("check_number"),
-        checkPeoplePay("check_people_pay"),
-        checkPeopleReceive("check_people_receive"),
+        checkPayPeople("check_pay_people"),
+        checkReceivePeople("check_receive_people"),
         checkDate("check_date"),
         checkDeadline("check_deadline"),
         remark("remark"),

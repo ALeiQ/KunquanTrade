@@ -924,143 +924,143 @@ public class DealDetailExample {
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayIsNull() {
-            addCriterion("check_people_pay is null");
+        public Criteria andCheckPayPeopleIsNull() {
+            addCriterion("check_pay_people is null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayIsNotNull() {
-            addCriterion("check_people_pay is not null");
+        public Criteria andCheckPayPeopleIsNotNull() {
+            addCriterion("check_pay_people is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayEqualTo(String value) {
-            addCriterion("check_people_pay =", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleEqualTo(String value) {
+            addCriterion("check_pay_people =", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayNotEqualTo(String value) {
-            addCriterion("check_people_pay <>", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleNotEqualTo(String value) {
+            addCriterion("check_pay_people <>", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayGreaterThan(String value) {
-            addCriterion("check_people_pay >", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleGreaterThan(String value) {
+            addCriterion("check_pay_people >", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayGreaterThanOrEqualTo(String value) {
-            addCriterion("check_people_pay >=", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleGreaterThanOrEqualTo(String value) {
+            addCriterion("check_pay_people >=", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayLessThan(String value) {
-            addCriterion("check_people_pay <", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleLessThan(String value) {
+            addCriterion("check_pay_people <", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayLessThanOrEqualTo(String value) {
-            addCriterion("check_people_pay <=", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleLessThanOrEqualTo(String value) {
+            addCriterion("check_pay_people <=", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayLike(String value) {
-            addCriterion("check_people_pay like", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleLike(String value) {
+            addCriterion("check_pay_people like", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayNotLike(String value) {
-            addCriterion("check_people_pay not like", value, "checkPeoplePay");
+        public Criteria andCheckPayPeopleNotLike(String value) {
+            addCriterion("check_pay_people not like", value, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayIn(List<String> values) {
-            addCriterion("check_people_pay in", values, "checkPeoplePay");
+        public Criteria andCheckPayPeopleIn(List<String> values) {
+            addCriterion("check_pay_people in", values, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayNotIn(List<String> values) {
-            addCriterion("check_people_pay not in", values, "checkPeoplePay");
+        public Criteria andCheckPayPeopleNotIn(List<String> values) {
+            addCriterion("check_pay_people not in", values, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayBetween(String value1, String value2) {
-            addCriterion("check_people_pay between", value1, value2, "checkPeoplePay");
+        public Criteria andCheckPayPeopleBetween(String value1, String value2) {
+            addCriterion("check_pay_people between", value1, value2, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeoplePayNotBetween(String value1, String value2) {
-            addCriterion("check_people_pay not between", value1, value2, "checkPeoplePay");
+        public Criteria andCheckPayPeopleNotBetween(String value1, String value2) {
+            addCriterion("check_pay_people not between", value1, value2, "checkPayPeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveIsNull() {
-            addCriterion("check_people_receive is null");
+        public Criteria andCheckReceivePeopleIsNull() {
+            addCriterion("check_receive_people is null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveIsNotNull() {
-            addCriterion("check_people_receive is not null");
+        public Criteria andCheckReceivePeopleIsNotNull() {
+            addCriterion("check_receive_people is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveEqualTo(String value) {
-            addCriterion("check_people_receive =", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleEqualTo(String value) {
+            addCriterion("check_receive_people =", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveNotEqualTo(String value) {
-            addCriterion("check_people_receive <>", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleNotEqualTo(String value) {
+            addCriterion("check_receive_people <>", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveGreaterThan(String value) {
-            addCriterion("check_people_receive >", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleGreaterThan(String value) {
+            addCriterion("check_receive_people >", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveGreaterThanOrEqualTo(String value) {
-            addCriterion("check_people_receive >=", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleGreaterThanOrEqualTo(String value) {
+            addCriterion("check_receive_people >=", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveLessThan(String value) {
-            addCriterion("check_people_receive <", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleLessThan(String value) {
+            addCriterion("check_receive_people <", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveLessThanOrEqualTo(String value) {
-            addCriterion("check_people_receive <=", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleLessThanOrEqualTo(String value) {
+            addCriterion("check_receive_people <=", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveLike(String value) {
-            addCriterion("check_people_receive like", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleLike(String value) {
+            addCriterion("check_receive_people like", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveNotLike(String value) {
-            addCriterion("check_people_receive not like", value, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleNotLike(String value) {
+            addCriterion("check_receive_people not like", value, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveIn(List<String> values) {
-            addCriterion("check_people_receive in", values, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleIn(List<String> values) {
+            addCriterion("check_receive_people in", values, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveNotIn(List<String> values) {
-            addCriterion("check_people_receive not in", values, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleNotIn(List<String> values) {
+            addCriterion("check_receive_people not in", values, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveBetween(String value1, String value2) {
-            addCriterion("check_people_receive between", value1, value2, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleBetween(String value1, String value2) {
+            addCriterion("check_receive_people between", value1, value2, "checkReceivePeople");
             return (Criteria) this;
         }
 
-        public Criteria andCheckPeopleReceiveNotBetween(String value1, String value2) {
-            addCriterion("check_people_receive not between", value1, value2, "checkPeopleReceive");
+        public Criteria andCheckReceivePeopleNotBetween(String value1, String value2) {
+            addCriterion("check_receive_people not between", value1, value2, "checkReceivePeople");
             return (Criteria) this;
         }
 

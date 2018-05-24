@@ -102,6 +102,131 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script type="text/javascript" src="footer.js"></script>
     <!--//footer-->
 </div>
+
+<!-- 增加数据的提示框 -->
+<div class="modal fade" id="addDealModal" tabindex="-1" role="dialog"
+     aria-labelledby="addDealModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <form  id="updateDealForm">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                    <h4 class="modal-title" id="addDealModalLabel">新增</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_deal_date">交易时间</label>
+                                <input type="text" name="txt_deal_date" class="form-control" id="txt_deal_date"
+                                       placeholder="交易时间" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_deal_company">交易公司</label>
+                                <input type="text" name="txt_deal_company" class="form-control" id="txt_deal_company"
+                                       placeholder="交易公司" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_deal_amount">交易金额</label>
+                                <input type="text" name="txt_deal_amount" class="form-control"
+                                       id="txt_deal_amount" placeholder="交易金额" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="txt_deal_direction">交易流向</label>
+                                <select  name="txt_deal_direction" class="form-control" id="txt_deal_direction"
+                                         placeholder="交易流向" autocomplete="off">
+                                    <option value="1">收入</option>
+                                    <option value="2">支出</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-3" style="border-top: solid 2px #868181">
+                            <i class="fa fa-weixin input-icon" aria-hidden="true"></i>
+                            <div class="form-group">
+                                <label for="txt_wechat_pay_account">微信打款账号</label>
+                                <input type="text" name="txt_wechat_pay_account" class="form-control"
+                                       id="txt_wechat_pay_account" placeholder="微信打款账号" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_wechat_receive_account">微信收款账号</label>
+                                <input type="text" name="txt_wechat_receive_account" class="form-control"
+                                       id="txt_wechat_receive_account" placeholder="微信收款账号" autoComplete="off"/>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3" style="border: solid 2px #868181; border-bottom: none">
+                            <i class="fa fa-university input-icon" aria-hidden="true"></i>
+                            <div class="form-group">
+                                <label for="txt_bank_pay_account">银行打款账号</label>
+                                <input type="text" name="txt_bank_pay_account" class="form-control"
+                                       id="txt_bank_pay_account" placeholder="银行打款账号" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_bank_receive_account">银行收款账号</label>
+                                <input type="text" name="txt_bank_receive_account" class="form-control"
+                                       id="txt_bank_receive_account" placeholder="银行收款账号" autoComplete="off"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_bank_name">银行名称账号</label>
+                                <input type="text" name="txt_bank_name" class="form-control"
+                                       id="txt_bank_name" placeholder="银行收款账号" autoComplete="off"/>
+                            </div>
+                        </div>
+                        <div class = "check-input" style="border-top: solid 2px #868181">
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label for="txt_check_pay_people">出票方</label>
+                                    <input type="text" name="txt_check_pay_people" class="form-control"
+                                           id="txt_check_pay_people" placeholder="出票方" autoComplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_check_receive_people">受票方</label>
+                                    <input type="text" name="txt_check_receive_people" class="form-control"
+                                           id="txt_check_receive_people" placeholder="受票方" autoComplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_check_number">承兑票号</label>
+                                    <input type="text" name="txt_check_number" class="form-control"
+                                           id="txt_check_number" placeholder="承兑票号" autoComplete="off"/>
+                                </div>
+                            </div>
+                            <div class="col-sm-3">
+                                <i class="fa fa-money input-icon" aria-hidden="true"></i>
+                                <div class="form-group">
+                                    <label for="txt_check_date">出票日期</label>
+                                    <input type="text" name="txt_check_date" class="form-control"
+                                           id="txt_check_date" placeholder="出票日期" autoComplete="off"/>
+                                </div>
+                                <div class="form-group">
+                                    <label for="txt_check_deadline">到期日</label>
+                                    <input type="text" name="txt_check_deadline" class="form-control"
+                                           id="txt_check_deadline" placeholder="到期日" autoComplete="off"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="display: none;"></i>
+                    <button type="button" id="btn_clear_invoice_modal" class="btn btn-default"><span
+                            class="glyphicon glyphicon-remove" aria-hidden="true"></span>清空</button>
+                    <button type="submit" id="btn_submit_invoice" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>保存</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- //增加数据的提示框 -->
+
 <!-- Classie -->
 <script src="js/classie.js"></script>
 

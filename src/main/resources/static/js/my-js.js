@@ -68,8 +68,21 @@ $(document).ready(function () {
         );
     };
 
-    setDateYYMMDD = function (inp) {
-        inp.datetimepicker({
+    // 检查Input是否全空
+    checkInputsEmpty = function(inputs) {
+
+        for (var i  = 0; i < inputs.length; ++i) {
+            if (typeof($(inputs[i]).val()) !== "undefined"
+                && $(inputs[i]).val() !== "") {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
+    setDateYYMMDD = function (form, inp) {
+        $(inp).datetimepicker({
             format: 'yyyy-mm-dd',//显示格式
             todayHighlight: 1,//今天高亮
             minView: "month",//设置只显示到月份
@@ -78,15 +91,16 @@ $(document).ready(function () {
             showMeridian: 1,
             autoclose: 1//选择后自动关闭
         }).on('hide', function (e) {
+            $(inp).blur();
             // 关闭后手动触发校验（否则不自动校验）
             form.data('bootstrapValidator')
-                .updateStatus(inp, 'NOT_VALIDATED',null)
-                .validateField(inp);
+                .updateStatus($(inp), 'NOT_VALIDATED',null)
+                .validateField($(inp));
         });
     };
 
     // 开启inp的校验
-    startValidator = function(inp) {
+    startValidator = function(form, inp) {
         form.data('bootstrapValidator')
             .updateStatus($(inp), 'NOT_VALIDATED',null)
             .validateField($(inp));

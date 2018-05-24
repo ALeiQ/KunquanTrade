@@ -55,60 +55,6 @@ public class LogisticsController {
     }
 
     /**
-     * 运输明细页面下拉框数据获取
-     *
-     * @param getType
-     *
-     * @return
-     */
-    @ResponseBody
-    @RequestMapping(value = "/getTypeaheadData", method = RequestMethod.GET)
-    public ResponseVO getTypeaheadData(String getType, String query, String goodsName) {
-
-        log.info("getTypeaheadData start [type={}, query={}, goodsName={}]", getType, query, goodsName);
-
-        ResponseVO result = new ResponseVO();
-
-        try {
-
-            if (StringUtils.isEmpty(getType)) {
-                result.setResult(ExceptionEnum.PARAM_EMPTY);
-                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
-            }
-
-            // 根据前端提供的类型，分别进行不同数据表的数据添加。
-            switch (getType) {
-                case "company":
-                    result = companyInfoService.getCompanyByKeyword(query);
-                    break;
-                case "transCompany":
-                    result = logisticsCompanyInfoService.getLogisticsCompanyByKeyword(query);
-                    break;
-                case "goodsName":
-                    result = goodsInfoService.getGoodsNameByKeyword(query);
-                    break;
-                case "goodsModel":
-                    result = goodsInfoService.getGoodsModelByKeyword(query, goodsName);
-                    break;
-                default:
-                    log.error("getTypeaheadData 传参错误！ 没有这个类型");
-                    result.setResult(ExceptionEnum.PARAM_ERR);
-                    break;
-            }
-
-        } catch (MyException ex) {
-            log.error("getTypeaheadData Known error! [type={}]", getType, ex);
-        } catch (Exception ex) {
-            log.error("getTypeaheadData UnKnown error! [type={}]", getType, ex);
-            result.setResult(ResultEnum.FAILURE);
-        }
-
-        log.info("getTypeaheadData end [type={}, query={}, goodsName={}]", getType, query, goodsName);
-
-        return result;
-    }
-
-    /**
      * 获取运输明细详情数据
      *
      * @return
@@ -133,8 +79,6 @@ public class LogisticsController {
         return result;
 
     }
-
-    ;
 
     /**
      * 添加单条运输明细

@@ -32,16 +32,6 @@
     margin-bottom: 0;
 }
 
-.term-table th:first-child
-{
-    width:60px;
-}
-
-.term-table th:nth-child(2)
-{
-    width:350px;
-}
-
 .panel-group .panel
 {
     margin-bottom: 10px;
@@ -162,16 +152,6 @@
     .panel-group .panel:first-child .term-table th:nth-child(2)
     {
         width: 80px !important;
-    }
-
-    .term-table th:first-child
-    {
-        width:52px;
-    }
-
-    .term-table th:nth-child(2)
-    {
-        width:157px;
     }
 
     .panel-heading ul

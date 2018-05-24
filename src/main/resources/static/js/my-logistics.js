@@ -273,7 +273,7 @@ $(function () {
         }
     });
 
-    setDateYYMMDD($('#txt_load_time'));
+    setDateYYMMDD(form, $('#txt_load_time'));
 
     // 净重监听
     $('#txt_net_weight').change(function () {
@@ -401,16 +401,16 @@ $(function () {
                     });
             },
             afterSelect: function () {
-                startValidator(inp);
+                startValidator(form, inp);
             }
         });
     };
 
-    $('#txt_goods_model').makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsModel'});
-    $('#txt_goods_name').makeTypeahead('/logistics/getTypeaheadData', {getType: 'goodsName'});
-    $('#txt_trans_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'transCompany'});
-    $('#txt_buyer_company').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
-    $('#txt_goods_from').makeTypeahead('/logistics/getTypeaheadData', {getType: 'company'});
+    $('#txt_goods_model').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsModel'});
+    $('#txt_goods_name').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'goodsName'});
+    $('#txt_trans_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'transCompany'});
+    $('#txt_buyer_company').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
+    $('#txt_goods_from').makeTypeahead('/majorTerms/getTypeaheadData', {getType: 'company'});
 });
 
 // 校验配置
