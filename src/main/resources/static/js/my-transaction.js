@@ -257,16 +257,60 @@ $(function () {
             },
             fields: {
                 txt_deal_date: {
+                    message: '交易时间不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '交易时间不可为空'
+                        },
+                        callback: {
+                            callback: function (value, validator, $field) {
 
+                                var dateFormat = /^\d{4}-\d{1,2}-\d{1,2}/;
+                                var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
+
+                                if (value === "") {
+                                    return true;
+                                }
+
+                                if (!dateFormat.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '交易时间不合法，请输入正确的日期格式（如2018-05-12）'
+                                    };
+                                }
+                                if (!dateFailure.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '交易时间不合法，日期不存在'
+                                    };
+                                }
+                                return true;
+                            }
+                        }
+                    }
                 },
                 txt_deal_company: {
 
                 },
                 txt_deal_amount: {
-
+                    message: '交易金额不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '交易金额不可为空'
+                        },
+                        regexp: {
+                            regexp: '^(0|([1-9][0-9]*))+([.][0-9]*)?$',
+                            message: '请输入非零开头的整数或者小数'
+                        }
+                    }
                 },
                 txt_deal_direction: {
-
+                    message: '交易流向不合法',
+                    validators:{
+                        notEmpty: {
+                            message: '交易流向不可为空'
+                        }
+                    }
                 },
                 txt_wechat_pay_account: {
 
@@ -293,10 +337,64 @@ $(function () {
 
                 },
                 txt_check_date: {
+                    message: '出票时间不合法',
+                    validators: {
+                        callback: {
+                            callback: function (value, validator, $field) {
 
+                                var dateFormat = /^\d{4}-\d{1,2}-\d{1,2}/;
+                                var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
+
+                                if (value === "") {
+                                    return true;
+                                }
+
+                                if (!dateFormat.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '出票时间不合法，请输入正确的日期格式（如2018-05-12）'
+                                    };
+                                }
+                                if (!dateFailure.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '出票时间不合法，日期不存在'
+                                    };
+                                }
+                                return true;
+                            }
+                        }
+                    }
                 },
                 txt_check_deadline: {
+                    message: '到期时间不合法',
+                    validators: {
+                        callback: {
+                            callback: function (value, validator, $field) {
 
+                                var dateFormat = /^\d{4}-\d{1,2}-\d{1,2}/;
+                                var dateFailure = /^20[0-9][0-9]-(0[1-9]|1[0-2])-((0[1-9])|((1|2)[0-9])|30|31)$/;
+
+                                if (value === "") {
+                                    return true;
+                                }
+
+                                if (!dateFormat.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '到期时间不合法，请输入正确的日期格式（如2018-05-12）'
+                                    };
+                                }
+                                if (!dateFailure.test(value)) {
+                                    return {
+                                        valid: false,
+                                        message: '到期时间不合法，日期不存在'
+                                    };
+                                }
+                                return true;
+                            }
+                        }
+                    }
                 }
             }
         })
