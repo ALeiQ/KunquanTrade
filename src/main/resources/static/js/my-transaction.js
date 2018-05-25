@@ -2,6 +2,7 @@
 var mainForm = $("#updateDealForm");
 var mainTable = $('#dealTable');
 var myModal = $('#addDealModal');
+var bindModal = $('#bindLogisticsModal');
 
 // 表格属性设定
 $(function () {
@@ -197,6 +198,7 @@ $(function () {
     // 清空Modal數據
     clearModal = function() {
         $("input").val('');
+        $('#btn_deal_bind_logistics').text('点击绑定');
         $(dealDetail).find('input').attr("disabled", false);
         resetValidator();
     };
@@ -206,6 +208,161 @@ $(function () {
         mainForm.data('bootstrapValidator', null);
         formValidator();
     };
+});
+
+// 绑定相关物流
+$(function () {
+
+    var overAllIds = new Set();                // 全局保存选中行的对象
+
+    function examine(type,datas){            // 操作类型，选中的行
+        if(type.indexOf('uncheck')==-1){
+            $.each(datas,function(i,v){        // 如果是选中则添加选中行的 id
+                overAllIds.add(v.id);
+            });
+        }else{
+            $.each(datas,function(i,v){
+                overAllIds.delete(v.id);     // 删除取消选中行的 id
+            });
+        }
+    }
+
+    $('#bindTransTable').bootstrapTable({
+        url: '/logistics/getLogisticsDetails',
+        method: 'get',
+        dataType: 'json',
+        dataFiled: 'data',
+        search: true,           // 显示检索框
+        showRefresh: true,      // 显示刷新按钮
+        pagination: true,       // 在表格底部显示分页条
+        showColumns: true,      // 显示内容列下拉框
+        showToggle: true,       // 显示视图切换按钮（分页/卡片）
+        uniqueId: 'id',
+        undefinedText: '',      // null显示空，默认'-'
+        clickToSelect: true,
+        pageSize: 10,
+        pageList: [10, 15, 20],
+        responseHandler : function(res) {
+            //在ajax获取到数据，渲染表格之前，修改数据源
+            return res;
+        },
+        columns: [
+            {
+                field: 'state',
+                checkbox: true,
+                formatter: function (i,row) {            // 每次加载 checkbox 时判断当前 row 的 id 是否已经存在全局 Set() 里
+                    if($.inArray(row.id,Array.from(overAllIds))!=-1){    // 因为 Set是集合,需要先转换成数组
+                        return {
+                            checked : true               // 存在则选中
+                        }
+                    }
+                }
+            },
+            {
+                field: "id",
+                title: "#",
+            },
+            {
+                field: "loadTime",
+                title: "装车时间"
+            }, {
+                field: "goodsName",
+                title: "物资名称"
+            }, {
+                field: "goodsModel",
+                title: "型号"
+            }, {
+                field: "netWeight",
+                title: "净重"
+            }, {
+                field: "returnWeight",
+                title: "回执数"
+            }, {
+                field: "lossWeight",
+                title: "亏吨"
+            }, {
+                field: "sellerUnitPrice",
+                title: "厂家结算单价"
+            }, {
+                field: "sellerSumPrice",
+                title: "厂家结算金额"
+            }, {
+                field: "unitPrice",
+                title: "结算单价"
+            }, {
+                field: "sumPrice",
+                title: "结算金额"
+            }, {
+                field: "transUnitPrice",
+                title: "运费单价"
+            }, {
+                field: "transSumPrice",
+                title: "运费金额"
+            }, {
+                field: "profit",
+                title: "利润"
+            }, {
+                field: "goodsFrom",
+                title: "物资来源"
+            }, {
+                field: "buyerCompany",
+                title: "结算公司"
+            }, {
+                field: "transCompany",
+                title: "运输公司"
+            }, {
+                field: "weighingNumber",
+                title: "检斤号"
+            }, {
+                field: "carNumber",
+                title: "车牌号"
+            }, {
+                field: "remark",
+                title: "备注"
+            }
+        ]
+    });
+
+    $('#bindTransTable').on('uncheck.bs.table check.bs.table check-all.bs.table uncheck-all.bs.table',function(e,rows){
+        var datas = $.isArray(rows) ? rows : [rows];        // 点击时获取选中的行或取消选中的行
+        examine(e.type,datas);                                 // 保存到全局 Set() 里
+    });
+
+    $('#btn_deal_bind_logistics').click(function () {
+
+        $('#bindTransTable').bootstrapTable('refresh');
+
+        var selectText = $(this).text().trim();
+        var selectId = selectText.split(',');
+        var regex = /^[1-9][0-9]*$/;
+
+        overAllIds = new Set();
+
+        for (var i in selectId) {
+            if (regex.test(selectId[i])) {
+                overAllIds.add(eval(selectId[i]));
+            }
+        }
+
+        var title = bindModal.find('.modal-title');
+
+        if (title[0].innerHTML !== '绑定贸易物流') {
+            title.text('绑定贸易物流');
+        }
+
+        bindModal.modal();
+    });
+
+    $('#btn_confirm_logistics').click(function () {
+
+        var arr = Array.from(overAllIds);
+
+        if (arr.length === 0) {
+            $('#btn_deal_bind_logistics').text('点击绑定');
+        } else {
+            $('#btn_deal_bind_logistics').text(arr);
+        }
+    });
 });
 
 // 初始化事件
@@ -435,6 +592,15 @@ $(function () {
                                 }
                                 return true;
                             }
+                        }
+                    }
+                },
+                txt_deal_remark: {
+                    message: '备注不合法',
+                    validators: {
+                        stringLength: {
+                            max: 100,
+                            message: '输入超过上限'
                         }
                     }
                 }

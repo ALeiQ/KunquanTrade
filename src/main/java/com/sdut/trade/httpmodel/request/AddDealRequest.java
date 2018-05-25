@@ -57,4 +57,7 @@ public class AddDealRequest {
     @JSONField(name = "txt_check_deadline", format = "yyyy-MM-dd")
     private Date checkDeadline;
 
+    @JSONField(name = "txt_deal_remark")
+    private String remark;
+
 }

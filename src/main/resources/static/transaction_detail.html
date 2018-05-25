@@ -213,6 +213,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
                             </div>
                         </div>
                     </div>
+                    <div class="row" style="border-top: solid 2px #868181">
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <label for="btn_deal_bind_logistics">相关物流</label>
+                                <button type = "button" name="btn_deal_bind_logistics" class="form-control btn"
+                                        id="btn_deal_bind_logistics" placeholder="相关物流">
+                                    点击绑定
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-sm-9">
+                            <div class="form-group">
+                                <label for="txt_deal_remark">备注</label>
+                                <input type="text" name="txt_deal_remark" class="form-control"
+                                       id="txt_deal_remark" placeholder="备注" autoComplete="off"/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <i class="fa fa-spinner fa-pulse fa-2x fa-fw" style="display: none;"></i>
@@ -226,6 +244,28 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     </div>
 </div>
 <!-- //增加数据的提示框 -->
+
+<!-- 绑定运输明细的提示框 -->
+<div class="modal fade" id="bindLogisticsModal" tabindex="-1" role="dialog"
+     aria-labelledby="bindLogisticsModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                <h4 class="modal-title" id="bindLogisticsModalLabel">绑定贸易物流</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table text-nowrap table-striped" id="bindTransTable">
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" id="btn_confirm_logistics" class="btn btn-primary">
+                    <span class="fa fa-check" aria-hidden="true"></span>确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 绑定运输明细的提示框 -->
 
 <!-- Classie -->
 <script src="js/classie.js"></script>
