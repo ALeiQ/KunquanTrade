@@ -218,6 +218,7 @@ $(function () {
     };
 
 
+    // 提交表单按钮
     $("#btn_submit_invoice").click(function () {
 
         mainForm.bootstrapValidator('validate');

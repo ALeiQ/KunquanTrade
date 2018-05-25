@@ -151,6 +151,11 @@ $(function () {
         });
     };
 
+    // 表单清空按钮
+    $('#btn_clear_deal_modal').click(function () {
+        clearModal();
+    });
+
     // 清空Modal數據
     clearModal = function() {
         $("input").val('');
@@ -163,7 +168,6 @@ $(function () {
         mainForm.data('bootstrapValidator', null);
         formValidator();
     };
-
 });
 
 // 初始化事件
