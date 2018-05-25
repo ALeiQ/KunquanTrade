@@ -80,15 +80,17 @@ $(function () {
             }, {
                 field: "operate",
                 title: "操作",
-                formatter: delIcon(1)
+                formatter: function (value, row, index){
+                    return delIcon(1, row);
+                }
             }
         ]
         //onExpandRow: showDetails,
         //onClickRow: editRow
     });
 
-    function delIcon(type, value, row, index) {
-        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + type + ', this)"><i' +
+    function delIcon(type, row, index) {
+        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + row.id + ',' + type + ', this)"><i' +
             ' class="fa' +
             ' fa-times"></i></a>';
     }
@@ -132,6 +134,21 @@ $(function () {
         return false;
     });
 
+    // 删除行按钮
+    delData = function (delId, type, del_icon) {
+
+        var row = $(del_icon).parent().parent();
+        var table = row.parent().parent();
+
+        var url;
+        if (type === 1) {
+            url = "/transactionDetail/delDeal";
+            delDeal(url, $(table), delId);
+        }
+
+        return false;
+    };
+
     addDeal = function(form_data) {
         $.ajax({
             type: "post",
@@ -147,6 +164,27 @@ $(function () {
                     clearModal();
                     mainTable.bootstrapTable('refresh');
                 }
+            }
+        });
+    };
+
+    // 删除单条附加信息
+    delDeal = function(url, table, id) {
+        $.ajax({
+            type: "POST",
+            dataType: "json",
+            url: url,
+            async: false,
+            data: {delId: id},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    table.bootstrapTable('refresh');
+                }
+            },
+            error : function() {
+                alert("ajax请求异常！");
             }
         });
     };

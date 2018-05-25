@@ -115,6 +115,30 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
     }
 
     /**
+     * 删除指定id的资金往来
+     *
+     * @param delId
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO delDealById(Integer delId) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        Date delDate = new Date();
+
+        int delNum = dealDetailDao.delDealById(delId, delDate);
+
+        if (delNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_DEL_FAILURE);
+            log.error("addDeal add dealDetail false! id={}", delId);
+        }
+
+        return responseVO;
+    }
+
+    /**
      * 将前端请求类解析为数据对象
      * @param addDealRequest
      * @param createDate

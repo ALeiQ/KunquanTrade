@@ -94,4 +94,34 @@ public class TransactionDetailController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/delDeal", method = RequestMethod.POST)
+    public ResponseVO delDeal(Integer delId) {
+
+        log.info("delDeal start id={}", delId);
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+
+            // 写入的数据不可为空
+            if (delId == null) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            result = transactionDetailService.delDealById(delId);
+
+        } catch (MyException ex) {
+            log.error("delDeal Known Error!" + ex);
+        } catch (Exception ex) {
+            result.setResult(ResultEnum.FAILURE);
+            log.error("delDeal Unknown Error!", ex);
+        }
+
+        log.info("delDeal end id={}", delId);
+
+        return result;
+    }
+
 }

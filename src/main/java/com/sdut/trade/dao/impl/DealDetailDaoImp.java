@@ -1,5 +1,6 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,25 @@ public class DealDetailDaoImp implements DealDetailDao {
     @Override
     public int addDetail(DealDetail dealDetail) {
         return dealDetailMapper.insertSelective(dealDetail);
+    }
+
+    /**
+     * 刪除指定id的資金往來
+     *
+     * @param delId
+     * @param delDate
+     *
+     * @return
+     */
+    @Override
+    public int delDealById(Integer delId, Date delDate) {
+
+        DealDetail dealDetail = new DealDetail();
+
+        dealDetail.setId(delId);
+        dealDetail.setDeleteDate(delDate);
+        dealDetail.setEnable(EnableEnum.DISABLE.isValue());
+
+        return dealDetailMapper.updateByPrimaryKeySelective(dealDetail);
     }
 }

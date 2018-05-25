@@ -30,7 +30,8 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "#"
+                title: "#",
+                visible: false
             },
             {
                 field: "loadTime",
@@ -92,7 +93,9 @@ $(function () {
             }, {
                 field: "operate",
                 title: "操作",
-                formatter: delIcon
+                formatter: function (value, row, index){
+                    return delIcon(value, row, index);
+                }
             }
         ],
         onClickRow: editRow
@@ -129,7 +132,8 @@ $(function () {
     }
 
     function delIcon(value, row, index) {
-        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(this)"><i class="fa' +
+        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + row.id + ', this)"><i' +
+            ' class="fa' +
             ' fa-times"></i></a>';
 
     }
@@ -211,11 +215,9 @@ $(function () {
     };
 
     // 删除行按钮
-    delData = function (del_icon) {
+    delData = function (delId, del_icon) {
 
-        var row = $(del_icon).parent().parent();
-
-        delLogisticsDetail($(row.children()[0])[0].innerText);
+        delLogisticsDetail(delId);
 
         return false;
     };

@@ -33,7 +33,8 @@ $(function () {
         columns: [
             {
                 field: "id",
-                title: "#"
+                title: "#",
+                visible: false
             },
             {
                 field: "makeDate",
@@ -66,7 +67,9 @@ $(function () {
             }, {
                 field: "operate",
                 title: "操作",
-                formatter: delIcon(1)
+                formatter: function (value, row, index) {
+                    return delIcon(1, value, row, index);
+                }
             }
         ],
         onExpandRow: showDetails,
@@ -94,7 +97,8 @@ $(function () {
             columns: [
                 {
                     field: "id",
-                    title: "#"
+                    title: "#",
+                    visible: false
                 },
                 {
                     field: 'goodsName',
@@ -117,7 +121,9 @@ $(function () {
                 }, {
                     field: "operate",
                     title: "操作",
-                    formatter: delIcon(2)
+                    formatter: function (value, row, index) {
+                        return delIcon(2, value, row, index);
+                    }
                 }
             ]
         });
@@ -157,7 +163,7 @@ $(function () {
     }
 
     function delIcon(type, value, row, index) {
-        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + type + ', this)"><i' +
+        return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData('+ row.id + ',' + type + ', this)"><i' +
             ' class="fa' +
             ' fa-times"></i></a>';
     }
@@ -199,7 +205,7 @@ $(function () {
     });
 
     // 删除行按钮
-    delData = function (type, del_icon) {
+    delData = function (delId, type, del_icon) {
 
         var row = $(del_icon).parent().parent();
         var table = row.parent().parent();
@@ -207,10 +213,10 @@ $(function () {
         var url;
         if (type === 1) {
             url = "/invoice/delInvoice";
-            delInvoice(url, $(table), $(row.children()[1])[0].innerText);
+            delInvoice(url, $(table), delId);
         } else if (type === 2) {
             url = "/invoice/delInvoiceDetail";
-            delInvoice(url, $(table), $(row.children()[0])[0].innerText);
+            delInvoice(url, $(table), delId);
         }
 
 
@@ -286,13 +292,13 @@ $(function () {
     };
 
     // 删除单条附加信息
-    delInvoice = function(url, table, id) {
+    delInvoice = function(url, table, delId) {
         $.ajax({
             type: "POST",
             dataType: "json",
             url: url,
             async: false,
-            data: {delId: id},
+            data: {delId: delId},
             success: function (result) {
                 if (result.resultCode !== 0) {
                     alert(result.resultMsg);

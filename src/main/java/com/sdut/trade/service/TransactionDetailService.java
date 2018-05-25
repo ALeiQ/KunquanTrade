@@ -23,4 +23,11 @@ public interface TransactionDetailService {
      * @return
      */
     ResponseVO addDeal(AddDealRequest addDealRequest);
+
+    /**
+     * 删除指定id的资金往来
+     * @param delId
+     * @return
+     */
+    ResponseVO delDealById(Integer delId);
 }

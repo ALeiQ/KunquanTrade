@@ -1,5 +1,6 @@
 package com.sdut.trade.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.sdut.trade.entity.DealDetail;
@@ -24,4 +25,12 @@ public interface DealDetailDao {
      * @return
      */
     int addDetail(DealDetail dealDetail);
+
+    /**
+     * 刪除指定id的資金往來
+     * @param delId
+     * @param delDate
+     * @return
+     */
+    int delDealById(Integer delId, Date delDate);
 }
