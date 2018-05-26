@@ -12,6 +12,8 @@ $(function () {
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
+        advancedSearch: true,   //开启高级搜索
+        idTable: "invoiceTable",
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条

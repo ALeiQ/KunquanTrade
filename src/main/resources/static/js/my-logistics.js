@@ -14,13 +14,15 @@ $(function () {
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
-        search: true,           // 显示检索框
-        showRefresh: true,      // 显示刷新按钮
-        pagination: true,       // 在表格底部显示分页条
-        showColumns: true,      // 显示内容列下拉框
-        showToggle: true,       // 显示视图切换按钮（分页/卡片）
+        advancedSearch: true,       //开启高级搜索
+        idTable: "transTable",
+        search: true,               // 显示检索框
+        showRefresh: true,          // 显示刷新按钮
+        pagination: true,           // 在表格底部显示分页条
+        showColumns: true,          // 显示内容列下拉框
+        showToggle: true,           // 显示视图切换按钮（分页/卡片）
         uniqueId: 'id',
-        undefinedText: '',      // null显示空，默认'-'
+        undefinedText: '',          // null显示空，默认'-'
         pageSize: 10,
         pageList: [10, 15, 20],
         responseHandler : function(res) {

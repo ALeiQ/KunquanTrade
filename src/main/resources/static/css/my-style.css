@@ -142,6 +142,11 @@
     margin: 5px 0px 20px 165px;
 }
 
+.fixed-table-container {
+    padding-bottom: 0px !important;
+    height: 100% !important;
+}
+
 @media(max-width: 500px)
 {
     .term-panel-body

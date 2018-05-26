@@ -12,6 +12,8 @@ $(function () {
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
+        advancedSearch: true,   //开启高级搜索
+        idTable: "dealTable",
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
@@ -95,7 +97,6 @@ $(function () {
     });
 
     function showDetails(index, row, $detail) {
-        console.log(row);
         var bindIds = row.bindLogisticsId;
         var cur_table = $detail.html('<table class="table-striped"></table>').find('table');
         $(cur_table).bootstrapTable({
@@ -176,12 +177,6 @@ $(function () {
                 }, {
                     field: "remark",
                     title: "备注"
-                }, {
-                    field: "operate",
-                    title: "操作",
-                    formatter: function (value, row, index){
-                        return delIcon(value, row, index);
-                    }
                 }
             ]
         });
@@ -397,6 +392,8 @@ $(function () {
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
+        advancedSearch: true,   //开启高级搜索
+        idTable: "bindTransTable",//开启高级搜索绑定的表格
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
