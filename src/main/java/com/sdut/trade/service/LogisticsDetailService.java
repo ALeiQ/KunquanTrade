@@ -1,5 +1,7 @@
 package com.sdut.trade.service;
 
+import java.util.List;
+
 import com.sdut.trade.httpmodel.request.AddLogisticsRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 
@@ -26,6 +28,13 @@ public interface LogisticsDetailService {
      * @return
      */
     ResponseVO getAll();
+
+    /**
+     * 查询Ids的运输明细
+     * @param ids
+     * @return
+     */
+    ResponseVO getByIds(List<Integer> ids);
 
     /**
      * 修改给定id的运输明细信息

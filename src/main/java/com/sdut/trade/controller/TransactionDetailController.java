@@ -65,7 +65,7 @@ public class TransactionDetailController {
 
     @ResponseBody
     @RequestMapping(value = "/addDeal", method = RequestMethod.POST)
-    public ResponseVO addDeal(String params) {
+    public ResponseVO addDeal(String params, String bindLogistics) {
 
         ResponseVO result = new ResponseVO();
 
@@ -78,7 +78,10 @@ public class TransactionDetailController {
                 throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
             }
 
+            JSON.parseArray(bindLogistics);
+
             AddDealRequest addDealRequest = JSON.parseObject(params, AddDealRequest.class);
+            addDealRequest.setBind_logistics_id(bindLogistics);
 
             result = transactionDetailService.addDeal(addDealRequest);
 

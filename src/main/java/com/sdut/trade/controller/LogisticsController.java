@@ -3,15 +3,19 @@
  */
 package com.sdut.trade.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.thymeleaf.util.ListUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.sdut.trade.enums.impl.ExceptionEnum;
@@ -77,7 +81,41 @@ public class LogisticsController {
         log.info("getLogisticsDetail end");
 
         return result;
+    }
 
+    /**
+     * 获取id列表的所有运输明细详情数据
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping(value = "/getLogisticsDetailsByIds", method = RequestMethod.GET)
+    public ResponseVO getLogisticsDetailsById(String params) {
+
+        log.info("getLogisticsDetailsById start, params={}", params);
+
+        ResponseVO result = new ResponseVO();
+
+        try {
+
+            if (StringUtils.isEmpty(params)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            List<Integer> ids = JSON.parseArray(params, Integer.class);
+
+            result = logisticsDetailService.getByIds(ids);
+        } catch (MyException ex) {
+            log.error("getLogisticsDetailById Known Error!, params={}", params);
+        } catch (Exception ex) {
+            log.error("getLogisticsDetailById UnKnown error!, params={}", params);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("getLogisticsDetailsById end, params={}", params);
+
+        return result;
     }
 
     /**

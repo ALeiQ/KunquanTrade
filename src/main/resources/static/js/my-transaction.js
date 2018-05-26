@@ -27,6 +27,10 @@ $(function () {
         },
         columns: [
             {
+                field: "bindLogisticsId",
+                visible: false
+            },
+            {
                 field: "id",
                 title: "#",
                 visible: false
@@ -85,10 +89,103 @@ $(function () {
                     return delIcon(1, row);
                 }
             }
-        ]
-        //onExpandRow: showDetails,
+        ],
+        onExpandRow: showDetails
         //onClickRow: editRow
     });
+
+    function showDetails(index, row, $detail) {
+        console.log(row);
+        var bindIds = row.bindLogisticsId;
+        var cur_table = $detail.html('<table class="table-striped"></table>').find('table');
+        $(cur_table).bootstrapTable({
+            url: '/logistics/getLogisticsDetailsByIds',
+            method: 'get',
+            dataType: 'json',
+            dataFiled: 'data',
+            uniqueId: "id",
+            undefinedText: '',      // null显示空，默认'-'
+            //pagination: true,       // 在表格底部显示分页条
+            //pageSize: 5,
+            //pageList: [5, 10, 20],
+            queryParams: function() {
+                return {
+                    params: bindIds
+                };
+            },
+            columns: [
+                {
+                    field: "id",
+                    title: "#",
+                    visible: false
+                },
+                {
+                    field: "loadTime",
+                    title: "装车时间"
+                }, {
+                    field: "goodsName",
+                    title: "物资名称"
+                }, {
+                    field: "goodsModel",
+                    title: "型号"
+                }, {
+                    field: "netWeight",
+                    title: "净重"
+                }, {
+                    field: "returnWeight",
+                    title: "回执数"
+                }, {
+                    field: "lossWeight",
+                    title: "亏吨"
+                }, {
+                    field: "sellerUnitPrice",
+                    title: "厂家结算单价"
+                }, {
+                    field: "sellerSumPrice",
+                    title: "厂家结算金额"
+                }, {
+                    field: "unitPrice",
+                    title: "结算单价"
+                }, {
+                    field: "sumPrice",
+                    title: "结算金额"
+                }, {
+                    field: "transUnitPrice",
+                    title: "运费单价"
+                }, {
+                    field: "transSumPrice",
+                    title: "运费金额"
+                }, {
+                    field: "profit",
+                    title: "利润"
+                }, {
+                    field: "goodsFrom",
+                    title: "物资来源"
+                }, {
+                    field: "buyerCompany",
+                    title: "结算公司"
+                }, {
+                    field: "transCompany",
+                    title: "运输公司"
+                }, {
+                    field: "weighingNumber",
+                    title: "检斤号"
+                }, {
+                    field: "carNumber",
+                    title: "车牌号"
+                }, {
+                    field: "remark",
+                    title: "备注"
+                }, {
+                    field: "operate",
+                    title: "操作",
+                    formatter: function (value, row, index){
+                        return delIcon(value, row, index);
+                    }
+                }
+            ]
+        });
+    }
 
     function delIcon(type, row, index) {
         return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + row.id + ',' + type + ', this)"><i' +
@@ -151,11 +248,15 @@ $(function () {
     };
 
     addDeal = function(form_data) {
+        var regex = /^([1-9][0-9]*,?)*$/;
         $.ajax({
             type: "post",
             dataType: 'json',
             url: '/transactionDetail/addDeal',
-            data: {params: JSON.stringify(form_data)},
+            data: {params: JSON.stringify(form_data),
+                bindLogistics: regex.test($('#btn_deal_bind_logistics').text())?
+                    ('[' + $('#btn_deal_bind_logistics').text() + ']') :
+                    ""},
             async: false,
             success: function (result) {
                 if (result.resultCode !== 0) {
@@ -362,6 +463,8 @@ $(function () {
         } else {
             $('#btn_deal_bind_logistics').text(arr);
         }
+
+        bindModal.modal('hide');
     });
 });
 

@@ -78,6 +78,7 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
             dealDetailVO.setCheckDate(dealDetail.getCheckDate());
             dealDetailVO.setCheckDeadLine(dealDetail.getCheckDeadline());
             dealDetailVO.setRemark(dealDetail.getRemark());
+            dealDetailVO.setBindLogisticsId(dealDetail.getBindLogisticsId());
 
             dealDetailVOList.add(dealDetailVO);
         }
@@ -170,6 +171,7 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
         dealDetail.setCheckDate(addDealRequest.getCheckDate());
         dealDetail.setCheckDeadline(addDealRequest.getCheckDeadline());
         dealDetail.setRemark(addDealRequest.getRemark());
+        dealDetail.setBindLogisticsId(addDealRequest.getBind_logistics_id());
 
         dealDetail.setCreateDate(createDate);
         dealDetail.setEnable(EnableEnum.ENABLE.isValue());

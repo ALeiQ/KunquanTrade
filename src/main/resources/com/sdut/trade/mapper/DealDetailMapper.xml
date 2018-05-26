@@ -23,6 +23,7 @@
     <result column="enable" jdbcType="BIT" property="enable" />
     <result column="update_date" jdbcType="TIMESTAMP" property="updateDate" />
     <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="bind_logistics_id" jdbcType="VARCHAR" property="bindLogisticsId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -86,7 +87,7 @@
     id, date, amount, type, way, wechat_pay_account, wechat_receive_account, bank_pay_account, 
     bank_receive_account, bank_name, check_number, check_pay_people, check_receive_people, 
     check_date, check_deadline, remark, create_date, delete_date, enable, update_date, 
-    company
+    company, bind_logistics_id
   </sql>
   <select id="selectByExample" parameterType="com.sdut.trade.entity.DealDetailExample" resultMap="BaseResultMap">
     select
@@ -133,16 +134,16 @@
       bank_name, check_number, check_pay_people, 
       check_receive_people, check_date, check_deadline, 
       remark, create_date, delete_date, 
-      enable, update_date, company
-      )
+      enable, update_date, company, 
+      bind_logistics_id)
     values (#{id,jdbcType=INTEGER}, #{date,jdbcType=DATE}, #{amount,jdbcType=DOUBLE}, 
       #{type,jdbcType=INTEGER}, #{way,jdbcType=INTEGER}, #{wechatPayAccount,jdbcType=VARCHAR}, 
       #{wechatReceiveAccount,jdbcType=VARCHAR}, #{bankPayAccount,jdbcType=BIGINT}, #{bankReceiveAccount,jdbcType=BIGINT}, 
       #{bankName,jdbcType=VARCHAR}, #{checkNumber,jdbcType=BIGINT}, #{checkPayPeople,jdbcType=VARCHAR}, 
       #{checkReceivePeople,jdbcType=VARCHAR}, #{checkDate,jdbcType=DATE}, #{checkDeadline,jdbcType=DATE}, 
       #{remark,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, #{deleteDate,jdbcType=TIMESTAMP}, 
-      #{enable,jdbcType=BIT}, #{updateDate,jdbcType=TIMESTAMP}, #{company,jdbcType=VARCHAR}
-      )
+      #{enable,jdbcType=BIT}, #{updateDate,jdbcType=TIMESTAMP}, #{company,jdbcType=VARCHAR}, 
+      #{bindLogisticsId,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.sdut.trade.entity.DealDetail">
     insert into deal_detail
@@ -210,6 +211,9 @@
       <if test="company != null">
         company,
       </if>
+      <if test="bindLogisticsId != null">
+        bind_logistics_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -274,6 +278,9 @@
       </if>
       <if test="company != null">
         #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="bindLogisticsId != null">
+        #{bindLogisticsId,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
@@ -349,6 +356,9 @@
       <if test="record.company != null">
         company = #{record.company,jdbcType=VARCHAR},
       </if>
+      <if test="record.bindLogisticsId != null">
+        bind_logistics_id = #{record.bindLogisticsId,jdbcType=VARCHAR},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -376,7 +386,8 @@
       delete_date = #{record.deleteDate,jdbcType=TIMESTAMP},
       enable = #{record.enable,jdbcType=BIT},
       update_date = #{record.updateDate,jdbcType=TIMESTAMP},
-      company = #{record.company,jdbcType=VARCHAR}
+      company = #{record.company,jdbcType=VARCHAR},
+      bind_logistics_id = #{record.bindLogisticsId,jdbcType=VARCHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -444,6 +455,9 @@
       <if test="company != null">
         company = #{company,jdbcType=VARCHAR},
       </if>
+      <if test="bindLogisticsId != null">
+        bind_logistics_id = #{bindLogisticsId,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -468,7 +482,8 @@
       delete_date = #{deleteDate,jdbcType=TIMESTAMP},
       enable = #{enable,jdbcType=BIT},
       update_date = #{updateDate,jdbcType=TIMESTAMP},
-      company = #{company,jdbcType=VARCHAR}
+      company = #{company,jdbcType=VARCHAR},
+      bind_logistics_id = #{bindLogisticsId,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <insert id="batchInsert" parameterType="map">
@@ -481,7 +496,7 @@
     (id, date, amount, type, way, wechat_pay_account, wechat_receive_account, bank_pay_account, 
       bank_receive_account, bank_name, check_number, check_pay_people, check_receive_people, 
       check_date, check_deadline, remark, create_date, delete_date, enable, update_date, 
-      company)
+      company, bind_logistics_id)
     values
     <foreach collection="list" item="item" separator=",">
       (#{item.id,jdbcType=INTEGER}, #{item.date,jdbcType=DATE}, #{item.amount,jdbcType=DOUBLE}, 
@@ -491,7 +506,8 @@
         #{item.checkNumber,jdbcType=BIGINT}, #{item.checkPayPeople,jdbcType=VARCHAR}, #{item.checkReceivePeople,jdbcType=VARCHAR}, 
         #{item.checkDate,jdbcType=DATE}, #{item.checkDeadline,jdbcType=DATE}, #{item.remark,jdbcType=VARCHAR}, 
         #{item.createDate,jdbcType=TIMESTAMP}, #{item.deleteDate,jdbcType=TIMESTAMP}, #{item.enable,jdbcType=BIT}, 
-        #{item.updateDate,jdbcType=TIMESTAMP}, #{item.company,jdbcType=VARCHAR})
+        #{item.updateDate,jdbcType=TIMESTAMP}, #{item.company,jdbcType=VARCHAR}, #{item.bindLogisticsId,jdbcType=VARCHAR}
+        )
     </foreach>
   </insert>
   <insert id="batchInsertSelective" parameterType="map">
@@ -571,6 +587,9 @@
         </if>
         <if test="'company' == column.value">
           #{item.company,jdbcType=VARCHAR}
+        </if>
+        <if test="'bind_logistics_id' == column.value">
+          #{item.bindLogisticsId,jdbcType=VARCHAR}
         </if>
       </foreach>
       )

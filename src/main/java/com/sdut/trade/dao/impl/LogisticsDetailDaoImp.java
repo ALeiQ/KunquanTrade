@@ -128,4 +128,24 @@ public class LogisticsDetailDaoImp implements LogisticsDetailDao {
     public LogisticsDetail getById(int id) {
         return logisticsDetailMapper.selectByPrimaryKey(id);
     }
+
+    /**
+     * 获取多条id数据
+     *
+     * @param ids
+     *
+     * @return
+     */
+    @Override
+    public List<LogisticsDetail> getByIds(List<Integer> ids) {
+
+        LogisticsDetailExample logisticsDetailExample = new LogisticsDetailExample();
+
+        logisticsDetailExample.setOrderByClause("id desc");
+
+        logisticsDetailExample.createCriteria()
+                .andIdIn(ids);
+
+        return logisticsDetailMapper.selectByExample(logisticsDetailExample);
+    }
 }

@@ -1563,6 +1563,76 @@ public class DealDetailExample {
             addCriterion("company not between", value1, value2, "company");
             return (Criteria) this;
         }
+
+        public Criteria andBindLogisticsIdIsNull() {
+            addCriterion("bind_logistics_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdIsNotNull() {
+            addCriterion("bind_logistics_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdEqualTo(String value) {
+            addCriterion("bind_logistics_id =", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdNotEqualTo(String value) {
+            addCriterion("bind_logistics_id <>", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdGreaterThan(String value) {
+            addCriterion("bind_logistics_id >", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdGreaterThanOrEqualTo(String value) {
+            addCriterion("bind_logistics_id >=", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdLessThan(String value) {
+            addCriterion("bind_logistics_id <", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdLessThanOrEqualTo(String value) {
+            addCriterion("bind_logistics_id <=", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdLike(String value) {
+            addCriterion("bind_logistics_id like", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdNotLike(String value) {
+            addCriterion("bind_logistics_id not like", value, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdIn(List<String> values) {
+            addCriterion("bind_logistics_id in", values, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdNotIn(List<String> values) {
+            addCriterion("bind_logistics_id not in", values, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdBetween(String value1, String value2) {
+            addCriterion("bind_logistics_id between", value1, value2, "bindLogisticsId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBindLogisticsIdNotBetween(String value1, String value2) {
+            addCriterion("bind_logistics_id not between", value1, value2, "bindLogisticsId");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

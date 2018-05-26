@@ -115,4 +115,9 @@ public class DealDetailVO {
      */
     private String remark;
 
+    /**
+     * 绑定的交易物流
+     */
+    private String bindLogisticsId;
+
 }

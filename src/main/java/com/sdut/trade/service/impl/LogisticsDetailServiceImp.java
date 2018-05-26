@@ -119,6 +119,32 @@ public class LogisticsDetailServiceImp implements LogisticsDetailService {
     }
 
     /**
+     * 查询Ids的运输明细
+     *
+     * @param ids
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO getByIds(List<Integer> ids) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        List<LogisticsDetail> logisticsDetailList = logisticsDetailDao.getByIds(ids);
+        List<LogisticsDetailVO> logisticsDetailVOS = new ArrayList<>();
+
+        for (LogisticsDetail logisticsDetail : logisticsDetailList) {
+
+            LogisticsDetailVO logisticsDetailVO = parseModelToView(logisticsDetail);
+
+            logisticsDetailVOS.add(logisticsDetailVO);
+        }
+
+        responseVO.setData(logisticsDetailVOS);
+        return responseVO;
+    }
+
+    /**
      * 修改给定id的运输明细信息
      *
      * @param id
