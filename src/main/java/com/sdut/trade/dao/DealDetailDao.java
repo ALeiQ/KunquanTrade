@@ -20,11 +20,25 @@ public interface DealDetailDao {
     List<DealDetail> getAll();
 
     /**
+     * 获取单条记录
+     * @param dealId
+     * @return
+     */
+    DealDetail getById(int dealId);
+
+    /**
      * 添加单条资金往来数据
      * @param dealDetail
      * @return
      */
     int addDetail(DealDetail dealDetail);
+
+    /**
+     * 更新资金往来记录
+     * @param dealDetail
+     * @return
+     */
+    int updateDetail(DealDetail dealDetail);
 
     /**
      * 刪除指定id的資金往來

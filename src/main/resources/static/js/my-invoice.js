@@ -274,7 +274,6 @@ $(function () {
             type: "post",
             dataType: 'json',
             url: '/invoice/updateInvoice',
-            async: false,
             data: {invoiceId: id,
                 params: JSON.stringify(form_data),
                 details: JSON.stringify(invoiceDetails)},

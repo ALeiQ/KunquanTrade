@@ -25,6 +25,15 @@ public interface TransactionDetailService {
     ResponseVO addDeal(AddDealRequest addDealRequest);
 
     /**
+     * 更新资金往来记录
+     *
+     * @param dealId
+     * @param updateDealRequest
+     * @return
+     */
+    ResponseVO updateDeal(int dealId, AddDealRequest updateDealRequest);
+
+    /**
      * 删除指定id的资金往来
      * @param delId
      * @return

@@ -77,7 +77,7 @@ $(function () {
                 field: "checkDate",
                 title: "出票日期"
             }, {
-                field: "checkDeadLine",
+                field: "checkDeadline",
                 title: "到期日"
             }, {
                 field: "remark",
@@ -90,8 +90,8 @@ $(function () {
                 }
             }
         ],
-        onExpandRow: showDetails
-        //onClickRow: editRow
+        onExpandRow: showDetails,
+        onClickRow: editRow
     });
 
     function showDetails(index, row, $detail) {
@@ -187,6 +187,45 @@ $(function () {
         });
     }
 
+    function editRow(row, $element, field) {
+
+        if (field === "operate") {
+            return false;
+        }
+
+        clearModal();
+
+        myModal.find('.modal-title').text('编号：' + row['id']);
+        $('#txt_deal_date').val(row['date']);
+        $('#txt_deal_company').val(row['company']);
+        $('#txt_deal_amount').val(row['amount']);
+        $('#txt_deal_direction').val(row['type']);
+        $('#txt_wechat_pay_account').val(row['wechatPayAccount']);
+        $('#txt_wechat_receive_account').val(row['wechatReceiveAccount']);
+        $('#txt_bank_pay_account').val(row['bankPayAccount']);
+        $('#txt_bank_receive_account').val(row['bankReceiveAccount']);
+        $('#txt_bank_name').val(row['bankName']);
+        $('#txt_check_pay_people').val(row['checkPayPeople']);
+        $('#txt_check_receive_people').val(row['checkReceivePeople']);
+        $('#txt_check_number').val(row['checkNumber']);
+        $('#txt_check_date').val(row['checkDate']);
+        $('#txt_check_deadline').val(row['checkDeadline']);
+        $('#txt_deal_remark').val(row['remark']);
+
+        var bindId = row['bindLogisticsId'];
+
+        if (typeof(bindId) === 'undefined'
+            || $.trim(bindId) == '') {
+            $('#btn_deal_bind_logistics').text('点击绑定');
+        } else {
+            bindId = bindId.replace('[', '').replace(']', '');
+            $('#btn_deal_bind_logistics').text(bindId);
+        }
+
+        dealWithInput();
+        myModal.modal();
+    }
+
     function delIcon(type, row, index) {
         return '<a class="icon closed-tool" style="cursor: pointer;" onclick="delData(' + row.id + ',' + type + ', this)"><i' +
             ' class="fa' +
@@ -225,7 +264,7 @@ $(function () {
                 addDeal(form_data);
             } else {
                 var id = $.trim((title.split('：'))[1]);
-                //updateInvoice(id, load, form_data, details_data);
+                updateDeal(id, form_data);
             }
         }
 
@@ -247,6 +286,7 @@ $(function () {
         return false;
     };
 
+    // 添加资金往来信息
     addDeal = function(form_data) {
         var regex = /^([1-9][0-9]*,?)*$/;
         $.ajax({
@@ -268,6 +308,30 @@ $(function () {
                 }
             }
         });
+    };
+
+    // 更新资金往来信息按钮
+    updateDeal = function(id, form_data) {
+        var regex = /^([1-9][0-9]*,?)*$/;
+        $.ajax({
+            type: "post",
+            dataType: 'json',
+            url: '/transactionDetail/updateDeal',
+            data: {dealId: id,
+                params: JSON.stringify(form_data),
+                bindLogistics: regex.test($('#btn_deal_bind_logistics').text())?
+                    ('[' + $('#btn_deal_bind_logistics').text() + ']') :
+                    ""},
+            success: function (result) {
+                if (result.resultCode !== 0) {
+                    alert(result.resultMsg);
+                } else {
+                    myModal.modal('hide');
+                    resetValidator();
+                    mainTable.bootstrapTable('refresh');
+                }
+            }
+        })
     };
 
     // 删除单条附加信息
@@ -491,47 +555,35 @@ $(function () {
 
     // 微信、银行、支票转账三只可选一。其中某个有输入，屏蔽其他几个的input
     $(dealDetail).find('input').blur(function () {
-        dealWithInput($(this))
+        dealWithInput();
     });
 
-    dealWithInput = function (inp) {
-        var id = inp.attr('id');
-        var tag = id.split('_')[1];
-
-        switch(tag) {
-            case "wechat":
-                if (checkInputsEmpty(weChatInputs)) {
-                    bankInputs.attr("disabled", false);
-                    checkInputs.attr("disabled", false);
-                } else {
-                    bankInputs.attr("disabled", true);
-                    checkInputs.attr("disabled", true);
-                    bankInputs.val('');
-                    checkInputs.val('');
-                }
-                break;
-            case "bank":
-                if (checkInputsEmpty(bankInputs)) {
-                    weChatInputs.attr("disabled", false);
-                    checkInputs.attr("disabled", false);
-                } else {
-                    weChatInputs.attr("disabled", true);
-                    checkInputs.attr("disabled", true);
-                    weChatInputs.val('');
-                    checkInputs.val('');
-                }
-                break;
-            case "check":
-                if (checkInputsEmpty(checkInputs)) {
-                    weChatInputs.attr("disabled", false);
-                    bankInputs.attr("disabled", false);
-                } else {
-                    weChatInputs.attr("disabled", true);
-                    bankInputs.attr("disabled", true);
-                    weChatInputs.val('');
-                    bankInputs.val('');
-                }
-                break;
+    dealWithInput = function () {
+        if (!checkInputsEmpty(weChatInputs)) {
+            weChatInputs.attr("disabled", false);
+            bankInputs.attr("disabled", true);
+            checkInputs.attr("disabled", true);
+            bankInputs.val('');
+            checkInputs.val('');
+        } else if (!checkInputsEmpty(bankInputs)) {
+            bankInputs.attr("disabled", false);
+            weChatInputs.attr("disabled", true);
+            checkInputs.attr("disabled", true);
+            weChatInputs.val('');
+            checkInputs.val('');
+        } else if (!checkInputsEmpty(checkInputs)) {
+            checkInputs.attr("disabled", false);
+            bankInputs.attr("disabled", true);
+            weChatInputs.attr("disabled", true);
+            bankInputs.val('');
+            weChatInputs.val('');
+        } else {
+            weChatInputs.attr("disabled", false);
+            bankInputs.attr("disabled", false);
+            checkInputs.attr("disabled", false);
+            weChatInputs.val('')
+            bankInputs.val('');
+            checkInputs.val('');
         }
     }
 

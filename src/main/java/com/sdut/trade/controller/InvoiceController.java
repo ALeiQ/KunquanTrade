@@ -175,7 +175,7 @@ public class InvoiceController {
      */
     @ResponseBody
     @RequestMapping(value = "/updateInvoice", method = RequestMethod.POST)
-    public ResponseVO addInvoice(int invoiceId, String params, String details) {
+    public ResponseVO updateInvoice(int invoiceId, String params, String details) {
 
         ResponseVO result = new ResponseVO();
 

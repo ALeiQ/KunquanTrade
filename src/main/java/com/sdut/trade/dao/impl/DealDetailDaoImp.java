@@ -46,6 +46,18 @@ public class DealDetailDaoImp implements DealDetailDao {
     }
 
     /**
+     * 获取单条记录
+     *
+     * @param dealId
+     *
+     * @return
+     */
+    @Override
+    public DealDetail getById(int dealId) {
+        return dealDetailMapper.selectByPrimaryKey(dealId);
+    }
+
+    /**
      * 添加单条资金往来数据
      *
      * @param dealDetail
@@ -55,6 +67,19 @@ public class DealDetailDaoImp implements DealDetailDao {
     @Override
     public int addDetail(DealDetail dealDetail) {
         return dealDetailMapper.insertSelective(dealDetail);
+    }
+
+    /**
+     * 更新资金往来记录
+     * 不用updateSelective原因：double类型Null会被忽略不更新
+     *
+     * @param dealDetail
+     *
+     * @return
+     */
+    @Override
+    public int updateDetail(DealDetail dealDetail) {
+        return dealDetailMapper.updateByPrimaryKey(dealDetail);
     }
 
     /**

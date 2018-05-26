@@ -108,7 +108,7 @@ public class DealDetailVO {
      * 到期日
      */
     @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    private Date checkDeadLine;
+    private Date checkDeadline;
 
     /**
      * 备注

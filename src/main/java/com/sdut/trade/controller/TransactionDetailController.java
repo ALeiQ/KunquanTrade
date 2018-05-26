@@ -98,6 +98,40 @@ public class TransactionDetailController {
     }
 
     @ResponseBody
+    @RequestMapping(value = "/updateDeal", method = RequestMethod.POST)
+    public ResponseVO updateDeal(int dealId, String params, String bindLogistics) {
+
+        ResponseVO result = new ResponseVO();
+
+        log.info("updateDeal start [params={}]", params);
+
+        try {
+
+            if (StringUtils.isEmpty(params)) {
+                result.setResult(ExceptionEnum.PARAM_EMPTY);
+                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+            }
+
+            JSON.parseArray(bindLogistics);
+
+            AddDealRequest updateDealRequest = JSON.parseObject(params, AddDealRequest.class);
+            updateDealRequest.setBind_logistics_id(bindLogistics);
+
+            result = transactionDetailService.updateDeal(dealId, updateDealRequest);
+
+        } catch (MyException ex) {
+            log.error("updateDeal Known error! ", ex);
+        } catch (Exception ex) {
+            log.error("updateDeal UnKnown error! ", ex);
+            result.setResult(ResultEnum.FAILURE);
+        }
+
+        log.info("updateDeal end [params={}]", params);
+
+        return result;
+    }
+
+    @ResponseBody
     @RequestMapping(value = "/delDeal", method = RequestMethod.POST)
     public ResponseVO delDeal(Integer delId) {
 

@@ -76,7 +76,7 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
             dealDetailVO.setCheckPayPeople(dealDetail.getCheckPayPeople());
             dealDetailVO.setCheckNumber(dealDetail.getCheckNumber());
             dealDetailVO.setCheckDate(dealDetail.getCheckDate());
-            dealDetailVO.setCheckDeadLine(dealDetail.getCheckDeadline());
+            dealDetailVO.setCheckDeadline(dealDetail.getCheckDeadline());
             dealDetailVO.setRemark(dealDetail.getRemark());
             dealDetailVO.setBindLogisticsId(dealDetail.getBindLogisticsId());
 
@@ -112,6 +112,42 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
 
         companyInfoService.addCompanyTerm(addDealRequest.getCompany(), createDate);
         bankInfoService.addBankTerm(addDealRequest.getBankName(), createDate);
+
+        return responseVO;
+    }
+
+    /**
+     * 更新资金往来记录
+     *
+     *
+     * @param dealId
+     * @param updateDealRequest
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO updateDeal(int dealId, AddDealRequest updateDealRequest) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        Date updateDate = new Date();
+
+        DealDetail oldDetail = dealDetailDao.getById(dealId);
+
+        DealDetail dealDetail = parseRequestToModel(updateDealRequest, null);
+        dealDetail.setCreateDate(oldDetail.getCreateDate());
+        dealDetail.setUpdateDate(updateDate);
+        dealDetail.setId(oldDetail.getId());
+
+        int updateNum = dealDetailDao.updateDetail(dealDetail);
+
+        if (updateNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_UPDATE_FAILURE);
+            log.error("addDeal update dealDetail false!", dealDetail.toString());
+        }
+
+        companyInfoService.addCompanyTerm(updateDealRequest.getCompany(), updateDate);
+        bankInfoService.addBankTerm(updateDealRequest.getBankName(), updateDate);
 
         return responseVO;
     }
