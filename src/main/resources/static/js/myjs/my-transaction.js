@@ -12,13 +12,21 @@ $(function () {
         method: 'get',
         dataType: 'json',
         dataFiled: 'data',
-        advancedSearch: true,   //开启高级搜索
         idTable: "dealTable",
+        toolbar : "#toolbar",
+        advancedSearch: true,   //开启高级搜索
         search: true,           // 显示检索框
         showRefresh: true,      // 显示刷新按钮
         showToggle: true,       // 显示视图切换按钮（分页/卡片）
         pagination: true,       // 在表格底部显示分页条
         showColumns: true,      // 显示内容列下拉框
+        showExport: true,
+        exportDataType: 'all',
+        exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel'],  //导出文件类型
+        exportOptions:{
+            ignoreColumn: [0,'operate'],  //忽略某一列的索引
+            fileName: '资金往来' + (new Date()).toLocaleString( )  //文件名称设置
+        },
         uniqueId: 'id',
         undefinedText: '',      // null显示空，默认'-'
         detailView: true,//父子表

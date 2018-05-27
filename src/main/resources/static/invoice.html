@@ -34,7 +34,7 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <script src="js/Chart.js"></script>
     <!-- //chart -->
     <!-- js-->
-    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery/jquery-1.11.1.min.js"></script>
     <script src="js/modernizr.custom.js"></script>
     <!--webfonts-->
     <link href='css/googleFont.css' rel='stylesheet' type='text/css'>
@@ -55,20 +55,24 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
     <link href="css/my-style.css" rel="stylesheet" type="text/css" media="all">
     <!--//end my style-->
     <!-- bootstrap-table -->
-    <script src="js/bootstrap-table.js"></script>
-    <script src="js/bootstrap-table-toolbar.js"></script>
+    <script src="js/bootstrapTable/bootstrap-table.js"></script>
+    <script src="js/bootstrapTable/bootstrap-table-toolbar.js"></script>
     <link href="css/bootstrap-table.css" rel="stylesheet">
     <!-- //bootstrap-table -->
+    <!-- table expert -->
+    <script src="js/bootstrapTable/bootstrap-table-export.js"></script>
+    <script src="js/bootstrapTable/tableExport.js"></script>
+    <!-- //table expert -->
     <!-- validator -->
     <link href="css/bootstrapValidator.css" rel="stylesheet" type="text/css" media="all">
-    <script src="js/bootstrapValidator.js"></script>
+    <script src="js/bootstrapTable/bootstrapValidator.js"></script>
     <!-- //validator -->
     <!-- datetimepicker -->
     <link href="css/bootstrap-datetimepicker.css" rel="stylesheet" type="text/css" media="all">
-    <script src="js/bootstrap-datetimepicker.js"></script>
+    <script src="js/bootstrapTable/bootstrap-datetimepicker.js"></script>
     <!-- //datetimepicker -->
     <!-- typeahead -->
-    <script src="js/bootstrap3-typeahead.js"></script>
+    <script src="js/bootstrapTable/bootstrap3-typeahead.js"></script>
     <!-- //typeahead -->
 </head>
 <body class="cbp-spmenu-push cbp-spmenu-push-toleft">
@@ -88,10 +92,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
             <!-- 开票明细表 -->
             <div class="panel-group" id="accordion">
                 <div class="panel panel-widget">
+                    <div id="toolbar">
                     <button type="button" class="add-row-button btn btn-success dropdown-toggle"
                             id = 'addInvoic'>
                         <span class="glyphicon glyphicon  glyphicon-plus" aria-hidden="true"></span>增加
                     </button>
+                    </div>
                     <table class="table text-nowrap table-striped" id="invoiceTable">
                     </table>
                 </div>
@@ -215,10 +221,10 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <script type="text/javascript" src="js/dev-loaders.js"></script>
 <script type="text/javascript" src="js/dev-layout-default.js"></script>
-<script type="text/javascript" src="js/jquery.marquee.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.marquee.js"></script>
 
 <!-- candlestick -->
-<script type="text/javascript" src="js/jquery.jqcandlestick.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery.jqcandlestick.min.js"></script>
 <link rel="stylesheet" type="text/css" href="css/jqcandlestick.css"/>
 <!-- //candlestick -->
 
@@ -227,12 +233,12 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 <!--//max-plugin-->
 
 <!--scrolling js-->
-<script src="js/jquery.nicescroll.js"></script>
+<script src="js/jquery/jquery.nicescroll.js"></script>
 <script src="js/scripts.js"></script>
 <!--//scrolling js-->
 
 <!-- real-time-updates -->
-<script language="javascript" type="text/javascript" src="js/jquery.flot.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery/jquery.flot.js"></script>
 <script type="text/javascript">
 
     $(function () {
@@ -253,17 +259,17 @@ SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony
 
 <!-- //real-time-updates -->
 <!-- error-graph -->
-<script language="javascript" type="text/javascript" src="js/jquery.flot.errorbars.js"></script>
-<script language="javascript" type="text/javascript" src="js/jquery.flot.navigate.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery/jquery.flot.errorbars.js"></script>
+<script language="javascript" type="text/javascript" src="js/jquery/jquery.flot.navigate.js"></script>
 <!-- //error-graph -->
 <!-- status -->
-<script src="js/jquery.fn.gantt.js"></script>
+<script src="js/jquery/jquery.fn.gantt.js"></script>
 <!-- //status -->
 
 <!-- my JavaScript -->
-<script src="js/my-js.js"></script>
-<script src="js/my-except-index.js"></script>
-<script src="js/my-invoice.js"></script>
+<script src="js/myjs/my-js.js"></script>
+<script src="js/myjs/my-except-index.js"></script>
+<script src="js/myjs/my-invoice.js"></script>
 <!-- //my JavaScript -->
 </body>
 </html>

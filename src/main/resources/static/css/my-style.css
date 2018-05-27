@@ -102,10 +102,6 @@
     border-radius: 3px;
 }
 
-.panel .add-row-button {
-    position: absolute;
-}
-
 .table-alert {
     border: 1px solid transparent;
     border-color: #a9f36b;
