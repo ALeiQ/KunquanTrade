@@ -1,5 +1,7 @@
 package com.sdut.trade.dao.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,21 +23,35 @@ public class UserInfoDaoImp implements UserInfoDao {
     UserInfoMapper userInfoMapper;
 
     /**
-     * 查看是否的存在某用户
+     * 通过用户帐号获取用户
      *
-     * @param userInfo
+     * @param name
      *
      * @return
      */
     @Override
-    public boolean hasUser(UserInfo userInfo) {
+    public UserInfo getByName(String name) {
 
         UserInfoExample userInfoExample = new UserInfoExample();
 
         userInfoExample.createCriteria()
-                .andNameEqualTo(userInfo.getName())
-                .andPasswordEqualTo(userInfo.getPassword());
+                .andNameEqualTo(name);
 
-        return userInfoMapper.countByExample(userInfoExample) == 1;
+        List<UserInfo> userInfoList = userInfoMapper.selectByExample(userInfoExample);
+
+        return userInfoList.size() == 0? null: userInfoList.get(0);
+    }
+
+    /**
+     * 通过Id获取用户信息
+     *
+     * @param userId
+     *
+     * @return
+     */
+    @Override
+    public UserInfo getById(int userId) {
+
+        return userInfoMapper.selectByPrimaryKey(userId);
     }
 }

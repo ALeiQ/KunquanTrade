@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.sdut.trade.annotation.LoginRequired;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
@@ -41,6 +42,7 @@ public class InvoiceController {
     @Autowired
     InvoiceService invoiceService;
 
+    @LoginRequired
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String invoice(ModelMap modelMap, HttpServletRequest httpServletRequest) {
         return "/invoice";
@@ -53,6 +55,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getAllByDirection", method = RequestMethod.GET)
     public ResponseVO getAllByDirection(Integer direction) {
@@ -95,6 +98,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getInvoiceDetailsById", method = RequestMethod.GET)
     public ResponseVO getInvoiceDetailsById(Integer queryId) {
@@ -132,6 +136,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/addInvoice", method = RequestMethod.POST)
     public ResponseVO addInvoice(String params, String details) {
@@ -173,6 +178,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/updateInvoice", method = RequestMethod.POST)
     public ResponseVO updateInvoice(int invoiceId, String params, String details) {
@@ -213,6 +219,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/delInvoice", method = RequestMethod.POST)
     public ResponseVO delInvoice(int delId) {
@@ -240,6 +247,7 @@ public class InvoiceController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/delInvoiceDetail", method = RequestMethod.POST)
     public ResponseVO delInvoiceDetail(int delId) {

@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.sdut.trade.annotation.LoginRequired;
+
 /**
  * 类描述：欢迎页控制层
  *
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/index")
 public class IndexController {
 
+    @LoginRequired
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String index(ModelMap modelMap, HttpServletRequest request) {
         return "/index";

@@ -1,5 +1,7 @@
 package com.sdut.trade.service;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.sdut.trade.httpmodel.request.LoginRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 
@@ -9,13 +11,14 @@ import com.sdut.trade.httpmodel.response.ResponseVO;
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/26
  */
-public interface LoginService {
+public interface UserService {
 
     /**
      * 登陆请求
      * @param loginRequest
+     * @param request
      * @return
      */
-    ResponseVO login(LoginRequest loginRequest);
+    ResponseVO login(LoginRequest loginRequest, HttpServletRequest request);
 
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.ListUtils;
 
 import com.alibaba.fastjson.JSON;
+import com.sdut.trade.annotation.LoginRequired;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
@@ -53,6 +54,7 @@ public class LogisticsController {
     @Autowired
     private LogisticsDetailService logisticsDetailService;
 
+    @LoginRequired
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String logistics(ModelMap modelMap, HttpServletRequest httpServletRequest) {
         return "/logistics";
@@ -63,6 +65,7 @@ public class LogisticsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getLogisticsDetails", method = RequestMethod.GET)
     public ResponseVO getLogisticsDetails() {
@@ -88,6 +91,7 @@ public class LogisticsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getLogisticsDetailsByIds", method = RequestMethod.GET)
     public ResponseVO getLogisticsDetailsById(String params) {
@@ -125,6 +129,7 @@ public class LogisticsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/addLogisticsDetail", method = RequestMethod.POST)
     public ResponseVO addLogisticsDetail(String params) {
@@ -164,6 +169,7 @@ public class LogisticsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/updateLogisticsDetail", method = RequestMethod.POST)
     public ResponseVO updateLogisticsDetail(int id, String params) {
@@ -200,6 +206,7 @@ public class LogisticsController {
      *
      * @return 数据写入是否成功
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/delLogisticsDetail", method = RequestMethod.POST)
     public ResponseVO delLogisticsDetail(Integer delId) {

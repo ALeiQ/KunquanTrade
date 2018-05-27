@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.sdut.trade.annotation.LoginRequired;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
@@ -37,11 +38,13 @@ public class TransactionDetailController {
     @Autowired
     private TransactionDetailService transactionDetailService;
 
+    @LoginRequired
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String transactionDetailController(ModelMap modelMap, HttpServletRequest httpServletRequest) {
         return "/transaction_detail";
     }
 
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getAll", method = RequestMethod.GET)
     public ResponseVO getAll() {
@@ -63,6 +66,7 @@ public class TransactionDetailController {
         return result;
     }
 
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/addDeal", method = RequestMethod.POST)
     public ResponseVO addDeal(String params, String bindLogistics) {
@@ -97,6 +101,7 @@ public class TransactionDetailController {
         return result;
     }
 
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/updateDeal", method = RequestMethod.POST)
     public ResponseVO updateDeal(int dealId, String params, String bindLogistics) {
@@ -131,6 +136,7 @@ public class TransactionDetailController {
         return result;
     }
 
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/delDeal", method = RequestMethod.POST)
     public ResponseVO delDeal(Integer delId) {

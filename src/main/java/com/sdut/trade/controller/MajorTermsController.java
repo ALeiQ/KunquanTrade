@@ -17,6 +17,7 @@ import org.thymeleaf.util.ListUtils;
 import org.thymeleaf.util.StringUtils;
 
 import com.alibaba.fastjson.JSONArray;
+import com.sdut.trade.annotation.LoginRequired;
 import com.sdut.trade.enums.impl.ExceptionEnum;
 import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
@@ -56,6 +57,7 @@ public class MajorTermsController {
     @Autowired
     TermsRecordService termRecordService;
 
+    @LoginRequired
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String majorTerms(ModelMap modelMap, HttpServletRequest request) {
         return "/major_terms";
@@ -66,6 +68,7 @@ public class MajorTermsController {
      *
      * @return 货物信息列表
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getTermsInfo", method = RequestMethod.GET)
     public ResponseVO getTermsInfo(String getType) {
@@ -121,6 +124,7 @@ public class MajorTermsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getTermsRecords", method = RequestMethod.GET)
     public ResponseVO getTermsRecords(Integer page, Integer pageSize, Integer getType) {
@@ -166,6 +170,7 @@ public class MajorTermsController {
      *
      * @return
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/getTypeaheadData", method = RequestMethod.GET)
     public ResponseVO getTypeaheadData(String getType, String query, String goodsName) {
@@ -225,6 +230,7 @@ public class MajorTermsController {
      *
      * @return 数据写入是否成功
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/addTerms", method = RequestMethod.POST)
     public ResponseVO addTerms(String addType, String termsJson) {
@@ -282,6 +288,7 @@ public class MajorTermsController {
      *
      * @return 数据写入是否成功
      */
+    @LoginRequired
     @ResponseBody
     @RequestMapping(value = "/delTerm", method = RequestMethod.POST)
     public ResponseVO delTerm(String delType, String delId) {

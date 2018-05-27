@@ -26,6 +26,7 @@ $(function () {
             url: "/login/login.do",
             method: "GET",
             dataType: "json",
+            async: false,
             data: {param: JSON.stringify(form.serializeObject())},
             success: function (result) {
                 if (result.resultCode === 0) {

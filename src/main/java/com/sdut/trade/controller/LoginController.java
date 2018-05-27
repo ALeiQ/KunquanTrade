@@ -19,7 +19,7 @@ import com.sdut.trade.enums.impl.ResultEnum;
 import com.sdut.trade.exception.MyException;
 import com.sdut.trade.httpmodel.request.LoginRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
-import com.sdut.trade.service.LoginService;
+import com.sdut.trade.service.UserService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,7 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LoginController {
 
     @Autowired
-    private LoginService loginService;
+    private UserService userService;
 
     @RequestMapping(value = "", method = RequestMethod.GET)
     public String login(ModelMap modelMap, HttpServletRequest request) {
@@ -44,7 +44,7 @@ public class LoginController {
 
     @ResponseBody
     @RequestMapping(value = "/login.do", method = RequestMethod.GET)
-    public ResponseVO doLogin(String param) {
+    public ResponseVO doLogin(String param, HttpServletRequest request) {
 
         ResponseVO result = new ResponseVO();
 
@@ -59,7 +59,7 @@ public class LoginController {
 
             LoginRequest loginRequest = JSON.parseObject(param, LoginRequest.class);
 
-            result = loginService.login(loginRequest);
+            result = userService.login(loginRequest, request);
 
         } catch (MyException ex) {
             log.error("doLogin Known Error param={}", param, ex);

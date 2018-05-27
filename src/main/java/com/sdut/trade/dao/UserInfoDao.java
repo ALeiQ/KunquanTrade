@@ -11,9 +11,16 @@ import com.sdut.trade.entity.UserInfo;
 public interface UserInfoDao {
 
     /**
-     * 查看是否的存在某用户
-     * @param userInfo
+     * 通过用户帐号获取用户
+     *
      * @return
      */
-    boolean hasUser(UserInfo userInfo);
+    UserInfo getByName(String name);
+
+    /**
+     * 通过Id获取用户信息
+     * @param userId
+     * @return
+     */
+    UserInfo getById(int userId);
 }
