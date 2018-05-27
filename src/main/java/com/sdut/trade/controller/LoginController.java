@@ -73,4 +73,19 @@ public class LoginController {
         return result;
     }
 
+    @ResponseBody
+    @RequestMapping(value = "/logout.do", method = RequestMethod.GET)
+    public ResponseVO doLogout(HttpServletRequest request) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        log.info("doLogout start");
+
+        request.getSession().removeAttribute("token");
+
+        log.info("doLogout end");
+
+        return responseVO;
+    }
+
 }

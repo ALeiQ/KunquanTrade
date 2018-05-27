@@ -2,30 +2,33 @@
  * Copyright (C) 2018 Baidu, Inc. All Rights Reserved.
  */
 
-// 右侧导航栏效果
-$(document).ready(function () {
-    var menuRight = document.getElementById('cbp-spmenu-s2'),
-        showRightPush = document.getElementById('showRightPush'),
-        body = document.body;
+// 个人头像下拉菜单
+$(function () {
 
-    showRightPush.onclick = function () {
-        classie.toggle(this, 'active');
-        classie.toggle(body, 'cbp-spmenu-push-toleft');
-        classie.toggle(menuRight, 'cbp-spmenu-open');
-        disableOther('showRightPush');
-    };
+    $($('.profile_details .dropdown-menu').find('li')[2]).click(function () {
+        $.ajax({
+            url: "/login/logout.do",
+            method: "GET",
+            dataType: "json",
+            async: false,
+            success: function (result) {
+                if (result.resultCode === 0) {
+                    window.location.href = "/login";
+                } else {
+                    alert(result.resultMsg)
+                }
+            },
+            error: function () {
+                alert("ajax请求异常！");
+            }
+        });
+    })
 
-
-    function disableOther(button) {
-        if (button !== 'showRightPush') {
-            classie.toggle(showRightPush, 'disabled');
-        }
-    }
 });
-
 
 // 共用函数
 $(document).ready(function () {
+
 
     // 删除行（隐藏）
     delRow = function (term) {
