@@ -32,6 +32,7 @@ public interface CompanyInfoService {
 
     /**
      * 添加单条公司信息
+     *
      * @param name
      */
     void addCompanyTerm(String name, Date createDate);

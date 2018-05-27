@@ -51,6 +51,7 @@ public interface GoodsInfoService {
 
     /**
      * 添加单条货物信息
+     *
      * @param goodsName
      * @param goodsModel
      * @param createDate

@@ -11,11 +11,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.thymeleaf.util.ListUtils;
 
 import com.alibaba.fastjson.JSON;
 import com.sdut.trade.annotation.LoginRequired;
@@ -103,17 +101,14 @@ public class LogisticsController {
         try {
 
             if (StringUtils.isEmpty(params)) {
-                result.setResult(ExceptionEnum.PARAM_EMPTY);
-                throw new MyException(ExceptionEnum.PARAM_EMPTY.getDesc());
+                return result;
             }
 
             List<Integer> ids = JSON.parseArray(params, Integer.class);
 
             result = logisticsDetailService.getByIds(ids);
-        } catch (MyException ex) {
-            log.error("getLogisticsDetailById Known Error!, params={}", params);
         } catch (Exception ex) {
-            log.error("getLogisticsDetailById UnKnown error!, params={}", params);
+            log.error("getLogisticsDetailById UnKnown error!, params={}", params, ex);
             result.setResult(ResultEnum.FAILURE);
         }
 

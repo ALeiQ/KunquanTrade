@@ -67,7 +67,9 @@ public interface LogisticsDetailDao {
 
     /**
      * 获取多条id数据
+     *
      * @param ids
+     *
      * @return
      */
     List<LogisticsDetail> getByIds(List<Integer> ids);

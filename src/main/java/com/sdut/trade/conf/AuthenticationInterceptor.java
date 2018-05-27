@@ -51,7 +51,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         if (methodAnnotation != null) {
 
             // 执行认证
-            String token = (String)request.getSession().getAttribute("token");  // 从 http 请求头中取出 token
+            String token = (String) request.getSession().getAttribute("token");  // 从 http 请求头中取出 token
             if (token == null) {
                 log.warn("无token，请重新登录");
                 response.sendRedirect("/login");

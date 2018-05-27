@@ -37,8 +37,8 @@ public class UserServiceImp implements UserService {
      * 登陆请求
      *
      * @param loginRequest
-     *
      * @param request
+     *
      * @return
      */
     @Override
@@ -86,8 +86,10 @@ public class UserServiceImp implements UserService {
 
     /**
      * 比较密码的hash值是否相同
+     *
      * @param user
      * @param userInDataBase
+     *
      * @return
      */
     public boolean comparePassword(UserInfo user, UserInfo userInDataBase) {
@@ -95,10 +97,11 @@ public class UserServiceImp implements UserService {
                 .equals(passwordToHash(user.getPassword()));
     }
 
-
     /**
      * 获得密码的hash值
+     *
      * @param password
+     *
      * @return
      */
     private String passwordToHash(String password) {

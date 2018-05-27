@@ -13,13 +13,16 @@ public interface TransactionDetailService {
 
     /**
      * 获取所有资金往来记录
+     *
      * @return
      */
     ResponseVO getAll();
 
     /**
      * 添加资金往来记录
+     *
      * @param addDealRequest
+     *
      * @return
      */
     ResponseVO addDeal(AddDealRequest addDealRequest);
@@ -29,13 +32,16 @@ public interface TransactionDetailService {
      *
      * @param dealId
      * @param updateDealRequest
+     *
      * @return
      */
     ResponseVO updateDeal(int dealId, AddDealRequest updateDealRequest);
 
     /**
      * 删除指定id的资金往来
+     *
      * @param delId
+     *
      * @return
      */
     ResponseVO delDealById(Integer delId);

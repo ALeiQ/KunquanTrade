@@ -32,8 +32,9 @@ public interface BankInfoDao {
     /**
      * 根据银行名称关键词模糊查找银行信息
      *
-     * @return
      * @param query
+     *
+     * @return
      */
     List<BankInfo> getBankInfoByKeywordName(String query);
 
@@ -48,7 +49,9 @@ public interface BankInfoDao {
 
     /**
      * 添加单条银行信息
+     *
      * @param bankInfo
+     *
      * @return
      */
     boolean addBankInfo(BankInfo bankInfo);
@@ -65,7 +68,9 @@ public interface BankInfoDao {
 
     /**
      * 判断数据库是否有该银行
+     *
      * @param bankName
+     *
      * @return
      */
     boolean hasBankName(String bankName);

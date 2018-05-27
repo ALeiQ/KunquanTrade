@@ -41,6 +41,7 @@ public interface BankInfoService {
 
     /**
      * 添加单条银行信息
+     *
      * @param bankName
      * @param createDate
      */

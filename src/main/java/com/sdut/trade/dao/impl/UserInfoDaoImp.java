@@ -39,7 +39,7 @@ public class UserInfoDaoImp implements UserInfoDao {
 
         List<UserInfo> userInfoList = userInfoMapper.selectByExample(userInfoExample);
 
-        return userInfoList.size() == 0? null: userInfoList.get(0);
+        return userInfoList.size() == 0 ? null : userInfoList.get(0);
     }
 
     /**

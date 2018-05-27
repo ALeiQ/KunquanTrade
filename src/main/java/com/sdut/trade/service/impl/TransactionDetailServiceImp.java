@@ -119,7 +119,6 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
     /**
      * 更新资金往来记录
      *
-     *
      * @param dealId
      * @param updateDealRequest
      *
@@ -178,8 +177,10 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
 
     /**
      * 将前端请求类解析为数据对象
+     *
      * @param addDealRequest
      * @param createDate
+     *
      * @return
      */
     private DealDetail parseRequestToModel(AddDealRequest addDealRequest, Date createDate) {
@@ -217,7 +218,9 @@ public class TransactionDetailServiceImp implements TransactionDetailService {
 
     /**
      * 获取支付方式（微信/银行/承兑汇票）
+     *
      * @param addDealRequest
+     *
      * @return
      */
     private DealWayEnum getDealWay(AddDealRequest addDealRequest) {

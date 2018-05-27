@@ -18,6 +18,7 @@ $(function () {
         showRefresh: true,      // 显示刷新按钮
         pagination: true,       // 在表格底部显示分页条
         showColumns: true,      // 显示内容列下拉框
+        showToggle: true,       // 显示视图切换按钮（分页/卡片）
         uniqueId: 'id',
         undefinedText: '',      // null显示空，默认'-'
         detailView: true,//父子表

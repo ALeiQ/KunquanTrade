@@ -224,7 +224,6 @@ public class MajorTermsController {
         return result;
     }
 
-
     /**
      * 增加多条数据
      *

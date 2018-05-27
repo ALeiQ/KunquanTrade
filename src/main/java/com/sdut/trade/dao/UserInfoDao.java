@@ -19,7 +19,9 @@ public interface UserInfoDao {
 
     /**
      * 通过Id获取用户信息
+     *
      * @param userId
+     *
      * @return
      */
     UserInfo getById(int userId);

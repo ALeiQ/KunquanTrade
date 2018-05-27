@@ -31,7 +31,9 @@ public interface LogisticsDetailService {
 
     /**
      * 查询Ids的运输明细
+     *
      * @param ids
+     *
      * @return
      */
     ResponseVO getByIds(List<Integer> ids);
