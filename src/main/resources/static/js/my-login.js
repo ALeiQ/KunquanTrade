@@ -23,7 +23,7 @@ $(function () {
         var form = $('#login_form');
 
         $.ajax({
-            url: "/login/login.do",
+            url: "/login.do",
             method: "GET",
             dataType: "json",
             async: false,

@@ -23,4 +23,14 @@ public interface UserService {
      */
     ResponseVO login(LoginRequest loginRequest, HttpServletRequest request);
 
+    /**
+     * 修改密码
+     * @param userId
+     * @param token
+     * @param oldpasswd
+     * @param newpasswd1
+     * @param newpasswd2
+     * @return
+     */
+    ResponseVO changePassword(int userId, String token, String oldpasswd, String newpasswd1, String newpasswd2);
 }

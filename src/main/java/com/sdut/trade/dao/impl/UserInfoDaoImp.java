@@ -54,4 +54,16 @@ public class UserInfoDaoImp implements UserInfoDao {
 
         return userInfoMapper.selectByPrimaryKey(userId);
     }
+
+    /**
+     * 更新用户信息
+     *
+     * @param userInDB
+     *
+     * @return
+     */
+    @Override
+    public int updateUser(UserInfo userInDB) {
+        return userInfoMapper.updateByPrimaryKey(userInDB);
+    }
 }

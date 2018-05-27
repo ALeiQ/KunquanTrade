@@ -4,10 +4,15 @@
 
 // 个人头像下拉菜单
 $(function () {
+    var dropDown = $('.profile_details .dropdown-menu').find('li');
 
-    $($('.profile_details .dropdown-menu').find('li')[2]).click(function () {
+    $(dropDown[0]).click(function () {
+        window.location.href = "/changePassword";
+    });
+
+    $(dropDown[1]).click(function () {
         $.ajax({
-            url: "/login/logout.do",
+            url: "/logout.do",
             method: "GET",
             dataType: "json",
             async: false,

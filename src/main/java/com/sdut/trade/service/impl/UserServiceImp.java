@@ -3,6 +3,7 @@ package com.sdut.trade.service.impl;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,9 +12,13 @@ import org.springframework.stereotype.Component;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.sdut.trade.bean.UserInfoVO;
 import com.sdut.trade.dao.UserInfoDao;
 import com.sdut.trade.entity.UserInfo;
+import com.sdut.trade.enums.impl.ExceptionEnum;
+import com.sdut.trade.enums.impl.ResultEnum;
+import com.sdut.trade.exception.MyException;
 import com.sdut.trade.httpmodel.request.LoginRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.UserService;
@@ -61,12 +66,66 @@ public class UserServiceImp implements UserService {
 
             String token = getToken(userInDB);
             request.getSession().setAttribute("token", token);
-
-            userInfoVO.setUsername(userInDB.getName());
-            userInfoVO.setPassword(userInDB.getPassword());
+            request.getSession().setAttribute("userId", userInDB.getId());
+            request.getSession().setAttribute("username", userInDB.getName());
         }
 
         responseVO.setData(userInfoVO);
+        return responseVO;
+    }
+
+    /**
+     * 修改密码
+     *
+     * @param userId
+     * @param token
+     * @param oldpasswd
+     * @param newpasswd1
+     * @param newpasswd2
+     *
+     * @return
+     */
+    @Override
+    public ResponseVO changePassword(int userId, String token, String oldpasswd, String newpasswd1, String newpasswd2) {
+
+        ResponseVO responseVO = new ResponseVO();
+
+        int userIdInToken;
+
+        try {
+            userIdInToken = Integer.parseInt(JWT.decode(token).getAudience().get(0));  // 获取 token 中的 user id
+
+            if (userIdInToken != userId) {
+                throw new JWTDecodeException("token无效");
+            }
+        } catch (JWTDecodeException e) {
+            log.warn("token无效，请重新登录");
+            responseVO.setResultMsg("token无效");
+            responseVO.setResultCode(202);
+            return responseVO;
+        }
+
+        UserInfo userInDB = userInfoDao.getById(userId);
+
+        UserInfo user = new UserInfo();
+        user.setPassword(oldpasswd);
+
+        if (!comparePassword(user, userInDB)) {
+            responseVO.setResultMsg("旧密码错误");
+            responseVO.setResultCode(201);
+            return responseVO;
+        }
+
+        userInDB.setPassword(passwordToHash(newpasswd1));
+        userInDB.setUpdateDate(new Date());
+
+        int updateNum = userInfoDao.updateUser(userInDB);
+
+        if (updateNum != 1) {
+            responseVO.setResult(ExceptionEnum.DB_UPDATE_FAILURE);
+            return responseVO;
+        }
+
         return responseVO;
     }
 

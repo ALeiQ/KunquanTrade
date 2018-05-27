@@ -25,4 +25,11 @@ public interface UserInfoDao {
      * @return
      */
     UserInfo getById(int userId);
+
+    /**
+     * 更新用户信息
+     * @param userInDB
+     * @return
+     */
+    int updateUser(UserInfo userInDB);
 }
