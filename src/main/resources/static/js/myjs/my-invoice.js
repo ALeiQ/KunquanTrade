@@ -337,13 +337,17 @@ $(function () {
         var len = details.length;
 
         for (var i in names) {
-            list.push(form_data[names[i]]);
+            var l = form_data[names[i]];
+            if (typeof(l) === 'undefined' || !(l instanceof Array)) {
+                l = [l];
+            }
+            list.push(l);
         }
 
         for (var i in list[0]) {
 
             var flag = false;
-            for (j in names) {
+            for (var j in names) {
                 if (list[j][i] !== "") {
                     flag = true;
                     break;
@@ -355,7 +359,7 @@ $(function () {
             }
 
             var detail = {};
-            for (j in names) {
+            for (var j in names) {
                 detail[names[j]] = list[j][i];
             }
             detail['id'] = $(details[len-(eval(i)+1)*6-1]).val();
