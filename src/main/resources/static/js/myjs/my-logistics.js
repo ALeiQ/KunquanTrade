@@ -287,13 +287,6 @@ $(function () {
 
     setDateYYMMDD(mainForm, $('#txt_load_time'));
 
-    // 净重监听
-    $('#txt_net_weight').change(function () {
-        getSumPrice($('#txt_seller_unit_price'), $('#txt_seller_sum_price'));
-        getSumPrice($('#txt_unit_price'), $('#txt_sum_price'));
-        getSumPrice($('#txt_trans_unit_price'), $('#txt_trans_sum_price'));
-    });
-
     // 金额Input监听
     $('#txt_seller_unit_price').change(function (){
         getDoublePoint($(this));
@@ -322,11 +315,15 @@ $(function () {
         getProfit();
     });
 
-    // 重量Input监听
+    // 净重监听
     $('#txt_net_weight').change(function () {
+        getSumPrice($('#txt_seller_unit_price'), $('#txt_seller_sum_price'));
+        getSumPrice($('#txt_unit_price'), $('#txt_sum_price'));
+        getSumPrice($('#txt_trans_unit_price'), $('#txt_trans_sum_price'));
         getDoublePoint($(this));
         getLossWeight();
     });
+    // 回执数监听
     $('#txt_return_weight').change(function () {
         getDoublePoint($(this));
         getLossWeight();
@@ -367,6 +364,7 @@ $(function () {
 
         var profit = returnFloat(sell-buy-trans);
         $('#txt_profit').val(profit);
+        startValidator(mainForm, '#txt_profit');
     };
 
     getLossWeight = function () {
@@ -381,6 +379,7 @@ $(function () {
 
         var lossWeigth = returnFloat(netWeight-returnWeight);
         $('#txt_loss_weight').val(lossWeigth);
+        startValidator(mainForm, '#txt_loss_weight');
     };
 
     getDoublePoint = function(input) {
