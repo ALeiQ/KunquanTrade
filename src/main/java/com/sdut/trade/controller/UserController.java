@@ -123,8 +123,8 @@ public class UserController {
                 throw new MyException("两次输入的密码不相同");
             }
 
-            int userId = (int)request.getSession().getAttribute("userId");
-            String token = (String)request.getSession().getAttribute("token");
+            int userId = (int) request.getSession().getAttribute("userId");
+            String token = (String) request.getSession().getAttribute("token");
             result = userService.changePassword(userId, token, oldpasswd, newpasswd1, newpasswd2);
 
         } catch (MyException ex) {

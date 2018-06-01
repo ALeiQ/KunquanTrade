@@ -17,8 +17,6 @@ import com.sdut.trade.bean.UserInfoVO;
 import com.sdut.trade.dao.UserInfoDao;
 import com.sdut.trade.entity.UserInfo;
 import com.sdut.trade.enums.impl.ExceptionEnum;
-import com.sdut.trade.enums.impl.ResultEnum;
-import com.sdut.trade.exception.MyException;
 import com.sdut.trade.httpmodel.request.LoginRequest;
 import com.sdut.trade.httpmodel.response.ResponseVO;
 import com.sdut.trade.service.UserService;
