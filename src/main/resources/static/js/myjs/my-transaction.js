@@ -678,10 +678,22 @@ $(function () {
 
                 },
                 txt_bank_pay_account: {
-
+                    message: '银行打款账号不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^([0-9]*)$',
+                            message: '请输入纯数字账号'
+                        }
+                    }
                 },
                 txt_bank_receive_account: {
-
+                    message: '银行收款账号不合法',
+                    validators: {
+                        regexp: {
+                            regexp: '^([0-9]*)$',
+                            message: '请输入纯数字账号'
+                        }
+                    }
                 },
                 txt_bank_name: {
 
@@ -693,7 +705,13 @@ $(function () {
 
                 },
                 txt_check_number: {
-
+                    message: '承兑票号不合法',
+                    validators: {
+                        regex: {
+                            regexp: '^([0-9]*)$',
+                            message: '请输入纯数字承兑票号'
+                        }
+                    }
                 },
                 txt_check_date: {
                     message: '出票时间不合法',
