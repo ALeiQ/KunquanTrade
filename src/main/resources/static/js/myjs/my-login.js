@@ -41,7 +41,41 @@ $(function () {
         });
 
         return false;
-    })
+    });
+
+    formValidator = function () {
+        $('#login_form').bootstrapValidator({
+            //excluded:[":hidden",":disabled",":not(visible)"], // 默认不验证隐藏域和不可用域
+            excluded: [":hidden"],
+            message: '输入值不合法',
+            submitButtons: 'button[type="submit"]',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                username: {
+                    message: '用户名不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '用户名不可为空'
+                        }
+                    }
+                },
+                password: {
+                    message: '密码不合法',
+                    validators: {
+                        notEmpty: {
+                            message: '密码不可为空'
+                        }
+                    }
+                }
+            }
+        });
+    };
+
+    formValidator();
 });
 
 
