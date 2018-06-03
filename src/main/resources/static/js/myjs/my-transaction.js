@@ -22,7 +22,7 @@ $(function () {
         showColumns: true,      // 显示内容列下拉框
         showExport: true,
         exportDataType: 'all',
-        exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel'],  //导出文件类型
+        exportTyp'csv', e:[ 'txt', 'doc', 'excel'],  //导出文件类型
         exportOptions:{
             ignoreColumn: [0,'operate'],  //忽略某一列的索引
             fileName: '资金往来' + (new Date()).toLocaleString( )  //文件名称设置

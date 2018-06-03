@@ -22,7 +22,7 @@ $(function () {
         toolbar : "#toolbar",
         showExport: true,
         exportDataType: 'all',
-        exportTypes:[ 'csv', 'txt', 'sql', 'doc', 'excel'],  //导出文件类型
+        exportTypes:['txt', 'doc', 'excel'],  //导出文件类型
         exportOptions:{
             ignoreColumn: [0,'operate'],  //忽略某一列的索引
             fileName: '开票明细' + (new Date()).toLocaleString( )  //文件名称设置
