@@ -22,7 +22,7 @@ $(function () {
         showColumns: true,      // 显示内容列下拉框
         showExport: true,
         exportDataType: 'all',
-        exportTyp'csv', e:[ 'txt', 'doc', 'excel'],  //导出文件类型
+        exportType:[ 'txt', 'doc', 'excel'],  //导出文件类型
         exportOptions:{
             ignoreColumn: [0,'operate'],  //忽略某一列的索引
             fileName: '资金往来' + (new Date()).toLocaleString( )  //文件名称设置
@@ -35,6 +35,12 @@ $(function () {
         responseHandler : function(res) {
             //在ajax获取到数据，渲染表格之前，修改数据源
             return res;
+        },
+        formatLoadingMessage: function () {
+            return "请稍等，正在加载中...";
+        },
+        formatNoMatches: function () {  //没有匹配的结果
+            return '无符合条件的记录';
         },
         columns: [
             {
@@ -122,6 +128,12 @@ $(function () {
                 return {
                     params: bindIds
                 };
+            },
+            formatLoadingMessage: function () {
+                return "请稍等，正在加载中...";
+            },
+            formatNoMatches: function () {  //没有匹配的结果
+                return '这条交易记录没有绑定物流信息';
             },
             columns: [
                 {

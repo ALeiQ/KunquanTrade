@@ -41,6 +41,12 @@ $(function () {
             //在ajax获取到数据，渲染表格之前，修改数据源
             return res;
         },
+        formatLoadingMessage: function () {
+            return "请稍等，正在加载中...";
+        },
+        formatNoMatches: function () {  //没有匹配的结果
+            return '无符合条件的记录';
+        },
         columns: [
             {
                 field: "id",
@@ -104,6 +110,12 @@ $(function () {
                 return {
                     queryId: parentid
                 };
+            },
+            formatLoadingMessage: function () {
+                return "请稍等，正在加载中...";
+            },
+            formatNoMatches: function () {  //没有匹配的结果
+                return '没有这条票据相关的物资信息';
             },
             columns: [
                 {
