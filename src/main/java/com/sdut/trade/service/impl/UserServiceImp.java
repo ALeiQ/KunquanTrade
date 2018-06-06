@@ -128,16 +128,13 @@ public class UserServiceImp implements UserService {
     }
 
     private String getToken(UserInfo userInDB) {
-
         String token = "";
-
         try {
             token = JWT.create()
                     .withAudience(userInDB.getId().toString())          // 将 user id 保存到 token 里面
                     .sign(Algorithm.HMAC256(userInDB.getPassword()));   // 以 password 作为 token 的密钥
         } catch (UnsupportedEncodingException ignore) {
         }
-
         return token;
     }
 
@@ -184,6 +181,7 @@ public class UserServiceImp implements UserService {
 
             return stringBuilder.toString();
 
+            // getInstance为获取到该算法则跳过Hash
         } catch (NoSuchAlgorithmException ignore) {
         }
 

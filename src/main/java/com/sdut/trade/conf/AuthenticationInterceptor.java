@@ -34,6 +34,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Autowired
     private UserInfoDao userInfoDao;
 
+    // 请求处理前
     public boolean preHandle(HttpServletRequest request,
                              HttpServletResponse response, Object handler) throws Exception {
         // 如果不是映射到方法直接通过
@@ -96,12 +97,14 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         return true;
     }
 
+    // 请求处理后
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o,
                            ModelAndView modelAndView) throws Exception {
 
     }
 
+    // 回调时
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse,
                                 Object o, Exception e) throws Exception {

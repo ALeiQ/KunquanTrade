@@ -6,7 +6,7 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * 类描述：
+ * 类描述：登陆拦截器注册类
  *
  * @author liuzixiang[liuzixiang@baidu.com]
  * @date 2018/5/27
